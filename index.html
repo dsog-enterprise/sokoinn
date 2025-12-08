@@ -680,10 +680,91 @@
             font-size: 0.9rem;
         }
         
+        /* Product Search Section */
+        .product-search {
+            max-width: 1400px;
+            margin: 3rem auto 2rem;
+            padding: 0 1.5rem;
+        }
+        
+        .product-search-container {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            border: 2px solid var(--border-color);
+        }
+        
+        .search-bar-large {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .search-input-large {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--border-color);
+            border-radius: 30px;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+        }
+        
+        .search-input-large:focus {
+            border-color: var(--primary-red);
+            box-shadow: 0 0 0 3px rgba(178, 34, 34, 0.1);
+        }
+        
+        .search-btn-large {
+            background: var(--primary-red);
+            color: var(--white);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .search-btn-large:hover {
+            background: var(--secondary-red);
+            transform: translateY(-2px);
+        }
+        
+        .search-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .clear-search {
+            background: transparent;
+            color: var(--primary-red);
+            border: 1px solid var(--primary-red);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .clear-search:hover {
+            background: var(--primary-red);
+            color: var(--white);
+        }
+        
         /* Products Section - OPTIMIZED */
         .products {
             max-width: 1400px;
-            margin: 3rem auto;
+            margin: 2rem auto 4rem;
             padding: 0 1.5rem;
         }
         
@@ -764,8 +845,8 @@
         
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.5s ease, transform 0.5s ease;
@@ -778,7 +859,7 @@
         
         .product-card {
             background: var(--card-bg);
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
             box-shadow: var(--shadow-sm);
             transition: var(--transition);
@@ -800,17 +881,18 @@
         }
         
         .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
             border-color: var(--primary-red);
         }
         
+        /* UPDATED: Larger product images without grid */
         .product-image-wrapper {
             position: relative;
             width: 100%;
-            height: 280px;
+            height: 320px; /* Larger height for bigger images */
             overflow: hidden;
-            background: var(--bg-secondary);
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--white) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -819,24 +901,24 @@
         .product-image {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            transition: transform 0.5s ease;
-            padding: 1rem;
+            object-fit: contain; /* Changed from cover to contain to show full image */
+            transition: transform 0.6s ease;
+            padding: 1.5rem; /* More padding for better presentation */
         }
         
         .product-card:hover .product-image {
-            transform: scale(1.05);
+            transform: scale(1.08); /* Slightly larger hover effect */
         }
         
         .view-image-btn {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 15px;
+            right: 15px;
             background: rgba(0,0,0,0.7);
             color: white;
             border: none;
-            width: 36px;
-            height: 36px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
@@ -846,6 +928,8 @@
             transform: translateY(-10px);
             transition: var(--transition);
             z-index: 2;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
         }
         
         .product-image-wrapper:hover .view-image-btn {
@@ -854,7 +938,7 @@
         }
         
         .product-info {
-            padding: 1.5rem;
+            padding: 1.8rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
@@ -863,106 +947,307 @@
         .product-badge {
             background: var(--primary-red);
             color: var(--white);
-            padding: 0.3rem 0.8rem;
+            padding: 0.4rem 1rem;
             border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
+            font-size: 0.8rem;
+            font-weight: 700;
             align-self: flex-start;
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
         }
         
         .product-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
             color: var(--text-primary);
             line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
         
         .seller-info {
             display: flex;
             align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+        }
+        
+        .seller-avatar-small {
+            width: 36px;
+            height: 36px;
+            background: var(--primary-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        
+        .seller-details {
+            flex: 1;
+        }
+        
+        .seller-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
             gap: 0.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--gray);
-            font-size: 0.85rem;
         }
         
         .seller-rating {
             color: var(--rating-gold);
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        
+        .seller-location {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 0.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
         }
         
         .product-price {
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             font-weight: bold;
             color: var(--primary-red);
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
+            background: linear-gradient(135deg, var(--primary-red), var(--secondary-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .product-description {
-            color: var(--gray);
-            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
             margin-bottom: 1.5rem;
-            line-height: 1.5;
+            line-height: 1.6;
             display: -webkit-box;
-            -webkit-line-clamp: 2;
+            -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
             flex-grow: 1;
         }
         
-        /* Seller Details Button */
-        .seller-btn {
-            background: var(--seller-blue);
-            color: var(--white);
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 0;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            transition: var(--transition);
+        /* UPDATED: Enhanced Contact Buttons */
+        .contact-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        
+        .contact-btn {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
+            padding: 0.9rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
         
-        .seller-btn:hover {
-            background: var(--seller-dark);
-            transform: translateY(-2px);
-        }
-        
-        /* WhatsApp Contact Button */
         .whatsapp-btn {
             background: var(--whatsapp-green);
             color: var(--white);
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 0;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 0.5rem;
         }
         
         .whatsapp-btn:hover {
             background: var(--whatsapp-dark);
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
+        
+        .call-btn {
+            background: var(--primary-red);
+            color: var(--white);
+        }
+        
+        .call-btn:hover {
+            background: var(--secondary-red);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(178, 34, 34, 0.3);
+        }
+        
+        /* Infinite Scroll Loading Indicator */
+        .loading-indicator {
+            text-align: center;
+            padding: 3rem;
+            color: var(--gray);
+            grid-column: 1 / -1;
+            display: none;
+        }
+        
+        .loading-indicator.active {
+            display: block;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--bg-secondary);
+            border-top: 4px solid var(--primary-red);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1.5rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .end-of-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--gray);
+            grid-column: 1 / -1;
+            display: none;
+            font-style: italic;
+        }
+        
+        .end-of-results.active {
+            display: block;
+        }
+        
+        /* Phone Number Reveal Modal */
+        .phone-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2500;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        
+        .phone-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .phone-modal-content {
+            background: var(--white);
+            border-radius: 15px;
+            max-width: 400px;
+            width: 90%;
+            padding: 2.5rem;
+            text-align: center;
+            animation: modalSlideIn 0.3s ease;
+            border: 2px solid var(--primary-gold);
+        }
+        
+        .phone-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--white);
+            font-size: 2rem;
+            border: 3px solid var(--primary-gold);
+        }
+        
+        .phone-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .phone-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .phone-action-btn {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .phone-action-btn.call {
+            background: var(--primary-red);
+            color: var(--white);
+        }
+        
+        .phone-action-btn.call:hover {
+            background: var(--secondary-red);
+            transform: translateY(-2px);
+        }
+        
+        .phone-action-btn.whatsapp {
+            background: var(--whatsapp-green);
+            color: var(--white);
+        }
+        
+        .phone-action-btn.whatsapp:hover {
+            background: var(--whatsapp-dark);
+            transform: translateY(-2px);
+        }
+        
+        .phone-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            color: var(--white);
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .phone-modal-close:hover {
+            background: var(--primary-red);
         }
         
         /* Seller Details Modal */
@@ -1099,14 +1384,25 @@
             color: var(--white);
         }
         
-        .seller-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
+        .seller-contact-info {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
         }
         
-        .seller-action-btn {
-            flex: 1;
+        .seller-contact-info h4 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .contact-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .seller-contact-btn {
             padding: 1rem;
             border: none;
             border-radius: 8px;
@@ -1117,26 +1413,25 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            font-size: 0.95rem;
         }
         
-        .seller-action-btn.primary {
-            background: var(--seller-blue);
-            color: var(--white);
-        }
-        
-        .seller-action-btn.primary:hover {
-            background: var(--seller-dark);
-            transform: translateY(-2px);
-        }
-        
-        .seller-action-btn.secondary {
+        .seller-contact-btn.call {
             background: var(--primary-red);
             color: var(--white);
         }
         
-        .seller-action-btn.secondary:hover {
+        .seller-contact-btn.call:hover {
             background: var(--secondary-red);
+            transform: translateY(-2px);
+        }
+        
+        .seller-contact-btn.whatsapp {
+            background: var(--whatsapp-green);
+            color: var(--white);
+        }
+        
+        .seller-contact-btn.whatsapp:hover {
+            background: var(--whatsapp-dark);
             transform: translateY(-2px);
         }
         
@@ -1162,7 +1457,7 @@
             transform: rotate(90deg);
         }
         
-        /* Enhanced Product Modal */
+        /* Product Modal */
         .product-modal {
             position: fixed;
             top: 0;
@@ -1422,12 +1717,18 @@
             font-weight: 600;
         }
         
-        .modal-seller-btn {
-            background: var(--seller-blue);
-            color: var(--white);
+        /* UPDATED: Modal Contact Buttons */
+        .modal-contact-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .modal-contact-btn {
+            padding: 1.2rem;
             border: none;
-            padding: 1.2rem 2rem;
-            border-radius: 0;
+            border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
@@ -1436,39 +1737,29 @@
             justify-content: center;
             gap: 0.8rem;
             font-size: 1.1rem;
-            margin-top: 1rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
         }
         
-        .modal-seller-btn:hover {
-            background: var(--seller-dark);
+        .modal-contact-btn.call {
+            background: var(--primary-red);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(178, 34, 34, 0.3);
+        }
+        
+        .modal-contact-btn.call:hover {
+            background: var(--secondary-red);
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+            box-shadow: 0 6px 20px rgba(178, 34, 34, 0.4);
         }
         
-        .modal-whatsapp-btn {
+        .modal-contact-btn.whatsapp {
             background: var(--whatsapp-green);
             color: var(--white);
-            border: none;
-            padding: 1.2rem 2rem;
-            border-radius: 0;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            font-size: 1.1rem;
-            margin-top: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
         }
         
-        .modal-whatsapp-btn:hover {
+        .modal-contact-btn.whatsapp:hover {
             background: var(--whatsapp-dark);
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
@@ -1845,27 +2136,70 @@
             opacity: 0.7;
         }
         
-        /* Loading State */
-        .loading {
-            text-align: center;
-            padding: 3rem;
-            color: var(--gray);
-            grid-column: 1 / -1;
+        /* Product Skeleton Loading */
+        .skeleton-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
         }
         
-        .loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid var(--bg-secondary);
-            border-top: 4px solid var(--primary-red);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
+        .skeleton-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            animation: skeleton-loading 1.5s infinite ease-in-out;
         }
         
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .skeleton-image {
+            width: 100%;
+            height: 320px;
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+        }
+        
+        .skeleton-info {
+            padding: 1.8rem;
+        }
+        
+        .skeleton-text {
+            height: 20px;
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+        
+        .skeleton-text.short {
+            width: 60%;
+        }
+        
+        .skeleton-text.medium {
+            width: 80%;
+        }
+        
+        .skeleton-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        
+        .skeleton-btn {
+            height: 46px;
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            border-radius: 8px;
+        }
+        
+        @keyframes skeleton-loading {
+            0% {
+                background-position: -200% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
         }
         
         /* Enhanced Floating Bottom Navigation */
@@ -2080,84 +2414,24 @@
             font-weight: 600;
         }
         
-        /* Product Skeleton Loading */
-        .skeleton-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .skeleton-card {
-            background: var(--card-bg);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border-color);
-            animation: skeleton-loading 1.5s infinite ease-in-out;
-        }
-        
-        .skeleton-image {
-            width: 100%;
-            height: 280px;
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-        }
-        
-        .skeleton-info {
-            padding: 1.5rem;
-        }
-        
-        .skeleton-text {
-            height: 20px;
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            margin-bottom: 1rem;
-            border-radius: 4px;
-        }
-        
-        .skeleton-text.short {
-            width: 60%;
-        }
-        
-        .skeleton-text.medium {
-            width: 80%;
-        }
-        
-        .skeleton-btn {
-            height: 40px;
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            border-radius: 0;
-            margin-top: 1rem;
-        }
-        
-        @keyframes skeleton-loading {
-            0% {
-                background-position: -200% 0;
-            }
-            100% {
-                background-position: 200% 0;
-            }
-        }
-        
         /* FIX: Better click handling */
-        .seller-btn *,
-        .whatsapp-btn *,
+        .contact-btn *,
         .view-image-btn *,
         .image-zoom-btn *,
-        .modal-seller-btn *,
-        .modal-whatsapp-btn *,
+        .modal-contact-btn *,
+        .seller-contact-btn *,
+        .phone-action-btn *,
         .chat-option-btn * {
             pointer-events: none;
         }
         
         /* FIX: Ensure buttons are clickable on mobile */
         @media (max-width: 768px) {
-            .seller-btn,
-            .whatsapp-btn,
+            .contact-btn,
             .view-image-btn,
-            .modal-seller-btn,
-            .modal-whatsapp-btn,
+            .modal-contact-btn,
+            .seller-contact-btn,
+            .phone-action-btn,
             .image-control-btn,
             .image-nav-btn {
                 min-height: 44px;
@@ -2218,6 +2492,10 @@
             .search-container {
                 display: none;
             }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
         }
         
         @media (max-width: 768px) {
@@ -2261,19 +2539,19 @@
             }
             
             .product-image-wrapper {
-                height: 200px;
+                height: 250px;
             }
             
             .product-info {
-                padding: 1rem;
+                padding: 1.2rem;
             }
             
             .product-title {
-                font-size: 0.95rem;
+                font-size: 1.1rem;
             }
             
             .product-price {
-                font-size: 1.1rem;
+                font-size: 1.3rem;
             }
             
             .modal-body {
@@ -2291,6 +2569,16 @@
             .gallery-thumbnail {
                 width: 60px;
                 height: 60px;
+            }
+            
+            .contact-buttons {
+                grid-template-columns: 1fr;
+                gap: 0.6rem;
+            }
+            
+            .modal-contact-buttons {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
             }
             
             .full-image-nav {
@@ -2341,6 +2629,15 @@
             
             .category-card {
                 padding: 1rem;
+            }
+            
+            .product-search-container {
+                padding: 1.5rem;
+            }
+            
+            .search-bar-large {
+                flex-direction: column;
+                gap: 0.8rem;
             }
             
             .products-grid {
@@ -2411,6 +2708,14 @@
                 padding: 0.6rem 1rem;
             }
             
+            .phone-modal-content {
+                padding: 1.5rem;
+            }
+            
+            .phone-actions {
+                flex-direction: column;
+            }
+            
             .bottom-nav-container {
                 gap: 0.2rem;
             }
@@ -2442,7 +2747,7 @@
             }
             
             .product-image-wrapper {
-                height: 180px;
+                height: 220px;
             }
             
             .chat-bot-container {
@@ -2852,6 +3157,34 @@
         </div>
     </section>
 
+    <!-- Product Search Section -->
+    <section class="product-search" id="searchSection">
+        <div class="section-title">
+            <h2>Search Products</h2>
+            <p>Find exactly what you're looking for</p>
+        </div>
+        
+        <div class="product-search-container">
+            <div class="search-bar-large">
+                <input type="text" 
+                       class="search-input-large" 
+                       id="productSearchInput" 
+                       placeholder="Search products by name, category, or description..."
+                       autocomplete="off">
+                <button class="search-btn-large" id="productSearchBtn">
+                    <i class="fas fa-search"></i>
+                    Search
+                </button>
+            </div>
+            <div class="search-stats">
+                <span id="searchResultsCount">Type to search products</span>
+                <button class="clear-search" id="clearSearchBtn" style="display: none;">
+                    <i class="fas fa-times"></i> Clear Search
+                </button>
+            </div>
+        </div>
+    </section>
+
     <!-- Products Section -->
     <section class="products" id="products">
         <div class="section-title">
@@ -2879,7 +3212,10 @@
                         <div class="skeleton-text short"></div>
                         <div class="skeleton-text medium"></div>
                         <div class="skeleton-text" style="width: 40%;"></div>
-                        <div class="skeleton-btn"></div>
+                        <div class="skeleton-buttons">
+                            <div class="skeleton-btn"></div>
+                            <div class="skeleton-btn"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="skeleton-card">
@@ -2888,7 +3224,10 @@
                         <div class="skeleton-text short"></div>
                         <div class="skeleton-text medium"></div>
                         <div class="skeleton-text" style="width: 40%;"></div>
-                        <div class="skeleton-btn"></div>
+                        <div class="skeleton-buttons">
+                            <div class="skeleton-btn"></div>
+                            <div class="skeleton-btn"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="skeleton-card">
@@ -2897,7 +3236,10 @@
                         <div class="skeleton-text short"></div>
                         <div class="skeleton-text medium"></div>
                         <div class="skeleton-text" style="width: 40%;"></div>
-                        <div class="skeleton-btn"></div>
+                        <div class="skeleton-buttons">
+                            <div class="skeleton-btn"></div>
+                            <div class="skeleton-btn"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="skeleton-card">
@@ -2906,18 +3248,25 @@
                         <div class="skeleton-text short"></div>
                         <div class="skeleton-text medium"></div>
                         <div class="skeleton-text" style="width: 40%;"></div>
-                        <div class="skeleton-btn"></div>
+                        <div class="skeleton-buttons">
+                            <div class="skeleton-btn"></div>
+                            <div class="skeleton-btn"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- Load More Button -->
-        <div id="loadMoreContainer" style="text-align: center; margin-top: 3rem; display: none;">
-            <button id="loadMoreBtn" style="padding: 1rem 2.5rem; background: var(--primary-red); color: white; border: none; border-radius: 30px; font-weight: 600; cursor: pointer; transition: var(--transition); font-size: 1rem;">
-                <i class="fas fa-spinner fa-spin" style="margin-right: 0.5rem; display: none;"></i>
-                Load More Products
-            </button>
+        <!-- Infinite Scroll Loading Indicator -->
+        <div class="loading-indicator" id="loadingIndicator">
+            <div class="loading-spinner"></div>
+            <p>Loading more products...</p>
+        </div>
+        
+        <!-- End of Results -->
+        <div class="end-of-results" id="endOfResults">
+            <p>🎉 You've seen all available products!</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Check back later for new arrivals.</p>
         </div>
     </section>
 
@@ -2984,14 +3333,40 @@
                     </div>
                 </div>
                 
-                <div class="seller-actions">
-                    <button class="seller-action-btn primary" id="viewSellerProducts">
-                        <i class="fas fa-store"></i> View Products
-                    </button>
-                    <button class="seller-action-btn secondary" id="contactSeller">
-                        <i class="fab fa-whatsapp"></i> Contact Seller
-                    </button>
+                <div class="seller-contact-info">
+                    <h4>Contact Seller</h4>
+                    <div class="contact-options">
+                        <button class="seller-contact-btn call" id="sellerCallBtn">
+                            <i class="fas fa-phone"></i> Call Now
+                        </button>
+                        <button class="seller-contact-btn whatsapp" id="sellerWhatsAppBtn">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </button>
+                    </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Phone Number Reveal Modal -->
+    <div class="phone-modal" id="phoneModal">
+        <div class="phone-modal-content">
+            <button class="phone-modal-close" id="phoneModalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="phone-icon">
+                <i class="fas fa-phone"></i>
+            </div>
+            <h3>Contact Seller</h3>
+            <p>You can reach the seller at:</p>
+            <div class="phone-number" id="phoneNumberDisplay">+254 700 000 000</div>
+            <div class="phone-actions">
+                <button class="phone-action-btn call" id="directCallBtn">
+                    <i class="fas fa-phone"></i> Call Now
+                </button>
+                <button class="phone-action-btn whatsapp" id="directWhatsAppBtn">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </button>
             </div>
         </div>
     </div>
@@ -3135,7 +3510,7 @@
     <!-- Enhanced JavaScript with all features integrated -->
     <script>
         // Google Apps Script URL
-        const scriptUrl = 'https://script.google.com/macros/s/AKfycbz8ZlSXM-_uEdKwS_epdAEUorEXChxF3wk6fsNgXaeL_aHpvCcMkSUx9Hz5YqIl4KFC/exec';
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbyXXjGrTy1-pTpjJNC2WBWfCJgdDREvRfDcxcxk_r8s2h3bbDev7u-tP_3YnO9AObZfGg/exec';
         
         // WhatsApp number for marketplace support
         const marketplaceWhatsAppNumber = '254700000000';
@@ -3177,12 +3552,37 @@
                 responseTime: '45 min',
                 verified: true,
                 category: 'home'
+            },
+            'beauty_shop': {
+                name: 'Beauty Haven',
+                phone: '254726789012',
+                location: 'Nakuru',
+                rating: 4.6,
+                totalProducts: 178,
+                totalSales: 2150,
+                positiveRating: 97,
+                responseTime: '40 min',
+                verified: true,
+                category: 'beauty'
+            },
+            'sports_store': {
+                name: 'Sports Gear Pro',
+                phone: '254727890123',
+                location: 'Eldoret',
+                rating: 4.9,
+                totalProducts: 134,
+                totalSales: 1670,
+                positiveRating: 99,
+                responseTime: '50 min',
+                verified: true,
+                category: 'sports'
             }
         };
 
         // Current seller view
         let currentSeller = null;
         let currentSellerView = null;
+        let currentPhoneToReveal = null;
         
         // Hero slides data
         const heroSlides = [
@@ -3290,6 +3690,12 @@
         let isLoadingProducts = false;
         let currentPage = 1;
         const productsPerPage = 12;
+        let hasMoreProducts = true;
+        let isSearchActive = false;
+        let searchQuery = '';
+        
+        // Infinite scroll observer
+        let scrollObserver = null;
         
         // Image modal variables
         let currentImageIndex = 0;
@@ -3330,6 +3736,7 @@
             initProductFilters();
             initModal();
             initSellerModal();
+            initPhoneModal();
             initBottomNav();
             initNavToggle();
             initWhatsAppChat();
@@ -3339,6 +3746,9 @@
             
             // Initialize search functionality
             initSearch();
+            
+            // Initialize infinite scroll
+            initInfiniteScroll();
             
             // Load products with optimized loading
             setTimeout(() => {
@@ -3511,57 +3921,116 @@
             }
         }
         
+        // Initialize infinite scroll
+        function initInfiniteScroll() {
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const endOfResults = document.getElementById('endOfResults');
+            
+            // Create intersection observer
+            scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !isLoadingProducts && hasMoreProducts && !isSearchActive) {
+                        loadMoreProducts();
+                    }
+                });
+            }, {
+                root: null,
+                rootMargin: '100px',
+                threshold: 0.1
+            });
+            
+            // Observe loading indicator
+            if (loadingIndicator) {
+                scrollObserver.observe(loadingIndicator);
+            }
+        }
+        
         // Initialize search functionality
         function initSearch() {
-            const searchInput = document.getElementById('searchInput');
-            const searchBtn = document.getElementById('searchBtn');
+            const searchInput = document.getElementById('productSearchInput');
+            const searchBtn = document.getElementById('productSearchBtn');
+            const clearSearchBtn = document.getElementById('clearSearchBtn');
+            const searchResultsCount = document.getElementById('searchResultsCount');
             
+            let searchTimeout = null;
+            
+            // Perform search on button click
             searchBtn.addEventListener('click', performSearch);
             
+            // Perform search on Enter key
             searchInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     performSearch();
                 }
             });
-        }
-        
-        function performSearch() {
-            const searchInput = document.getElementById('searchInput');
-            const query = searchInput.value.trim();
             
-            if (!query) {
-                showNotification('Please enter search terms');
-                return;
-            }
+            // Real-time search with debouncing
+            searchInput.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                
+                searchTimeout = setTimeout(() => {
+                    if (this.value.trim().length >= 2) {
+                        performSearch();
+                    } else if (this.value.trim().length === 0) {
+                        clearSearch();
+                    }
+                }, 500);
+            });
             
-            // Filter products based on search query
-            const searchResults = allProducts.filter(product => 
-                product.name.toLowerCase().includes(query.toLowerCase()) ||
-                product.description.toLowerCase().includes(query.toLowerCase()) ||
-                product.category.toLowerCase().includes(query.toLowerCase())
-            );
+            // Clear search
+            clearSearchBtn.addEventListener('click', clearSearch);
             
-            if (searchResults.length > 0) {
-                filteredProducts = searchResults;
-                currentFilter = 'search';
+            function performSearch() {
+                searchQuery = searchInput.value.trim();
+                
+                if (!searchQuery) {
+                    showNotification('Please enter search terms');
+                    return;
+                }
+                
+                isSearchActive = true;
                 currentPage = 1;
                 
-                // Update filter buttons
-                const filterButtons = document.querySelectorAll('.filter-btn');
-                filterButtons.forEach(btn => {
-                    btn.classList.remove('active');
-                    if (btn.dataset.filter === 'all') {
-                        btn.classList.add('active');
-                    }
+                // Filter products based on search query
+                const searchResults = allProducts.filter(product => {
+                    const searchLower = searchQuery.toLowerCase();
+                    return product.name.toLowerCase().includes(searchLower) ||
+                           product.description.toLowerCase().includes(searchLower) ||
+                           product.category.toLowerCase().includes(searchLower) ||
+                           (sellers[product.sellerId] && sellers[product.sellerId].name.toLowerCase().includes(searchLower));
                 });
                 
+                filteredProducts = searchResults;
+                
+                // Update search results count
+                searchResultsCount.textContent = `${searchResults.length} products found for "${searchQuery}"`;
+                clearSearchBtn.style.display = 'block';
+                
+                // Display search results
                 displayProducts(filteredProducts.slice(0, productsPerPage));
-                showNotification(`Found ${searchResults.length} products for "${query}"`);
+                
+                // Show end of results if no more products
+                if (searchResults.length <= productsPerPage) {
+                    hasMoreProducts = false;
+                    endOfResults.classList.add('active');
+                } else {
+                    hasMoreProducts = true;
+                    endOfResults.classList.remove('active');
+                }
                 
                 // Scroll to products section
                 document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
-            } else {
-                showNotification(`No products found for "${query}"`);
+            }
+            
+            function clearSearch() {
+                searchInput.value = '';
+                searchQuery = '';
+                isSearchActive = false;
+                clearSearchBtn.style.display = 'none';
+                searchResultsCount.textContent = 'Type to search products';
+                
+                // Reset to filtered products
+                filterProducts();
             }
         }
         
@@ -3752,6 +4221,12 @@
                     // Update current filter
                     currentFilter = this.dataset.filter;
                     currentPage = 1;
+                    isSearchActive = false;
+                    
+                    // Clear search
+                    document.getElementById('productSearchInput').value = '';
+                    document.getElementById('clearSearchBtn').style.display = 'none';
+                    document.getElementById('searchResultsCount').textContent = 'Type to search products';
                     
                     // Filter products
                     filterProducts();
@@ -3769,15 +4244,20 @@
                 );
             }
             
+            // Reset pagination
+            currentPage = 1;
+            hasMoreProducts = true;
+            
             // Display filtered products
             displayProducts(filteredProducts.slice(0, productsPerPage));
             
-            // Show/hide load more button
-            const loadMoreContainer = document.getElementById('loadMoreContainer');
-            if (filteredProducts.length > productsPerPage) {
-                loadMoreContainer.style.display = 'block';
+            // Show/hide end of results
+            const endOfResults = document.getElementById('endOfResults');
+            if (filteredProducts.length <= productsPerPage) {
+                hasMoreProducts = false;
+                endOfResults.classList.add('active');
             } else {
-                loadMoreContainer.style.display = 'none';
+                endOfResults.classList.remove('active');
             }
         }
         
@@ -3787,15 +4267,13 @@
             
             isLoadingProducts = true;
             const container = document.getElementById('productsContainer');
-            const loadMoreBtn = document.getElementById('loadMoreBtn');
-            const loadMoreIcon = loadMoreBtn.querySelector('.fa-spinner');
+            const loadingIndicator = document.getElementById('loadingIndicator');
             
             try {
                 console.log('📦 Loading featured products...');
                 
-                // Show loading state
-                loadMoreIcon.style.display = 'inline-block';
-                loadMoreBtn.disabled = true;
+                // Show loading indicator
+                loadingIndicator.classList.add('active');
                 
                 // Load all products at once for better performance
                 const products = await fetchAllProducts();
@@ -3804,9 +4282,6 @@
                     console.log(`✅ Loaded ${products.length} products`);
                     allProducts = products;
                     filterProducts();
-                    
-                    // Add event listener for load more button
-                    loadMoreBtn.addEventListener('click', loadMoreProducts);
                 } else {
                     throw new Error('No products found');
                 }
@@ -3817,8 +4292,7 @@
                 loadSampleProducts();
             } finally {
                 isLoadingProducts = false;
-                loadMoreIcon.style.display = 'none';
-                loadMoreBtn.disabled = false;
+                loadingIndicator.classList.remove('active');
                 
                 // Hide skeleton loader
                 const skeletonLoader = document.getElementById('skeletonLoader');
@@ -3859,21 +4333,39 @@
             }
         }
         
-        // Load more products (pagination)
+        // Load more products (infinite scroll)
         function loadMoreProducts() {
-            const startIndex = currentPage * productsPerPage;
-            const endIndex = startIndex + productsPerPage;
-            const moreProducts = filteredProducts.slice(startIndex, endIndex);
+            if (isLoadingProducts || !hasMoreProducts || isSearchActive) return;
             
-            if (moreProducts.length > 0) {
-                displayMoreProducts(moreProducts);
-                currentPage++;
+            isLoadingProducts = true;
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const endOfResults = document.getElementById('endOfResults');
+            
+            loadingIndicator.classList.add('active');
+            
+            // Simulate API call delay
+            setTimeout(() => {
+                const startIndex = currentPage * productsPerPage;
+                const endIndex = startIndex + productsPerPage;
+                const moreProducts = filteredProducts.slice(startIndex, endIndex);
                 
-                // Hide load more button if no more products
-                if (endIndex >= filteredProducts.length) {
-                    document.getElementById('loadMoreContainer').style.display = 'none';
+                if (moreProducts.length > 0) {
+                    displayMoreProducts(moreProducts);
+                    currentPage++;
+                    
+                    // Check if there are more products
+                    if (endIndex >= filteredProducts.length) {
+                        hasMoreProducts = false;
+                        endOfResults.classList.add('active');
+                    }
+                } else {
+                    hasMoreProducts = false;
+                    endOfResults.classList.add('active');
                 }
-            }
+                
+                isLoadingProducts = false;
+                loadingIndicator.classList.remove('active');
+            }, 800);
         }
         
         // Display initial products
@@ -3904,9 +4396,12 @@
                     }
                 }, index * 50);
             });
+            
+            // Show products grid
+            container.classList.add('loaded');
         }
         
-        // Display more products for pagination
+        // Display more products for infinite scroll
         function displayMoreProducts(products) {
             const container = document.getElementById('productsContainer');
             
@@ -3951,35 +4446,48 @@
                     <div class="product-info">
                         <div class="product-badge">${product.category}</div>
                         <h3 class="product-title">${product.name}</h3>
+                        
                         <div class="seller-info">
-                            <span>By ${seller.name}</span>
-                            <span class="seller-rating">
-                                <i class="fas fa-star"></i> ${seller.rating}
-                            </span>
-                            ${seller.verified ? '<span class="verified-badge"><i class="fas fa-check-circle"></i></span>' : ''}
+                            <div class="seller-avatar-small">
+                                ${seller.name.charAt(0)}
+                            </div>
+                            <div class="seller-details">
+                                <div class="seller-name">
+                                    ${seller.name}
+                                    <span class="seller-rating">
+                                        <i class="fas fa-star"></i> ${seller.rating}
+                                    </span>
+                                    ${seller.verified ? '<span class="verified-badge"><i class="fas fa-check-circle"></i></span>' : ''}
+                                </div>
+                                <div class="seller-location">
+                                    <i class="fas fa-map-marker-alt"></i> ${seller.location}
+                                </div>
+                            </div>
                         </div>
-                        <div class="product-price">KSh ${product.price}</div>
+                        
+                        <div class="product-price">KSh ${product.price.toLocaleString()}</div>
                         <p class="product-description">${product.description || 'Quality product from verified seller on SokoInn Marketplace.'}</p>
-                        <button class="seller-btn" onclick="event.stopPropagation(); viewSellerDetails('${product.sellerId}', event)">
-                            <i class="fas fa-store"></i> View Seller Details
-                        </button>
-                        <button class="whatsapp-btn" onclick="event.stopPropagation(); contactSellerViaWhatsApp('${product.sellerId}', '${escapedProductName}', ${product.price}, event)">
-                            <i class="fab fa-whatsapp"></i> Contact Seller
-                        </button>
+                        
+                        <div class="contact-buttons">
+                            <button class="contact-btn whatsapp-btn" onclick="event.stopPropagation(); contactSellerViaWhatsApp('${product.sellerId}', '${escapedProductName}', ${product.price}, event)">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </button>
+                            <button class="contact-btn call-btn" onclick="event.stopPropagation(); revealPhoneNumber('${seller.phone}', '${escapedSellerName}', event)">
+                                <i class="fas fa-phone"></i> Call
+                            </button>
+                        </div>
                     </div>
                 `;
                 
                 // Add click event to open modal
                 card.addEventListener('click', function(e) {
-                    // Only open modal if click is not on seller button, whatsapp button, view button, or their children
-                    if (!e.target.closest('.seller-btn') && 
-                        !e.target.closest('.whatsapp-btn') && 
+                    // Only open modal if click is not on contact buttons, view button, or their children
+                    if (!e.target.closest('.contact-btn') && 
                         !e.target.closest('.view-image-btn') &&
-                        !e.target.matches('.seller-btn') &&
-                        !e.target.matches('.whatsapp-btn') &&
+                        !e.target.matches('.contact-btn') &&
                         !e.target.matches('.view-image-btn') &&
-                        !e.target.closest('.fa-store') &&
                         !e.target.closest('.fa-whatsapp') &&
+                        !e.target.closest('.fa-phone') &&
                         !e.target.closest('.fa-expand')) {
                         openModal(product);
                     }
@@ -3998,13 +4506,15 @@
                     <div class="product-info">
                         <div class="product-badge">${product.category || 'Product'}</div>
                         <h3 class="product-title">${product.name}</h3>
-                        <div class="product-price">KSh ${product.price}</div>
-                        <button class="seller-btn" onclick="viewSellerDetails('tech_hub', event)">
-                            <i class="fas fa-store"></i> View Seller
-                        </button>
-                        <button class="whatsapp-btn" onclick="contactSellerViaWhatsApp('tech_hub', '${product.name}', ${product.price}, event)">
-                            <i class="fab fa-whatsapp"></i> Contact Seller
-                        </button>
+                        <div class="product-price">KSh ${product.price.toLocaleString()}</div>
+                        <div class="contact-buttons">
+                            <button class="contact-btn whatsapp-btn" onclick="contactSellerViaWhatsApp('tech_hub', '${product.name}', ${product.price}, event)">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </button>
+                            <button class="contact-btn call-btn" onclick="revealPhoneNumber('254723456789', 'Tech Hub Kenya', event)">
+                                <i class="fas fa-phone"></i> Call
+                            </button>
+                        </div>
                     </div>
                 `;
                 return fallbackCard;
@@ -4140,17 +4650,27 @@
                     </div>
                     <div class="modal-details">
                         <h2 class="modal-title">${product.name}</h2>
-                        <div class="modal-price">KSh ${product.price}</div>
+                        <div class="modal-price">KSh ${product.price.toLocaleString()}</div>
                         <div class="modal-category">${product.category}</div>
                         
-                        <div class="seller-info" style="margin: 1rem 0;">
-                            <strong>Seller:</strong> ${seller.name}
-                            <span class="seller-rating">
-                                <i class="fas fa-star"></i> ${seller.rating}
-                            </span>
-                            ${seller.verified ? '<span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>' : ''}
-                            <br>
-                            <small><i class="fas fa-map-marker-alt"></i> ${seller.location}</small>
+                        <div class="seller-info" style="margin: 1rem 0; padding: 1rem; background: var(--bg-secondary); border-radius: 10px;">
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div class="seller-avatar-small">
+                                    ${seller.name.charAt(0)}
+                                </div>
+                                <div>
+                                    <div style="font-weight: 600; font-size: 1.1rem;">${seller.name}</div>
+                                    <div style="display: flex; align-items: center; gap: 0.8rem; margin-top: 0.3rem;">
+                                        <span class="seller-rating">
+                                            <i class="fas fa-star"></i> ${seller.rating}
+                                        </span>
+                                        ${seller.verified ? '<span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>' : ''}
+                                    </div>
+                                    <div style="font-size: 0.9rem; color: var(--gray); margin-top: 0.3rem;">
+                                        <i class="fas fa-map-marker-alt"></i> ${seller.location}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         
                         <p class="modal-description">${product.description || 'Quality product from verified seller on SokoInn Marketplace.'}</p>
@@ -4177,12 +4697,14 @@
                             </ul>
                         </div>
                         
-                        <button class="modal-seller-btn" onclick="viewSellerDetails('${product.sellerId}')">
-                            <i class="fas fa-store"></i> View Seller Details
-                        </button>
-                        <button class="modal-whatsapp-btn" onclick="contactSellerViaWhatsApp('${product.sellerId}', '${escapedProductName}', ${product.price})">
-                            <i class="fab fa-whatsapp"></i> Contact Seller
-                        </button>
+                        <div class="modal-contact-buttons">
+                            <button class="modal-contact-btn whatsapp" onclick="contactSellerViaWhatsApp('${product.sellerId}', '${escapedProductName}', ${product.price})">
+                                <i class="fab fa-whatsapp"></i> WhatsApp Seller
+                            </button>
+                            <button class="modal-contact-btn call" onclick="revealPhoneNumber('${seller.phone}', '${escapedSellerName}')">
+                                <i class="fas fa-phone"></i> Call Seller
+                            </button>
+                        </div>
                     </div>
                 `;
                 
@@ -4223,8 +4745,8 @@
         function initSellerModal() {
             const sellerModal = document.getElementById('sellerModal');
             const sellerModalClose = document.getElementById('sellerModalClose');
-            const viewSellerProducts = document.getElementById('viewSellerProducts');
-            const contactSeller = document.getElementById('contactSeller');
+            const sellerCallBtn = document.getElementById('sellerCallBtn');
+            const sellerWhatsAppBtn = document.getElementById('sellerWhatsAppBtn');
             
             sellerModalClose.addEventListener('click', closeSellerModal);
             
@@ -4234,31 +4756,14 @@
                 }
             });
             
-            viewSellerProducts.addEventListener('click', function() {
+            sellerCallBtn.addEventListener('click', function() {
                 if (currentSeller) {
-                    // Filter products by this seller
-                    currentFilter = currentSeller.category;
-                    currentSellerView = currentSeller.name;
-                    
-                    const filterButtons = document.querySelectorAll('.filter-btn');
-                    filterButtons.forEach(btn => {
-                        btn.classList.remove('active');
-                        if (btn.dataset.filter === currentFilter) {
-                            btn.classList.add('active');
-                        }
-                    });
-                    
-                    filterProducts();
+                    revealPhoneNumber(currentSeller.phone, currentSeller.name);
                     closeSellerModal();
-                    
-                    // Scroll to products section
-                    document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
-                    
-                    showNotification(`Showing products from ${currentSeller.name}`);
                 }
             });
             
-            contactSeller.addEventListener('click', function() {
+            sellerWhatsAppBtn.addEventListener('click', function() {
                 if (currentSeller) {
                     const message = `Hello ${currentSeller.name}! I saw your products on SokoInn and would like to inquire about them.`;
                     const whatsappUrl = `https://wa.me/${currentSeller.phone}?text=${encodeURIComponent(message)}`;
@@ -4271,6 +4776,46 @@
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && sellerModal.classList.contains('active')) {
                     closeSellerModal();
+                }
+            });
+        }
+        
+        // Initialize phone modal
+        function initPhoneModal() {
+            const phoneModal = document.getElementById('phoneModal');
+            const phoneModalClose = document.getElementById('phoneModalClose');
+            const directCallBtn = document.getElementById('directCallBtn');
+            const directWhatsAppBtn = document.getElementById('directWhatsAppBtn');
+            
+            phoneModalClose.addEventListener('click', closePhoneModal);
+            
+            phoneModal.addEventListener('click', function(e) {
+                if (e.target === phoneModal) {
+                    closePhoneModal();
+                }
+            });
+            
+            directCallBtn.addEventListener('click', function() {
+                if (currentPhoneToReveal) {
+                    const telUrl = `tel:${currentPhoneToReveal}`;
+                    window.location.href = telUrl;
+                    closePhoneModal();
+                }
+            });
+            
+            directWhatsAppBtn.addEventListener('click', function() {
+                if (currentPhoneToReveal) {
+                    const message = `Hello! I saw your contact on SokoInn and would like to get in touch.`;
+                    const whatsappUrl = `https://wa.me/${currentPhoneToReveal}?text=${encodeURIComponent(message)}`;
+                    window.open(whatsappUrl, '_blank');
+                    closePhoneModal();
+                }
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && phoneModal.classList.contains('active')) {
+                    closePhoneModal();
                 }
             });
         }
@@ -4320,7 +4865,7 @@
             
             const message = `Hello ${seller.name}! I'm interested in your product:\n\n` +
                            `Product: ${productName}\n` +
-                           `Price: KSh ${productPrice}\n\n` +
+                           `Price: KSh ${productPrice.toLocaleString()}\n\n` +
                            `Please provide more details about this product.`;
             
             const encodedMessage = encodeURIComponent(message);
@@ -4328,6 +4873,24 @@
             
             window.open(whatsappUrl, '_blank');
             showNotification(`Opening WhatsApp to contact ${seller.name}`);
+        };
+        
+        // Reveal phone number
+        window.revealPhoneNumber = function(phoneNumber, sellerName, event = null) {
+            if (event) event.stopPropagation();
+            
+            currentPhoneToReveal = phoneNumber;
+            const phoneModal = document.getElementById('phoneModal');
+            
+            // Format phone number for display
+            const formattedNumber = phoneNumber.replace(/(\d{3})(\d{3})(\d{3,4})/, '$1 $2 $3');
+            document.getElementById('phoneNumberDisplay').textContent = `+${formattedNumber}`;
+            
+            phoneModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            hideBottomNav();
+            
+            showNotification(`Phone number for ${sellerName} is now visible`);
         };
         
         function generateStarRating(rating) {
@@ -4360,6 +4923,14 @@
             sellerModal.classList.remove('active');
             document.body.style.overflow = 'auto';
             currentSeller = null;
+            setTimeout(showBottomNav, 300);
+        }
+        
+        function closePhoneModal() {
+            const phoneModal = document.getElementById('phoneModal');
+            phoneModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            currentPhoneToReveal = null;
             setTimeout(showBottomNav, 300);
         }
         
@@ -4834,14 +5405,14 @@
                 case 'sellers':
                     addChatMessage('I want to find sellers', 'user');
                     setTimeout(() => {
-                        addChatMessage('You can view seller details by clicking the "View Seller" button on any product. We have verified sellers in all categories!', 'bot');
+                        addChatMessage('You can view seller details by clicking on any product. Contact sellers directly via WhatsApp or call for inquiries!', 'bot');
                     }, 500);
                     break;
                     
                 case 'order':
                     addChatMessage('I need help with an order', 'user');
                     setTimeout(() => {
-                        addChatMessage('For order assistance, please contact the seller directly via WhatsApp using the "Contact Seller" button. They can help with order details, tracking, and returns.', 'bot');
+                        addChatMessage('For order assistance, please contact the seller directly via WhatsApp or call using the contact buttons. They can help with order details, tracking, and returns.', 'bot');
                     }, 500);
                     break;
                     
@@ -4885,13 +5456,17 @@
             } else if (message.includes('price') || message.includes('cost') || message.includes('how much')) {
                 response = 'Prices are listed with each product. You can contact the seller directly for any price negotiations or inquiries.';
             } else if (message.includes('delivery') || message.includes('shipping')) {
-                response = 'Delivery arrangements are made directly with the seller. Contact them via WhatsApp to discuss delivery options.';
+                response = 'Delivery arrangements are made directly with the seller. Contact them via WhatsApp or call to discuss delivery options.';
             } else if (message.includes('payment') || message.includes('pay')) {
                 response = 'We recommend arranging secure payment methods directly with the seller. Always ensure safe transaction practices.';
             } else if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
                 response = 'Hello! I\'m your SokoInn marketplace assistant. How can I help you today?';
             } else if (message.includes('category') || message.includes('type')) {
                 response = 'We have categories like Electronics, Fashion, Home & Garden, Beauty & Health, Sports, and more! Use the category filters to explore.';
+            } else if (message.includes('call') || message.includes('phone') || message.includes('number')) {
+                response = 'You can call sellers directly by clicking the "Call" button on any product. The phone number will be revealed in a secure modal.';
+            } else if (message.includes('whatsapp')) {
+                response = 'Use the WhatsApp button to contact sellers directly. They typically respond within minutes during business hours.';
             } else {
                 response = 'I\'m here to help with marketplace questions. You can ask about products, sellers, orders, or general marketplace information.';
             }
@@ -4973,12 +5548,12 @@
             }
             
             /* FIX: Ensure proper pointer events */
-            .seller-btn,
-            .whatsapp-btn,
+            .contact-btn,
             .view-image-btn,
             .image-zoom-btn,
-            .modal-seller-btn,
-            .modal-whatsapp-btn,
+            .modal-contact-btn,
+            .seller-contact-btn,
+            .phone-action-btn,
             .chat-option-btn {
                 cursor: pointer !important;
             }
