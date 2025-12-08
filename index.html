@@ -252,11 +252,15 @@
             filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.3));
         }
         
-        /* Search Bar */
+        /* Search Bar - Moved to top of hero */
         .search-container {
-            flex: 1;
-            max-width: 600px;
-            margin: 0 2rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 800px;
+            z-index: 20;
         }
         
         .search-bar {
@@ -265,22 +269,23 @@
             background: var(--white);
             border-radius: 30px;
             overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            border: 2px solid transparent;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            border: 3px solid var(--primary-gold);
             transition: var(--transition);
         }
         
         .search-bar:focus-within {
             border-color: var(--primary-red);
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
         }
         
         .search-input {
             flex: 1;
-            padding: 0.8rem 1.5rem;
+            padding: 1.2rem 1.5rem;
             border: none;
             outline: none;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             background: transparent;
         }
         
@@ -288,13 +293,14 @@
             background: var(--primary-red);
             color: var(--white);
             border: none;
-            padding: 0.8rem 1.5rem;
+            padding: 1.2rem 2rem;
             cursor: pointer;
             transition: var(--transition);
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 1.1rem;
         }
         
         .search-btn:hover {
@@ -465,13 +471,16 @@
             transform: rotate(90deg);
         }
         
-        /* SokoInn Hero Slideshow */
+        /* SokoInn Hero with Search Bar */
         .hero {
-            height: 50vh;
-            min-height: 300px;
+            height: 60vh;
+            min-height: 400px;
             position: relative;
             overflow: hidden;
             background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .hero-slides {
@@ -506,7 +515,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.8));
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -517,7 +526,7 @@
         }
         
         .hero-title {
-            font-size: clamp(2rem, 4vw, 3rem);
+            font-size: clamp(2rem, 4vw, 3.5rem);
             font-weight: 900;
             margin-bottom: 1rem;
             text-transform: uppercase;
@@ -527,10 +536,11 @@
         }
         
         .hero-subtitle {
-            font-size: clamp(1rem, 2vw, 1.2rem);
+            font-size: clamp(1rem, 2vw, 1.3rem);
             max-width: 600px;
             opacity: 0.9;
             line-height: 1.5;
+            margin-bottom: 2rem;
         }
         
         .hero-dots {
@@ -559,227 +569,25 @@
             border-color: var(--primary-gold);
         }
         
-        /* Collections Section */
-        .collections {
+        /* Featured Products Section */
+        .featured-products {
             max-width: 1400px;
             margin: 4rem auto;
             padding: 0 1.5rem;
         }
         
-        .collections-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        .collection-card {
-            position: relative;
-            height: 300px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-            cursor: pointer;
-            border: 2px solid transparent;
-            text-decoration: none;
-            display: block;
-        }
-        
-        .collection-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary-red);
-        }
-        
-        .collection-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-        
-        .collection-card:hover .collection-image {
-            transform: scale(1.05);
-        }
-        
-        .collection-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(178, 34, 34, 0.8));
-            color: white;
-            padding: 1.5rem;
-        }
-        
-        .collection-title {
-            font-size: 1.4rem;
-            margin-bottom: 0.4rem;
-            font-weight: 600;
-        }
-        
-        .collection-description {
-            opacity: 0.9;
-            font-size: 0.85rem;
-        }
-        
-        /* Marketplace Categories */
-        .categories {
-            max-width: 1400px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-        }
-        
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-        
-        .category-card {
-            background: var(--white);
-            border-radius: 10px;
-            padding: 1.5rem;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-            border: 2px solid transparent;
-            box-shadow: var(--shadow-sm);
-            text-decoration: none;
-            color: var(--text-primary);
-        }
-        
-        .category-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-red);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .category-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--primary-red);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            color: var(--white);
-            font-size: 1.5rem;
-        }
-        
-        .category-title {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-        
-        .category-count {
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-        
-        /* Product Search Section */
-        .product-search {
-            max-width: 1400px;
-            margin: 3rem auto 2rem;
-            padding: 0 1.5rem;
-        }
-        
-        .product-search-container {
-            background: var(--white);
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: var(--shadow-md);
-            border: 2px solid var(--border-color);
-        }
-        
-        .search-bar-large {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .search-input-large {
-            flex: 1;
-            padding: 1rem 1.5rem;
-            border: 2px solid var(--border-color);
-            border-radius: 30px;
-            font-size: 1rem;
-            outline: none;
-            transition: var(--transition);
-        }
-        
-        .search-input-large:focus {
-            border-color: var(--primary-red);
-            box-shadow: 0 0 0 3px rgba(178, 34, 34, 0.1);
-        }
-        
-        .search-btn-large {
-            background: var(--primary-red);
-            color: var(--white);
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .search-btn-large:hover {
-            background: var(--secondary-red);
-            transform: translateY(-2px);
-        }
-        
-        .search-stats {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border-color);
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-        
-        .clear-search {
-            background: transparent;
-            color: var(--primary-red);
-            border: 1px solid var(--primary-red);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-weight: 500;
-        }
-        
-        .clear-search:hover {
-            background: var(--primary-red);
-            color: var(--white);
-        }
-        
-        /* Products Section - OPTIMIZED */
-        .products {
-            max-width: 1400px;
-            margin: 2rem auto 4rem;
-            padding: 0 1.5rem;
-        }
-        
         .section-title {
             text-align: center;
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
             position: relative;
             display: inline-block;
             width: 100%;
         }
         
         .section-title h2 {
-            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
             color: var(--text-primary);
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
             font-weight: 700;
             position: relative;
             display: inline-block;
@@ -788,19 +596,20 @@
         .section-title h2::after {
             content: '';
             position: absolute;
-            bottom: -8px;
+            bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
+            width: 80px;
+            height: 4px;
             background: var(--primary-red);
+            border-radius: 2px;
         }
         
         .section-title p {
             color: var(--gray);
             max-width: 500px;
-            margin: 0 auto;
-            font-size: 0.9rem;
+            margin: 1.5rem auto 0;
+            font-size: 1rem;
             line-height: 1.6;
         }
         
@@ -809,25 +618,25 @@
             display: flex;
             justify-content: center;
             gap: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             flex-wrap: wrap;
-            padding: 1rem;
+            padding: 1.5rem;
             background: var(--card-bg);
-            border-radius: 10px;
+            border-radius: 15px;
             box-shadow: var(--shadow-sm);
             border: 1px solid var(--border-color);
         }
         
         .filter-btn {
-            padding: 0.6rem 1.5rem;
+            padding: 0.8rem 2rem;
             border: 2px solid var(--border-color);
             background: var(--white);
             color: var(--text-primary);
             border-radius: 30px;
             cursor: pointer;
             transition: var(--transition);
-            font-weight: 500;
-            font-size: 0.9rem;
+            font-weight: 600;
+            font-size: 1rem;
             white-space: nowrap;
         }
         
@@ -843,9 +652,10 @@
             border-color: var(--primary-red);
         }
         
+        /* Simplified Products Grid */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
             opacity: 0;
             transform: translateY(20px);
@@ -886,11 +696,11 @@
             border-color: var(--primary-red);
         }
         
-        /* UPDATED: Larger product images without grid */
+        /* Product images */
         .product-image-wrapper {
             position: relative;
             width: 100%;
-            height: 320px; /* Larger height for bigger images */
+            height: 280px;
             overflow: hidden;
             background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--white) 100%);
             display: flex;
@@ -901,64 +711,24 @@
         .product-image {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Changed from cover to contain to show full image */
+            object-fit: contain;
             transition: transform 0.6s ease;
-            padding: 1.5rem; /* More padding for better presentation */
+            padding: 1.5rem;
         }
         
         .product-card:hover .product-image {
-            transform: scale(1.08); /* Slightly larger hover effect */
-        }
-        
-        .view-image-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            border: none;
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: var(--transition);
-            z-index: 2;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        
-        .product-image-wrapper:hover .view-image-btn {
-            opacity: 1;
-            transform: translateY(0);
+            transform: scale(1.08);
         }
         
         .product-info {
-            padding: 1.8rem;
+            padding: 1.5rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
         
-        .product-badge {
-            background: var(--primary-red);
-            color: var(--white);
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            align-self: flex-start;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-        }
-        
         .product-title {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 700;
             margin-bottom: 0.8rem;
             color: var(--text-primary);
@@ -969,124 +739,48 @@
             overflow: hidden;
         }
         
-        .seller-info {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            margin-bottom: 1rem;
-            padding: 0.8rem;
-            background: var(--bg-secondary);
-            border-radius: 10px;
-        }
-        
-        .seller-avatar-small {
-            width: 36px;
-            height: 36px;
-            background: var(--primary-red);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 1rem;
-            font-weight: bold;
-        }
-        
-        .seller-details {
-            flex: 1;
-        }
-        
-        .seller-name {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .seller-rating {
-            color: var(--rating-gold);
-            font-weight: 700;
-            font-size: 0.9rem;
-        }
-        
-        .seller-location {
-            font-size: 0.8rem;
-            color: var(--gray);
-            margin-top: 0.2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-        
         .product-price {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: bold;
             color: var(--primary-red);
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
             background: linear-gradient(135deg, var(--primary-red), var(--secondary-red));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
-        .product-description {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            flex-grow: 1;
-        }
-        
-        /* UPDATED: Enhanced Contact Buttons */
-        .contact-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.8rem;
-            margin-top: 0.5rem;
-        }
-        
-        .contact-btn {
+        .product-location {
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 0.5rem;
-            padding: 0.9rem;
-            border: none;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .product-location i {
+            color: var(--primary-red);
+        }
+        
+        .view-details-btn {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            background: transparent;
+            color: var(--primary-red);
+            border: 2px solid var(--primary-red);
             border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            text-align: center;
+            display: none;
         }
         
-        .whatsapp-btn {
-            background: var(--whatsapp-green);
-            color: var(--white);
-        }
-        
-        .whatsapp-btn:hover {
-            background: var(--whatsapp-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-        }
-        
-        .call-btn {
-            background: var(--primary-red);
-            color: var(--white);
-        }
-        
-        .call-btn:hover {
-            background: var(--secondary-red);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(178, 34, 34, 0.3);
+        .product-card:hover .view-details-btn {
+            display: block;
         }
         
         /* Infinite Scroll Loading Indicator */
@@ -1128,333 +822,6 @@
         
         .end-of-results.active {
             display: block;
-        }
-        
-        /* Phone Number Reveal Modal */
-        .phone-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2500;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-        }
-        
-        .phone-modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .phone-modal-content {
-            background: var(--white);
-            border-radius: 15px;
-            max-width: 400px;
-            width: 90%;
-            padding: 2.5rem;
-            text-align: center;
-            animation: modalSlideIn 0.3s ease;
-            border: 2px solid var(--primary-gold);
-        }
-        
-        .phone-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--primary-red);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            color: var(--white);
-            font-size: 2rem;
-            border: 3px solid var(--primary-gold);
-        }
-        
-        .phone-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary-red);
-            margin: 1.5rem 0;
-            padding: 1rem;
-            background: var(--bg-secondary);
-            border-radius: 10px;
-            letter-spacing: 1px;
-        }
-        
-        .phone-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-        
-        .phone-action-btn {
-            flex: 1;
-            padding: 1rem;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-        
-        .phone-action-btn.call {
-            background: var(--primary-red);
-            color: var(--white);
-        }
-        
-        .phone-action-btn.call:hover {
-            background: var(--secondary-red);
-            transform: translateY(-2px);
-        }
-        
-        .phone-action-btn.whatsapp {
-            background: var(--whatsapp-green);
-            color: var(--white);
-        }
-        
-        .phone-action-btn.whatsapp:hover {
-            background: var(--whatsapp-dark);
-            transform: translateY(-2px);
-        }
-        
-        .phone-modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: transparent;
-            color: var(--white);
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: var(--transition);
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-        }
-        
-        .phone-modal-close:hover {
-            background: var(--primary-red);
-        }
-        
-        /* Seller Details Modal */
-        .seller-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2500;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-        }
-        
-        .seller-modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .seller-modal-content {
-            background: var(--white);
-            border-radius: 15px;
-            max-width: 500px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            position: relative;
-            animation: modalSlideIn 0.3s ease;
-            border: 2px solid var(--seller-blue);
-        }
-        
-        .seller-modal-header {
-            background: var(--seller-blue);
-            color: var(--white);
-            padding: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            border-radius: 12px 12px 0 0;
-        }
-        
-        .seller-avatar {
-            width: 70px;
-            height: 70px;
-            background: var(--white);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: var(--seller-blue);
-            border: 3px solid var(--white);
-        }
-        
-        .seller-info-header {
-            flex: 1;
-        }
-        
-        .seller-name {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-        }
-        
-        .seller-rating-large {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .rating-stars {
-            color: var(--rating-gold);
-            font-size: 1.1rem;
-        }
-        
-        .rating-value {
-            font-weight: 600;
-            color: var(--white);
-            background: rgba(0,0,0,0.2);
-            padding: 0.2rem 0.6rem;
-            border-radius: 15px;
-        }
-        
-        .seller-location {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-        
-        .seller-modal-body {
-            padding: 2rem;
-        }
-        
-        .seller-details-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .detail-item {
-            text-align: center;
-            padding: 1rem;
-            background: var(--bg-secondary);
-            border-radius: 8px;
-            transition: var(--transition);
-        }
-        
-        .detail-item:hover {
-            background: var(--primary-red);
-            color: var(--white);
-        }
-        
-        .detail-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-        }
-        
-        .detail-label {
-            font-size: 0.85rem;
-            color: var(--gray);
-        }
-        
-        .detail-item:hover .detail-label {
-            color: var(--white);
-        }
-        
-        .seller-contact-info {
-            background: var(--bg-secondary);
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin: 1.5rem 0;
-        }
-        
-        .seller-contact-info h4 {
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-        
-        .contact-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-        
-        .seller-contact-btn {
-            padding: 1rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-        
-        .seller-contact-btn.call {
-            background: var(--primary-red);
-            color: var(--white);
-        }
-        
-        .seller-contact-btn.call:hover {
-            background: var(--secondary-red);
-            transform: translateY(-2px);
-        }
-        
-        .seller-contact-btn.whatsapp {
-            background: var(--whatsapp-green);
-            color: var(--white);
-        }
-        
-        .seller-contact-btn.whatsapp:hover {
-            background: var(--whatsapp-dark);
-            transform: translateY(-2px);
-        }
-        
-        .seller-modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: rgba(255,255,255,0.2);
-            color: var(--white);
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-        }
-        
-        .seller-modal-close:hover {
-            background: rgba(255,255,255,0.3);
-            transform: rotate(90deg);
         }
         
         /* Product Modal */
@@ -1642,19 +1009,32 @@
         .modal-details {
             display: flex;
             flex-direction: column;
-            gap: 1.2rem;
+            gap: 1.5rem;
         }
         
         .modal-title {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 700;
             color: var(--text-primary);
             line-height: 1.3;
         }
         
         .modal-price {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: bold;
+            color: var(--primary-red);
+        }
+        
+        .modal-location {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--gray);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .modal-location i {
             color: var(--primary-red);
         }
         
@@ -1673,9 +1053,48 @@
         .modal-description {
             color: var(--text-secondary);
             line-height: 1.7;
-            font-size: 1rem;
-            margin: 1rem 0;
+            font-size: 1.1rem;
+            margin: 1.5rem 0;
             flex-grow: 1;
+        }
+        
+        .seller-info {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+        
+        .seller-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .seller-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .seller-name {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+        }
+        
+        .seller-rating {
+            color: var(--rating-gold);
+            font-weight: 700;
+            margin-top: 0.2rem;
         }
         
         .product-specs {
@@ -1717,7 +1136,7 @@
             font-weight: 600;
         }
         
-        /* UPDATED: Modal Contact Buttons */
+        /* Contact Buttons in Modal */
         .modal-contact-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1848,44 +1267,6 @@
             user-select: none;
         }
         
-        .full-image-controls {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 1rem;
-            background: rgba(0,0,0,0.7);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        .image-control-btn {
-            background: transparent;
-            color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: var(--transition);
-        }
-        
-        .image-control-btn:hover {
-            background: var(--primary-red);
-            transform: scale(1.1);
-        }
-        
-        .image-control-btn.active {
-            background: var(--primary-red);
-        }
-        
         .full-image-close {
             position: absolute;
             top: 2rem;
@@ -1926,7 +1307,297 @@
             border: 1px solid rgba(255,255,255,0.1);
         }
         
-        /* WhatsApp Chat Bot with Seller Name */
+        /* Phone Number Reveal Modal */
+        .phone-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2500;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        
+        .phone-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .phone-modal-content {
+            background: var(--white);
+            border-radius: 15px;
+            max-width: 400px;
+            width: 90%;
+            padding: 2.5rem;
+            text-align: center;
+            animation: modalSlideIn 0.3s ease;
+            border: 2px solid var(--primary-gold);
+        }
+        
+        .phone-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--white);
+            font-size: 2rem;
+            border: 3px solid var(--primary-gold);
+        }
+        
+        .phone-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .phone-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .phone-action-btn {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .phone-action-btn.call {
+            background: var(--primary-red);
+            color: var(--white);
+        }
+        
+        .phone-action-btn.call:hover {
+            background: var(--secondary-red);
+            transform: translateY(-2px);
+        }
+        
+        .phone-action-btn.whatsapp {
+            background: var(--whatsapp-green);
+            color: var(--white);
+        }
+        
+        .phone-action-btn.whatsapp:hover {
+            background: var(--whatsapp-dark);
+            transform: translateY(-2px);
+        }
+        
+        .phone-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            color: var(--white);
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .phone-modal-close:hover {
+            background: var(--primary-red);
+        }
+        
+        /* Floating Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--primary-black);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid var(--primary-red);
+            border-radius: 30px;
+            z-index: 1000;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4),
+                        0 0 0 1px rgba(212, 175, 55, 0.2);
+            padding: 0.5rem;
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55),
+                        opacity 0.3s ease,
+                        box-shadow 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            max-width: calc(100vw - 40px);
+            overflow: hidden;
+        }
+        
+        .bottom-nav.visible {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .bottom-nav.scrolled-down {
+            transform: translateX(-50%) translateY(100px);
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .bottom-nav-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        /* Navigation Items */
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--gray);
+            padding: 0.6rem 0.8rem;
+            border-radius: 20px;
+            transition: var(--transition);
+            position: relative;
+            flex: 1;
+            min-width: 60px;
+            max-width: 75px;
+            background: transparent;
+            border: 2px solid transparent;
+            cursor: pointer;
+            outline: none;
+        }
+        
+        .nav-item.active {
+            color: var(--white);
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--secondary-red) 100%);
+            border-color: var(--primary-gold);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(178, 34, 34, 0.3);
+        }
+        
+        .nav-item:hover:not(.active) {
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+        }
+        
+        /* Navigation Icons */
+        .nav-icon {
+            position: relative;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            transition: var(--transition);
+            z-index: 1;
+        }
+        
+        .nav-item.active .nav-icon {
+            transform: scale(1.1);
+            color: var(--primary-gold);
+        }
+        
+        /* Active Indicator */
+        .nav-indicator {
+            position: absolute;
+            top: -6px;
+            width: 6px;
+            height: 6px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            animation: glow 1.5s ease-in-out infinite alternate;
+            z-index: 1;
+        }
+        
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 5px var(--primary-gold);
+            }
+            to {
+                box-shadow: 0 0 15px var(--primary-gold);
+            }
+        }
+        
+        /* Navigation Labels */
+        .nav-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+            z-index: 1;
+            white-space: nowrap;
+        }
+        
+        /* Show/Hide Toggle Button */
+        .nav-toggle-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: var(--primary-red);
+            border: 2px solid var(--primary-gold);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            box-shadow: 0 4px 15px rgba(178, 34, 34, 0.3);
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .nav-toggle-btn.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .nav-toggle-btn:hover {
+            background: var(--secondary-red);
+            transform: translateX(-50%) scale(1.1);
+        }
+        
+        .nav-toggle-btn i {
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-toggle-btn.active i {
+            transform: rotate(180deg);
+        }
+        
+        /* WhatsApp Chat Bot */
         .whatsapp-chat-bot {
             position: fixed;
             bottom: 90px;
@@ -2000,13 +1671,6 @@
             font-weight: 600;
             margin: 0;
             font-size: 1rem;
-        }
-        
-        .seller-name-chat {
-            font-size: 0.8rem;
-            opacity: 0.9;
-            color: var(--primary-gold);
-            font-weight: 500;
         }
         
         .chat-bot-status {
@@ -2131,15 +1795,10 @@
             transform: translateX(5px);
         }
         
-        .chat-option-btn i {
-            font-size: 0.8rem;
-            opacity: 0.7;
-        }
-        
         /* Product Skeleton Loading */
         .skeleton-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
         }
         
@@ -2154,13 +1813,13 @@
         
         .skeleton-image {
             width: 100%;
-            height: 320px;
+            height: 280px;
             background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
             background-size: 200% 100%;
         }
         
         .skeleton-info {
-            padding: 1.8rem;
+            padding: 1.5rem;
         }
         
         .skeleton-text {
@@ -2179,20 +1838,6 @@
             width: 80%;
         }
         
-        .skeleton-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.8rem;
-            margin-top: 1rem;
-        }
-        
-        .skeleton-btn {
-            height: 46px;
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            border-radius: 8px;
-        }
-        
         @keyframes skeleton-loading {
             0% {
                 background-position: -200% 0;
@@ -2202,224 +1847,8 @@
             }
         }
         
-        /* Enhanced Floating Bottom Navigation */
-        .bottom-nav {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: var(--primary-black);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 2px solid var(--primary-red);
-            border-radius: 30px;
-            z-index: 1000;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4),
-                        0 0 0 1px rgba(212, 175, 55, 0.2);
-            padding: 0.5rem;
-            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55),
-                        opacity 0.3s ease,
-                        box-shadow 0.3s ease;
-            opacity: 0;
-            visibility: hidden;
-            max-width: calc(100vw - 40px);
-            overflow: hidden;
-        }
-        
-        .bottom-nav.visible {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .bottom-nav.scrolled-down {
-            transform: translateX(-50%) translateY(100px);
-            opacity: 0;
-            visibility: hidden;
-        }
-        
-        .bottom-nav-container {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            gap: 0.3rem;
-        }
-        
-        /* Navigation Items */
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: var(--gray);
-            padding: 0.6rem 0.8rem;
-            border-radius: 20px;
-            transition: var(--transition);
-            position: relative;
-            flex: 1;
-            min-width: 60px;
-            max-width: 75px;
-            background: transparent;
-            border: 2px solid transparent;
-            cursor: pointer;
-            outline: none;
-        }
-        
-        .nav-item.active {
-            color: var(--white);
-            background: linear-gradient(135deg, var(--primary-red) 0%, var(--secondary-red) 100%);
-            border-color: var(--primary-gold);
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(178, 34, 34, 0.3);
-        }
-        
-        .nav-item:hover:not(.active) {
-            color: var(--white);
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateY(-2px);
-        }
-        
-        /* Navigation Icons */
-        .nav-icon {
-            position: relative;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            margin-bottom: 0.3rem;
-            transition: var(--transition);
-            z-index: 1;
-        }
-        
-        .nav-item.active .nav-icon {
-            transform: scale(1.1);
-            color: var(--primary-gold);
-        }
-        
-        /* Badges */
-        .nav-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: var(--primary-gold);
-            color: var(--primary-black);
-            font-size: 0.6rem;
-            font-weight: 800;
-            min-width: 16px;
-            height: 16px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid var(--primary-black);
-            z-index: 2;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% {
-                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
-            }
-            50% {
-                box-shadow: 0 0 0 6px rgba(212, 175, 55, 0);
-            }
-        }
-        
-        /* Active Indicator */
-        .nav-indicator {
-            position: absolute;
-            top: -6px;
-            width: 6px;
-            height: 6px;
-            background: var(--primary-gold);
-            border-radius: 50%;
-            animation: glow 1.5s ease-in-out infinite alternate;
-            z-index: 1;
-        }
-        
-        @keyframes glow {
-            from {
-                box-shadow: 0 0 5px var(--primary-gold);
-            }
-            to {
-                box-shadow: 0 0 15px var(--primary-gold);
-            }
-        }
-        
-        /* Navigation Labels */
-        .nav-label {
-            font-size: 0.65rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: var(--transition);
-            z-index: 1;
-            white-space: nowrap;
-        }
-        
-        /* Show/Hide Toggle Button */
-        .nav-toggle-btn {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 60px;
-            background: var(--primary-red);
-            border: 2px solid var(--primary-gold);
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 999;
-            box-shadow: 0 4px 15px rgba(178, 34, 34, 0.3);
-            transition: var(--transition);
-            opacity: 0;
-            visibility: hidden;
-        }
-        
-        .nav-toggle-btn.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .nav-toggle-btn:hover {
-            background: var(--secondary-red);
-            transform: translateX(-50%) scale(1.1);
-        }
-        
-        .nav-toggle-btn i {
-            color: white;
-            font-size: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-        
-        .nav-toggle-btn.active i {
-            transform: rotate(180deg);
-        }
-        
-        /* Seller Verification Badge */
-        .verified-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-            background: var(--seller-blue);
-            color: white;
-            padding: 0.2rem 0.6rem;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-        
         /* FIX: Better click handling */
-        .contact-btn *,
-        .view-image-btn *,
-        .image-zoom-btn *,
         .modal-contact-btn *,
-        .seller-contact-btn *,
         .phone-action-btn *,
         .chat-option-btn * {
             pointer-events: none;
@@ -2427,13 +1856,8 @@
         
         /* FIX: Ensure buttons are clickable on mobile */
         @media (max-width: 768px) {
-            .contact-btn,
-            .view-image-btn,
             .modal-contact-btn,
-            .seller-contact-btn,
-            .phone-action-btn,
-            .image-control-btn,
-            .image-nav-btn {
+            .phone-action-btn {
                 min-height: 44px;
                 min-width: 44px;
             }
@@ -2490,7 +1914,7 @@
             }
             
             .search-container {
-                display: none;
+                width: 95%;
             }
             
             .products-grid {
@@ -2508,8 +1932,8 @@
             }
             
             .hero {
-                height: 40vh;
-                min-height: 250px;
+                height: 50vh;
+                min-height: 350px;
             }
             
             .hero-title {
@@ -2518,19 +1942,40 @@
             
             .hero-subtitle {
                 font-size: 0.9rem;
+                margin-bottom: 1.5rem;
             }
             
-            .collections-grid {
-                grid-template-columns: 1fr;
+            .search-bar {
+                flex-direction: column;
+                border-radius: 15px;
+                overflow: visible;
             }
             
-            .collection-card {
-                height: 250px;
+            .search-input {
+                width: 100%;
+                padding: 1rem;
+                border-radius: 15px 15px 0 0;
             }
             
-            .categories-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
+            .search-btn {
+                width: 100%;
+                padding: 1rem;
+                border-radius: 0 0 15px 15px;
+                justify-content: center;
+            }
+            
+            .section-title h2 {
+                font-size: 1.6rem;
+            }
+            
+            .product-filters {
+                padding: 1rem;
+                gap: 0.5rem;
+            }
+            
+            .filter-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
             }
             
             .products-grid {
@@ -2539,7 +1984,7 @@
             }
             
             .product-image-wrapper {
-                height: 250px;
+                height: 200px;
             }
             
             .product-info {
@@ -2547,15 +1992,16 @@
             }
             
             .product-title {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
             
             .product-price {
-                font-size: 1.3rem;
+                font-size: 1.2rem;
             }
             
             .modal-body {
                 padding: 1.5rem;
+                gap: 2rem;
             }
             
             .modal-image-container {
@@ -2563,17 +2009,20 @@
             }
             
             .modal-title {
-                font-size: 1.4rem;
+                font-size: 1.6rem;
+            }
+            
+            .modal-price {
+                font-size: 1.8rem;
+            }
+            
+            .modal-description {
+                font-size: 1rem;
             }
             
             .gallery-thumbnail {
                 width: 60px;
                 height: 60px;
-            }
-            
-            .contact-buttons {
-                grid-template-columns: 1fr;
-                gap: 0.6rem;
             }
             
             .modal-contact-buttons {
@@ -2589,110 +2038,6 @@
                 width: 50px;
                 height: 50px;
                 font-size: 1.2rem;
-            }
-            
-            .full-image-controls {
-                padding: 0.8rem 1.5rem;
-                bottom: 1rem;
-            }
-            
-            .image-control-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-            
-            .whatsapp-chat-bot {
-                bottom: 80px;
-                right: 15px;
-            }
-            
-            .chat-bot-container {
-                width: 280px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero {
-                height: 35vh;
-                min-height: 200px;
-            }
-            
-            .section-title h2 {
-                font-size: 1.5rem;
-            }
-            
-            .categories-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.8rem;
-            }
-            
-            .category-card {
-                padding: 1rem;
-            }
-            
-            .product-search-container {
-                padding: 1.5rem;
-            }
-            
-            .search-bar-large {
-                flex-direction: column;
-                gap: 0.8rem;
-            }
-            
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .product-filters {
-                gap: 0.5rem;
-                padding: 0.8rem;
-            }
-            
-            .filter-btn {
-                padding: 0.5rem 1rem;
-                font-size: 0.8rem;
-            }
-            
-            .modal-body {
-                padding: 1rem;
-                gap: 1.5rem;
-            }
-            
-            .modal-image-container {
-                height: 250px;
-            }
-            
-            .modal-title {
-                font-size: 1.3rem;
-            }
-            
-            .modal-price {
-                font-size: 1.4rem;
-            }
-            
-            .modal-description {
-                font-size: 0.9rem;
-            }
-            
-            .image-zoom-btn {
-                padding: 0.6rem 1rem;
-                font-size: 0.9rem;
-            }
-            
-            .full-image-nav {
-                display: none;
-            }
-            
-            .full-image-controls {
-                bottom: 0.5rem;
-                padding: 0.6rem 1rem;
-            }
-            
-            .image-control-btn {
-                width: 35px;
-                height: 35px;
-                font-size: 0.9rem;
             }
             
             .full-image-close {
@@ -2715,43 +2060,86 @@
             .phone-actions {
                 flex-direction: column;
             }
-            
-            .bottom-nav-container {
-                gap: 0.2rem;
+        }
+        
+        @media (max-width: 480px) {
+            .hero {
+                height: 45vh;
+                min-height: 300px;
             }
             
-            .nav-item {
-                padding: 0.4rem 0.5rem;
-                min-width: 50px;
-                max-width: 60px;
+            .hero-title {
+                font-size: 1.5rem;
+                padding: 0 1rem;
             }
             
-            .nav-icon {
-                width: 28px;
-                height: 28px;
+            .hero-subtitle {
+                font-size: 0.85rem;
+                padding: 0 1rem;
+            }
+            
+            .search-container {
+                width: 100%;
+                padding: 0 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.4rem;
+            }
+            
+            .product-filters {
+                gap: 0.3rem;
+                padding: 0.8rem;
+            }
+            
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .product-image-wrapper {
+                height: 250px;
+            }
+            
+            .modal-body {
+                padding: 1rem;
+                gap: 1.5rem;
+            }
+            
+            .modal-image-container {
+                height: 250px;
+            }
+            
+            .modal-title {
+                font-size: 1.3rem;
+            }
+            
+            .modal-price {
+                font-size: 1.5rem;
+            }
+            
+            .image-zoom-btn {
+                padding: 0.6rem 1rem;
                 font-size: 0.9rem;
             }
             
-            .nav-label {
-                font-size: 0.55rem;
+            .full-image-nav {
+                display: none;
             }
         }
         
         @media (max-width: 360px) {
             .hero {
-                height: 30vh;
-            }
-            
-            .category-card {
-                padding: 0.8rem;
+                height: 40vh;
             }
             
             .product-image-wrapper {
                 height: 220px;
-            }
-            
-            .chat-bot-container {
-                width: 260px;
             }
             
             .modal-image-container {
@@ -2776,57 +2164,39 @@
         constructor() {
             this.currentVersion = '1.0.0';
             this.checkInterval = null;
-            
-            // Check if app is installed as PWA
             this.isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-            
             this.init();
         }
         
         init() {
-            // Check for updates immediately
             this.checkForUpdates();
-            
-            // Check every 5 minutes
             this.checkInterval = setInterval(() => this.checkForUpdates(), 5 * 60 * 1000);
             
-            // Listen for service worker messages
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.addEventListener('message', this.handleServiceWorkerMessage.bind(this));
             }
             
-            // Listen for online/offline events
             window.addEventListener('online', () => this.checkForUpdates());
-            
-            // Display update badge if needed
             this.checkStoredUpdate();
         }
         
         async checkForUpdates() {
             try {
-                // Fetch fresh manifest
                 const response = await fetch('/manifest.json?v=' + Date.now());
                 const manifest = await response.json();
-                
-                // Store current version from manifest
                 this.currentVersion = manifest.version || '1.0.0';
                 localStorage.setItem('sokoinn_app_version', this.currentVersion);
                 
-                // Check against stored version
                 const storedVersion = localStorage.getItem('sokoinn_previous_version') || '1.0.0';
-                
                 if (this.currentVersion !== storedVersion) {
-                    console.log(`App update available: ${storedVersion} → ${this.currentVersion}`);
                     this.showUpdateNotification(storedVersion, this.currentVersion);
                 }
-                
             } catch (error) {
                 console.error('Update check failed:', error);
             }
         }
         
         showUpdateNotification(oldVersion, newVersion) {
-            // Create update notification
             const notification = document.createElement('div');
             notification.id = 'app-update-notification';
             notification.innerHTML = `
@@ -2905,7 +2275,6 @@
                 </div>
             `;
             
-            // Add animation style
             const style = document.createElement('style');
             style.textContent = `
                 @keyframes slideUp {
@@ -2921,13 +2290,11 @@
             `;
             document.head.appendChild(style);
             
-            // Remove existing notification
             const existing = document.getElementById('app-update-notification');
             if (existing) existing.remove();
             
             document.body.appendChild(notification);
             
-            // Auto-hide after 30 seconds
             setTimeout(() => {
                 if (document.getElementById('app-update-notification')) {
                     this.hideNotification();
@@ -2948,25 +2315,18 @@
             
             if ('serviceWorker' in navigator) {
                 try {
-                    // Update service worker
                     const registration = await navigator.serviceWorker.ready;
                     await registration.update();
-                    
-                    // Show success message
                     this.showUpdateSuccess();
-                    
-                    // Force reload after 2 seconds
                     setTimeout(() => {
                         localStorage.setItem('sokoinn_previous_version', this.currentVersion);
                         window.location.reload();
                     }, 2000);
-                    
                 } catch (error) {
                     console.error('Update failed:', error);
                     this.showUpdateError();
                 }
             } else {
-                // No service worker, just reload
                 localStorage.setItem('sokoinn_previous_version', this.currentVersion);
                 window.location.reload();
             }
@@ -2985,13 +2345,11 @@
             const previousVersion = localStorage.getItem('sokoinn_previous_version');
             
             if (storedVersion && previousVersion && storedVersion !== previousVersion) {
-                // Show persistent update badge
                 this.showUpdateBadge();
             }
         }
         
         showUpdateBadge() {
-            // Add update badge to your install button
             const installBtn = document.getElementById('installAppBtn');
             if (installBtn) {
                 const badge = document.createElement('span');
@@ -3011,7 +2369,6 @@
                 installBtn.style.position = 'relative';
                 installBtn.appendChild(badge);
                 
-                // Add pulse animation
                 const style = document.createElement('style');
                 style.textContent = `
                     @keyframes pulse {
@@ -3044,22 +2401,10 @@
         <div class="header-content">
             <img src="https://i.postimg.cc/kMZ1jTww/Untitled-design-4-removebg-preview.png" alt="SokoInn" class="logo">
             
-            <!-- Search Bar -->
-            <div class="search-container">
-                <div class="search-bar">
-                    <input type="text" class="search-input" id="searchInput" placeholder="Search products, categories, sellers...">
-                    <button class="search-btn" id="searchBtn">
-                        <i class="fas fa-search"></i>
-                        Search
-                    </button>
-                </div>
-            </div>
-            
             <!-- Desktop Navigation -->
             <nav class="nav-links">
                 <a href="index.html" class="active">Home</a>
                 <a href="#products">Products</a>
-                <a href="#categories">Categories</a>
                 <a href="sellers.html">Sellers</a>
                 <a href="become-seller.html">Become a Seller</a>
                 <a href="#" class="install-app-btn" id="installAppBtn">
@@ -3109,7 +2454,6 @@
         <nav class="mobile-nav-links">
             <a href="index.html" onclick="closeMobileMenu()">Home</a>
             <a href="#products" onclick="closeMobileMenu()">Products</a>
-            <a href="#categories" onclick="closeMobileMenu()">Categories</a>
             <a href="sellers.html" onclick="closeMobileMenu()">Sellers</a>
             <a href="become-seller.html" onclick="closeMobileMenu()">Become a Seller</a>
             <a href="support.html" onclick="closeMobileMenu()">Support</a>
@@ -3123,73 +2467,36 @@
     <!-- Menu Backdrop -->
     <div class="menu-backdrop" id="menuBackdrop"></div>
 
-    <!-- SokoInn Hero Slideshow -->
+    <!-- SokoInn Hero with Search Bar -->
     <section class="hero" id="home">
         <div class="hero-slides" id="heroSlides">
             <!-- Slides will be populated by JavaScript -->
+        </div>
+        <div class="hero-overlay">
+            <h1 class="hero-title">SokoInn Marketplace</h1>
+            <p class="hero-subtitle">Discover quality products from verified sellers across Kenya</p>
+            
+            <!-- Search Bar on Hero -->
+            <div class="search-container">
+                <div class="search-bar">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search products, categories, or sellers...">
+                    <button class="search-btn" id="searchBtn">
+                        <i class="fas fa-search"></i>
+                        Search Marketplace
+                    </button>
+                </div>
+            </div>
         </div>
         <div class="hero-dots" id="heroDots">
             <!-- Dots will be populated by JavaScript -->
         </div>
     </section>
 
-    <!-- Collections Section -->
-    <section class="collections" id="collections">
-        <div class="section-title">
-            <h2>Featured Collections</h2>
-            <p>Browse our curated marketplace collections</p>
-        </div>
-        
-        <div class="collections-grid" id="collectionsContainer">
-            <!-- Collections will be populated by JavaScript -->
-        </div>
-    </section>
-
-    <!-- Marketplace Categories -->
-    <section class="categories" id="categories">
-        <div class="section-title">
-            <h2>Browse Categories</h2>
-            <p>Discover products across various categories</p>
-        </div>
-        
-        <div class="categories-grid" id="categoriesContainer">
-            <!-- Categories will be populated by JavaScript -->
-        </div>
-    </section>
-
-    <!-- Product Search Section -->
-    <section class="product-search" id="searchSection">
-        <div class="section-title">
-            <h2>Search Products</h2>
-            <p>Find exactly what you're looking for</p>
-        </div>
-        
-        <div class="product-search-container">
-            <div class="search-bar-large">
-                <input type="text" 
-                       class="search-input-large" 
-                       id="productSearchInput" 
-                       placeholder="Search products by name, category, or description..."
-                       autocomplete="off">
-                <button class="search-btn-large" id="productSearchBtn">
-                    <i class="fas fa-search"></i>
-                    Search
-                </button>
-            </div>
-            <div class="search-stats">
-                <span id="searchResultsCount">Type to search products</span>
-                <button class="clear-search" id="clearSearchBtn" style="display: none;">
-                    <i class="fas fa-times"></i> Clear Search
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Products Section -->
-    <section class="products" id="products">
+    <!-- Featured Products Section -->
+    <section class="featured-products" id="products">
         <div class="section-title">
             <h2>Featured Products</h2>
-            <p>Quality products from verified sellers</p>
+            <p>Quality products from verified sellers across Kenya</p>
         </div>
         
         <!-- Product Filters -->
@@ -3212,10 +2519,6 @@
                         <div class="skeleton-text short"></div>
                         <div class="skeleton-text medium"></div>
                         <div class="skeleton-text" style="width: 40%;"></div>
-                        <div class="skeleton-buttons">
-                            <div class="skeleton-btn"></div>
-                            <div class="skeleton-btn"></div>
-                        </div>
                     </div>
                 </div>
                 <div class="skeleton-card">
@@ -3224,10 +2527,6 @@
                         <div class="skeleton-text short"></div>
                         <div class="skeleton-text medium"></div>
                         <div class="skeleton-text" style="width: 40%;"></div>
-                        <div class="skeleton-buttons">
-                            <div class="skeleton-btn"></div>
-                            <div class="skeleton-btn"></div>
-                        </div>
                     </div>
                 </div>
                 <div class="skeleton-card">
@@ -3236,10 +2535,6 @@
                         <div class="skeleton-text short"></div>
                         <div class="skeleton-text medium"></div>
                         <div class="skeleton-text" style="width: 40%;"></div>
-                        <div class="skeleton-buttons">
-                            <div class="skeleton-btn"></div>
-                            <div class="skeleton-btn"></div>
-                        </div>
                     </div>
                 </div>
                 <div class="skeleton-card">
@@ -3248,10 +2543,6 @@
                         <div class="skeleton-text short"></div>
                         <div class="skeleton-text medium"></div>
                         <div class="skeleton-text" style="width: 40%;"></div>
-                        <div class="skeleton-buttons">
-                            <div class="skeleton-btn"></div>
-                            <div class="skeleton-btn"></div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -3278,72 +2569,6 @@
             </button>
             <div class="modal-body" id="modalBody">
                 <!-- Modal content will be populated by JavaScript -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Seller Details Modal -->
-    <div class="seller-modal" id="sellerModal">
-        <div class="seller-modal-content">
-            <button class="seller-modal-close" id="sellerModalClose">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="seller-modal-header">
-                <div class="seller-avatar">
-                    <i class="fas fa-user"></i>
-                </div>
-                <div class="seller-info-header">
-                    <div class="seller-name" id="sellerModalName">Seller Name</div>
-                    <div class="seller-rating-large">
-                        <span class="rating-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </span>
-                        <span class="rating-value" id="sellerModalRating">4.5</span>
-                        <span class="verified-badge">
-                            <i class="fas fa-check-circle"></i> Verified Seller
-                        </span>
-                    </div>
-                    <div class="seller-location">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span id="sellerModalLocation">Nairobi, Kenya</span>
-                    </div>
-                </div>
-            </div>
-            <div class="seller-modal-body">
-                <div class="seller-details-grid">
-                    <div class="detail-item">
-                        <div class="detail-value" id="sellerProducts">150</div>
-                        <div class="detail-label">Products</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-value" id="sellerSales">2.5k</div>
-                        <div class="detail-label">Sales</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-value" id="sellerRating">98%</div>
-                        <div class="detail-label">Positive Rating</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-value" id="sellerResponse">1h</div>
-                        <div class="detail-label">Avg. Response Time</div>
-                    </div>
-                </div>
-                
-                <div class="seller-contact-info">
-                    <h4>Contact Seller</h4>
-                    <div class="contact-options">
-                        <button class="seller-contact-btn call" id="sellerCallBtn">
-                            <i class="fas fa-phone"></i> Call Now
-                        </button>
-                        <button class="seller-contact-btn whatsapp" id="sellerWhatsAppBtn">
-                            <i class="fab fa-whatsapp"></i> WhatsApp
-                        </button>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -3391,24 +2616,6 @@
                 <img src="" alt="" class="full-image" id="fullImage">
             </div>
             
-            <div class="full-image-controls">
-                <button class="image-control-btn" id="zoomInBtn">
-                    <i class="fas fa-search-plus"></i>
-                </button>
-                <button class="image-control-btn" id="zoomOutBtn">
-                    <i class="fas fa-search-minus"></i>
-                </button>
-                <button class="image-control-btn" id="resetZoomBtn">
-                    <i class="fas fa-expand"></i>
-                </button>
-                <button class="image-control-btn" id="rotateBtn">
-                    <i class="fas fa-redo"></i>
-                </button>
-                <button class="image-control-btn" id="downloadBtn">
-                    <i class="fas fa-download"></i>
-                </button>
-            </div>
-            
             <div class="image-counter" id="imageCounter">1 / 1</div>
         </div>
     </div>
@@ -3422,14 +2629,6 @@
                     <i class="fas fa-home"></i>
                 </div>
                 <span class="nav-label">Home</span>
-            </a>
-            
-            <!-- Collections Button -->
-            <a href="#collections" class="nav-item" onclick="setActiveNav(this)">
-                <div class="nav-icon">
-                    <i class="fas fa-layer-group"></i>
-                </div>
-                <span class="nav-label">Collections</span>
             </a>
             
             <!-- Products Button -->
@@ -3463,54 +2662,10 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <!-- WhatsApp Chat Bot with Seller Name -->
-    <div class="whatsapp-chat-bot" id="whatsappChatBot">
-        <button class="chat-bot-toggle" id="chatBotToggle">
-            <i class="fab fa-whatsapp"></i>
-        </button>
-        <div class="chat-bot-container" id="chatBotContainer">
-            <div class="chat-bot-header">
-                <div class="chat-bot-avatar">
-                    <i class="fab fa-whatsapp"></i>
-                </div>
-                <div>
-                    <h4 id="sellerChatName">SokoInn Support</h4>
-                    <div class="seller-name-chat" id="sellerNameDisplay">Marketplace Support</div>
-                    <div class="chat-bot-status">Online</div>
-                </div>
-            </div>
-            <div class="chat-bot-messages" id="chatMessages">
-                <div class="chat-message bot-message">
-                    Hi! I'm your SokoInn marketplace assistant. How can I help you today?
-                </div>
-            </div>
-            <div class="chat-options" id="chatOptions">
-                <button class="chat-option-btn" onclick="handleChatOption('products')">
-                    <i class="fas fa-shopping-bag"></i> Browse Products
-                </button>
-                <button class="chat-option-btn" onclick="handleChatOption('sellers')">
-                    <i class="fas fa-store"></i> Find Sellers
-                </button>
-                <button class="chat-option-btn" onclick="handleChatOption('order')">
-                    <i class="fas fa-shopping-cart"></i> Help with Order
-                </button>
-                <button class="chat-option-btn" onclick="handleChatOption('support')">
-                    <i class="fas fa-headset"></i> Customer Support
-                </button>
-            </div>
-            <div class="chat-bot-input">
-                <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..." onkeypress="handleChatKeypress(event)">
-                <button class="chat-send-btn" onclick="sendChatMessage()">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Enhanced JavaScript with all features integrated -->
+    <!-- Enhanced JavaScript -->
     <script>
         // Google Apps Script URL
-        const scriptUrl = 'https://script.google.com/macros/s/AKfycbyXXjGrTy1-pTpjJNC2WBWfCJgdDREvRfDcxcxk_r8s2h3bbDev7u-tP_3YnO9AObZfGg/exec';
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbz8ZlSXM-_uEdKwS_epdAEUorEXChxF3wk6fsNgXaeL_aHpvCcMkSUx9Hz5YqIl4KFC/exec';
         
         // WhatsApp number for marketplace support
         const marketplaceWhatsAppNumber = '254700000000';
@@ -3579,11 +2734,6 @@
             }
         };
 
-        // Current seller view
-        let currentSeller = null;
-        let currentSellerView = null;
-        let currentPhoneToReveal = null;
-        
         // Hero slides data
         const heroSlides = [
             {
@@ -3603,85 +2753,6 @@
             }
         ];
         
-        // Collections data
-        const collectionsData = [
-            {
-                image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                title: 'Featured Sellers',
-                description: 'Top-rated sellers with premium products',
-                link: 'sellers.html'
-            },
-            {
-                image: 'https://images.unsplash.com/photo-1581655353564-df123a1eb820?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                title: 'Best Deals',
-                description: 'Exclusive discounts and offers',
-                link: '#products'
-            },
-            {
-                image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                title: 'New Arrivals',
-                description: 'Fresh products added daily',
-                link: '#products'
-            }
-        ];
-        
-        // Categories data
-        const categoriesData = [
-            {
-                icon: 'fas fa-laptop',
-                title: 'Electronics',
-                count: '1,234 products',
-                filter: 'electronics'
-            },
-            {
-                icon: 'fas fa-tshirt',
-                title: 'Fashion',
-                count: '2,567 products',
-                filter: 'fashion'
-            },
-            {
-                icon: 'fas fa-home',
-                title: 'Home & Garden',
-                count: '893 products',
-                filter: 'home'
-            },
-            {
-                icon: 'fas fa-heart',
-                title: 'Beauty & Health',
-                count: '1,045 products',
-                filter: 'beauty'
-            },
-            {
-                icon: 'fas fa-futbol',
-                title: 'Sports & Outdoors',
-                count: '678 products',
-                filter: 'sports'
-            },
-            {
-                icon: 'fas fa-car',
-                title: 'Automotive',
-                count: '345 products',
-                filter: 'automotive'
-            },
-            {
-                icon: 'fas fa-graduation-cap',
-                title: 'Books & Education',
-                count: '789 products',
-                filter: 'books'
-            },
-            {
-                icon: 'fas fa-utensils',
-                title: 'Food & Grocery',
-                count: '1,567 products',
-                filter: 'food'
-            }
-        ];
-        
-        // PWA variables
-        let deferredPrompt = null;
-        let isAppInstalled = false;
-        let isInstallPromptShown = false;
-        
         // Product management variables
         let currentProduct = null;
         let allProducts = [];
@@ -3694,19 +2765,15 @@
         let isSearchActive = false;
         let searchQuery = '';
         
-        // Infinite scroll observer
-        let scrollObserver = null;
+        // PWA variables
+        let deferredPrompt = null;
+        let isAppInstalled = false;
+        let isInstallPromptShown = false;
         
         // Image modal variables
         let currentImageIndex = 0;
         let currentImages = [];
-        let currentZoom = 1;
-        let currentRotation = 0;
-        let isDragging = false;
-        let dragStartX = 0;
-        let dragStartY = 0;
-        let translateX = 0;
-        let translateY = 0;
+        let currentPhoneToReveal = null;
         
         // Mobile menu state
         let isMobileMenuOpen = false;
@@ -3720,22 +2787,18 @@
         let isBottomNavVisible = false;
         let isBottomNavForced = false;
         let scrollDirection = 'down';
-        let scrollStartPos = 0;
 
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 SokoInn Marketplace - Enhanced Home Page');
+            console.log('🚀 SokoInn Marketplace - Streamlined Home Page');
             
             // Initialize App Update Manager
             window.appUpdateManager = new AppUpdateManager();
             
             initMobileMenu();
             initHeroSlideshow();
-            loadCollections();
-            loadCategories();
             initProductFilters();
             initModal();
-            initSellerModal();
             initPhoneModal();
             initBottomNav();
             initNavToggle();
@@ -3743,14 +2806,9 @@
             initFullImageModal();
             initScrollBehavior();
             initPWA();
-            
-            // Initialize search functionality
             initSearch();
             
-            // Initialize infinite scroll
-            initInfiniteScroll();
-            
-            // Load products with optimized loading
+            // Load products
             setTimeout(() => {
                 loadFeaturedProducts();
             }, 500);
@@ -3765,21 +2823,15 @@
 
         // PWA Installation
         function initPWA() {
-            // Check if app is already installed
             if (window.matchMedia('(display-mode: standalone)').matches || 
                 window.navigator.standalone === true) {
                 isAppInstalled = true;
-                console.log('📱 App is installed as PWA');
                 hideInstallButton();
             }
             
-            // Listen for beforeinstallprompt event
             window.addEventListener('beforeinstallprompt', (e) => {
                 e.preventDefault();
                 deferredPrompt = e;
-                console.log('📱 PWA installation available');
-                
-                // Show install button after a delay
                 setTimeout(() => {
                     if (!isAppInstalled && !isInstallPromptShown) {
                         showInstallButton();
@@ -3787,20 +2839,15 @@
                 }, 3000);
             });
             
-            // Listen for app installed event
             window.addEventListener('appinstalled', () => {
                 isAppInstalled = true;
                 deferredPrompt = null;
-                console.log('✅ PWA installed successfully');
                 hideInstallPrompt();
                 hideInstallButton();
                 showNotification('App installed successfully!');
             });
             
-            // Initialize install buttons
             initInstallButtons();
-            
-            // Register service worker
             registerServiceWorker();
         }
         
@@ -3810,15 +2857,12 @@
                     .then(registration => {
                         console.log('✅ Service Worker registered:', registration.scope);
                         
-                        // Check for updates
                         registration.addEventListener('updatefound', () => {
                             console.log('🔄 Service Worker update found');
                             const newWorker = registration.installing;
                             
                             newWorker.addEventListener('statechange', () => {
                                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                    console.log('🔄 New content is available; please refresh.');
-                                    // Show update notification
                                     window.appUpdateManager.showUpdateNotification(
                                         localStorage.getItem('sokoinn_app_version') || '1.0.0',
                                         'New version'
@@ -3839,35 +2883,20 @@
             const installLaterBtn = document.getElementById('pwaInstallLater');
             const installCloseBtn = document.getElementById('pwaInstallClose');
             
-            if (installBtn) {
-                installBtn.addEventListener('click', showInstallPrompt);
-            }
-            
-            if (installNowBtn) {
-                installNowBtn.addEventListener('click', installPWA);
-            }
-            
-            if (installLaterBtn) {
-                installLaterBtn.addEventListener('click', hideInstallPrompt);
-            }
-            
-            if (installCloseBtn) {
-                installCloseBtn.addEventListener('click', hideInstallPrompt);
-            }
+            if (installBtn) installBtn.addEventListener('click', showInstallPrompt);
+            if (installNowBtn) installNowBtn.addEventListener('click', installPWA);
+            if (installLaterBtn) installLaterBtn.addEventListener('click', hideInstallPrompt);
+            if (installCloseBtn) installCloseBtn.addEventListener('click', hideInstallPrompt);
         }
         
         function showInstallButton() {
             const installBtn = document.getElementById('installAppBtn');
-            if (installBtn) {
-                installBtn.style.display = 'flex';
-            }
+            if (installBtn) installBtn.style.display = 'flex';
         }
         
         function hideInstallButton() {
             const installBtn = document.getElementById('installAppBtn');
-            if (installBtn) {
-                installBtn.style.display = 'none';
-            }
+            if (installBtn) installBtn.style.display = 'none';
         }
         
         function showInstallPrompt() {
@@ -3890,9 +2919,7 @@
         
         function hideInstallPrompt() {
             const installPrompt = document.getElementById('pwaInstallPrompt');
-            if (installPrompt) {
-                installPrompt.style.display = 'none';
-            }
+            if (installPrompt) installPrompt.style.display = 'none';
         }
         
         async function installPWA() {
@@ -3906,12 +2933,9 @@
                 const { outcome } = await deferredPrompt.userChoice;
                 
                 if (outcome === 'accepted') {
-                    console.log('✅ User accepted PWA installation');
                     isAppInstalled = true;
                     hideInstallPrompt();
                     hideInstallButton();
-                } else {
-                    console.log('❌ User dismissed PWA installation');
                 }
                 
                 deferredPrompt = null;
@@ -3921,36 +2945,10 @@
             }
         }
         
-        // Initialize infinite scroll
-        function initInfiniteScroll() {
-            const loadingIndicator = document.getElementById('loadingIndicator');
-            const endOfResults = document.getElementById('endOfResults');
-            
-            // Create intersection observer
-            scrollObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && !isLoadingProducts && hasMoreProducts && !isSearchActive) {
-                        loadMoreProducts();
-                    }
-                });
-            }, {
-                root: null,
-                rootMargin: '100px',
-                threshold: 0.1
-            });
-            
-            // Observe loading indicator
-            if (loadingIndicator) {
-                scrollObserver.observe(loadingIndicator);
-            }
-        }
-        
         // Initialize search functionality
         function initSearch() {
-            const searchInput = document.getElementById('productSearchInput');
-            const searchBtn = document.getElementById('productSearchBtn');
-            const clearSearchBtn = document.getElementById('clearSearchBtn');
-            const searchResultsCount = document.getElementById('searchResultsCount');
+            const searchInput = document.getElementById('searchInput');
+            const searchBtn = document.getElementById('searchBtn');
             
             let searchTimeout = null;
             
@@ -3977,9 +2975,6 @@
                 }, 500);
             });
             
-            // Clear search
-            clearSearchBtn.addEventListener('click', clearSearch);
-            
             function performSearch() {
                 searchQuery = searchInput.value.trim();
                 
@@ -4002,34 +2997,19 @@
                 
                 filteredProducts = searchResults;
                 
-                // Update search results count
-                searchResultsCount.textContent = `${searchResults.length} products found for "${searchQuery}"`;
-                clearSearchBtn.style.display = 'block';
-                
                 // Display search results
                 displayProducts(filteredProducts.slice(0, productsPerPage));
                 
-                // Show end of results if no more products
-                if (searchResults.length <= productsPerPage) {
-                    hasMoreProducts = false;
-                    endOfResults.classList.add('active');
-                } else {
-                    hasMoreProducts = true;
-                    endOfResults.classList.remove('active');
-                }
-                
                 // Scroll to products section
                 document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+                
+                showNotification(`Found ${searchResults.length} products for "${searchQuery}"`);
             }
             
             function clearSearch() {
                 searchInput.value = '';
                 searchQuery = '';
                 isSearchActive = false;
-                clearSearchBtn.style.display = 'none';
-                searchResultsCount.textContent = 'Type to search products';
-                
-                // Reset to filtered products
                 filterProducts();
             }
         }
@@ -4045,14 +3025,12 @@
                 isMobileMenuOpen = !isMobileMenuOpen;
                 
                 if (isMobileMenuOpen) {
-                    // Open menu
                     mobileMenu.classList.add('active');
                     menuBackdrop.classList.add('active');
                     hamburgerBtn.classList.add('active');
                     document.body.style.overflow = 'hidden';
                     hideBottomNav();
                 } else {
-                    // Close menu
                     mobileMenu.classList.remove('active');
                     menuBackdrop.classList.remove('active');
                     hamburgerBtn.classList.remove('active');
@@ -4060,22 +3038,15 @@
                 }
             }
             
-            // Hamburger button click
             hamburgerBtn.addEventListener('click', toggleMobileMenu);
-            
-            // Close button click
             closeMenu.addEventListener('click', toggleMobileMenu);
-            
-            // Backdrop click
             menuBackdrop.addEventListener('click', toggleMobileMenu);
             
-            // Close menu when clicking on links
             const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
             mobileLinks.forEach(link => {
                 link.addEventListener('click', toggleMobileMenu);
             });
             
-            // Close menu with Escape key
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && isMobileMenuOpen) {
                     toggleMobileMenu();
@@ -4083,7 +3054,6 @@
             });
         }
         
-        // Make closeMobileMenu available globally
         window.closeMobileMenu = function() {
             const mobileMenu = document.getElementById('mobileMenu');
             const menuBackdrop = document.getElementById('menuBackdrop');
@@ -4101,28 +3071,20 @@
             const slidesContainer = document.getElementById('heroSlides');
             const dotsContainer = document.getElementById('heroDots');
             
-            // Create slides and dots
             heroSlides.forEach((slide, index) => {
-                // Create slide
                 const slideElement = document.createElement('div');
                 slideElement.className = `hero-slide ${index === 0 ? 'active' : ''}`;
                 slideElement.innerHTML = `
                     <img src="${slide.image}" alt="${slide.title}" loading="lazy">
-                    <div class="hero-overlay">
-                        <h1 class="hero-title">${slide.title}</h1>
-                        <p class="hero-subtitle">${slide.subtitle}</p>
-                    </div>
                 `;
                 slidesContainer.appendChild(slideElement);
                 
-                // Create dot
                 const dot = document.createElement('div');
                 dot.className = `dot ${index === 0 ? 'active' : ''}`;
                 dot.addEventListener('click', () => showSlide(index));
                 dotsContainer.appendChild(dot);
             });
             
-            // Auto-advance slides
             let currentSlide = 0;
             setInterval(() => {
                 currentSlide = (currentSlide + 1) % heroSlides.length;
@@ -4131,78 +3093,14 @@
         }
         
         function showSlide(index) {
-            // Update slides
             const slides = document.querySelectorAll('.hero-slide');
             slides.forEach((slide, i) => {
                 slide.classList.toggle('active', i === index);
             });
             
-            // Update dots
             const dots = document.querySelectorAll('.dot');
             dots.forEach((dot, i) => {
                 dot.classList.toggle('active', i === index);
-            });
-        }
-        
-        // Load collections
-        function loadCollections() {
-            const container = document.getElementById('collectionsContainer');
-            
-            collectionsData.forEach(collection => {
-                const card = document.createElement('a');
-                card.className = 'collection-card';
-                card.href = collection.link;
-                card.innerHTML = `
-                    <img src="${collection.image}" alt="${collection.title}" class="collection-image" loading="lazy">
-                    <div class="collection-overlay">
-                        <h3 class="collection-title">${collection.title}</h3>
-                        <p class="collection-description">${collection.description}</p>
-                    </div>
-                `;
-                
-                container.appendChild(card);
-            });
-        }
-        
-        // Load categories
-        function loadCategories() {
-            const container = document.getElementById('categoriesContainer');
-            
-            categoriesData.forEach(category => {
-                const card = document.createElement('a');
-                card.className = 'category-card';
-                card.href = '#';
-                card.dataset.filter = category.filter;
-                card.innerHTML = `
-                    <div class="category-icon">
-                        <i class="${category.icon}"></i>
-                    </div>
-                    <h3 class="category-title">${category.title}</h3>
-                    <p class="category-count">${category.count}</p>
-                `;
-                
-                card.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const filter = this.dataset.filter;
-                    
-                    // Update filter
-                    const filterButtons = document.querySelectorAll('.filter-btn');
-                    filterButtons.forEach(btn => {
-                        btn.classList.remove('active');
-                        if (btn.dataset.filter === filter) {
-                            btn.classList.add('active');
-                        }
-                    });
-                    
-                    currentFilter = filter;
-                    currentPage = 1;
-                    filterProducts();
-                    
-                    // Scroll to products section
-                    document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
-                });
-                
-                container.appendChild(card);
             });
         }
         
@@ -4212,23 +3110,16 @@
             
             filterButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    // Remove active class from all buttons
                     filterButtons.forEach(btn => btn.classList.remove('active'));
-                    
-                    // Add active class to clicked button
                     this.classList.add('active');
                     
-                    // Update current filter
                     currentFilter = this.dataset.filter;
                     currentPage = 1;
                     isSearchActive = false;
                     
                     // Clear search
-                    document.getElementById('productSearchInput').value = '';
-                    document.getElementById('clearSearchBtn').style.display = 'none';
-                    document.getElementById('searchResultsCount').textContent = 'Type to search products';
+                    document.getElementById('searchInput').value = '';
                     
-                    // Filter products
                     filterProducts();
                 });
             });
@@ -4244,14 +3135,10 @@
                 );
             }
             
-            // Reset pagination
             currentPage = 1;
             hasMoreProducts = true;
-            
-            // Display filtered products
             displayProducts(filteredProducts.slice(0, productsPerPage));
             
-            // Show/hide end of results
             const endOfResults = document.getElementById('endOfResults');
             if (filteredProducts.length <= productsPerPage) {
                 hasMoreProducts = false;
@@ -4261,7 +3148,7 @@
             }
         }
         
-        // OPTIMIZED: Load featured products
+        // Load featured products
         async function loadFeaturedProducts() {
             if (isLoadingProducts) return;
             
@@ -4270,16 +3157,10 @@
             const loadingIndicator = document.getElementById('loadingIndicator');
             
             try {
-                console.log('📦 Loading featured products...');
-                
-                // Show loading indicator
                 loadingIndicator.classList.add('active');
-                
-                // Load all products at once for better performance
                 const products = await fetchAllProducts();
                 
                 if (products.length > 0) {
-                    console.log(`✅ Loaded ${products.length} products`);
                     allProducts = products;
                     filterProducts();
                 } else {
@@ -4288,19 +3169,16 @@
                 
             } catch (error) {
                 console.error('❌ Error loading products:', error);
-                // Fallback to sample products
                 loadSampleProducts();
             } finally {
                 isLoadingProducts = false;
                 loadingIndicator.classList.remove('active');
                 
-                // Hide skeleton loader
                 const skeletonLoader = document.getElementById('skeletonLoader');
                 if (skeletonLoader) {
                     skeletonLoader.style.display = 'none';
                 }
                 
-                // Show products grid
                 container.classList.add('loaded');
             }
         }
@@ -4312,7 +3190,6 @@
                 const result = await response.json();
                 
                 if (result.success && result.data) {
-                    // Add seller info to each product
                     const productsWithSeller = result.data.map(product => {
                         const seller = sellers[product.sellerId] || sellers['tech_hub'];
                         return {
@@ -4333,59 +3210,21 @@
             }
         }
         
-        // Load more products (infinite scroll)
-        function loadMoreProducts() {
-            if (isLoadingProducts || !hasMoreProducts || isSearchActive) return;
-            
-            isLoadingProducts = true;
-            const loadingIndicator = document.getElementById('loadingIndicator');
-            const endOfResults = document.getElementById('endOfResults');
-            
-            loadingIndicator.classList.add('active');
-            
-            // Simulate API call delay
-            setTimeout(() => {
-                const startIndex = currentPage * productsPerPage;
-                const endIndex = startIndex + productsPerPage;
-                const moreProducts = filteredProducts.slice(startIndex, endIndex);
-                
-                if (moreProducts.length > 0) {
-                    displayMoreProducts(moreProducts);
-                    currentPage++;
-                    
-                    // Check if there are more products
-                    if (endIndex >= filteredProducts.length) {
-                        hasMoreProducts = false;
-                        endOfResults.classList.add('active');
-                    }
-                } else {
-                    hasMoreProducts = false;
-                    endOfResults.classList.add('active');
-                }
-                
-                isLoadingProducts = false;
-                loadingIndicator.classList.remove('active');
-            }, 800);
-        }
-        
-        // Display initial products
+        // Display products
         function displayProducts(products) {
             const container = document.getElementById('productsContainer');
             const skeletonLoader = document.getElementById('skeletonLoader');
             
-            // Clear existing content except skeleton
             Array.from(container.children).forEach(child => {
                 if (child.id !== 'skeletonLoader') {
                     container.removeChild(child);
                 }
             });
             
-            // Hide skeleton loader
             if (skeletonLoader) {
                 skeletonLoader.style.display = 'none';
             }
             
-            // Display products with staggered animation
             products.forEach((product, index) => {
                 setTimeout(() => {
                     try {
@@ -4397,106 +3236,54 @@
                 }, index * 50);
             });
             
-            // Show products grid
             container.classList.add('loaded');
         }
         
-        // Display more products for infinite scroll
-        function displayMoreProducts(products) {
-            const container = document.getElementById('productsContainer');
-            
-            products.forEach((product, index) => {
-                setTimeout(() => {
-                    try {
-                        const productCard = createProductCard(product);
-                        container.appendChild(productCard);
-                    } catch (error) {
-                        console.error('Error displaying product:', error, product);
-                    }
-                }, index * 50);
-            });
-        }
-        
-        // Create product card for marketplace
+        // Create simplified product card
         function createProductCard(product) {
             try {
                 const card = document.createElement('div');
                 card.className = 'product-card';
                 card.style.animationDelay = `${Math.random() * 0.3}s`;
                 
-                // Get product images
                 const productImages = product.images || [product.image];
                 const mainImage = productImages[0];
                 
-                // Get seller info
                 const seller = sellers[product.sellerId] || sellers['tech_hub'];
-                
-                // Properly escape quotes and special characters
-                const escapedProductName = product.name.replace(/'/g, "\\'").replace(/"/g, '\\"');
-                const escapedSellerName = seller.name.replace(/'/g, "\\'").replace(/"/g, '\\"');
-                const imageUrlsString = productImages.join(',').replace(/'/g, "\\'");
                 
                 card.innerHTML = `
                     <div class="product-image-wrapper">
                         <img src="${mainImage}" alt="${product.name}" class="product-image" loading="lazy">
-                        <button class="view-image-btn" onclick="event.stopPropagation(); openFullImageView('${imageUrlsString}', '${escapedProductName}')">
-                            <i class="fas fa-expand"></i>
-                        </button>
                     </div>
                     <div class="product-info">
-                        <div class="product-badge">${product.category}</div>
                         <h3 class="product-title">${product.name}</h3>
-                        
-                        <div class="seller-info">
-                            <div class="seller-avatar-small">
-                                ${seller.name.charAt(0)}
-                            </div>
-                            <div class="seller-details">
-                                <div class="seller-name">
-                                    ${seller.name}
-                                    <span class="seller-rating">
-                                        <i class="fas fa-star"></i> ${seller.rating}
-                                    </span>
-                                    ${seller.verified ? '<span class="verified-badge"><i class="fas fa-check-circle"></i></span>' : ''}
-                                </div>
-                                <div class="seller-location">
-                                    <i class="fas fa-map-marker-alt"></i> ${seller.location}
-                                </div>
-                            </div>
-                        </div>
-                        
                         <div class="product-price">KSh ${product.price.toLocaleString()}</div>
-                        <p class="product-description">${product.description || 'Quality product from verified seller on SokoInn Marketplace.'}</p>
-                        
-                        <div class="contact-buttons">
-                            <button class="contact-btn whatsapp-btn" onclick="event.stopPropagation(); contactSellerViaWhatsApp('${product.sellerId}', '${escapedProductName}', ${product.price}, event)">
-                                <i class="fab fa-whatsapp"></i> WhatsApp
-                            </button>
-                            <button class="contact-btn call-btn" onclick="event.stopPropagation(); revealPhoneNumber('${seller.phone}', '${escapedSellerName}', event)">
-                                <i class="fas fa-phone"></i> Call
-                            </button>
+                        <div class="product-location">
+                            <i class="fas fa-map-marker-alt"></i> ${seller.location}
                         </div>
+                        <button class="view-details-btn">View Details</button>
                     </div>
                 `;
                 
                 // Add click event to open modal
                 card.addEventListener('click', function(e) {
-                    // Only open modal if click is not on contact buttons, view button, or their children
-                    if (!e.target.closest('.contact-btn') && 
-                        !e.target.closest('.view-image-btn') &&
-                        !e.target.matches('.contact-btn') &&
-                        !e.target.matches('.view-image-btn') &&
-                        !e.target.closest('.fa-whatsapp') &&
-                        !e.target.closest('.fa-phone') &&
-                        !e.target.closest('.fa-expand')) {
+                    if (!e.target.classList.contains('view-details-btn')) {
                         openModal(product);
                     }
                 });
                 
+                // Add click event to view details button
+                const viewBtn = card.querySelector('.view-details-btn');
+                if (viewBtn) {
+                    viewBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        openModal(product);
+                    });
+                }
+                
                 return card;
             } catch (error) {
                 console.error('Error creating product card:', error, product);
-                // Return a simple card as fallback
                 const fallbackCard = document.createElement('div');
                 fallbackCard.className = 'product-card';
                 fallbackCard.innerHTML = `
@@ -4504,19 +3291,14 @@
                         <img src="${product.image || 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'}" alt="${product.name}" class="product-image" loading="lazy">
                     </div>
                     <div class="product-info">
-                        <div class="product-badge">${product.category || 'Product'}</div>
                         <h3 class="product-title">${product.name}</h3>
                         <div class="product-price">KSh ${product.price.toLocaleString()}</div>
-                        <div class="contact-buttons">
-                            <button class="contact-btn whatsapp-btn" onclick="contactSellerViaWhatsApp('tech_hub', '${product.name}', ${product.price}, event)">
-                                <i class="fab fa-whatsapp"></i> WhatsApp
-                            </button>
-                            <button class="contact-btn call-btn" onclick="revealPhoneNumber('254723456789', 'Tech Hub Kenya', event)">
-                                <i class="fas fa-phone"></i> Call
-                            </button>
+                        <div class="product-location">
+                            <i class="fas fa-map-marker-alt"></i> Nairobi, Kenya
                         </div>
                     </div>
                 `;
+                fallbackCard.addEventListener('click', () => openModal(product));
                 return fallbackCard;
             }
         }
@@ -4530,7 +3312,7 @@
                     category: 'electronics',
                     price: 89999,
                     image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-                    description: 'Latest smartphone with advanced features and camera.',
+                    description: 'Latest smartphone with advanced features and 64MP camera, 256GB storage, 8GB RAM.',
                     sellerId: 'tech_hub',
                     sellerPhone: '254723456789',
                     images: [
@@ -4539,11 +3321,11 @@
                 },
                 {
                     id: '2',
-                    name: 'Designer Handbag',
+                    name: 'Designer Leather Handbag',
                     category: 'fashion',
                     price: 15500,
                     image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-                    description: 'Elegant designer handbag perfect for any occasion.',
+                    description: 'Genuine leather handbag with multiple compartments. Perfect for work or casual use.',
                     sellerId: 'fashion_store',
                     sellerPhone: '254724567890',
                     images: [
@@ -4552,11 +3334,11 @@
                 },
                 {
                     id: '3',
-                    name: 'Modern Sofa Set',
+                    name: 'Modern Sofa Set (3 Seater)',
                     category: 'home',
                     price: 125000,
                     image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-                    description: 'Comfortable modern sofa set for your living room.',
+                    description: 'Comfortable modern sofa set with premium upholstery. Includes 2 throw pillows.',
                     sellerId: 'home_decor',
                     sellerPhone: '254725678901',
                     images: [
@@ -4565,11 +3347,11 @@
                 },
                 {
                     id: '4',
-                    name: 'Fitness Tracker',
+                    name: 'Fitness Tracker Watch',
                     category: 'sports',
                     price: 8999,
                     image: 'https://images.unsplash.com/photo-1576243345690-4e4b79b63288?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-                    description: 'Advanced fitness tracker with heart rate monitoring.',
+                    description: 'Smart fitness tracker with heart rate monitoring, GPS, and 7-day battery life.',
                     sellerId: 'tech_hub',
                     sellerPhone: '254723456789',
                     images: [
@@ -4582,13 +3364,11 @@
             filteredProducts = [...sampleProducts];
             displayProducts(filteredProducts.slice(0, productsPerPage));
             
-            // Hide skeleton loader
             const skeletonLoader = document.getElementById('skeletonLoader');
             if (skeletonLoader) {
                 skeletonLoader.style.display = 'none';
             }
             
-            // Show products grid
             const container = document.getElementById('productsContainer');
             container.classList.add('loaded');
         }
@@ -4606,7 +3386,6 @@
                 }
             });
             
-            // Close modal with Escape key
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && modal.classList.contains('active')) {
                     closeModal();
@@ -4620,12 +3399,10 @@
                 const modal = document.getElementById('productModal');
                 const modalBody = document.getElementById('modalBody');
                 
-                // Get product images
                 const productImages = product.images || [product.image];
                 const escapedProductName = product.name.replace(/'/g, "\\'").replace(/"/g, '\\"');
                 const imageUrlsString = productImages.join(',').replace(/'/g, "\\'");
                 
-                // Get seller info
                 const seller = sellers[product.sellerId] || sellers['tech_hub'];
                 const escapedSellerName = seller.name.replace(/'/g, "\\'").replace(/"/g, '\\"');
                 
@@ -4651,26 +3428,26 @@
                     <div class="modal-details">
                         <h2 class="modal-title">${product.name}</h2>
                         <div class="modal-price">KSh ${product.price.toLocaleString()}</div>
+                        
+                        <div class="modal-location">
+                            <i class="fas fa-map-marker-alt"></i> ${seller.location}
+                        </div>
+                        
                         <div class="modal-category">${product.category}</div>
                         
-                        <div class="seller-info" style="margin: 1rem 0; padding: 1rem; background: var(--bg-secondary); border-radius: 10px;">
-                            <div style="display: flex; align-items: center; gap: 1rem;">
-                                <div class="seller-avatar-small">
+                        <div class="seller-info">
+                            <div class="seller-header">
+                                <div class="seller-avatar">
                                     ${seller.name.charAt(0)}
                                 </div>
                                 <div>
-                                    <div style="font-weight: 600; font-size: 1.1rem;">${seller.name}</div>
-                                    <div style="display: flex; align-items: center; gap: 0.8rem; margin-top: 0.3rem;">
-                                        <span class="seller-rating">
-                                            <i class="fas fa-star"></i> ${seller.rating}
-                                        </span>
-                                        ${seller.verified ? '<span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>' : ''}
-                                    </div>
-                                    <div style="font-size: 0.9rem; color: var(--gray); margin-top: 0.3rem;">
-                                        <i class="fas fa-map-marker-alt"></i> ${seller.location}
+                                    <div class="seller-name">${seller.name}</div>
+                                    <div class="seller-rating">
+                                        <i class="fas fa-star"></i> ${seller.rating} • ${seller.verified ? 'Verified Seller' : 'Seller'}
                                     </div>
                                 </div>
                             </div>
+                            <p>Contact this seller for inquiries, negotiations, or to arrange viewing/delivery.</p>
                         </div>
                         
                         <p class="modal-description">${product.description || 'Quality product from verified seller on SokoInn Marketplace.'}</p>
@@ -4689,6 +3466,10 @@
                                 <li>
                                     <span class="spec-label">Condition:</span>
                                     <span class="spec-value">${product.condition || 'New'}</span>
+                                </li>
+                                <li>
+                                    <span class="spec-label">Location:</span>
+                                    <span class="spec-value">${seller.location}</span>
                                 </li>
                                 <li>
                                     <span class="spec-label">Availability:</span>
@@ -4724,7 +3505,6 @@
                 mainImage.src = imageSrc;
             }
             
-            // Update active thumbnail
             thumbnails.forEach(thumb => {
                 thumb.classList.remove('active');
                 if (parseInt(thumb.dataset.index) === index) {
@@ -4739,45 +3519,6 @@
             document.body.style.overflow = 'auto';
             currentProduct = null;
             setTimeout(showBottomNav, 300);
-        }
-        
-        // Initialize seller modal
-        function initSellerModal() {
-            const sellerModal = document.getElementById('sellerModal');
-            const sellerModalClose = document.getElementById('sellerModalClose');
-            const sellerCallBtn = document.getElementById('sellerCallBtn');
-            const sellerWhatsAppBtn = document.getElementById('sellerWhatsAppBtn');
-            
-            sellerModalClose.addEventListener('click', closeSellerModal);
-            
-            sellerModal.addEventListener('click', function(e) {
-                if (e.target === sellerModal) {
-                    closeSellerModal();
-                }
-            });
-            
-            sellerCallBtn.addEventListener('click', function() {
-                if (currentSeller) {
-                    revealPhoneNumber(currentSeller.phone, currentSeller.name);
-                    closeSellerModal();
-                }
-            });
-            
-            sellerWhatsAppBtn.addEventListener('click', function() {
-                if (currentSeller) {
-                    const message = `Hello ${currentSeller.name}! I saw your products on SokoInn and would like to inquire about them.`;
-                    const whatsappUrl = `https://wa.me/${currentSeller.phone}?text=${encodeURIComponent(message)}`;
-                    window.open(whatsappUrl, '_blank');
-                    closeSellerModal();
-                }
-            });
-            
-            // Close modal with Escape key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && sellerModal.classList.contains('active')) {
-                    closeSellerModal();
-                }
-            });
         }
         
         // Initialize phone modal
@@ -4812,46 +3553,12 @@
                 }
             });
             
-            // Close modal with Escape key
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && phoneModal.classList.contains('active')) {
                     closePhoneModal();
                 }
             });
         }
-        
-        // View seller details
-        window.viewSellerDetails = function(sellerId, event = null) {
-            if (event) event.stopPropagation();
-            
-            const seller = sellers[sellerId];
-            if (!seller) {
-                showNotification('Seller information not available');
-                return;
-            }
-            
-            currentSeller = seller;
-            const sellerModal = document.getElementById('sellerModal');
-            
-            // Update modal content
-            document.getElementById('sellerModalName').textContent = seller.name;
-            document.getElementById('sellerModalRating').textContent = seller.rating;
-            document.getElementById('sellerModalLocation').textContent = seller.location;
-            document.getElementById('sellerProducts').textContent = seller.totalProducts;
-            document.getElementById('sellerSales').textContent = seller.totalSales.toLocaleString();
-            document.getElementById('sellerRating').textContent = seller.positiveRating + '%';
-            document.getElementById('sellerResponse').textContent = seller.responseTime;
-            
-            // Update rating stars
-            const ratingStars = document.querySelector('.rating-stars');
-            if (ratingStars) {
-                ratingStars.innerHTML = generateStarRating(seller.rating);
-            }
-            
-            sellerModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            hideBottomNav();
-        };
         
         // Contact seller via WhatsApp
         window.contactSellerViaWhatsApp = function(sellerId, productName, productPrice, event = null) {
@@ -4882,7 +3589,6 @@
             currentPhoneToReveal = phoneNumber;
             const phoneModal = document.getElementById('phoneModal');
             
-            // Format phone number for display
             const formattedNumber = phoneNumber.replace(/(\d{3})(\d{3})(\d{3,4})/, '$1 $2 $3');
             document.getElementById('phoneNumberDisplay').textContent = `+${formattedNumber}`;
             
@@ -4892,39 +3598,6 @@
             
             showNotification(`Phone number for ${sellerName} is now visible`);
         };
-        
-        function generateStarRating(rating) {
-            const fullStars = Math.floor(rating);
-            const halfStar = rating % 1 >= 0.5;
-            const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
-            
-            let stars = '';
-            
-            // Full stars
-            for (let i = 0; i < fullStars; i++) {
-                stars += '<i class="fas fa-star"></i>';
-            }
-            
-            // Half star
-            if (halfStar) {
-                stars += '<i class="fas fa-star-half-alt"></i>';
-            }
-            
-            // Empty stars
-            for (let i = 0; i < emptyStars; i++) {
-                stars += '<i class="far fa-star"></i>';
-            }
-            
-            return stars;
-        }
-        
-        function closeSellerModal() {
-            const sellerModal = document.getElementById('sellerModal');
-            sellerModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-            currentSeller = null;
-            setTimeout(showBottomNav, 300);
-        }
         
         function closePhoneModal() {
             const phoneModal = document.getElementById('phoneModal');
@@ -4940,15 +3613,7 @@
             const fullImageClose = document.getElementById('fullImageClose');
             const prevImageBtn = document.getElementById('prevImageBtn');
             const nextImageBtn = document.getElementById('nextImageBtn');
-            const zoomInBtn = document.getElementById('zoomInBtn');
-            const zoomOutBtn = document.getElementById('zoomOutBtn');
-            const resetZoomBtn = document.getElementById('resetZoomBtn');
-            const rotateBtn = document.getElementById('rotateBtn');
-            const downloadBtn = document.getElementById('downloadBtn');
-            const fullImage = document.getElementById('fullImage');
-            const fullImageContainer = document.getElementById('fullImageContainer');
             
-            // Close modal
             fullImageClose.addEventListener('click', closeFullImageModal);
             
             fullImageModal.addEventListener('click', function(e) {
@@ -4957,18 +3622,9 @@
                 }
             });
             
-            // Navigation
             prevImageBtn.addEventListener('click', showPrevImage);
             nextImageBtn.addEventListener('click', showNextImage);
             
-            // Zoom controls
-            zoomInBtn.addEventListener('click', () => zoomImage(1.2));
-            zoomOutBtn.addEventListener('click', () => zoomImage(0.8));
-            resetZoomBtn.addEventListener('click', resetImage);
-            rotateBtn.addEventListener('click', rotateImage);
-            downloadBtn.addEventListener('click', downloadImage);
-            
-            // Keyboard navigation
             document.addEventListener('keydown', function(e) {
                 if (!fullImageModal.classList.contains('active')) return;
                 
@@ -4982,115 +3638,8 @@
                     case 'ArrowRight':
                         showNextImage();
                         break;
-                    case '+':
-                    case '=':
-                        zoomImage(1.2);
-                        break;
-                    case '-':
-                        zoomImage(0.8);
-                        break;
-                    case 'r':
-                    case 'R':
-                        rotateImage();
-                        break;
-                    case '0':
-                        resetImage();
-                        break;
                 }
             });
-            
-            // Mouse wheel zoom
-            fullImageContainer.addEventListener('wheel', function(e) {
-                if (e.ctrlKey || e.metaKey) {
-                    e.preventDefault();
-                    if (e.deltaY < 0) {
-                        zoomImage(1.1);
-                    } else {
-                        zoomImage(0.9);
-                    }
-                }
-            });
-            
-            // Touch events for mobile
-            let touchStartDistance = 0;
-            
-            fullImageContainer.addEventListener('touchstart', function(e) {
-                if (e.touches.length === 2) {
-                    touchStartDistance = getTouchDistance(e);
-                }
-            });
-            
-            fullImageContainer.addEventListener('touchmove', function(e) {
-                if (e.touches.length === 2) {
-                    e.preventDefault();
-                    const touchDistance = getTouchDistance(e);
-                    const scale = touchDistance / touchStartDistance;
-                    
-                    if (scale > 1.1) {
-                        zoomImage(1.1);
-                        touchStartDistance = touchDistance;
-                    } else if (scale < 0.9) {
-                        zoomImage(0.9);
-                        touchStartDistance = touchDistance;
-                    }
-                }
-            });
-            
-            // Drag functionality
-            fullImage.addEventListener('mousedown', startDrag);
-            fullImage.addEventListener('touchstart', startDrag);
-            
-            document.addEventListener('mousemove', doDrag);
-            document.addEventListener('touchmove', doDrag);
-            
-            document.addEventListener('mouseup', stopDrag);
-            document.addEventListener('touchend', stopDrag);
-        }
-        
-        function getTouchDistance(e) {
-            const dx = e.touches[0].clientX - e.touches[1].clientX;
-            const dy = e.touches[0].clientY - e.touches[1].clientY;
-            return Math.sqrt(dx * dx + dy * dy);
-        }
-        
-        function startDrag(e) {
-            isDragging = true;
-            if (e.type === 'mousedown') {
-                dragStartX = e.clientX - translateX;
-                dragStartY = e.clientY - translateY;
-            } else if (e.type === 'touchstart') {
-                dragStartX = e.touches[0].clientX - translateX;
-                dragStartY = e.touches[0].clientY - translateY;
-            }
-        }
-        
-        function doDrag(e) {
-            if (!isDragging) return;
-            
-            e.preventDefault();
-            let clientX, clientY;
-            
-            if (e.type === 'mousemove') {
-                clientX = e.clientX;
-                clientY = e.clientY;
-            } else if (e.type === 'touchmove') {
-                clientX = e.touches[0].clientX;
-                clientY = e.touches[0].clientY;
-            }
-            
-            translateX = clientX - dragStartX;
-            translateY = clientY - dragStartY;
-            
-            updateImageTransform();
-        }
-        
-        function stopDrag() {
-            isDragging = false;
-        }
-        
-        function updateImageTransform() {
-            const fullImage = document.getElementById('fullImage');
-            fullImage.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentZoom}) rotate(${currentRotation}deg)`;
         }
         
         // Open full image view
@@ -5100,10 +3649,6 @@
                 
                 currentImages = images;
                 currentImageIndex = 0;
-                currentZoom = 1;
-                currentRotation = 0;
-                translateX = 0;
-                translateY = 0;
                 
                 const fullImageModal = document.getElementById('fullImageModal');
                 const fullImage = document.getElementById('fullImage');
@@ -5113,9 +3658,6 @@
                     fullImage.src = currentImages[0];
                     fullImage.alt = productName;
                     imageCounter.textContent = `1 / ${currentImages.length}`;
-                    
-                    fullImage.style.transform = `translate(0, 0) scale(1) rotate(0deg)`;
-                    fullImage.style.transition = 'transform 0.3s ease';
                     
                     fullImageModal.classList.add('active');
                     document.body.style.overflow = 'hidden';
@@ -5145,50 +3687,10 @@
             const fullImage = document.getElementById('fullImage');
             const imageCounter = document.getElementById('imageCounter');
             
-            // Reset zoom and position for new image
-            currentZoom = 1;
-            currentRotation = 0;
-            translateX = 0;
-            translateY = 0;
-            
-            // Update image
             if (currentImages[currentImageIndex]) {
                 fullImage.src = currentImages[currentImageIndex];
-                fullImage.style.transform = `translate(0, 0) scale(1) rotate(0deg)`;
                 imageCounter.textContent = `${currentImageIndex + 1} / ${currentImages.length}`;
             }
-        }
-        
-        function zoomImage(factor) {
-            currentZoom *= factor;
-            currentZoom = Math.max(0.1, Math.min(currentZoom, 10));
-            updateImageTransform();
-        }
-        
-        function rotateImage() {
-            currentRotation += 90;
-            if (currentRotation >= 360) {
-                currentRotation = 0;
-            }
-            updateImageTransform();
-        }
-        
-        function resetImage() {
-            currentZoom = 1;
-            currentRotation = 0;
-            translateX = 0;
-            translateY = 0;
-            updateImageTransform();
-        }
-        
-        function downloadImage() {
-            const fullImage = document.getElementById('fullImage');
-            const link = document.createElement('a');
-            link.href = fullImage.src;
-            link.download = `sokoinn-product-${currentImageIndex + 1}.jpg`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
         }
         
         function closeFullImageModal() {
@@ -5202,7 +3704,6 @@
         // Initialize scroll behavior
         function initScrollBehavior() {
             let ticking = false;
-            let lastScrollTime = Date.now();
             
             window.addEventListener('scroll', function() {
                 if (!ticking) {
@@ -5214,7 +3715,6 @@
                 }
             });
             
-            // Show nav on page load if user is at top
             setTimeout(() => {
                 if (window.scrollY < 100) {
                     showBottomNav();
@@ -5226,32 +3726,26 @@
             const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
             const scrollDelta = currentScroll - lastScrollTop;
             const scrollSpeed = Math.abs(scrollDelta);
-            const now = Date.now();
             
-            // Update scroll direction
             if (scrollDelta > 0) {
                 scrollDirection = 'down';
             } else if (scrollDelta < 0) {
                 scrollDirection = 'up';
             }
             
-            // Hide nav on fast scrolling
             if (scrollSpeed > 30 && scrollDirection === 'down' && currentScroll > 100) {
                 hideBottomNav();
             }
             
-            // Show nav on scroll up or when reaching bottom
             if (scrollDirection === 'up' && !isBottomNavForced) {
                 showBottomNav();
             }
             
-            // Show nav when near bottom of page
             const scrollBottom = document.documentElement.scrollHeight - window.innerHeight - currentScroll;
             if (scrollBottom < 100) {
                 showBottomNav();
             }
             
-            // Auto-hide nav after inactivity
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(() => {
                 if (!isBottomNavForced && scrollDirection === 'down' && currentScroll > 200) {
@@ -5308,7 +3802,6 @@
                 }
             });
             
-            // Show toggle button when nav is hidden
             setInterval(() => {
                 if (!isBottomNavVisible && window.scrollY > 100) {
                     navToggleBtn.classList.add('visible');
@@ -5366,7 +3859,6 @@
                 }
             });
             
-            // Close chat when clicking outside
             document.addEventListener('click', function(e) {
                 if (!chatContainer.contains(e.target) && !chatToggle.contains(e.target) && isChatOpen) {
                     chatContainer.classList.remove('active');
@@ -5440,7 +3932,6 @@
             addChatMessage(message, 'user');
             chatInput.value = '';
             
-            // Simulate bot response
             setTimeout(() => {
                 handleBotResponse(message.toLowerCase());
             }, 1000);
@@ -5485,13 +3976,11 @@
         
         // Simple notification
         function showNotification(message) {
-            // Remove existing notification
             const existingNotification = document.querySelector('.notification');
             if (existingNotification) {
                 existingNotification.remove();
             }
             
-            // Create new notification
             const notification = document.createElement('div');
             notification.className = 'notification';
             notification.textContent = message;
@@ -5514,7 +4003,6 @@
             
             document.body.appendChild(notification);
             
-            // Remove after 3 seconds
             setTimeout(() => {
                 if (notification.parentNode) {
                     notification.remove();
@@ -5548,19 +4036,10 @@
             }
             
             /* FIX: Ensure proper pointer events */
-            .contact-btn,
-            .view-image-btn,
-            .image-zoom-btn,
             .modal-contact-btn,
-            .seller-contact-btn,
             .phone-action-btn,
             .chat-option-btn {
                 cursor: pointer !important;
-            }
-            
-            /* FIX: Prevent double triggering */
-            .product-card * {
-                user-select: none;
             }
             
             /* Standalone app styles */
