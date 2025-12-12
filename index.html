@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.5, maximum-scale=1.0, user-scalable=no">
     <title>SokoInn Marketplace | Trusted Sellers, Quality Products</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#800000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    
     <!-- Performance optimizations -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -109,6 +118,29 @@
         .text-white { color: var(--white); }
         .bg-maroon { background: var(--maroon); }
         .bg-white { background: var(--white); }
+        
+        /* ==================== INSTALL BUTTON ==================== */
+        .install-button {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 99;
+            background: var(--maroon);
+            color: white;
+            border-radius: var(--radius-md);
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            box-shadow: var(--shadow-md);
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            animation: slideInRight 0.3s ease;
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
         
         /* ==================== LOADING & SKELETON ==================== */
         .loading {
@@ -258,67 +290,94 @@
             visibility: visible;
         }
         
-        /* ==================== HERO SECTION ==================== */
+        /* ==================== IMPROVED HERO SECTION WITH SLIDESHOW ==================== */
         .hero {
-            background: linear-gradient(135deg, var(--maroon) 0%, var(--dark-maroon) 100%);
-            color: var(--white);
-            padding: 3rem 1rem;
-            text-align: center;
             position: relative;
+            height: 500px;
             overflow: hidden;
+            color: var(--white);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
-        .hero::before {
+        .hero-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        
+        .hero-slide.active {
+            opacity: 1;
+        }
+        
+        .hero-slide::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h20v20H0z" fill="none"/><path d="M10 3a7 7 0 100 14 7 7 0 000-14zm0 12a5 5 0 110-10 5 5 0 010 10z" fill="rgba(255,255,255,0.1)"/></svg>');
-            opacity: 0.1;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(128,0,0,0.8));
         }
         
         .hero-content {
             position: relative;
-            z-index: 1;
-            max-width: 600px;
-            margin: 0 auto;
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
         }
         
         .hero h1 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
             line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
         
         .hero p {
-            font-size: 1rem;
+            font-size: 1.125rem;
             opacity: 0.9;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
         
         .search-box {
-            max-width: 500px;
+            max-width: 600px;
             margin: 0 auto;
             position: relative;
         }
         
         .search-input {
             width: 100%;
-            padding: 0.75rem 1rem;
+            padding: 0.875rem 1rem;
             padding-right: 3rem;
             border: none;
             border-radius: var(--radius-md);
-            font-size: 0.875rem;
+            font-size: 1rem;
             background: var(--white);
             color: var(--black);
             box-shadow: var(--shadow-md);
         }
         
         .search-input:focus {
-            outline: 2px solid var(--white);
+            outline: 2px solid var(--maroon);
             outline-offset: 2px;
         }
         
@@ -327,12 +386,37 @@
             right: 0.5rem;
             top: 50%;
             transform: translateY(-50%);
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--maroon);
+        }
+        
+        .slide-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            z-index: 2;
+        }
+        
+        .slide-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .slide-indicator.active {
+            background: var(--white);
+            transform: scale(1.2);
         }
         
         /* ==================== CATEGORIES ==================== */
@@ -503,7 +587,7 @@
             }
             
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 3rem;
             }
         }
         
@@ -668,6 +752,110 @@
             background: var(--gray-200);
         }
         
+        /* ==================== IMPROVED PRODUCT MODAL WITH IMAGE GALLERY ==================== */
+        .product-gallery {
+            position: relative;
+            aspect-ratio: 1/1;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        
+        .gallery-main {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .gallery-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-thumbnails {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: var(--gray-100);
+            border-radius: var(--radius-md);
+            overflow-x: auto;
+        }
+        
+        .thumbnail {
+            width: 60px;
+            height: 60px;
+            flex-shrink: 0;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+        
+        .thumbnail.active {
+            border-color: var(--maroon);
+        }
+        
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 2;
+        }
+        
+        .gallery-nav:hover {
+            background: var(--white);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .gallery-prev {
+            left: 10px;
+        }
+        
+        .gallery-next {
+            right: 10px;
+        }
+        
+        .gallery-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            z-index: 2;
+        }
+        
+        .gallery-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            transition: var(--transition);
+        }
+        
+        .gallery-dot.active {
+            background: var(--white);
+            transform: scale(1.2);
+        }
+        
         /* ==================== FEATURED SECTION ==================== */
         .featured-section {
             padding: 3rem 0;
@@ -719,6 +907,171 @@
         .stat-label {
             font-size: 0.875rem;
             opacity: 0.9;
+        }
+        
+        /* ==================== CHATBOT ==================== */
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--maroon);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            z-index: 98;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .chatbot-toggle:hover {
+            background: var(--dark-maroon);
+            transform: scale(1.1);
+        }
+        
+        .chatbot-container {
+            position: fixed;
+            bottom: 170px;
+            right: 20px;
+            width: 350px;
+            max-width: calc(100vw - 40px);
+            height: 500px;
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            z-index: 97;
+            overflow: hidden;
+            transform: translateY(20px);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chatbot-container.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .chatbot-header {
+            background: var(--maroon);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chatbot-header h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .chatbot-close {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .chatbot-close:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .chatbot-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .chat-message {
+            max-width: 80%;
+            padding: 0.75rem;
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+        }
+        
+        .message-bot {
+            background: var(--gray-100);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        
+        .message-user {
+            background: var(--maroon);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .chatbot-input {
+            padding: 1rem;
+            border-top: 1px solid var(--gray-200);
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+        }
+        
+        .chatbot-input input:focus {
+            outline: 2px solid var(--maroon);
+            outline-offset: -2px;
+        }
+        
+        .chatbot-input button {
+            background: var(--maroon);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .chatbot-input button:hover {
+            background: var(--dark-maroon);
+        }
+        
+        .quick-questions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .quick-question {
+            background: var(--gray-200);
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .quick-question:hover {
+            background: var(--gray-300);
         }
         
         /* ==================== FOOTER ==================== */
@@ -887,6 +1240,25 @@
             border-left: 4px solid #3b82f6;
         }
         
+        /* ==================== OFFLINE NOTIFICATION ==================== */
+        .offline-notification {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #f59e0b;
+            color: white;
+            text-align: center;
+            padding: 0.5rem;
+            z-index: 1002;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .offline-notification.show {
+            transform: translateY(0);
+        }
+        
         /* ==================== LOADING STATES ==================== */
         .loading-state {
             text-align: center;
@@ -979,6 +1351,45 @@
             margin-bottom: 1.5rem;
         }
         
+        /* ==================== SAMPLE PRODUCTS WARNING ==================== */
+        .sample-warning {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            animation: slideInDown 0.5s ease;
+        }
+        
+        @keyframes slideInDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .sample-warning-icon {
+            font-size: 1.5rem;
+            color: #d97706;
+        }
+        
+        .sample-warning-content {
+            flex: 1;
+        }
+        
+        .sample-warning-title {
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 0.25rem;
+        }
+        
+        .sample-warning-text {
+            color: #92400e;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+        
         /* ==================== LAZY LOADING ==================== */
         .lazy-image {
             opacity: 0;
@@ -1026,6 +1437,16 @@
     </style>
 </head>
 <body>
+    <!-- Install Button -->
+    <button class="install-button" id="installButton">
+        📱 Install App
+    </button>
+    
+    <!-- Offline Notification -->
+    <div class="offline-notification" id="offlineNotification">
+        ⚠️ You are offline. Some features may be limited.
+    </div>
+    
     <!-- Header -->
     <header class="header">
         <div class="container">
@@ -1054,8 +1475,12 @@
         <div class="overlay" id="overlay"></div>
     </header>
     
-    <!-- Hero Section -->
-    <section class="hero">
+    <!-- Hero Section with Slideshow -->
+    <section class="hero" id="hero">
+        <div class="hero-slideshow" id="heroSlideshow">
+            <!-- Slides will be added dynamically -->
+        </div>
+        
         <div class="hero-content">
             <h1>Discover Quality Products from Trusted Kenyan Sellers</h1>
             <p>Shop directly with verified sellers. WhatsApp-first shopping experience.</p>
@@ -1067,7 +1492,14 @@
                 </button>
             </div>
         </div>
+        
+        <div class="slide-indicators" id="slideIndicators">
+            <!-- Indicators will be added dynamically -->
+        </div>
     </section>
+    
+    <!-- Sample Products Warning -->
+    <div class="container" id="sampleWarningContainer"></div>
     
     <!-- Categories Section -->
     <section class="categories" id="categories">
@@ -1075,22 +1507,6 @@
             <h2 class="section-title">Shop by Category</h2>
             <div class="category-grid" id="categoryGrid">
                 <!-- Categories will be loaded dynamically -->
-                <div class="skeleton-category">
-                    <div class="category-icon skeleton"></div>
-                    <div class="category-name skeleton"></div>
-                </div>
-                <div class="skeleton-category">
-                    <div class="category-icon skeleton"></div>
-                    <div class="category-name skeleton"></div>
-                </div>
-                <div class="skeleton-category">
-                    <div class="category-icon skeleton"></div>
-                    <div class="category-name skeleton"></div>
-                </div>
-                <div class="skeleton-category">
-                    <div class="category-icon skeleton"></div>
-                    <div class="category-name skeleton"></div>
-                </div>
             </div>
         </div>
     </section>
@@ -1105,38 +1521,6 @@
             
             <div class="product-grid" id="productGrid">
                 <!-- Products will be loaded dynamically -->
-                <div class="skeleton-product">
-                    <div class="product-image skeleton"></div>
-                    <div class="product-content">
-                        <div class="product-title skeleton"></div>
-                        <div class="product-price skeleton"></div>
-                        <div class="product-actions skeleton"></div>
-                    </div>
-                </div>
-                <div class="skeleton-product">
-                    <div class="product-image skeleton"></div>
-                    <div class="product-content">
-                        <div class="product-title skeleton"></div>
-                        <div class="product-price skeleton"></div>
-                        <div class="product-actions skeleton"></div>
-                    </div>
-                </div>
-                <div class="skeleton-product">
-                    <div class="product-image skeleton"></div>
-                    <div class="product-content">
-                        <div class="product-title skeleton"></div>
-                        <div class="product-price skeleton"></div>
-                        <div class="product-actions skeleton"></div>
-                    </div>
-                </div>
-                <div class="skeleton-product">
-                    <div class="product-image skeleton"></div>
-                    <div class="product-content">
-                        <div class="product-title skeleton"></div>
-                        <div class="product-price skeleton"></div>
-                        <div class="product-actions skeleton"></div>
-                    </div>
-                </div>
             </div>
             
             <div class="text-center mt-6">
@@ -1215,6 +1599,36 @@
         </div>
     </footer>
     
+    <!-- Chatbot -->
+    <div class="chatbot-toggle" id="chatbotToggle">
+        🤖
+    </div>
+    
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <h3><span>🤖</span> SokoInn Assistant</h3>
+            <button class="chatbot-close" id="chatbotClose">✕</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="chat-message message-bot">
+                Hello! I'm your SokoInn assistant. How can I help you today? 😊
+            </div>
+            <div class="chat-message message-bot">
+                Here are some quick questions I can answer:
+                <div class="quick-questions">
+                    <div class="quick-question" onclick="askQuestion('How do I buy products?')">How do I buy products?</div>
+                    <div class="quick-question" onclick="askQuestion('How to become a seller?')">How to become a seller?</div>
+                    <div class="quick-question" onclick="askQuestion('Payment methods')">Payment methods</div>
+                    <div class="quick-question" onclick="askQuestion('Delivery information')">Delivery information</div>
+                </div>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Type your question...">
+            <button id="chatbotSend">➤</button>
+        </div>
+    </div>
+    
     <!-- Scroll to Top Button -->
     <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
         ↑
@@ -1287,13 +1701,160 @@
     <!-- Toast Notification -->
     <div class="toast" id="toast"></div>
     
-    <!-- Script -->
+    <!-- Service Worker Registration -->
+    <script>
+        // ==================== PWA SERVICE WORKER ====================
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(
+                    function(registration) {
+                        console.log('Service Worker registered with scope:', registration.scope);
+                        
+                        // Check for updates
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            console.log('New service worker found!');
+                            
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    showToast('New version available! Refresh to update.', 'info');
+                                }
+                            });
+                        });
+                    },
+                    function(err) {
+                        console.log('Service Worker registration failed:', err);
+                    }
+                );
+                
+                // Check if app is already installed
+                window.addEventListener('beforeinstallprompt', (e) => {
+                    e.preventDefault();
+                    window.deferredPrompt = e;
+                    showInstallButton();
+                });
+                
+                // Check if app is already installed
+                window.addEventListener('appinstalled', () => {
+                    console.log('App installed successfully');
+                    window.deferredPrompt = null;
+                    hideInstallButton();
+                    showToast('App installed successfully!', 'success');
+                });
+            });
+        }
+        
+        // ==================== MANIFEST CREATION ====================
+        function createManifest() {
+            const manifest = {
+                "name": "SokoInn Marketplace",
+                "short_name": "SokoInn",
+                "description": "Trusted Sellers, Quality Products - African E-commerce",
+                "start_url": "/",
+                "display": "standalone",
+                "background_color": "#800000",
+                "theme_color": "#800000",
+                "orientation": "portrait",
+                "icons": [
+                    {
+                        "src": "icons/icon-72.png",
+                        "sizes": "72x72",
+                        "type": "image/png"
+                    },
+                    {
+                        "src": "icons/icon-96.png",
+                        "sizes": "96x96",
+                        "type": "image/png"
+                    },
+                    {
+                        "src": "icons/icon-128.png",
+                        "sizes": "128x128",
+                        "type": "image/png"
+                    },
+                    {
+                        "src": "icons/icon-144.png",
+                        "sizes": "144x144",
+                        "type": "image/png"
+                    },
+                    {
+                        "src": "icons/icon-152.png",
+                        "sizes": "152x152",
+                        "type": "image/png"
+                    },
+                    {
+                        "src": "icons/icon-192.png",
+                        "sizes": "192x192",
+                        "type": "image/png"
+                    },
+                    {
+                        "src": "icons/icon-384.png",
+                        "sizes": "384x384",
+                        "type": "image/png"
+                    },
+                    {
+                        "src": "icons/icon-512.png",
+                        "sizes": "512x512",
+                        "type": "image/png"
+                    }
+                ],
+                "screenshots": [
+                    {
+                        "src": "screenshots/screenshot1.png",
+                        "sizes": "1280x720",
+                        "type": "image/png",
+                        "form_factor": "wide"
+                    },
+                    {
+                        "src": "screenshots/screenshot2.png",
+                        "sizes": "750x1334",
+                        "type": "image/png",
+                        "form_factor": "narrow"
+                    }
+                ],
+                "categories": ["shopping", "business", "lifestyle"],
+                "shortcuts": [
+                    {
+                        "name": "Browse Products",
+                        "short_name": "Products",
+                        "description": "Browse all available products",
+                        "url": "/#products"
+                    },
+                    {
+                        "name": "Become a Seller",
+                        "short_name": "Seller",
+                        "description": "Register as a seller",
+                        "url": "/?action=seller"
+                    }
+                ]
+            };
+            
+            // Create manifest link dynamically
+            const link = document.createElement('link');
+            link.rel = 'manifest';
+            link.href = 'data:application/manifest+json,' + encodeURIComponent(JSON.stringify(manifest));
+            document.head.appendChild(link);
+        }
+        
+        // Create manifest on page load
+        createManifest();
+    </script>
+    
+    <!-- Main App Script -->
     <script>
         // ==================== CONFIGURATION ====================
         const CONFIG = {
             BACKEND_URL: 'https://script.google.com/macros/s/AKfycbxFV5ZB1KikI62uxGKU3XWZCk6nOUqE05R0MSK6LuzRKQWqwidMVQ1yDvEQ045vCmW4_w/exec',
             ITEMS_PER_PAGE: 12,
             DEFAULT_IMAGE: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400"><rect width="400" height="400" fill="%23f5f5f5"/><text x="50%" y="50%" font-family="Arial" font-size="24" fill="%23999" text-anchor="middle" dy=".3em">Image</text></svg>',
+            
+            // African city images for hero slideshow
+            HERO_IMAGES: [
+                'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=1200&h=600&fit=crop', // Nairobi
+                'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1200&h=600&fit=crop', // Cape Town
+                'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=1200&h=600&fit=crop', // Lagos
+                'https://images.unsplash.com/photo-1532372576444-dda954194ad0?w=1200&h=600&fit=crop', // Accra
+                'https://images.unsplash.com/photo-1557223562-6c77ef16210f?w=1200&h=600&fit=crop'  // Market scene
+            ],
             
             // Category icons mapping
             CATEGORY_ICONS: {
@@ -1317,6 +1878,31 @@
                 'baby': '👶',
                 'music': '🎵',
                 'movies': '🎬'
+            },
+            
+            // Chatbot responses
+            CHATBOT_RESPONSES: {
+                'greeting': ['Hello! 😊 How can I assist you today?', 'Hi there! Ready to help you shop.'],
+                'buy': [
+                    'To buy products: 1) Browse products 2) Click "View" 3) Contact seller via WhatsApp 4) Arrange payment & delivery',
+                    'Simply browse products, contact the seller directly on WhatsApp, and arrange your purchase!'
+                ],
+                'seller': [
+                    'Click "Become a Seller" in the menu or footer. Fill the form and we\'ll contact you within 24 hours!',
+                    'Register as a seller using the form. We verify all sellers to ensure trust and quality.'
+                ],
+                'payment': [
+                    'Sellers accept various methods: M-Pesa, bank transfer, cash on delivery. Discuss directly with the seller.',
+                    'Payment methods vary by seller. Most accept M-Pesa. Discuss payment options when you contact the seller.'
+                ],
+                'delivery': [
+                    'Delivery arrangements are made directly with sellers. They can deliver or you can pick up locally.',
+                    'Each seller handles their own delivery. You\'ll arrange this when you contact them on WhatsApp.'
+                ],
+                'default': [
+                    "I'm not sure about that. Would you like me to connect you with our support team via WhatsApp?",
+                    "That's a great question! Let me connect you with a human agent for more help."
+                ]
             }
         };
         
@@ -1328,15 +1914,30 @@
             currentPage: 1,
             isLoading: false,
             selectedCategory: 'all',
-            searchQuery: ''
+            searchQuery: '',
+            usingSampleProducts: false,
+            currentSlide: 0,
+            heroInterval: null,
+            chatHistory: []
         };
         
         // ==================== DOM ELEMENTS ====================
         const elements = {
+            // PWA Elements
+            installButton: document.getElementById('installButton'),
+            offlineNotification: document.getElementById('offlineNotification'),
+            
             // Navigation
             navToggle: document.getElementById('navToggle'),
             mobileNav: document.getElementById('mobileNav'),
             overlay: document.getElementById('overlay'),
+            
+            // Hero
+            heroSlideshow: document.getElementById('heroSlideshow'),
+            slideIndicators: document.getElementById('slideIndicators'),
+            
+            // Warning
+            sampleWarningContainer: document.getElementById('sampleWarningContainer'),
             
             // Search
             searchInput: document.getElementById('searchInput'),
@@ -1358,6 +1959,14 @@
             // Scroll
             scrollTop: document.getElementById('scrollTop'),
             
+            // Chatbot
+            chatbotToggle: document.getElementById('chatbotToggle'),
+            chatbotContainer: document.getElementById('chatbotContainer'),
+            chatbotClose: document.getElementById('chatbotClose'),
+            chatbotMessages: document.getElementById('chatbotMessages'),
+            chatbotInput: document.getElementById('chatbotInput'),
+            chatbotSend: document.getElementById('chatbotSend'),
+            
             // Modals
             productModal: document.getElementById('productModal'),
             closeProductModal: document.getElementById('closeProductModal'),
@@ -1377,9 +1986,251 @@
             initSearch();
             initModals();
             initScrollToTop();
+            initHeroSlideshow();
+            initChatbot();
+            initNetworkStatus();
             loadInitialData();
             setupLazyLoading();
         });
+        
+        // ==================== PWA INSTALLATION ====================
+        function showInstallButton() {
+            elements.installButton.style.display = 'flex';
+        }
+        
+        function hideInstallButton() {
+            elements.installButton.style.display = 'none';
+        }
+        
+        elements.installButton.addEventListener('click', async () => {
+            if (!window.deferredPrompt) return;
+            
+            window.deferredPrompt.prompt();
+            const { outcome } = await window.deferredPrompt.userChoice;
+            
+            if (outcome === 'accepted') {
+                console.log('User accepted the install prompt');
+                hideInstallButton();
+            } else {
+                console.log('User dismissed the install prompt');
+            }
+            
+            window.deferredPrompt = null;
+        });
+        
+        // ==================== NETWORK STATUS ====================
+        function initNetworkStatus() {
+            window.addEventListener('online', () => {
+                elements.offlineNotification.classList.remove('show');
+                showToast('You are back online!', 'success');
+            });
+            
+            window.addEventListener('offline', () => {
+                elements.offlineNotification.classList.add('show');
+                showToast('You are offline', 'error');
+            });
+            
+            // Initial check
+            if (!navigator.onLine) {
+                elements.offlineNotification.classList.add('show');
+            }
+        }
+        
+        // ==================== HERO SLIDESHOW ====================
+        function initHeroSlideshow() {
+            const slideshow = elements.heroSlideshow;
+            const indicators = elements.slideIndicators;
+            
+            // Create slides
+            CONFIG.HERO_IMAGES.forEach((image, index) => {
+                const slide = document.createElement('div');
+                slide.className = `hero-slide ${index === 0 ? 'active' : ''}`;
+                slide.style.backgroundImage = `url('${image}')`;
+                slideshow.appendChild(slide);
+                
+                const indicator = document.createElement('div');
+                indicator.className = `slide-indicator ${index === 0 ? 'active' : ''}`;
+                indicator.addEventListener('click', () => goToSlide(index));
+                indicators.appendChild(indicator);
+            });
+            
+            // Start slideshow
+            startSlideshow();
+            
+            // Pause on hover
+            slideshow.addEventListener('mouseenter', pauseSlideshow);
+            slideshow.addEventListener('mouseleave', startSlideshow);
+            
+            // Touch support for mobile
+            let touchStartX = 0;
+            slideshow.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+                pauseSlideshow();
+            });
+            
+            slideshow.addEventListener('touchend', (e) => {
+                const touchEndX = e.changedTouches[0].clientX;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) {
+                        nextSlide();
+                    } else {
+                        prevSlide();
+                    }
+                }
+                
+                setTimeout(startSlideshow, 3000);
+            });
+        }
+        
+        function startSlideshow() {
+            if (state.heroInterval) clearInterval(state.heroInterval);
+            
+            state.heroInterval = setInterval(() => {
+                nextSlide();
+            }, 5000);
+        }
+        
+        function pauseSlideshow() {
+            if (state.heroInterval) {
+                clearInterval(state.heroInterval);
+                state.heroInterval = null;
+            }
+        }
+        
+        function nextSlide() {
+            const slides = document.querySelectorAll('.hero-slide');
+            const indicators = document.querySelectorAll('.slide-indicator');
+            
+            slides[state.currentSlide].classList.remove('active');
+            indicators[state.currentSlide].classList.remove('active');
+            
+            state.currentSlide = (state.currentSlide + 1) % slides.length;
+            
+            slides[state.currentSlide].classList.add('active');
+            indicators[state.currentSlide].classList.add('active');
+        }
+        
+        function prevSlide() {
+            const slides = document.querySelectorAll('.hero-slide');
+            const indicators = document.querySelectorAll('.slide-indicator');
+            
+            slides[state.currentSlide].classList.remove('active');
+            indicators[state.currentSlide].classList.remove('active');
+            
+            state.currentSlide = (state.currentSlide - 1 + slides.length) % slides.length;
+            
+            slides[state.currentSlide].classList.add('active');
+            indicators[state.currentSlide].classList.add('active');
+        }
+        
+        function goToSlide(index) {
+            const slides = document.querySelectorAll('.hero-slide');
+            const indicators = document.querySelectorAll('.slide-indicator');
+            
+            slides[state.currentSlide].classList.remove('active');
+            indicators[state.currentSlide].classList.remove('active');
+            
+            state.currentSlide = index;
+            
+            slides[state.currentSlide].classList.add('active');
+            indicators[state.currentSlide].classList.add('active');
+            
+            // Restart slideshow
+            startSlideshow();
+        }
+        
+        // ==================== CHATBOT ====================
+        function initChatbot() {
+            elements.chatbotToggle.addEventListener('click', toggleChatbot);
+            elements.chatbotClose.addEventListener('click', toggleChatbot);
+            elements.chatbotSend.addEventListener('click', sendChatMessage);
+            
+            elements.chatbotInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendChatMessage();
+                }
+            });
+        }
+        
+        function toggleChatbot() {
+            elements.chatbotContainer.classList.toggle('active');
+            
+            if (elements.chatbotContainer.classList.contains('active')) {
+                elements.chatbotInput.focus();
+            }
+        }
+        
+        function sendChatMessage() {
+            const message = elements.chatbotInput.value.trim();
+            if (!message) return;
+            
+            // Add user message
+            addChatMessage(message, 'user');
+            
+            // Clear input
+            elements.chatbotInput.value = '';
+            
+            // Simulate typing delay
+            setTimeout(() => {
+                const response = getChatbotResponse(message);
+                addChatMessage(response, 'bot');
+                
+                // Scroll to bottom
+                elements.chatbotMessages.scrollTop = elements.chatbotMessages.scrollHeight;
+                
+                // Add to history
+                state.chatHistory.push({ question: message, response });
+            }, 500);
+        }
+        
+        function addChatMessage(message, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message message-${sender}`;
+            messageDiv.textContent = message;
+            elements.chatbotMessages.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            elements.chatbotMessages.scrollTop = elements.chatbotMessages.scrollHeight;
+        }
+        
+        function getChatbotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            // Check for keywords
+            if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
+                return randomResponse('greeting');
+            } else if (lowerMessage.includes('buy') || lowerMessage.includes('purchase') || lowerMessage.includes('shop')) {
+                return randomResponse('buy');
+            } else if (lowerMessage.includes('seller') || lowerMessage.includes('sell')) {
+                return randomResponse('seller');
+            } else if (lowerMessage.includes('payment') || lowerMessage.includes('pay') || lowerMessage.includes('mpesa')) {
+                return randomResponse('payment');
+            } else if (lowerMessage.includes('delivery') || lowerMessage.includes('ship') || lowerMessage.includes('deliver')) {
+                return randomResponse('delivery');
+            } else if (lowerMessage.includes('whatsapp') || lowerMessage.includes('contact') || lowerMessage.includes('help')) {
+                // Suggest WhatsApp for complex queries
+                setTimeout(() => {
+                    if (confirm("Would you like to chat with a human agent on WhatsApp?")) {
+                        window.open('https://wa.me/254712345678?text=Hi%20SokoInn%20Support,%20I%20need%20help%20with%3A%20' + encodeURIComponent(message), '_blank');
+                    }
+                }, 100);
+                return "I can connect you with our support team on WhatsApp for more detailed help!";
+            } else {
+                return randomResponse('default');
+            }
+        }
+        
+        function randomResponse(type) {
+            const responses = CONFIG.CHATBOT_RESPONSES[type] || CONFIG.CHATBOT_RESPONSES.default;
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+        
+        window.askQuestion = function(question) {
+            elements.chatbotInput.value = question;
+            sendChatMessage();
+        };
         
         // ==================== NAVIGATION ====================
         function initNavigation() {
@@ -1586,8 +2437,10 @@
                         sellerStatus: product.sellerStatus || 'verified'
                     }));
                     
+                    state.usingSampleProducts = false;
                     state.filteredProducts = [...state.products];
                     renderProducts();
+                    hideSampleWarning();
                     
                     // Update stats
                     updateProductCount();
@@ -1605,7 +2458,7 @@
                 loadSampleProducts();
                 
                 if (!silent) {
-                    showToast('Using sample products', 'info');
+                    showToast('Using sample products - reload for real data', 'info');
                 }
             } finally {
                 state.isLoading = false;
@@ -1623,11 +2476,16 @@
                     sellerId: 'SELL001',
                     sellerName: 'Luxury Bags Kenya',
                     sellerStatus: 'verified',
-                    images: ['https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&h=400&fit=crop'],
+                    images: [
+                        'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w-800&h-800&fit=crop',
+                        'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w-800&h-800&fit=crop',
+                        'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w-800&h-800&fit=crop'
+                    ],
                     rating: 4.5,
                     reviewCount: 24,
                     category: 'Fashion',
-                    stock: 5
+                    stock: 5,
+                    description: 'Premium genuine leather handbag with multiple compartments.'
                 },
                 {
                     productId: 'PROD002',
@@ -1636,11 +2494,15 @@
                     sellerId: 'SELL002',
                     sellerName: 'African Art Gallery',
                     sellerStatus: 'verified',
-                    images: ['https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&h=400&fit=crop'],
+                    images: [
+                        'https://images.unsplash.com/photo-1541961017774-22349e4a1262?w-800&h-800&fit=crop',
+                        'https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w-800&h-800&fit=crop'
+                    ],
                     rating: 4.8,
                     reviewCount: 18,
                     category: 'Home & Living',
-                    stock: 3
+                    stock: 3,
+                    description: 'Beautiful traditional African art piece for home decoration.'
                 },
                 {
                     productId: 'PROD003',
@@ -1649,11 +2511,15 @@
                     sellerId: 'SELL003',
                     sellerName: 'Tech Gadgets KE',
                     sellerStatus: 'verified',
-                    images: ['https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop'],
+                    images: [
+                        'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w-800&h-800&fit=crop',
+                        'https://images.unsplash.com/photo-1484704849700-f032a568e944?w-800&h-800&fit=crop'
+                    ],
                     rating: 4.2,
                     reviewCount: 36,
                     category: 'Electronics',
-                    stock: 8
+                    stock: 8,
+                    description: 'High-quality wireless headphones with noise cancellation.'
                 },
                 {
                     productId: 'PROD004',
@@ -1662,11 +2528,15 @@
                     sellerId: 'SELL004',
                     sellerName: 'Natural Beauty Hub',
                     sellerStatus: 'verified',
-                    images: ['https://images.unsplash.com/photo-1556228578-9c360e1d8d34?w=400&h=400&fit=crop'],
+                    images: [
+                        'https://images.unsplash.com/photo-1556228578-9c360e1d8d34?w-800&h-800&fit=crop',
+                        'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w-800&h-800&fit=crop'
+                    ],
                     rating: 4.7,
                     reviewCount: 42,
                     category: 'Beauty',
-                    stock: 12
+                    stock: 12,
+                    description: '100% organic shea butter for skin and hair care.'
                 },
                 {
                     productId: 'PROD005',
@@ -1675,11 +2545,15 @@
                     sellerId: 'SELL005',
                     sellerName: 'Cultural Crafts Ltd',
                     sellerStatus: 'verified',
-                    images: ['https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400&h=400&fit=crop'],
+                    images: [
+                        'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w-800&h-800&fit=crop',
+                        'https://images.unsplash.com/photo-1575537302964-96d34b3e42c6?w-800&h-800&fit=crop'
+                    ],
                     rating: 4.9,
                     reviewCount: 29,
                     category: 'Fashion',
-                    stock: 4
+                    stock: 4,
+                    description: 'Handcrafted Maasai beaded sandals with traditional designs.'
                 },
                 {
                     productId: 'PROD006',
@@ -1688,44 +2562,24 @@
                     sellerId: 'SELL006',
                     sellerName: 'Farm Fresh Products',
                     sellerStatus: 'verified',
-                    images: ['https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=400&fit=crop'],
+                    images: [
+                        'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w-800&h-800&fit=crop',
+                        'https://images.unsplash.com/photo-1510707577719-ae7c9b788690?w-800&h-800&fit=crop'
+                    ],
                     rating: 4.6,
                     reviewCount: 51,
                     category: 'Food',
-                    stock: 15
-                },
-                {
-                    productId: 'PROD007',
-                    name: 'Designer Sunglasses',
-                    price: 2500,
-                    sellerId: 'SELL001',
-                    sellerName: 'Luxury Bags Kenya',
-                    sellerStatus: 'verified',
-                    images: ['https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=400&fit=crop'],
-                    rating: 4.3,
-                    reviewCount: 18,
-                    category: 'Fashion',
-                    stock: 7
-                },
-                {
-                    productId: 'PROD008',
-                    name: 'Bamboo Cutting Board',
-                    price: 1200,
-                    sellerId: 'SELL007',
-                    sellerName: 'Eco Home Kenya',
-                    sellerStatus: 'verified',
-                    images: ['https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=400&h=400&fit=crop'],
-                    rating: 4.8,
-                    reviewCount: 23,
-                    category: 'Home & Living',
-                    stock: 9
+                    stock: 15,
+                    description: 'Premium Arabica coffee beans from Kenyan highlands.'
                 }
             ];
             
             state.products = sampleProducts;
             state.filteredProducts = [...sampleProducts];
+            state.usingSampleProducts = true;
             renderProducts();
             updateProductCount();
+            showSampleWarning();
         }
         
         async function loadStats() {
@@ -1741,11 +2595,33 @@
                 // Set default stats
                 updateStatsDisplay({
                     totalProducts: state.products.length,
-                    activeSellers: 6,
-                    totalCustomers: 1289,
+                    activeSellers: state.usingSampleProducts ? 6 : 0,
+                    totalCustomers: state.usingSampleProducts ? 1289 : 0,
                     cities: 10
                 });
             }
+        }
+        
+        // ==================== SAMPLE PRODUCTS WARNING ====================
+        function showSampleWarning() {
+            elements.sampleWarningContainer.innerHTML = `
+                <div class="sample-warning">
+                    <div class="sample-warning-icon">⚠️</div>
+                    <div class="sample-warning-content">
+                        <div class="sample-warning-title">Sample Products Loaded</div>
+                        <div class="sample-warning-text">
+                            You're viewing sample products. Real products from our sellers will load when you're connected to the backend.
+                        </div>
+                        <button class="btn btn-primary" onclick="window.location.reload()" style="font-size: 0.75rem; padding: 0.25rem 0.5rem;">
+                            Reload Page
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function hideSampleWarning() {
+            elements.sampleWarningContainer.innerHTML = '';
         }
         
         // ==================== RENDERING ====================
@@ -1908,6 +2784,157 @@
             lazyLoadImages();
         }
         
+        // ==================== IMPROVED PRODUCT MODAL ====================
+        async function viewProduct(productId) {
+            showProductModal();
+            
+            elements.productModalBody.innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <div class="loading" style="width: 40px; height: 40px; margin: 0 auto 1rem;"></div>
+                    <p style="color: var(--gray-500);">Loading product details...</p>
+                </div>
+            `;
+            
+            try {
+                const product = state.products.find(p => p.productId === productId);
+                
+                if (product) {
+                    const images = product.images && product.images.length > 0 ? product.images : [CONFIG.DEFAULT_IMAGE];
+                    
+                    let galleryHTML = '';
+                    let thumbnailsHTML = '';
+                    let dotsHTML = '';
+                    
+                    images.forEach((img, index) => {
+                        galleryHTML += `
+                            <div class="gallery-slide ${index === 0 ? 'active' : ''}">
+                                <img src="${img}" alt="${product.name} - Image ${index + 1}" 
+                                     onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
+                            </div>
+                        `;
+                        
+                        thumbnailsHTML += `
+                            <div class="thumbnail ${index === 0 ? 'active' : ''}" onclick="changeGalleryImage(${index})">
+                                <img src="${img}" alt="Thumbnail ${index + 1}"
+                                     onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
+                            </div>
+                        `;
+                        
+                        dotsHTML += `
+                            <div class="gallery-dot ${index === 0 ? 'active' : ''}" onclick="changeGalleryImage(${index})"></div>
+                        `;
+                    });
+                    
+                    elements.productModalBody.innerHTML = `
+                        <div style="display: grid; gap: 1.5rem;">
+                            <div class="product-gallery">
+                                <div class="gallery-main" id="galleryMain">
+                                    ${galleryHTML}
+                                </div>
+                                ${images.length > 1 ? `
+                                    <div class="gallery-nav gallery-prev" onclick="prevGalleryImage()">‹</div>
+                                    <div class="gallery-nav gallery-next" onclick="nextGalleryImage()">›</div>
+                                    <div class="gallery-dots" id="galleryDots">
+                                        ${dotsHTML}
+                                    </div>
+                                ` : ''}
+                            </div>
+                            
+                            ${images.length > 1 ? `
+                                <div class="gallery-thumbnails" id="galleryThumbnails">
+                                    ${thumbnailsHTML}
+                                </div>
+                            ` : ''}
+                            
+                            <div>
+                                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--black);">
+                                    ${product.name}
+                                </h3>
+                                <div style="font-size: 1.75rem; font-weight: 800; color: var(--maroon); margin-bottom: 1rem;">
+                                    KSh ${product.price.toLocaleString()}
+                                </div>
+                                
+                                ${product.description ? `
+                                    <div style="margin-bottom: 1rem; padding: 1rem; background: var(--gray-100); border-radius: var(--radius-md);">
+                                        <h4 style="font-weight: 600; margin-bottom: 0.5rem; color: var(--black);">Description</h4>
+                                        <p style="color: var(--gray-700); line-height: 1.6;">${product.description}</p>
+                                    </div>
+                                ` : ''}
+                                
+                                <div style="background: var(--gray-100); padding: 1rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                        <span style="font-weight: 600; color: var(--black);">Seller:</span>
+                                        <span>${product.sellerName} ${product.sellerStatus === 'verified' ? '✓' : ''}</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                        <span style="font-weight: 600; color: var(--black);">Category:</span>
+                                        <span>${product.category || 'General'}</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <span style="font-weight: 600; color: var(--black);">Availability:</span>
+                                        <span>${product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}</span>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: grid; gap: 0.75rem;">
+                                    <button class="btn btn-primary" onclick="contactSeller('${product.sellerId}', '${product.name}', ${product.price})">
+                                        💬 Contact Seller on WhatsApp
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="saveForLater('${product.productId}')">
+                                        ⭐ Save for Later
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Initialize gallery
+                    window.currentGalleryImages = images;
+                    window.currentGalleryIndex = 0;
+                } else {
+                    elements.productModalBody.innerHTML = `
+                        <div style="text-align: center; padding: 2rem;">
+                            <p style="color: var(--gray-500);">Product not found</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading product:', error);
+                elements.productModalBody.innerHTML = `
+                    <div style="text-align: center; padding: 2rem;">
+                        <p style="color: var(--gray-500);">Error loading product details</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Gallery functions
+        window.changeGalleryImage = function(index) {
+            const slides = document.querySelectorAll('.gallery-slide');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            const dots = document.querySelectorAll('.gallery-dot');
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            thumbnails[index].classList.add('active');
+            dots[index].classList.add('active');
+            
+            window.currentGalleryIndex = index;
+        };
+        
+        window.prevGalleryImage = function() {
+            const newIndex = (window.currentGalleryIndex - 1 + window.currentGalleryImages.length) % window.currentGalleryImages.length;
+            window.changeGalleryImage(newIndex);
+        };
+        
+        window.nextGalleryImage = function() {
+            const newIndex = (window.currentGalleryIndex + 1) % window.currentGalleryImages.length;
+            window.changeGalleryImage(newIndex);
+        };
+        
         // ==================== FILTERING ====================
         function filterProducts() {
             let filtered = [...state.products];
@@ -1994,80 +3021,6 @@
         }
         
         // ==================== PRODUCT INTERACTIONS ====================
-        async function viewProduct(productId) {
-            showProductModal();
-            
-            elements.productModalBody.innerHTML = `
-                <div style="text-align: center; padding: 2rem;">
-                    <div class="loading" style="width: 40px; height: 40px; margin: 0 auto 1rem;"></div>
-                    <p style="color: var(--gray-500);">Loading product details...</p>
-                </div>
-            `;
-            
-            try {
-                const product = state.products.find(p => p.productId === productId);
-                
-                if (product) {
-                    const images = product.images || [CONFIG.DEFAULT_IMAGE];
-                    const mainImage = images[0];
-                    
-                    elements.productModalBody.innerHTML = `
-                        <div style="display: grid; gap: 1.5rem;">
-                            <div style="aspect-ratio: 1/1; background: var(--gray-100); border-radius: var(--radius-lg); overflow: hidden;">
-                                <img src="${mainImage}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover;">
-                            </div>
-                            
-                            <div>
-                                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--black);">
-                                    ${product.name}
-                                </h3>
-                                <div style="font-size: 1.75rem; font-weight: 800; color: var(--maroon); margin-bottom: 1rem;">
-                                    KSh ${product.price.toLocaleString()}
-                                </div>
-                                
-                                <div style="background: var(--gray-100); padding: 1rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                        <span style="font-weight: 600; color: var(--black);">Seller:</span>
-                                        <span>${product.sellerName} ${product.sellerStatus === 'verified' ? '✓' : ''}</span>
-                                    </div>
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                        <span style="font-weight: 600; color: var(--black);">Category:</span>
-                                        <span>${product.category || 'General'}</span>
-                                    </div>
-                                    <div style="display: flex; justify-content: space-between;">
-                                        <span style="font-weight: 600; color: var(--black);">Availability:</span>
-                                        <span>${product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}</span>
-                                    </div>
-                                </div>
-                                
-                                <div style="display: grid; gap: 0.75rem;">
-                                    <button class="btn btn-primary" onclick="contactSeller('${product.sellerId}', '${product.name}', ${product.price})">
-                                        💬 Contact Seller on WhatsApp
-                                    </button>
-                                    <button class="btn btn-secondary" onclick="saveForLater('${product.productId}')">
-                                        ⭐ Save for Later
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    elements.productModalBody.innerHTML = `
-                        <div style="text-align: center; padding: 2rem;">
-                            <p style="color: var(--gray-500);">Product not found</p>
-                        </div>
-                    `;
-                }
-            } catch (error) {
-                console.error('Error loading product:', error);
-                elements.productModalBody.innerHTML = `
-                    <div style="text-align: center; padding: 2rem;">
-                        <p style="color: var(--gray-500);">Error loading product details</p>
-                    </div>
-                `;
-            }
-        }
-        
         function contactSeller(sellerId, productName = '', productPrice = 0) {
             // In a real implementation, you would fetch seller's WhatsApp from backend
             const phone = '254712345678'; // Placeholder
@@ -2234,6 +3187,88 @@
         window.showSupport = function() {
             showToast('Support center coming soon!', 'info');
         };
+    </script>
+    
+    <!-- Service Worker Script -->
+    <script>
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            const swScript = `
+                // Service Worker for SokoInn Marketplace
+                const CACHE_NAME = 'sokoinn-v1.0';
+                const urlsToCache = [
+                    '/',
+                    '/index.html',
+                    '/manifest.json',
+                    '/icons/icon-72.png',
+                    '/icons/icon-96.png',
+                    '/icons/icon-128.png',
+                    '/icons/icon-144.png',
+                    '/icons/icon-152.png',
+                    '/icons/icon-192.png',
+                    '/icons/icon-384.png',
+                    '/icons/icon-512.png'
+                ];
+                
+                // Install event
+                self.addEventListener('install', event => {
+                    event.waitUntil(
+                        caches.open(CACHE_NAME)
+                            .then(cache => cache.addAll(urlsToCache))
+                    );
+                });
+                
+                // Activate event
+                self.addEventListener('activate', event => {
+                    event.waitUntil(
+                        caches.keys().then(cacheNames => {
+                            return Promise.all(
+                                cacheNames.map(cacheName => {
+                                    if (cacheName !== CACHE_NAME) {
+                                        return caches.delete(cacheName);
+                                    }
+                                })
+                            );
+                        })
+                    );
+                });
+                
+                // Fetch event
+                self.addEventListener('fetch', event => {
+                    event.respondWith(
+                        caches.match(event.request)
+                            .then(response => {
+                                // Return cached version or fetch new
+                                return response || fetch(event.request);
+                            })
+                    );
+                });
+                
+                // Background sync for offline submissions
+                self.addEventListener('sync', event => {
+                    if (event.tag === 'seller-registration') {
+                        event.waitUntil(syncSellerRegistrations());
+                    }
+                });
+                
+                async function syncSellerRegistrations() {
+                    // Implementation for syncing offline submissions
+                    console.log('Syncing seller registrations...');
+                }
+            `;
+            
+            // Create a Blob URL for the service worker script
+            const blob = new Blob([swScript], { type: 'application/javascript' });
+            const swUrl = URL.createObjectURL(blob);
+            
+            navigator.serviceWorker.register(swUrl)
+                .then(registration => {
+                    console.log('Service Worker registered:', registration);
+                })
+                .catch(error => {
+                    console.log('Service Worker registration failed:', error);
+                });
+        }
     </script>
 </body>
 </html>
