@@ -1037,9 +1037,6 @@
     <script>
         // ==================== CONFIGURATION ====================
         const CONFIG = {
-            // Using a mock API for demonstration - replace with your actual backend
-            USE_MOCK_DATA: true, // Set to false when you have real backend
-            MOCK_BACKEND_URL: 'https://jsonplaceholder.typicode.com/posts', // Mock API
             BACKEND_URL: 'https://script.google.com/macros/s/AKfycbz-0ffrbeVW2OvYOKlGaRebK_iP12iUfCP7UXksnaRi9oyIzKCTW5J9f2YWtQDjqxuY6g/exec',
             ITEMS_PER_PAGE: 12,
             DEFAULT_IMAGE: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400"><rect width="400" height="400" fill="%23f5f5f5"/><text x="50%" y="50%" font-family="Arial" font-size="24" fill="%23999" text-anchor="middle" dy=".3em">No Image</text></svg>'
@@ -1185,16 +1182,24 @@
             showLoading();
             
             try {
-                // Load products first, then categories and sellers
-                await loadProducts();
+                // Load products and categories in parallel
+                await Promise.all([
+                    loadProducts(),
+                    loadSellers()
+                ]);
+                
+                // Load categories after products are loaded
                 await loadCategories();
-                await loadSellers();
                 
                 hideLoading();
             } catch (error) {
                 console.error('Failed to load initial data:', error);
                 showToast('Failed to load products. Please try again.', 'error');
                 hideLoading();
+                
+                // Try to load sample data as fallback
+                await loadSampleProducts();
+                await loadCategories();
             }
         }
         
@@ -1203,37 +1208,47 @@
             state.isLoading = true;
             
             try {
-                // Try to load from API first
-                if (!CONFIG.USE_MOCK_DATA) {
-                    const response = await fetch(`${CONFIG.BACKEND_URL}?action=getProducts`);
-                    const data = await response.json();
-                    
-                    if (data.success && data.data) {
-                        state.products = data.data;
-                        state.filteredProducts = [...state.products];
-                        renderProducts();
-                        return;
-                    }
+                console.log('Loading products from:', CONFIG.BACKEND_URL);
+                const response = await fetch(`${CONFIG.BACKEND_URL}?action=getProducts`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 
-                // If API fails or USE_MOCK_DATA is true, load sample data
-                await loadSampleProducts();
+                const data = await response.json();
+                console.log('Products API response:', data);
                 
+                if (data.success && data.data) {
+                    state.products = data.data.map(product => ({
+                        ...product,
+                        // Ensure images property exists
+                        images: product.images || [CONFIG.DEFAULT_IMAGE],
+                        // Ensure rating and reviewCount exist
+                        rating: product.rating || 0,
+                        reviewCount: product.reviewCount || 0,
+                        // Ensure stock exists
+                        stock: product.stock || 0
+                    }));
+                    state.filteredProducts = [...state.products];
+                    renderProducts();
+                    showToast('Products loaded successfully!', 'success');
+                } else {
+                    throw new Error(data.message || 'Failed to load products');
+                }
             } catch (error) {
                 console.error('Error loading products from API:', error);
-                // Load sample data as fallback
-                await loadSampleProducts();
+                throw error; // Re-throw to be caught by loadInitialData
             } finally {
                 state.isLoading = false;
             }
         }
         
         async function loadSampleProducts() {
-            // Enhanced sample data with real Unsplash images
+            // Sample data for testing - only used if API fails
             state.products = [
                 {
                     productId: 'PROD001',
-                    name: 'Genuine Leather Handbag',
+                    name: 'Leather Handbag',
                     price: 4500,
                     sellerId: 'SELL001',
                     sellerName: 'Luxury Bags Kenya',
@@ -1242,11 +1257,11 @@
                     reviewCount: 24,
                     category: 'Fashion',
                     stock: 5,
-                    description: 'Premium genuine leather handbag with multiple compartments. Perfect for daily use.'
+                    description: 'Premium genuine leather handbag'
                 },
                 {
                     productId: 'PROD002',
-                    name: 'Traditional African Wall Art',
+                    name: 'African Wall Art',
                     price: 3200,
                     sellerId: 'SELL002',
                     sellerName: 'African Art Gallery',
@@ -1255,59 +1270,7 @@
                     reviewCount: 18,
                     category: 'Home Decor',
                     stock: 3,
-                    description: 'Handcrafted traditional African wall art. Made by local artisans.'
-                },
-                {
-                    productId: 'PROD003',
-                    name: 'Wireless Bluetooth Headphones',
-                    price: 2800,
-                    sellerId: 'SELL003',
-                    sellerName: 'Tech Gadgets KE',
-                    images: ['https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop'],
-                    rating: 4.2,
-                    reviewCount: 36,
-                    category: 'Electronics',
-                    stock: 8,
-                    description: 'High-quality wireless headphones with noise cancellation.'
-                },
-                {
-                    productId: 'PROD004',
-                    name: 'Organic Shea Butter Cream',
-                    price: 1500,
-                    sellerId: 'SELL004',
-                    sellerName: 'Natural Beauty Hub',
-                    images: ['https://images.unsplash.com/photo-1556228578-9c360e1d8d34?w=400&h=400&fit=crop'],
-                    rating: 4.7,
-                    reviewCount: 42,
-                    category: 'Beauty',
-                    stock: 12,
-                    description: '100% organic shea butter cream for all skin types.'
-                },
-                {
-                    productId: 'PROD005',
-                    name: 'Maasai Beaded Sandals',
-                    price: 2200,
-                    sellerId: 'SELL005',
-                    sellerName: 'Cultural Crafts Ltd',
-                    images: ['https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400&h=400&fit=crop'],
-                    rating: 4.9,
-                    reviewCount: 29,
-                    category: 'Fashion',
-                    stock: 4,
-                    description: 'Handmade Maasai beaded sandals, traditional design.'
-                },
-                {
-                    productId: 'PROD006',
-                    name: 'Kenyan Coffee Beans (500g)',
-                    price: 1800,
-                    sellerId: 'SELL006',
-                    sellerName: 'Farm Fresh Products',
-                    images: ['https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=400&fit=crop'],
-                    rating: 4.6,
-                    reviewCount: 51,
-                    category: 'Food',
-                    stock: 15,
-                    description: 'Premium Kenyan AA coffee beans, freshly roasted.'
+                    description: 'Traditional African wall art'
                 }
             ];
             
@@ -1317,11 +1280,16 @@
         
         async function loadCategories() {
             try {
-                // Remove skeleton loading from categories
+                // Clear skeleton loading
                 elements.categoryGrid.innerHTML = '';
                 
                 // Extract unique categories from products
-                const allCategories = ['Fashion', 'Home Decor', 'Electronics', 'Beauty', 'Food', 'Sports', 'Books', 'Toys'];
+                const categories = [...new Set(state.products.map(p => p.category).filter(Boolean))];
+                
+                // If no categories from products, use default ones
+                if (categories.length === 0) {
+                    categories.push('Fashion', 'Home Decor', 'Electronics', 'Beauty');
+                }
                 
                 // Define category icons
                 const categoryIcons = {
@@ -1335,10 +1303,9 @@
                     'Food': '🍎'
                 };
                 
-                state.categories = allCategories.map(category => ({
+                state.categories = categories.map(category => ({
                     name: category,
-                    icon: categoryIcons[category] || '📦',
-                    count: state.products.filter(p => p.category === category).length
+                    icon: categoryIcons[category] || '📦'
                 }));
                 
                 renderCategories();
@@ -1349,50 +1316,40 @@
         
         async function loadSellers() {
             try {
-                // Sample seller data
+                const response = await fetch(`${CONFIG.BACKEND_URL}?action=getSellers`);
+                const data = await response.json();
+                
+                if (data.success && data.data) {
+                    state.sellers = data.data;
+                    renderSellers();
+                }
+            } catch (error) {
+                console.error('Error loading sellers:', error);
+                // Use sample sellers if API fails
                 state.sellers = [
                     {
                         sellerId: 'SELL001',
                         businessName: 'Luxury Bags Kenya',
                         location: 'Nairobi',
-                        rating: 4.8,
-                        productCount: 24
+                        rating: 4.8
                     },
                     {
                         sellerId: 'SELL002',
                         businessName: 'African Art Gallery',
                         location: 'Mombasa',
-                        rating: 4.9,
-                        productCount: 18
-                    },
-                    {
-                        sellerId: 'SELL003',
-                        businessName: 'Tech Gadgets KE',
-                        location: 'Nairobi',
-                        rating: 4.5,
-                        productCount: 42
-                    },
-                    {
-                        sellerId: 'SELL004',
-                        businessName: 'Natural Beauty Hub',
-                        location: 'Kisumu',
-                        rating: 4.7,
-                        productCount: 36
+                        rating: 4.9
                     }
                 ];
-                
                 renderSellers();
-            } catch (error) {
-                console.error('Error loading sellers:', error);
             }
         }
         
         // ==================== RENDERING ====================
         function renderProducts() {
-            // Clear skeleton loading
-            elements.productGrid.innerHTML = '';
-            
             const productsToShow = state.filteredProducts.slice(0, state.currentPage * CONFIG.ITEMS_PER_PAGE);
+            
+            // Clear any existing skeleton loaders
+            elements.productGrid.innerHTML = '';
             
             if (productsToShow.length === 0) {
                 elements.productGrid.innerHTML = `
@@ -1404,19 +1361,23 @@
                 return;
             }
             
-            elements.productGrid.innerHTML = productsToShow.map(product => `
+            elements.productGrid.innerHTML = productsToShow.map(product => {
+                // Ensure image URL is valid, fallback to default
+                const imageUrl = product.images?.[0] || CONFIG.DEFAULT_IMAGE;
+                
+                return `
                 <div class="product-card" data-id="${product.productId}">
                     ${product.stock <= 3 && product.stock > 0 ? `<span class="product-badge">Low Stock</span>` : ''}
                     ${product.stock === 0 ? `<span class="product-badge" style="background: var(--gray-500);">Sold Out</span>` : ''}
                     
                     <div class="product-image">
                         <img 
-                            src="${product.images?.[0] || CONFIG.DEFAULT_IMAGE}" 
+                            src="${imageUrl}" 
                             alt="${product.name}"
                             loading="lazy"
                             class="lazy-image"
                             onload="this.classList.add('loaded')"
-                            onerror="this.src='${CONFIG.DEFAULT_IMAGE}'; this.classList.add('loaded')"
+                            onerror="this.onerror=null; this.src='${CONFIG.DEFAULT_IMAGE}'; this.classList.add('loaded')"
                         >
                     </div>
                     
@@ -1442,13 +1403,13 @@
                         </div>
                     </div>
                 </div>
-            `).join('');
+            `}).join('');
             
             // Update load more button visibility
             elements.loadMore.style.display = 
                 state.filteredProducts.length > productsToShow.length ? 'inline-flex' : 'none';
             
-            // Initialize lazy loading for new images
+            // Initialize lazy loading for images
             initLazyLoading();
         }
         
@@ -1457,7 +1418,6 @@
                 <div class="category-card" data-category="${category.name}">
                     <div class="category-icon">${category.icon}</div>
                     <div class="category-name">${category.name}</div>
-                    ${category.count > 0 ? `<div class="text-xs text-gray-500 mt-1">${category.count} items</div>` : ''}
                 </div>
             `).join('');
             
@@ -1471,11 +1431,9 @@
                     // Visual feedback
                     elements.categoryGrid.querySelectorAll('.category-card').forEach(c => {
                         c.style.border = 'none';
-                        c.style.boxShadow = 'var(--shadow-sm)';
                     });
                     if (state.selectedCategory !== 'all') {
                         card.style.border = `2px solid var(--maroon)`;
-                        card.style.boxShadow = 'var(--shadow-md)';
                     }
                 });
             });
@@ -1489,28 +1447,24 @@
             elements.sellersGrid.innerHTML = topSellers.map(seller => `
                 <div class="product-card">
                     <div class="product-image">
-                        <div style="width: 100%; height: 100%; background: var(--maroon); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; background: linear-gradient(135deg, var(--maroon) 0%, var(--dark-maroon) 100%);">
+                        <div style="width: 100%; height: 100%; background: var(--maroon); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
                             ${seller.businessName?.charAt(0) || 'S'}
                         </div>
                     </div>
                     
                     <div class="product-content">
                         <h3 class="product-title">${seller.businessName}</h3>
-                        <div class="product-seller">📍 ${seller.location || 'Kenya'}</div>
+                        <div class="product-seller">${seller.location || 'Kenya'}</div>
                         
                         <div class="product-rating">
                             <div class="stars">
                                 ${'★'.repeat(Math.floor(seller.rating || 0))}${'☆'.repeat(5 - Math.floor(seller.rating || 0))}
                             </div>
-                            <span class="count">${seller.rating?.toFixed(1) || '0.0'}</span>
-                        </div>
-                        
-                        <div class="text-xs text-gray-500 mb-3">
-                            ${seller.productCount || 0} products
+                            <span class="count">${seller.rating || '0.0'}</span>
                         </div>
                         
                         <div class="product-actions">
-                            <button class="btn btn-primary w-full" onclick="viewSeller('${seller.sellerId}')">
+                            <button class="btn btn-primary" onclick="viewSeller('${seller.sellerId}')">
                                 View Store
                             </button>
                         </div>
@@ -1535,7 +1489,7 @@
                 filtered = filtered.filter(product =>
                     product.name.toLowerCase().includes(state.searchQuery) ||
                     (product.description && product.description.toLowerCase().includes(state.searchQuery)) ||
-                    (product.category && product.category.toLowerCase().includes(state.searchQuery))
+                    product.category.toLowerCase().includes(state.searchQuery)
                 );
             }
             
@@ -1545,9 +1499,7 @@
             
             // Scroll to products section
             if (state.selectedCategory !== 'all' || state.searchQuery) {
-                setTimeout(() => {
-                    document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
-                }, 100);
+                document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
             }
         }
         
@@ -1556,32 +1508,46 @@
             showLoading();
             
             try {
-                // Find product in state
-                const product = state.products.find(p => p.productId === productId);
+                // First try to get product details from API
+                const response = await fetch(`${CONFIG.BACKEND_URL}?action=getProduct&productId=${productId}`);
+                const data = await response.json();
                 
-                if (product) {
-                    showProductModal(product);
-                    // Track product view
+                if (data.success) {
+                    showProductModal(data.data);
                     trackProductView(productId);
                 } else {
-                    throw new Error('Product not found');
+                    // If API fails, find product in local state
+                    const product = state.products.find(p => p.productId === productId);
+                    if (product) {
+                        showProductModal(product);
+                        trackProductView(productId);
+                    } else {
+                        throw new Error('Product not found');
+                    }
                 }
             } catch (error) {
                 console.error('Error loading product:', error);
-                showToast('Failed to load product details', 'error');
+                // Fallback to local product data
+                const product = state.products.find(p => p.productId === productId);
+                if (product) {
+                    showProductModal(product);
+                } else {
+                    showToast('Failed to load product details', 'error');
+                }
             } finally {
                 hideLoading();
             }
         }
         
         function showProductModal(product) {
-            const seller = state.sellers.find(s => s.sellerId === product.sellerId);
+            // Ensure images array exists
+            const images = product.images || [CONFIG.DEFAULT_IMAGE];
             
             elements.productModalBody.innerHTML = `
                 <div class="product-view-images">
                     <div class="main-image" id="mainImage">
                         <img 
-                            src="${product.images?.[0] || CONFIG.DEFAULT_IMAGE}" 
+                            src="${images[0]}" 
                             alt="${product.name}"
                             loading="lazy"
                             class="lazy-image loaded"
@@ -1589,9 +1555,9 @@
                         >
                     </div>
                     
-                    ${product.images && product.images.length > 1 ? `
+                    ${images.length > 1 ? `
                         <div class="thumbnails" id="thumbnails">
-                            ${product.images.map((img, index) => `
+                            ${images.map((img, index) => `
                                 <div class="thumbnail ${index === 0 ? 'active' : ''}" data-index="${index}" onclick="switchProductImage('${img}', this)">
                                     <img src="${img}" alt="Thumbnail ${index + 1}" loading="lazy" onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
                                 </div>
@@ -1609,7 +1575,7 @@
                     <div style="background: var(--gray-100); padding: 1rem; border-radius: var(--radius-md); margin-bottom: 1rem;">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
                             <span style="font-weight: 600;">Seller:</span>
-                            <span>${seller?.businessName || product.sellerName || 'Verified Seller'}</span>
+                            <span>${product.sellerName || 'Verified Seller'}</span>
                         </div>
                         <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
                             <span style="font-weight: 600;">Category:</span>
@@ -1617,9 +1583,7 @@
                         </div>
                         <div style="display: flex; justify-content: space-between;">
                             <span style="font-weight: 600;">Stock:</span>
-                            <span style="color: ${product.stock > 3 ? 'var(--green)' : product.stock > 0 ? 'var(--orange)' : 'var(--red)'}">
-                                ${product.stock > 0 ? `${product.stock} available` : 'Out of stock'}
-                            </span>
+                            <span>${product.stock > 0 ? `${product.stock} available` : 'Out of stock'}</span>
                         </div>
                     </div>
                     
@@ -1634,7 +1598,7 @@
                         <button class="btn btn-primary" onclick="contactSeller('${product.sellerId}', '${product.name}', ${product.price})">
                             💬 Contact Seller via WhatsApp
                         </button>
-                        <button class="btn btn-secondary" onclick="saveForLater('${product.productId}')">
+                        <button class="btn btn-secondary" onclick="showSellerModal()">
                             ⭐ Save for Later
                         </button>
                     </div>
@@ -1658,12 +1622,11 @@
         
         function contactSeller(sellerId, productName = '', productPrice = 0) {
             // In a real app, this would fetch seller details from API
-            const seller = state.sellers.find(s => s.sellerId === sellerId);
-            const phone = '254712345678'; // Default number - in real app, this would come from seller data
+            const phone = '254712345678'; // This would come from seller data
             
-            let message = 'Hi, I found you on SokoInn and would like to inquire about your products';
+            let message = 'Hi, I found you on SokoInn';
             if (productName) {
-                message = `Hi, I'm interested in your "${productName}" for KSh ${productPrice.toLocaleString()}. Is it available?`;
+                message = `Hi, I'm interested in your ${productName} for KSh ${productPrice}`;
             }
             
             const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
@@ -1673,32 +1636,16 @@
             trackWhatsAppClick();
         }
         
-        function saveForLater(productId) {
-            const saved = JSON.parse(localStorage.getItem('sokoinn_saved') || '[]');
-            if (!saved.includes(productId)) {
-                saved.push(productId);
-                localStorage.setItem('sokoinn_saved', JSON.stringify(saved));
-                showToast('Product saved for later!', 'success');
-            } else {
-                showToast('Product already saved', 'info');
-            }
-        }
-        
         // ==================== TRACKING ====================
         async function trackProductView(productId) {
             try {
-                if (!CONFIG.USE_MOCK_DATA) {
-                    await fetch(CONFIG.BACKEND_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            action: 'updateProductView',
-                            productId: productId
-                        })
-                    });
-                }
+                await fetch(CONFIG.BACKEND_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: 'updateProductView',
+                        productId: productId
+                    })
+                });
             } catch (error) {
                 console.error('Error tracking view:', error);
             }
@@ -1706,17 +1653,13 @@
         
         async function trackWhatsAppClick() {
             try {
-                if (!CONFIG.USE_MOCK_DATA) {
-                    await fetch(CONFIG.BACKEND_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            action: 'updateWhatsappClick'
-                        })
-                    });
-                }
+                await fetch(CONFIG.BACKEND_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: 'updateWhatsappClick',
+                        productId: 'tracking'
+                    })
+                });
             } catch (error) {
                 console.error('Error tracking click:', error);
             }
@@ -1747,35 +1690,22 @@
             elements.submitSellerBtn.innerHTML = '<div class="loading"></div>';
             
             try {
-                // In real app, this would send to your backend
-                if (!CONFIG.USE_MOCK_DATA) {
-                    const response = await fetch(CONFIG.BACKEND_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            action: 'registerSeller',
-                            ...sellerData
-                        })
-                    });
-                    
-                    const data = await response.json();
-                    
-                    if (data.success) {
-                        showToast('Application submitted! We\'ll contact you via WhatsApp within 24 hours.', 'success');
-                        elements.sellerForm.reset();
-                        elements.sellerModal.classList.remove('active');
-                    } else {
-                        throw new Error(data.message);
-                    }
+                const response = await fetch(CONFIG.BACKEND_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: 'registerSeller',
+                        ...sellerData
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showToast('Application submitted! We\'ll contact you via WhatsApp within 24 hours.', 'success');
+                    elements.sellerForm.reset();
+                    elements.sellerModal.classList.remove('active');
                 } else {
-                    // Mock success for demonstration
-                    setTimeout(() => {
-                        showToast('Application submitted! We\'ll contact you via WhatsApp within 24 hours.', 'success');
-                        elements.sellerForm.reset();
-                        elements.sellerModal.classList.remove('active');
-                    }, 1000);
+                    throw new Error(data.message);
                 }
             } catch (error) {
                 console.error('Error registering seller:', error);
@@ -1788,9 +1718,10 @@
         
         // ==================== LAZY LOADING & PERFORMANCE ====================
         function initLazyLoading() {
-            const lazyImages = document.querySelectorAll('.lazy-image:not([data-src])');
+            const lazyImages = document.querySelectorAll('.lazy-image:not(.loaded)');
             
             lazyImages.forEach(img => {
+                // If image is already loaded (cached)
                 if (img.complete && img.naturalHeight !== 0) {
                     img.classList.add('loaded');
                 }
@@ -1798,39 +1729,31 @@
         }
         
         function setupIntersectionObserver() {
-            if ('IntersectionObserver' in window) {
-                const imageObserver = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            if (img.dataset.src) {
-                                img.src = img.dataset.src;
-                            }
-                            img.classList.add('loaded');
-                            observer.unobserve(img);
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
                         }
-                    });
+                        img.classList.add('loaded');
+                        observer.unobserve(img);
+                    }
                 });
-                
-                document.querySelectorAll('.lazy-image[data-src]').forEach(img => {
-                    imageObserver.observe(img);
-                });
-            }
+            }, {
+                rootMargin: '50px'
+            });
+            
+            // Observe all lazy images
+            document.querySelectorAll('.lazy-image').forEach(img => {
+                observer.observe(img);
+            });
         }
         
         // Load more products
         elements.loadMore.addEventListener('click', () => {
             state.currentPage++;
             renderProducts();
-        });
-        
-        // View all products
-        elements.viewAll.addEventListener('click', (e) => {
-            e.preventDefault();
-            state.selectedCategory = 'all';
-            state.searchQuery = '';
-            elements.searchInput.value = '';
-            filterProducts();
         });
         
         // ==================== UTILITY FUNCTIONS ====================
@@ -1858,9 +1781,9 @@
         window.showSellerModal = showSellerModal;
         window.switchProductImage = switchProductImage;
         window.viewSeller = function(sellerId) {
+            // Implementation for viewing seller profile
             showToast('Seller profile viewing coming soon!', 'info');
         };
-        window.saveForLater = saveForLater;
         
         // ==================== ERROR HANDLING ====================
         window.addEventListener('error', (e) => {
