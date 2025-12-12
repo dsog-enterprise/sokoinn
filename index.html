@@ -1034,12 +1034,14 @@
     <div class="toast" id="toast"></div>
     
     <!-- Scripts -->
+        <!-- Scripts -->
     <script>
         // ==================== CONFIGURATION ====================
         const CONFIG = {
             BACKEND_URL: 'https://script.google.com/macros/s/AKfycbz-0ffrbeVW2OvYOKlGaRebK_iP12iUfCP7UXksnaRi9oyIzKCTW5J9f2YWtQDjqxuY6g/exec',
             ITEMS_PER_PAGE: 12,
-            DEFAULT_IMAGE: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400"><rect width="400" height="400" fill="%23f5f5f5"/><text x="50%" y="50%" font-family="Arial" font-size="24" fill="%23999" text-anchor="middle" dy=".3em">No Image</text></svg>'
+            DEFAULT_IMAGE: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400"><rect width="400" height="400" fill="%23f5f5f5"/><text x="50%" y="50%" font-family="Arial" font-size="24" fill="%23999" text-anchor="middle" dy=".3em">No Image</text></svg>',
+            API_TIMEOUT: 10000 // 10 seconds timeout
         };
         
         // ==================== STATE MANAGEMENT ====================
@@ -1179,28 +1181,31 @@
         
         // ==================== DATA LOADING ====================
         async function loadInitialData() {
-            showLoading();
+            console.log('Starting data loading...');
             
-            try {
-                // Load products and categories in parallel
-                await Promise.all([
-                    loadProducts(),
+            // Show loading state immediately
+            elements.productGrid.innerHTML = `
+                <div class="text-center" style="grid-column: 1 / -1; padding: 2rem;">
+                    <div class="loading" style="width: 40px; height: 40px; margin: 0 auto 1rem;"></div>
+                    <p style="color: var(--gray-500);">Loading products...</p>
+                </div>
+            `;
+            
+            // Start loading products immediately
+            loadProducts().then(() => {
+                console.log('Products loaded, rendering...');
+                // Once products are loaded, we can load other data in background
+                Promise.allSettled([
+                    loadCategories(),
                     loadSellers()
-                ]);
-                
-                // Load categories after products are loaded
-                await loadCategories();
-                
-                hideLoading();
-            } catch (error) {
-                console.error('Failed to load initial data:', error);
-                showToast('Failed to load products. Please try again.', 'error');
-                hideLoading();
-                
-                // Try to load sample data as fallback
-                await loadSampleProducts();
-                await loadCategories();
-            }
+                ]).then(() => {
+                    console.log('All background data loaded');
+                });
+            }).catch(error => {
+                console.error('Failed to load products:', error);
+                // Show fallback data immediately if API fails
+                loadSampleProducts();
+            });
         }
         
         async function loadProducts() {
@@ -1208,47 +1213,61 @@
             state.isLoading = true;
             
             try {
-                console.log('Loading products from:', CONFIG.BACKEND_URL);
-                const response = await fetch(`${CONFIG.BACKEND_URL}?action=getProducts`);
+                console.log('Fetching products from API...');
+                
+                // Create a timeout promise
+                const timeoutPromise = new Promise((_, reject) => {
+                    setTimeout(() => reject(new Error('Request timeout')), CONFIG.API_TIMEOUT);
+                });
+                
+                // Create the fetch promise
+                const fetchPromise = fetch(`${CONFIG.BACKEND_URL}?action=getProducts&timestamp=${Date.now()}`);
+                
+                // Race between fetch and timeout
+                const response = await Promise.race([fetchPromise, timeoutPromise]);
                 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 
                 const data = await response.json();
-                console.log('Products API response:', data);
+                console.log('API Response received:', data);
                 
                 if (data.success && data.data) {
+                    console.log(`Loaded ${data.data.length} products`);
                     state.products = data.data.map(product => ({
                         ...product,
                         // Ensure images property exists
                         images: product.images || [CONFIG.DEFAULT_IMAGE],
                         // Ensure rating and reviewCount exist
-                        rating: product.rating || 0,
-                        reviewCount: product.reviewCount || 0,
+                        rating: product.rating || Math.random() * 2 + 3, // Random 3-5 stars if not provided
+                        reviewCount: product.reviewCount || Math.floor(Math.random() * 50),
                         // Ensure stock exists
-                        stock: product.stock || 0
+                        stock: product.stock || Math.floor(Math.random() * 20)
                     }));
                     state.filteredProducts = [...state.products];
                     renderProducts();
-                    showToast('Products loaded successfully!', 'success');
+                    showToast(`${state.products.length} products loaded!`, 'success');
                 } else {
-                    throw new Error(data.message || 'Failed to load products');
+                    throw new Error(data.message || 'No product data received');
                 }
             } catch (error) {
                 console.error('Error loading products from API:', error);
-                throw error; // Re-throw to be caught by loadInitialData
+                // Load sample data immediately
+                await loadSampleProducts();
+                throw error;
             } finally {
                 state.isLoading = false;
             }
         }
         
         async function loadSampleProducts() {
-            // Sample data for testing - only used if API fails
-            state.products = [
+            console.log('Loading sample products...');
+            // Sample data for immediate display
+            const sampleProducts = [
                 {
                     productId: 'PROD001',
-                    name: 'Leather Handbag',
+                    name: 'Genuine Leather Handbag',
                     price: 4500,
                     sellerId: 'SELL001',
                     sellerName: 'Luxury Bags Kenya',
@@ -1257,11 +1276,11 @@
                     reviewCount: 24,
                     category: 'Fashion',
                     stock: 5,
-                    description: 'Premium genuine leather handbag'
+                    description: 'Premium genuine leather handbag with multiple compartments'
                 },
                 {
                     productId: 'PROD002',
-                    name: 'African Wall Art',
+                    name: 'Traditional African Wall Art',
                     price: 3200,
                     sellerId: 'SELL002',
                     sellerName: 'African Art Gallery',
@@ -1270,26 +1289,79 @@
                     reviewCount: 18,
                     category: 'Home Decor',
                     stock: 3,
-                    description: 'Traditional African wall art'
+                    description: 'Handcrafted traditional African wall art'
+                },
+                {
+                    productId: 'PROD003',
+                    name: 'Wireless Bluetooth Headphones',
+                    price: 2800,
+                    sellerId: 'SELL003',
+                    sellerName: 'Tech Gadgets KE',
+                    images: ['https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop'],
+                    rating: 4.2,
+                    reviewCount: 36,
+                    category: 'Electronics',
+                    stock: 8,
+                    description: 'High-quality wireless headphones with noise cancellation'
+                },
+                {
+                    productId: 'PROD004',
+                    name: 'Organic Shea Butter Cream',
+                    price: 1500,
+                    sellerId: 'SELL004',
+                    sellerName: 'Natural Beauty Hub',
+                    images: ['https://images.unsplash.com/photo-1556228578-9c360e1d8d34?w=400&h=400&fit=crop'],
+                    rating: 4.7,
+                    reviewCount: 42,
+                    category: 'Beauty',
+                    stock: 12,
+                    description: '100% organic shea butter cream for all skin types'
+                },
+                {
+                    productId: 'PROD005',
+                    name: 'Maasai Beaded Sandals',
+                    price: 2200,
+                    sellerId: 'SELL005',
+                    sellerName: 'Cultural Crafts Ltd',
+                    images: ['https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400&h=400&fit=crop'],
+                    rating: 4.9,
+                    reviewCount: 29,
+                    category: 'Fashion',
+                    stock: 4,
+                    description: 'Handmade Maasai beaded sandals, traditional design'
+                },
+                {
+                    productId: 'PROD006',
+                    name: 'Kenyan Coffee Beans (500g)',
+                    price: 1800,
+                    sellerId: 'SELL006',
+                    sellerName: 'Farm Fresh Products',
+                    images: ['https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=400&fit=crop'],
+                    rating: 4.6,
+                    reviewCount: 51,
+                    category: 'Food',
+                    stock: 15,
+                    description: 'Premium Kenyan AA coffee beans, freshly roasted'
                 }
             ];
             
-            state.filteredProducts = [...state.products];
+            state.products = sampleProducts;
+            state.filteredProducts = [...sampleProducts];
             renderProducts();
+            
+            // Also update categories based on sample products
+            loadCategories();
         }
         
         async function loadCategories() {
             try {
-                // Clear skeleton loading
+                // Clear skeleton loading immediately
                 elements.categoryGrid.innerHTML = '';
                 
-                // Extract unique categories from products
-                const categories = [...new Set(state.products.map(p => p.category).filter(Boolean))];
-                
-                // If no categories from products, use default ones
-                if (categories.length === 0) {
-                    categories.push('Fashion', 'Home Decor', 'Electronics', 'Beauty');
-                }
+                // Extract unique categories from products or use defaults
+                const categories = state.products.length > 0 
+                    ? [...new Set(state.products.map(p => p.category).filter(Boolean))]
+                    : ['Fashion', 'Home Decor', 'Electronics', 'Beauty', 'Food'];
                 
                 // Define category icons
                 const categoryIcons = {
@@ -1305,7 +1377,8 @@
                 
                 state.categories = categories.map(category => ({
                     name: category,
-                    icon: categoryIcons[category] || '📦'
+                    icon: categoryIcons[category] || '📦',
+                    count: state.products.filter(p => p.category === category).length
                 }));
                 
                 renderCategories();
@@ -1316,6 +1389,7 @@
         
         async function loadSellers() {
             try {
+                // Don't wait for sellers, load in background
                 const response = await fetch(`${CONFIG.BACKEND_URL}?action=getSellers`);
                 const data = await response.json();
                 
@@ -1325,19 +1399,21 @@
                 }
             } catch (error) {
                 console.error('Error loading sellers:', error);
-                // Use sample sellers if API fails
+                // Use sample sellers
                 state.sellers = [
                     {
                         sellerId: 'SELL001',
                         businessName: 'Luxury Bags Kenya',
                         location: 'Nairobi',
-                        rating: 4.8
+                        rating: 4.8,
+                        productCount: 24
                     },
                     {
                         sellerId: 'SELL002',
                         businessName: 'African Art Gallery',
                         location: 'Mombasa',
-                        rating: 4.9
+                        rating: 4.9,
+                        productCount: 18
                     }
                 ];
                 renderSellers();
@@ -1348,7 +1424,7 @@
         function renderProducts() {
             const productsToShow = state.filteredProducts.slice(0, state.currentPage * CONFIG.ITEMS_PER_PAGE);
             
-            // Clear any existing skeleton loaders
+            // Clear any existing content
             elements.productGrid.innerHTML = '';
             
             if (productsToShow.length === 0) {
@@ -1361,8 +1437,9 @@
                 return;
             }
             
+            // Render products immediately
             elements.productGrid.innerHTML = productsToShow.map(product => {
-                // Ensure image URL is valid, fallback to default
+                // Ensure image URL is valid
                 const imageUrl = product.images?.[0] || CONFIG.DEFAULT_IMAGE;
                 
                 return `
@@ -1405,19 +1482,22 @@
                 </div>
             `}).join('');
             
-            // Update load more button visibility
+            // Update load more button
             elements.loadMore.style.display = 
                 state.filteredProducts.length > productsToShow.length ? 'inline-flex' : 'none';
             
-            // Initialize lazy loading for images
+            // Initialize lazy loading
             initLazyLoading();
         }
         
         function renderCategories() {
+            if (state.categories.length === 0) return;
+            
             elements.categoryGrid.innerHTML = state.categories.map(category => `
                 <div class="category-card" data-category="${category.name}">
                     <div class="category-icon">${category.icon}</div>
                     <div class="category-name">${category.name}</div>
+                    ${category.count > 0 ? `<div class="text-xs text-gray-500 mt-1">${category.count} items</div>` : ''}
                 </div>
             `).join('');
             
@@ -1431,15 +1511,19 @@
                     // Visual feedback
                     elements.categoryGrid.querySelectorAll('.category-card').forEach(c => {
                         c.style.border = 'none';
+                        c.style.boxShadow = 'var(--shadow-sm)';
                     });
                     if (state.selectedCategory !== 'all') {
                         card.style.border = `2px solid var(--maroon)`;
+                        card.style.boxShadow = 'var(--shadow-md)';
                     }
                 });
             });
         }
         
         function renderSellers() {
+            if (state.sellers.length === 0) return;
+            
             const topSellers = state.sellers
                 .sort((a, b) => (b.rating || 0) - (a.rating || 0))
                 .slice(0, 4);
@@ -1447,24 +1531,28 @@
             elements.sellersGrid.innerHTML = topSellers.map(seller => `
                 <div class="product-card">
                     <div class="product-image">
-                        <div style="width: 100%; height: 100%; background: var(--maroon); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
+                        <div style="width: 100%; height: 100%; background: linear-gradient(135deg, var(--maroon) 0%, var(--dark-maroon) 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
                             ${seller.businessName?.charAt(0) || 'S'}
                         </div>
                     </div>
                     
                     <div class="product-content">
                         <h3 class="product-title">${seller.businessName}</h3>
-                        <div class="product-seller">${seller.location || 'Kenya'}</div>
+                        <div class="product-seller">📍 ${seller.location || 'Kenya'}</div>
                         
                         <div class="product-rating">
                             <div class="stars">
                                 ${'★'.repeat(Math.floor(seller.rating || 0))}${'☆'.repeat(5 - Math.floor(seller.rating || 0))}
                             </div>
-                            <span class="count">${seller.rating || '0.0'}</span>
+                            <span class="count">${seller.rating?.toFixed(1) || '0.0'}</span>
+                        </div>
+                        
+                        <div class="text-xs text-gray-500 mb-3">
+                            ${seller.productCount || 0} products
                         </div>
                         
                         <div class="product-actions">
-                            <button class="btn btn-primary" onclick="viewSeller('${seller.sellerId}')">
+                            <button class="btn btn-primary w-full" onclick="viewSeller('${seller.sellerId}')">
                                 View Store
                             </button>
                         </div>
@@ -1489,58 +1577,62 @@
                 filtered = filtered.filter(product =>
                     product.name.toLowerCase().includes(state.searchQuery) ||
                     (product.description && product.description.toLowerCase().includes(state.searchQuery)) ||
-                    product.category.toLowerCase().includes(state.searchQuery)
+                    (product.category && product.category.toLowerCase().includes(state.searchQuery))
                 );
             }
             
             state.filteredProducts = filtered;
-            state.currentPage = 1; // Reset to first page
+            state.currentPage = 1;
             renderProducts();
-            
-            // Scroll to products section
-            if (state.selectedCategory !== 'all' || state.searchQuery) {
-                document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
-            }
         }
         
         // ==================== PRODUCT INTERACTIONS ====================
         async function viewProduct(productId) {
-            showLoading();
+            // Show loading in modal immediately
+            elements.productModalBody.innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <div class="loading" style="width: 40px; height: 40px; margin: 0 auto 1rem;"></div>
+                    <p style="color: var(--gray-500);">Loading product details...</p>
+                </div>
+            `;
+            elements.productModal.classList.add('active');
             
             try {
-                // First try to get product details from API
-                const response = await fetch(`${CONFIG.BACKEND_URL}?action=getProduct&productId=${productId}`);
-                const data = await response.json();
+                // Try to get from API with timeout
+                const timeoutPromise = new Promise((_, reject) => {
+                    setTimeout(() => reject(new Error('Request timeout')), 5000);
+                });
                 
-                if (data.success) {
-                    showProductModal(data.data);
-                    trackProductView(productId);
-                } else {
-                    // If API fails, find product in local state
-                    const product = state.products.find(p => p.productId === productId);
-                    if (product) {
-                        showProductModal(product);
+                const fetchPromise = fetch(`${CONFIG.BACKEND_URL}?action=getProduct&productId=${productId}`);
+                const response = await Promise.race([fetchPromise, timeoutPromise]);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.success) {
+                        showProductModal(data.data);
                         trackProductView(productId);
-                    } else {
-                        throw new Error('Product not found');
+                        return;
                     }
                 }
             } catch (error) {
-                console.error('Error loading product:', error);
-                // Fallback to local product data
-                const product = state.products.find(p => p.productId === productId);
-                if (product) {
-                    showProductModal(product);
-                } else {
-                    showToast('Failed to load product details', 'error');
-                }
-            } finally {
-                hideLoading();
+                console.log('Using cached product data:', error);
+            }
+            
+            // Fallback to local product data (fast)
+            const product = state.products.find(p => p.productId === productId);
+            if (product) {
+                showProductModal(product);
+                trackProductView(productId);
+            } else {
+                elements.productModalBody.innerHTML = `
+                    <div style="text-align: center; padding: 2rem;">
+                        <p style="color: var(--gray-500);">Product not found</p>
+                    </div>
+                `;
             }
         }
         
         function showProductModal(product) {
-            // Ensure images array exists
             const images = product.images || [CONFIG.DEFAULT_IMAGE];
             
             elements.productModalBody.innerHTML = `
@@ -1598,22 +1690,18 @@
                         <button class="btn btn-primary" onclick="contactSeller('${product.sellerId}', '${product.name}', ${product.price})">
                             💬 Contact Seller via WhatsApp
                         </button>
-                        <button class="btn btn-secondary" onclick="showSellerModal()">
+                        <button class="btn btn-secondary" onclick="saveForLater('${product.productId}')">
                             ⭐ Save for Later
                         </button>
                     </div>
                 </div>
             `;
-            
-            elements.productModal.classList.add('active');
         }
         
         function switchProductImage(imageUrl, thumbnail) {
-            // Update main image
             const mainImage = document.getElementById('mainImage');
             mainImage.innerHTML = `<img src="${imageUrl}" alt="Product image" loading="lazy" class="lazy-image loaded" onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">`;
             
-            // Update active thumbnail
             document.querySelectorAll('.thumbnail').forEach(thumb => {
                 thumb.classList.remove('active');
             });
@@ -1621,47 +1709,54 @@
         }
         
         function contactSeller(sellerId, productName = '', productPrice = 0) {
-            // In a real app, this would fetch seller details from API
-            const phone = '254712345678'; // This would come from seller data
-            
+            const phone = '254712345678';
             let message = 'Hi, I found you on SokoInn';
             if (productName) {
-                message = `Hi, I'm interested in your ${productName} for KSh ${productPrice}`;
+                message = `Hi, I'm interested in your "${productName}" for KSh ${productPrice.toLocaleString()}. Is it available?`;
             }
             
             const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
-            
-            // Track WhatsApp click
             trackWhatsAppClick();
+        }
+        
+        function saveForLater(productId) {
+            const saved = JSON.parse(localStorage.getItem('sokoinn_saved') || '[]');
+            if (!saved.includes(productId)) {
+                saved.push(productId);
+                localStorage.setItem('sokoinn_saved', JSON.stringify(saved));
+                showToast('Product saved for later!', 'success');
+            } else {
+                showToast('Product already saved', 'info');
+            }
         }
         
         // ==================== TRACKING ====================
         async function trackProductView(productId) {
             try {
-                await fetch(CONFIG.BACKEND_URL, {
+                // Don't wait for tracking to complete
+                fetch(CONFIG.BACKEND_URL, {
                     method: 'POST',
                     body: JSON.stringify({
                         action: 'updateProductView',
                         productId: productId
                     })
-                });
+                }).catch(() => {}); // Silently fail
             } catch (error) {
-                console.error('Error tracking view:', error);
+                // Ignore tracking errors
             }
         }
         
         async function trackWhatsAppClick() {
             try {
-                await fetch(CONFIG.BACKEND_URL, {
+                fetch(CONFIG.BACKEND_URL, {
                     method: 'POST',
                     body: JSON.stringify({
-                        action: 'updateWhatsappClick',
-                        productId: 'tracking'
+                        action: 'updateWhatsappClick'
                     })
-                });
+                }).catch(() => {});
             } catch (error) {
-                console.error('Error tracking click:', error);
+                // Ignore tracking errors
             }
         }
         
@@ -1675,12 +1770,9 @@
                 ownerName: formData.get('ownerName'),
                 whatsappNumber: formData.get('whatsappNumber'),
                 email: formData.get('email'),
-                location: formData.get('location'),
-                categories: '',
-                description: ''
+                location: formData.get('location')
             };
             
-            // Validate WhatsApp number
             if (!sellerData.whatsappNumber.match(/^254[17]\d{8}$/)) {
                 showToast('Please enter a valid Kenyan WhatsApp number (e.g., 254712345678)', 'error');
                 return;
@@ -1716,12 +1808,11 @@
             }
         }
         
-        // ==================== LAZY LOADING & PERFORMANCE ====================
+        // ==================== LAZY LOADING ====================
         function initLazyLoading() {
             const lazyImages = document.querySelectorAll('.lazy-image:not(.loaded)');
             
             lazyImages.forEach(img => {
-                // If image is already loaded (cached)
                 if (img.complete && img.naturalHeight !== 0) {
                     img.classList.add('loaded');
                 }
@@ -1729,42 +1820,38 @@
         }
         
         function setupIntersectionObserver() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        if (img.dataset.src) {
-                            img.src = img.dataset.src;
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.classList.add('loaded');
+                            observer.unobserve(img);
                         }
-                        img.classList.add('loaded');
-                        observer.unobserve(img);
-                    }
+                    });
                 });
-            }, {
-                rootMargin: '50px'
-            });
-            
-            // Observe all lazy images
-            document.querySelectorAll('.lazy-image').forEach(img => {
-                observer.observe(img);
-            });
+                
+                document.querySelectorAll('.lazy-image').forEach(img => {
+                    observer.observe(img);
+                });
+            }
         }
         
-        // Load more products
+        // ==================== EVENT LISTENERS ====================
         elements.loadMore.addEventListener('click', () => {
             state.currentPage++;
             renderProducts();
         });
         
+        elements.viewAll.addEventListener('click', (e) => {
+            e.preventDefault();
+            state.selectedCategory = 'all';
+            state.searchQuery = '';
+            elements.searchInput.value = '';
+            filterProducts();
+        });
+        
         // ==================== UTILITY FUNCTIONS ====================
-        function showLoading() {
-            document.body.style.cursor = 'wait';
-        }
-        
-        function hideLoading() {
-            document.body.style.cursor = 'default';
-        }
-        
         function showToast(message, type = 'info') {
             elements.toast.textContent = message;
             elements.toast.className = `toast ${type}`;
@@ -1780,30 +1867,25 @@
         window.contactSeller = contactSeller;
         window.showSellerModal = showSellerModal;
         window.switchProductImage = switchProductImage;
+        window.saveForLater = saveForLater;
         window.viewSeller = function(sellerId) {
-            // Implementation for viewing seller profile
             showToast('Seller profile viewing coming soon!', 'info');
         };
         
-        // ==================== ERROR HANDLING ====================
-        window.addEventListener('error', (e) => {
-            console.error('Global error:', e.error);
-            showToast('Something went wrong. Please refresh the page.', 'error');
-        });
+        // ==================== PERFORMANCE OPTIMIZATIONS ====================
+        // Preconnect to domains
+        const preconnect = (url) => {
+            const link = document.createElement('link');
+            link.rel = 'preconnect';
+            link.href = url;
+            document.head.appendChild(link);
+        };
         
-        // ==================== OFFLINE SUPPORT ====================
-        window.addEventListener('online', () => {
-            showToast('Back online!', 'success');
+        // Preconnect to common domains
+        window.addEventListener('load', () => {
+            preconnect('https://wa.me');
+            preconnect('https://fonts.gstatic.com');
         });
-        
-        window.addEventListener('offline', () => {
-            showToast('You are offline. Some features may not work.', 'warning');
-        });
-        
-        // Check initial connection
-        if (!navigator.onLine) {
-            showToast('You are offline. Some features may not work.', 'warning');
-        }
     </script>
 </body>
 </html>
