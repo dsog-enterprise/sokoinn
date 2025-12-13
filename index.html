@@ -66,6 +66,143 @@
             cursor: pointer;
         }
         
+        /* ==================== SEARCH BAR ==================== */
+        .search-container {
+            position: relative;
+            flex: 1;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--white);
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-md);
+            padding: 0.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            padding: 0.5rem;
+            font-size: 0.875rem;
+            outline: none;
+            background: transparent;
+        }
+        
+        .search-button {
+            background: var(--maroon);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: 0.5rem 1rem;
+            margin-left: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-md);
+            margin-top: 0.25rem;
+            max-height: 300px;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+            z-index: 1001;
+            display: none;
+        }
+        
+        .search-suggestions.active {
+            display: block;
+        }
+        
+        .suggestion-item {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--gray-200);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: var(--transition);
+        }
+        
+        .suggestion-item:hover {
+            background: var(--gray-100);
+        }
+        
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+        
+        .suggestion-image {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            object-fit: cover;
+        }
+        
+        .suggestion-details {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .suggestion-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .suggestion-price {
+            font-size: 0.75rem;
+            color: var(--maroon);
+            font-weight: 700;
+        }
+        
+        .suggestion-location {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+        }
+        
+        .no-suggestions {
+            padding: 1rem;
+            text-align: center;
+            color: var(--gray-500);
+            font-size: 0.875rem;
+        }
+        
+        /* ==================== LOCATION BADGE ==================== */
+        .location-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            background: var(--gray-100);
+            border-radius: var(--radius-md);
+            font-size: 0.75rem;
+            color: var(--gray-700);
+            border: 1px solid var(--gray-300);
+        }
+        
+        .location-loading {
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
         /* ==================== BOTTOM NAVIGATION ==================== */
         .bottom-nav {
             position: fixed;
@@ -112,7 +249,7 @@
         /* ==================== IMPROVED HERO SECTION FOR ADS ==================== */
         .hero {
             position: relative;
-            height: 400px; /* Increased height for better ad display */
+            height: 400px;
             overflow: hidden;
             color: var(--white);
             text-align: center;
@@ -505,6 +642,108 @@
         
         .btn-secondary:hover {
             background: var(--gray-200);
+        }
+        
+        /* ==================== FIXED PRODUCT MODAL GALLERY ==================== */
+        .product-gallery {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        
+        .gallery-main {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .gallery-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gray-100);
+        }
+        
+        .gallery-slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+        
+        .gallery-slide img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .gallery-nav:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        
+        .gallery-prev {
+            left: 1rem;
+        }
+        
+        .gallery-next {
+            right: 1rem;
+        }
+        
+        .gallery-thumbnails {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding: 0.5rem 0;
+            margin-bottom: 1rem;
+        }
+        
+        .thumbnail {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: var(--transition);
+            flex-shrink: 0;
+            border: 2px solid transparent;
+        }
+        
+        .thumbnail.active {
+            opacity: 1;
+            border-color: var(--maroon);
+        }
+        
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         /* ==================== FULLSCREEN IMAGE VIEWER ==================== */
@@ -1167,6 +1406,25 @@
                     <span>SokoInn</span>
                 </a>
                 
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" 
+                               class="search-input" 
+                               id="searchInput"
+                               placeholder="Search products..."
+                               oninput="handleSearchInput()">
+                        <button class="search-button" onclick="performSearch()">Search</button>
+                    </div>
+                    <div class="search-suggestions" id="searchSuggestions"></div>
+                </div>
+                
+                <!-- Location Badge -->
+                <div class="location-badge" id="locationBadge">
+                    <span class="location-loading">📍</span>
+                    <span id="locationText">Detecting location...</span>
+                </div>
+                
                 <div class="flex items-center gap-2">
                     <button class="btn btn-primary" onclick="showSellerModal()">
                         Sell on SokoInn
@@ -1216,7 +1474,10 @@
     <section class="products-section" id="products">
         <div class="container">
             <div class="flex justify-between items-center mb-4">
-                <h2 class="section-title" style="color: var(--black); margin: 0;">Featured Products</h2>
+                <h2 class="section-title" style="color: var(--black); margin: 0;">
+                    <span id="locationProductsText">Featured Products in</span>
+                    <span id="currentLocationText" style="color: var(--maroon);">Your Area</span>
+                </h2>
                 <a href="#" class="text-sm font-semibold text-maroon" onclick="showAllProducts(event)">View All →</a>
             </div>
             
@@ -1358,19 +1619,22 @@
         </div>
     </div>
 
-        <script>
+    <script>
         // ==================== CONFIGURATION ====================
         const CONFIG = {
             BACKEND_URL: 'https://script.google.com/macros/s/AKfycbzrOY9Lqu1feQJmqgZXn368Lo-HQ14-1LVRsY5pob7hNlo7uo2YlwlseeiI6GHTAanWnw/exec',
             ITEMS_PER_PAGE: 12,
             DEFAULT_IMAGE: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&q=80',
-            ADMIN_WHATSAPP: '254784599322'
+            ADMIN_WHATSAPP: '254784599322',
+            // Kenyan cities for location matching
+            KENYAN_CITIES: ['Nairobi', 'Mombasa', 'Kisumu', 'Nakuru', 'Eldoret', 'Thika', 'Malindi', 'Kitale', 'Garissa', 'Kakamega']
         };
         
         // ==================== STATE MANAGEMENT ====================
         let state = {
             products: [],
             filteredProducts: [],
+            allProducts: [], // Store all products before location filtering
             currentPage: 1,
             isLoading: false,
             hasMore: false,
@@ -1381,7 +1645,10 @@
             currentImages: [],
             currentImageIndex: 0,
             chatbotOpen: false,
-            unreadMessages: 0
+            unreadMessages: 0,
+            userLocation: null,
+            detectedCity: 'Nairobi', // Default to Nairobi
+            searchTimeout: null
         };
         
         // ==================== INITIALIZATION ====================
@@ -1391,14 +1658,292 @@
             initBottomNav();
             initChatbot();
             
-            // Load sample products immediately
+            // Detect user location
+            detectUserLocation();
+            
+            // Load sample products
             loadSampleProducts();
             
             // Also try to load from backend in background
             setTimeout(() => {
                 loadProductsFromBackend();
             }, 1000);
+            
+            // Close search suggestions when clicking outside
+            document.addEventListener('click', (e) => {
+                const searchContainer = document.querySelector('.search-container');
+                if (!searchContainer.contains(e.target)) {
+                    hideSearchSuggestions();
+                }
+            });
         });
+        
+        // ==================== LOCATION DETECTION ====================
+        async function detectUserLocation() {
+            try {
+                // Try HTML5 Geolocation first
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        async (position) => {
+                            const { latitude, longitude } = position.coords;
+                            await getCityFromCoordinates(latitude, longitude);
+                        },
+                        async () => {
+                            // Fallback to IP-based geolocation
+                            await getLocationFromIP();
+                        },
+                        { timeout: 5000 }
+                    );
+                } else {
+                    // Fallback to IP-based geolocation
+                    await getLocationFromIP();
+                }
+            } catch (error) {
+                console.warn('Location detection failed:', error);
+                state.detectedCity = 'Nairobi'; // Default city
+                updateLocationUI();
+                filterProductsByLocation();
+            }
+        }
+        
+        async function getLocationFromIP() {
+            try {
+                // Use a free IP geolocation service
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                
+                if (data && data.city) {
+                    state.detectedCity = data.city;
+                    state.userLocation = {
+                        city: data.city,
+                        country: data.country_name,
+                        region: data.region
+                    };
+                } else {
+                    // Fallback to Kenyan cities
+                    const randomIndex = Math.floor(Math.random() * CONFIG.KENYAN_CITIES.length);
+                    state.detectedCity = CONFIG.KENYAN_CITIES[randomIndex];
+                }
+            } catch (error) {
+                console.warn('IP geolocation failed:', error);
+                state.detectedCity = 'Nairobi';
+            }
+            
+            updateLocationUI();
+            filterProductsByLocation();
+        }
+        
+        async function getCityFromCoordinates(lat, lng) {
+            try {
+                const response = await fetch(
+                    `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+                );
+                const data = await response.json();
+                
+                if (data && data.address) {
+                    const city = data.address.city || data.address.town || data.address.village;
+                    if (city) {
+                        state.detectedCity = city;
+                        state.userLocation = {
+                            city: city,
+                            country: data.address.country,
+                            coordinates: { lat, lng }
+                        };
+                    }
+                }
+            } catch (error) {
+                console.warn('Reverse geocoding failed:', error);
+                // Fallback to IP-based detection
+                await getLocationFromIP();
+                return;
+            }
+            
+            updateLocationUI();
+            filterProductsByLocation();
+        }
+        
+        function updateLocationUI() {
+            const locationText = document.getElementById('locationText');
+            const currentLocationText = document.getElementById('currentLocationText');
+            const locationBadge = document.getElementById('locationBadge');
+            
+            if (locationText && currentLocationText) {
+                locationText.textContent = state.detectedCity;
+                currentLocationText.textContent = state.detectedCity;
+                
+                // Remove loading animation
+                const locationIcon = locationBadge.querySelector('.location-loading');
+                if (locationIcon) {
+                    locationIcon.classList.remove('location-loading');
+                    locationIcon.textContent = '📍';
+                }
+            }
+        }
+        
+        function filterProductsByLocation() {
+            if (!state.detectedCity || !state.allProducts.length) return;
+            
+            // Filter products by location
+            state.filteredProducts = state.allProducts.filter(product => {
+                if (!product.sellerLocation) return true; // Show products without location
+                
+                // Simple location matching (case-insensitive)
+                const productLocation = product.sellerLocation.toLowerCase();
+                const userCity = state.detectedCity.toLowerCase();
+                
+                // Check if product location contains user city or vice versa
+                return productLocation.includes(userCity) || 
+                       userCity.includes(productLocation) ||
+                       // Also check for partial matches (e.g., "Nairobi" matches "Nairobi CBD")
+                       productLocation.split(' ').some(word => userCity.includes(word)) ||
+                       userCity.split(' ').some(word => productLocation.includes(word));
+            });
+            
+            // If no products found in user's location, show all products
+            if (state.filteredProducts.length === 0) {
+                state.filteredProducts = [...state.allProducts];
+            }
+            
+            renderProducts();
+        }
+        
+        // ==================== SEARCH FUNCTIONALITY ====================
+        function handleSearchInput() {
+            const searchInput = document.getElementById('searchInput');
+            const query = searchInput.value.trim();
+            
+            // Clear previous timeout
+            if (state.searchTimeout) {
+                clearTimeout(state.searchTimeout);
+            }
+            
+            if (query.length === 0) {
+                hideSearchSuggestions();
+                return;
+            }
+            
+            // Debounce search for better performance
+            state.searchTimeout = setTimeout(() => {
+                showSearchSuggestions(query);
+            }, 300);
+        }
+        
+        function showSearchSuggestions(query) {
+            const suggestionsContainer = document.getElementById('searchSuggestions');
+            
+            if (!query || query.length < 2) {
+                suggestionsContainer.classList.remove('active');
+                return;
+            }
+            
+            const searchResults = searchProducts(query, 5); // Get top 5 results
+            
+            if (searchResults.length === 0) {
+                suggestionsContainer.innerHTML = `
+                    <div class="no-suggestions">
+                        No products found for "${query}"
+                    </div>
+                `;
+            } else {
+                suggestionsContainer.innerHTML = searchResults.map(product => `
+                    <div class="suggestion-item" onclick="selectSearchSuggestion('${product.listingId}')">
+                        <img src="${product.images[0] || CONFIG.DEFAULT_IMAGE}" 
+                             alt="${product.title}"
+                             class="suggestion-image"
+                             onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
+                        <div class="suggestion-details">
+                            <div class="suggestion-title">${product.title}</div>
+                            <div class="suggestion-price">KSh ${product.price.toLocaleString()}</div>
+                            <div class="suggestion-location">📍 ${product.sellerLocation || 'Nairobi'}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            suggestionsContainer.classList.add('active');
+        }
+        
+        function hideSearchSuggestions() {
+            const suggestionsContainer = document.getElementById('searchSuggestions');
+            suggestionsContainer.classList.remove('active');
+        }
+        
+        function selectSearchSuggestion(productId) {
+            hideSearchSuggestions();
+            viewProduct(productId);
+        }
+        
+        function performSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const query = searchInput.value.trim();
+            
+            if (query.length === 0) {
+                // If search is empty, reset to location-filtered products
+                state.searchQuery = '';
+                filterProductsByLocation();
+                return;
+            }
+            
+            state.searchQuery = query;
+            
+            // Search through all products
+            const searchResults = searchProducts(query);
+            
+            // Update filtered products
+            state.filteredProducts = searchResults;
+            state.currentPage = 1;
+            
+            // Update UI
+            const locationProductsText = document.getElementById('locationProductsText');
+            if (locationProductsText) {
+                locationProductsText.textContent = `Search results for "${query}"`;
+            }
+            
+            renderProducts();
+            hideSearchSuggestions();
+            
+            // Scroll to products section
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+            
+            // Show search query in input
+            searchInput.value = query;
+        }
+        
+        function searchProducts(query, limit = null) {
+            const searchTerms = query.toLowerCase().split(' ');
+            
+            const results = state.allProducts.filter(product => {
+                const searchableText = `
+                    ${product.title || ''}
+                    ${product.description || ''}
+                    ${product.category || ''}
+                    ${product.sellerName || ''}
+                    ${product.sellerLocation || ''}
+                `.toLowerCase();
+                
+                // Check if all search terms are found in the product
+                return searchTerms.every(term => searchableText.includes(term));
+            });
+            
+            // Sort by relevance (exact matches first)
+            results.sort((a, b) => {
+                const aTitle = a.title.toLowerCase();
+                const bTitle = b.title.toLowerCase();
+                
+                // Exact title match gets highest priority
+                if (aTitle === query.toLowerCase()) return -1;
+                if (bTitle === query.toLowerCase()) return 1;
+                
+                // Then check for title starts with query
+                if (aTitle.startsWith(query.toLowerCase())) return -1;
+                if (bTitle.startsWith(query.toLowerCase())) return 1;
+                
+                // Then by rating
+                return (b.rating || 0) - (a.rating || 0);
+            });
+            
+            return limit ? results.slice(0, limit) : results;
+        }
         
         // ==================== ENHANCED HERO SLIDESHOW ====================
         function initHeroSlideshow() {
@@ -1563,10 +2108,7 @@
         
         // ==================== WHATSAPP CHATBOT ====================
         function initChatbot() {
-            // Add initial bot message
             addBotMessage("Hello! I'm your SokoInn assistant. How can I help you today? You can ask me about buying products, becoming a seller, advertising, or any other questions about our platform.");
-            
-            // Load previous messages from localStorage
             loadChatHistory();
         }
         
@@ -1582,7 +2124,6 @@
                 notification.classList.add('hidden');
                 saveChatHistory();
                 
-                // Scroll to bottom
                 setTimeout(() => {
                     const messages = document.getElementById('chatbotMessages');
                     messages.scrollTop = messages.scrollHeight;
@@ -1597,7 +2138,6 @@
             messageDiv.textContent = text;
             messages.appendChild(messageDiv);
             
-            // Scroll to bottom
             messages.scrollTop = messages.scrollHeight;
             saveChatHistory();
         }
@@ -1609,7 +2149,6 @@
             messageDiv.textContent = text;
             messages.appendChild(messageDiv);
             
-            // Scroll to bottom
             messages.scrollTop = messages.scrollHeight;
             saveChatHistory();
         }
@@ -1629,7 +2168,6 @@
             addUserMessage(message);
             input.value = '';
             
-            // Process message and respond
             setTimeout(() => processUserMessage(message), 500);
         }
         
@@ -1642,7 +2180,6 @@
         function processUserMessage(message) {
             const lowerMessage = message.toLowerCase();
             
-            // Define responses based on keywords
             const responses = {
                 'hello': "Hello! Welcome to SokoInn. How can I assist you today?",
                 'hi': "Hi there! 👋 I'm here to help you with anything about SokoInn.",
@@ -1659,7 +2196,6 @@
                 'what': "SokoInn is a marketplace connecting buyers with verified sellers in Kenya. We focus on WhatsApp-first communication for easy transactions."
             };
             
-            // Check for keywords and respond
             let response = null;
             for (const [keyword, reply] of Object.entries(responses)) {
                 if (lowerMessage.includes(keyword)) {
@@ -1669,10 +2205,8 @@
             }
             
             if (!response) {
-                // If no keyword matches, escalate to admin
                 response = `I'm not sure about that. Let me connect you with our admin who can help you better. Please contact +254 784 599 322 directly for this inquiry.`;
                 
-                // Create a clickable admin contact button
                 setTimeout(() => {
                     const quickActions = document.getElementById('quickActions');
                     const adminBtn = document.createElement('button');
@@ -1687,7 +2221,6 @@
             
             addBotMessage(response);
             
-            // Add unread notification if chatbot is closed
             if (!state.chatbotOpen) {
                 state.unreadMessages++;
                 const notification = document.getElementById('chatbotNotification');
@@ -1736,21 +2269,13 @@
             state.isLoading = true;
             
             try {
-                console.log('Attempting to fetch products from backend...');
-                
                 const response = await fetch(
                     `${CONFIG.BACKEND_URL}?action=getProducts&limit=${CONFIG.ITEMS_PER_PAGE}&page=1`,
-                    {
-                        method: 'GET',
-                        mode: 'cors'
-                    }
+                    { method: 'GET', mode: 'cors' }
                 );
-                
-                console.log('Response status:', response.status);
                 
                 if (response.ok) {
                     const data = await response.json();
-                    console.log('Received data from backend:', data);
                     
                     if (data.success && data.data && Array.isArray(data.data) && data.data.length > 0) {
                         const newProducts = data.data.map(product => ({
@@ -1761,33 +2286,25 @@
                             category: product.category || 'Uncategorized'
                         }));
                         
-                        // Replace sample products with real ones
                         state.products = newProducts;
+                        state.allProducts = newProducts; // Store all products
                         state.filteredProducts = [...newProducts];
                         state.hasMore = newProducts.length === CONFIG.ITEMS_PER_PAGE;
                         
+                        // Apply location filtering after loading
+                        filterProductsByLocation();
                         renderProducts();
                         showToast('Products loaded from server!', 'success');
                     }
                 }
             } catch (error) {
                 console.error('Error loading products from backend:', error);
-                // Keep showing sample products
             } finally {
                 state.isLoading = false;
             }
         }
         
-        function loadProducts() {
-            // For now, always load sample products
-            // Backend loading is handled separately in loadProductsFromBackend()
-            if (state.products.length === 0) {
-                loadSampleProducts();
-            }
-        }
-        
         function loadSampleProducts() {
-            console.log('Loading sample products...');
             const sampleProducts = [
                 {
                     listingId: 'PROD001',
@@ -1842,7 +2359,7 @@
                     sellerVerification: 'verified',
                     sellerRating: 4.7,
                     sellerTotalReviews: 42,
-                    sellerLocation: 'Nairobi',
+                    sellerLocation: 'Mombasa',
                     sellerPhone: '254734567890',
                     sellerWhatsapp: '254734567890',
                     images: [
@@ -1930,7 +2447,7 @@
                     sellerVerification: 'verified',
                     sellerRating: 4.3,
                     sellerTotalReviews: 22,
-                    sellerLocation: 'Nairobi',
+                    sellerLocation: 'Kisumu',
                     sellerPhone: '254778901234',
                     sellerWhatsapp: '254778901234',
                     images: [
@@ -1974,7 +2491,7 @@
                     sellerVerification: 'verified',
                     sellerRating: 4.7,
                     sellerTotalReviews: 58,
-                    sellerLocation: 'Nairobi',
+                    sellerLocation: 'Eldoret',
                     sellerPhone: '254790123456',
                     sellerWhatsapp: '254790123456',
                     images: [
@@ -1990,7 +2507,7 @@
                 },
                 {
                     listingId: 'PROD010',
-                    title: 'Men\'s Formal Suit - 3 Piece',
+                    title: "Men's Formal Suit - 3 Piece",
                     price: 6500,
                     sellerName: 'Classic Tailors',
                     sellerVerification: 'verified',
@@ -2018,7 +2535,7 @@
                     sellerVerification: 'verified',
                     sellerRating: 4.3,
                     sellerTotalReviews: 19,
-                    sellerLocation: 'Nairobi',
+                    sellerLocation: 'Thika',
                     sellerPhone: '254712345679',
                     sellerWhatsapp: '254712345679',
                     images: [
@@ -2057,11 +2574,14 @@
             ];
             
             state.products = sampleProducts;
+            state.allProducts = sampleProducts; // Store all products
             state.filteredProducts = [...sampleProducts];
             state.hasMore = false;
+            
+            // Apply location filtering
+            filterProductsByLocation();
             renderProducts();
             
-            // Update load more button
             const loadMoreBtn = document.getElementById('loadMoreBtn');
             loadMoreBtn.textContent = 'No more products';
             loadMoreBtn.disabled = true;
@@ -2076,22 +2596,19 @@
                 productGrid.innerHTML = `
                     <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem;">
                         <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;">🔍</div>
-                        <h3 style="margin-bottom: 0.5rem; color: var(--gray-600);">No products available</h3>
-                        <p style="color: var(--gray-500);">Check back soon for new products</p>
+                        <h3 style="margin-bottom: 0.5rem; color: var(--gray-600);">No products available in ${state.detectedCity}</h3>
+                        <p style="color: var(--gray-500);">Try changing your location or check back soon</p>
                     </div>
                 `;
                 return;
             }
             
-            // Clear the grid
             productGrid.innerHTML = '';
             
-            // Add all products to show
             productsToShow.forEach(product => {
                 productGrid.innerHTML += createProductHTML(product);
             });
             
-            // Initialize image click events
             setTimeout(() => {
                 document.querySelectorAll('.product-image').forEach((imageDiv, index) => {
                     const product = state.filteredProducts[index];
@@ -2186,7 +2703,25 @@
             if (event) event.preventDefault();
             state.currentPage = 1;
             state.hasMore = true;
-            loadProducts();
+            
+            // Reset search and location filters
+            state.searchQuery = '';
+            state.filteredProducts = [...state.allProducts];
+            
+            const locationProductsText = document.getElementById('locationProductsText');
+            const currentLocationText = document.getElementById('currentLocationText');
+            const searchInput = document.getElementById('searchInput');
+            
+            if (locationProductsText && currentLocationText) {
+                locationProductsText.textContent = 'All Products';
+                currentLocationText.textContent = '';
+            }
+            
+            if (searchInput) {
+                searchInput.value = '';
+            }
+            
+            renderProducts();
             document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
         }
         
@@ -2239,10 +2774,10 @@
             }, 3000);
         }
         
-        // ==================== PRODUCT DETAILS ====================
+        // ==================== FIXED PRODUCT DETAILS ====================
         async function viewProduct(productId) {
             try {
-                const product = state.products.find(p => p.listingId === productId);
+                const product = state.allProducts.find(p => p.listingId === productId);
                 if (!product) {
                     showToast('Product not found', 'error');
                     return;
@@ -2256,17 +2791,18 @@
                 images.forEach((img, index) => {
                     galleryHTML += `
                         <div class="gallery-slide ${index === 0 ? 'active' : ''}">
-                            <img src="${img}" alt="Image ${index + 1}" 
+                            <img src="${img}" 
+                                 alt="Image ${index + 1}" 
                                  onerror="this.src='${CONFIG.DEFAULT_IMAGE}'"
-                                 onclick="openImageViewer(${JSON.stringify(images)}, ${index})"
-                                 style="cursor: pointer;">
+                                 onclick="openImageViewer(${JSON.stringify(images)}, ${index})">
                         </div>
                     `;
                     
                     thumbnailsHTML += `
                         <div class="thumbnail ${index === 0 ? 'active' : ''}" 
                              onclick="changeGalleryImage(${index})">
-                            <img src="${img}" alt="Thumbnail ${index + 1}"
+                            <img src="${img}" 
+                                 alt="Thumbnail ${index + 1}"
                                  onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
                         </div>
                     `;
@@ -2305,6 +2841,9 @@
                                         <div style="font-weight: 600; margin-bottom: 0.25rem;">
                                             ${product.sellerName}
                                             ${product.sellerVerification === 'verified' ? '<span style="color: #10b981; margin-left: 0.25rem;">✓</span>' : ''}
+                                        </div>
+                                        <div style="font-size: 0.875rem; color: var(--gray-500);">
+                                            📍 ${product.sellerLocation || 'Nairobi'}
                                         </div>
                                         <div style="font-size: 0.875rem; color: var(--gray-500);">
                                             ⭐ ${product.sellerRating || 4.0} (${product.sellerTotalReviews || 0} reviews)
@@ -2381,7 +2920,7 @@
         }
         
         async function showContactOptions(productId) {
-            const product = state.products.find(p => p.listingId === productId);
+            const product = state.allProducts.find(p => p.listingId === productId);
             if (!product) return;
             
             const whatsappMessage = `Hi, I'm interested in your "${product.title}" for KSh ${product.price.toLocaleString()} on SokoInn`;
@@ -2438,7 +2977,7 @@
                 event.stopPropagation();
             }
             
-            const product = state.products.find(p => p.listingId === productId);
+            const product = state.allProducts.find(p => p.listingId === productId);
             if (!product) return;
             
             if (method === 'whatsapp' && product.sellerWhatsapp) {
@@ -2453,7 +2992,7 @@
             if (dropdown) dropdown.classList.remove('show');
         }
         
-        // ==================== GALLERY FUNCTIONS ====================
+        // ==================== FIXED GALLERY FUNCTIONS ====================
         window.changeGalleryImage = function(index) {
             const slides = document.querySelectorAll('.gallery-slide');
             const thumbnails = document.querySelectorAll('.thumbnail');
@@ -2461,18 +3000,27 @@
             slides.forEach(slide => slide.classList.remove('active'));
             thumbnails.forEach(thumb => thumb.classList.remove('active'));
             
-            if (slides[index]) slides[index].classList.add('active');
+            if (slides[index]) {
+                slides[index].classList.add('active');
+                // Force image reload if needed
+                const img = slides[index].querySelector('img');
+                if (img && img.src) {
+                    img.src = img.src; // Trigger reload
+                }
+            }
             if (thumbnails[index]) thumbnails[index].classList.add('active');
             
             window.currentGalleryIndex = index;
         };
         
         window.prevGalleryImage = function() {
+            if (!window.currentGalleryImages) return;
             const newIndex = (window.currentGalleryIndex - 1 + window.currentGalleryImages.length) % window.currentGalleryImages.length;
             window.changeGalleryImage(newIndex);
         };
         
         window.nextGalleryImage = function() {
+            if (!window.currentGalleryImages) return;
             const newIndex = (window.currentGalleryIndex + 1) % window.currentGalleryImages.length;
             window.changeGalleryImage(newIndex);
         };
@@ -2564,7 +3112,6 @@
         
         // Initialize on load
         window.addEventListener('load', () => {
-            // Ensure images load
             document.querySelectorAll('.product-image img').forEach(img => {
                 if (img.complete) {
                     img.classList.add('loaded');
@@ -2573,7 +3120,6 @@
                 }
             });
             
-            // Add welcome message after 3 seconds
             setTimeout(() => {
                 if (!state.chatbotOpen && state.unreadMessages === 0) {
                     state.unreadMessages = 1;
