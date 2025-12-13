@@ -65,7 +65,7 @@
             cursor: pointer;
         }
         
-        /* ==================== IMPROVED HEADER (MATCHING MAIN PAGE) ==================== */
+        /* ==================== IMPROVED HEADER (CLEAN VERSION) ==================== */
         .header {
             position: sticky;
             top: 0;
@@ -244,48 +244,6 @@
             font-size: 0.875rem;
         }
         
-        /* ==================== LOCATION BADGE ==================== */
-        .location-badge {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.25rem 0.5rem;
-            background: var(--gray-100);
-            border-radius: var(--radius-md);
-            font-size: 0.75rem;
-            color: var(--gray-700);
-            border: 1px solid var(--gray-300);
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-        
-        /* ==================== HEADER ACTIONS ==================== */
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            flex-shrink: 0;
-        }
-        
-        @media (max-width: 768px) {
-            .header-actions {
-                order: 2;
-                margin-left: auto;
-            }
-        }
-        
-        .header-button {
-            background: var(--maroon);
-            color: var(--white);
-            border: none;
-            border-radius: var(--radius-sm);
-            padding: 0.5rem 0.75rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-            white-space: nowrap;
-            cursor: pointer;
-        }
-        
         /* ==================== BOTTOM NAVIGATION ==================== */
         .bottom-nav {
             position: fixed;
@@ -329,18 +287,65 @@
             font-weight: 500;
         }
         
-        /* ==================== HERO SECTION ==================== */
+        /* ==================== ENHANCED HERO SECTION ==================== */
         .hero {
             position: relative;
-            height: 200px;
+            height: 300px;
             overflow: hidden;
             color: var(--white);
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(to right, var(--maroon), var(--dark-maroon));
             margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--maroon), var(--dark-maroon));
+        }
+        
+        @media (min-width: 768px) {
+            .hero {
+                height: 350px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .hero {
+                height: 400px;
+            }
+        }
+        
+        .hero-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            cursor: pointer;
+        }
+        
+        .hero-slide.active {
+            opacity: 1;
+        }
+        
+        .hero-slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(128,0,0,0.7));
         }
         
         .hero-content {
@@ -348,33 +353,180 @@
             z-index: 2;
             max-width: 800px;
             padding: 1.5rem;
+            width: 90%;
+        }
+        
+        @media (max-width: 480px) {
+            .hero-content {
+                padding: 1rem;
+            }
         }
         
         .hero h1 {
             font-size: 1.75rem;
-            font-weight: 700;
+            font-weight: 800;
             margin-bottom: 0.75rem;
-            line-height: 1.3;
+            line-height: 1.2;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+        
+        @media (min-width: 640px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
         }
         
         .hero p {
             font-size: 1rem;
-            opacity: 0.9;
-            margin-bottom: 0;
+            opacity: 0.95;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
-        @media (max-width: 480px) {
-            .hero {
-                height: 180px;
-            }
-            
-            .hero h1 {
-                font-size: 1.5rem;
-            }
-            
+        @media (min-width: 768px) {
             .hero p {
+                font-size: 1.125rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .hero p {
+                font-size: 1.25rem;
+            }
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: var(--white);
+            color: var(--maroon);
+            padding: 0.4rem 1rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        @media (min-width: 768px) {
+            .hero-badge {
+                font-size: 0.875rem;
+                padding: 0.5rem 1.25rem;
+            }
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+            color: var(--white);
+        }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        @media (min-width: 768px) {
+            .stat-number {
+                font-size: 1.75rem;
+            }
+            
+            .stat-label {
                 font-size: 0.875rem;
             }
+        }
+        
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--white);
+            color: var(--maroon);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-top: 0.75rem;
+            transition: var(--transition);
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 2px solid transparent;
+        }
+        
+        @media (min-width: 768px) {
+            .hero-cta {
+                padding: 0.875rem 2rem;
+                font-size: 1rem;
+            }
+        }
+        
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+            background: var(--gray-100);
+            border-color: var(--maroon);
+        }
+        
+        .hero-indicators {
+            position: absolute;
+            bottom: 1rem;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            z-index: 3;
+        }
+        
+        .hero-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        @media (min-width: 768px) {
+            .hero-indicator {
+                width: 10px;
+                height: 10px;
+            }
+        }
+        
+        .hero-indicator.active {
+            background: white;
+            transform: scale(1.2);
         }
         
         /* ==================== RENTALS SECTION ==================== */
@@ -645,7 +797,7 @@
             background: var(--gray-200);
         }
         
-        /* ==================== FULLSCREEN IMAGE VIEWER (MATCHING MAIN PAGE) ==================== */
+        /* ==================== FULLSCREEN IMAGE VIEWER ==================== */
         .image-viewer {
             position: fixed;
             top: 0;
@@ -1029,7 +1181,7 @@
             background: var(--gray-200);
         }
         
-        /* ==================== PRODUCT MODAL GALLERY (MATCHING MAIN PAGE) ==================== */
+        /* ==================== PRODUCT MODAL GALLERY ==================== */
         .product-gallery {
             position: relative;
             width: 100%;
@@ -1467,6 +1619,41 @@
             font-weight: 600;
             z-index: 2;
         }
+        
+        /* ==================== CATEGORY FILTERS ==================== */
+        .category-filters {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .category-filter {
+            padding: 0.5rem 1rem;
+            background: var(--white);
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-md);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .category-filter:hover {
+            border-color: var(--maroon);
+            color: var(--maroon);
+        }
+        
+        .category-filter.active {
+            background: var(--maroon);
+            color: var(--white);
+            border-color: var(--maroon);
+        }
     </style>
 </head>
 <body>
@@ -1496,26 +1683,43 @@
                     </div>
                     <div class="search-suggestions" id="searchSuggestions"></div>
                 </div>
-                
-                <!-- Header Actions -->
-                <div class="header-actions">
-                    <div class="location-badge" id="locationBadge">
-                        📍 <span id="locationText">Location</span>
-                    </div>
-                    <button class="header-button" onclick="listProperty()">
-                        <span class="mobile-hidden">List Property</span>
-                        <span>+</span>
-                    </button>
-                </div>
             </div>
         </div>
     </header>
     
-    <!-- Hero Section -->
+    <!-- Enhanced Hero Section -->
     <section class="hero">
+        <div class="hero-slideshow" id="heroSlideshow">
+            <!-- Slides will be added dynamically -->
+        </div>
+        
         <div class="hero-content">
-            <h1>🏠 Find Your Perfect Space</h1>
-            <p>Browse rental properties and accommodations across Kenya</p>
+            <div class="hero-badge">Find Your Perfect Space</div>
+            <h1>Discover Your Dream Property</h1>
+            <p>Browse thousands of rental properties across Kenya. From cozy apartments to luxurious villas, find the perfect place to call home.</p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">1,200+</div>
+                    <div class="stat-label">Properties</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">85%</div>
+                    <div class="stat-label">Satisfaction</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support</div>
+                </div>
+            </div>
+            
+            <a href="#rentals" class="hero-cta">
+                🔍 Browse Properties
+            </a>
+        </div>
+        
+        <div class="hero-indicators" id="heroIndicators">
+            <!-- Indicators will be added dynamically -->
         </div>
     </section>
     
@@ -1546,6 +1750,17 @@
                 <a href="#" class="view-all-link" onclick="showAllProperties(event)">View All →</a>
             </div>
             
+            <!-- Category Filters -->
+            <div class="category-filters" id="categoryFilters">
+                <div class="category-filter active" onclick="filterByCategory('all')">All Properties</div>
+                <div class="category-filter" onclick="filterByCategory('apartment')">Apartments</div>
+                <div class="category-filter" onclick="filterByCategory('house')">Houses</div>
+                <div class="category-filter" onclick="filterByCategory('commercial')">Commercial</div>
+                <div class="category-filter" onclick="filterByCategory('studio')">Studios</div>
+                <div class="category-filter" onclick="filterByCategory('villa')">Villas</div>
+                <div class="category-filter" onclick="filterByCategory('hostel')">Hostels</div>
+            </div>
+            
             <div class="rentals-grid" id="rentalsGrid">
                 <!-- Properties will be loaded dynamically -->
             </div>
@@ -1569,7 +1784,7 @@
         <div class="chatbot-header">
             <div class="chatbot-title">
                 <div class="whatsapp-icon">💬</div>
-                SokoInn Assistant
+                SokoInn Rentals Assistant
             </div>
             <button class="chatbot-close" onclick="toggleChatbot()">✕</button>
         </div>
@@ -1579,16 +1794,16 @@
         </div>
         
         <div class="chatbot-quick-actions" id="quickActions">
-            <button class="chatbot-quick-btn" onclick="sendQuickMessage('How to rent?')">How to rent?</button>
-            <button class="chatbot-quick-btn" onclick="sendQuickMessage('List property')">List property</button>
-            <button class="chatbot-quick-btn" onclick="sendQuickMessage('Contact support')">Contact support</button>
-            <button class="chatbot-quick-btn" onclick="sendQuickMessage('Rental inquiry')">Rental inquiry</button>
+            <button class="chatbot-quick-btn" onclick="sendQuickMessage('Looking for apartment')">Find Apartment</button>
+            <button class="chatbot-quick-btn" onclick="sendQuickMessage('House for rent')">Find House</button>
+            <button class="chatbot-quick-btn" onclick="sendQuickMessage('Commercial space')">Commercial Space</button>
+            <button class="chatbot-quick-btn" onclick="sendQuickMessage('List property')">List Property</button>
         </div>
         
         <div class="chatbot-input">
             <input type="text" 
                    id="chatbotInput" 
-                   placeholder="Type your question..."
+                   placeholder="Ask about rentals..."
                    onkeypress="handleChatbotKeyPress(event)">
             <button onclick="sendChatbotMessage()">Send</button>
         </div>
@@ -1612,7 +1827,7 @@
             <span class="nav-icon">🏠</span>
             <span class="nav-label">Rentals</span>
         </a>
-        <a href="#" class="nav-item" onclick="listProperty()">
+        <a href="#" class="nav-item" onclick="showListPropertyForm()">
             <span class="nav-icon" style="color: var(--maroon);">+</span>
             <span class="nav-label">List</span>
         </a>
@@ -1668,6 +1883,8 @@
             hasMore: false,
             selectedCategory: 'all',
             searchQuery: '',
+            currentSlide: 0,
+            heroInterval: null,
             currentImages: [],
             currentImageIndex: 0,
             chatbotOpen: false,
@@ -1680,6 +1897,7 @@
         
         // ==================== INITIALIZATION ====================
         document.addEventListener('DOMContentLoaded', () => {
+            initHeroSlideshow();
             initScrollDetection();
             initBottomNav();
             initChatbot();
@@ -1706,6 +1924,83 @@
             // Initialize rentals grid
             renderRentals();
         });
+        
+        // ==================== ENHANCED HERO SLIDESHOW ====================
+        function initHeroSlideshow() {
+            const slides = [
+                {
+                    image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=600&fit=crop',
+                    title: 'Find Your Dream Home',
+                    description: 'Thousands of properties waiting for you'
+                },
+                {
+                    image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&h=600&fit=crop',
+                    title: 'Luxury Living',
+                    description: 'Premium properties in prime locations'
+                },
+                {
+                    image: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=1200&h=600&fit=crop',
+                    title: 'Affordable Spaces',
+                    description: 'Quality rentals at great prices'
+                },
+                {
+                    image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&h=600&fit=crop',
+                    title: 'Commercial Properties',
+                    description: 'Perfect spaces for your business'
+                }
+            ];
+            
+            const slideshow = document.getElementById('heroSlideshow');
+            const indicators = document.getElementById('heroIndicators');
+            
+            slides.forEach((slide, index) => {
+                // Create slide
+                const slideElement = document.createElement('div');
+                slideElement.className = `hero-slide ${index === 0 ? 'active' : ''}`;
+                slideElement.style.backgroundImage = `url('${slide.image}?w=1200&h=600&fit=crop')`;
+                slideshow.appendChild(slideElement);
+                
+                // Create indicator
+                const indicator = document.createElement('div');
+                indicator.className = `hero-indicator ${index === 0 ? 'active' : ''}`;
+                indicator.onclick = () => changeHeroSlide(index);
+                indicators.appendChild(indicator);
+            });
+            
+            // Auto slide every 5 seconds
+            state.heroInterval = setInterval(() => {
+                const slides = document.querySelectorAll('.hero-slide');
+                const indicators = document.querySelectorAll('.hero-indicator');
+                
+                slides[state.currentSlide].classList.remove('active');
+                indicators[state.currentSlide].classList.remove('active');
+                
+                state.currentSlide = (state.currentSlide + 1) % slides.length;
+                
+                slides[state.currentSlide].classList.add('active');
+                indicators[state.currentSlide].classList.add('active');
+            }, 5000);
+        }
+        
+        function changeHeroSlide(index) {
+            clearInterval(state.heroInterval);
+            state.currentSlide = index;
+            
+            const slides = document.querySelectorAll('.hero-slide');
+            const indicators = document.querySelectorAll('.hero-indicator');
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            indicators[index].classList.add('active');
+            
+            // Restart interval
+            state.heroInterval = setInterval(() => {
+                const nextIndex = (state.currentSlide + 1) % slides.length;
+                changeHeroSlide(nextIndex);
+            }, 5000);
+        }
         
         // ==================== SILENT LOCATION DETECTION ====================
         async function detectUserLocationSilently() {
@@ -1772,19 +2067,9 @@
         }
         
         function updateLocationUI() {
-            const locationBadge = document.getElementById('locationBadge');
-            const locationText = document.getElementById('locationText');
             const currentLocationText = document.getElementById('currentLocationText');
             
             if (state.detectedCity) {
-                // Show location badge only after detection
-                if (locationBadge && locationText) {
-                    locationBadge.classList.remove('hidden');
-                    const displayCity = state.detectedCity.length > 12 ? 
-                        state.detectedCity.substring(0, 10) + '...' : state.detectedCity;
-                    locationText.textContent = displayCity;
-                }
-                
                 // Update current location text
                 if (currentLocationText) {
                     currentLocationText.textContent = state.detectedCity;
@@ -1823,6 +2108,29 @@
                 }).slice(0, 8); // Limit to 8 rentals
             }
             
+            renderRentals();
+        }
+        
+        // ==================== CATEGORY FILTERING ====================
+        function filterByCategory(category) {
+            // Update active filter button
+            document.querySelectorAll('.category-filter').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            state.selectedCategory = category;
+            
+            if (category === 'all') {
+                state.filteredRentals = [...state.allRentals];
+            } else {
+                state.filteredRentals = state.allRentals.filter(rental => {
+                    const rentalType = rental.propertyType.toLowerCase();
+                    return rentalType.includes(category);
+                });
+            }
+            
+            state.currentPage = 1;
             renderRentals();
         }
         
@@ -2045,9 +2353,9 @@
                 'hi': "Hi there! 👋 I'm here to help you find the perfect rental property.",
                 'help': "I can help you with:\n1. Finding rental properties\n2. Listing your property\n3. Rental inquiries\n4. Contacting owners\n5. General rental questions\nWhat would you like to know?",
                 'rent': "To rent a property:\n1. Browse properties on this page\n2. Click 'View Details' on any property\n3. Use the 'Contact Owner' button\n4. Arrange viewing and rental terms directly with the owner",
-                'list': "To list your property:\n1. Click 'List Property' in the header\n2. We'll guide you through the listing process\n3. Once verified, your property will be visible to thousands of potential renters",
-                'property': "We have various property types:\n• Apartments\n• Houses\n• Commercial spaces\n• Hostels\n• Serviced apartments\nWhat type are you looking for?",
-                'price': "Rental prices vary by location and property type:\n• Apartments: 20,000 - 150,000 KSh/month\n• Houses: 50,000 - 500,000 KSh/month\n• Commercial: 30,000 - 300,000 KSh/month",
+                'list': "To list your property:\n1. Click 'List Property' in the bottom navigation\n2. We'll guide you through the listing process\n3. Once verified, your property will be visible to thousands of potential renters",
+                'property': "We have various property types:\n• Apartments\n• Houses\n• Commercial spaces\n• Hostels\n• Serviced apartments\n• Villas\nWhat type are you looking for?",
+                'price': "Rental prices vary by location and property type:\n• Apartments: 20,000 - 150,000 KSh/month\n• Houses: 50,000 - 500,000 KSh/month\n• Commercial: 30,000 - 300,000 KSh/month\n• Studios: 15,000 - 80,000 KSh/month",
                 'contact': "You can contact us:\n• WhatsApp: +254 784 599 322\n• Email: rentals@sokoinn.com\n• Website: www.sokoinn.com/rentals",
                 'thank': "You're welcome! 😊 Let me know if you need anything else.",
                 'bye': "Goodbye! Feel free to come back anytime you need help finding a property.",
@@ -2308,7 +2616,8 @@
                     description: 'Luxury villa with swimming pool, spacious garden, and modern amenities. Perfect for executive living.',
                     images: [
                         'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=500&q=80',
-                        'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&q=80'
+                        'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&q=80',
+                        'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=500&q=80'
                     ],
                     ownerName: 'Runda Properties',
                     ownerPhone: '254778901234',
@@ -2335,6 +2644,84 @@
                     ownerWhatsapp: '254789012345',
                     availableFrom: 'Immediately',
                     deposit: 28000
+                },
+                {
+                    listingId: 'RENT009',
+                    propertyTitle: 'Spacious 3-Bedroom Apartment',
+                    propertyType: 'Apartment',
+                    monthlyRent: 85000,
+                    location: 'Mombasa CBD',
+                    bedrooms: 3,
+                    bathrooms: 2,
+                    squareFeet: 1100,
+                    description: 'Spacious apartment with sea view in Mombasa CBD. Perfect for families or professionals.',
+                    images: [
+                        'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=500&q=80',
+                        'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=500&q=80'
+                    ],
+                    ownerName: 'Mombasa Properties',
+                    ownerPhone: '254701234567',
+                    ownerWhatsapp: '254701234567',
+                    availableFrom: 'Immediately',
+                    deposit: 85000
+                },
+                {
+                    listingId: 'RENT010',
+                    propertyTitle: 'Shop Space for Rent',
+                    propertyType: 'Commercial',
+                    monthlyRent: 45000,
+                    location: 'Nakuru Town',
+                    bedrooms: 0,
+                    bathrooms: 1,
+                    squareFeet: 800,
+                    description: 'Prime shop space in Nakuru town center. High foot traffic area.',
+                    images: [
+                        'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=500&q=80'
+                    ],
+                    ownerName: 'Nakuru Commercial',
+                    ownerPhone: '254712345679',
+                    ownerWhatsapp: '254712345679',
+                    availableFrom: 'Immediately',
+                    deposit: 90000
+                },
+                {
+                    listingId: 'RENT011',
+                    propertyTitle: 'Bachelor Pad Studio',
+                    propertyType: 'Studio',
+                    monthlyRent: 22000,
+                    location: 'Thika Town',
+                    bedrooms: 1,
+                    bathrooms: 1,
+                    squareFeet: 300,
+                    description: 'Modern studio apartment perfect for single professionals. Includes basic furnishings.',
+                    images: [
+                        'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=500&q=80'
+                    ],
+                    ownerName: 'Thika Apartments',
+                    ownerPhone: '254723456780',
+                    ownerWhatsapp: '254723456780',
+                    availableFrom: 'Immediately',
+                    deposit: 22000
+                },
+                {
+                    listingId: 'RENT012',
+                    propertyTitle: 'Family House with Compound',
+                    propertyType: 'House',
+                    monthlyRent: 95000,
+                    location: 'Kisumu City',
+                    bedrooms: 4,
+                    bathrooms: 3,
+                    squareFeet: 1800,
+                    description: 'Large family house with compound and garage. Perfect for extended families.',
+                    images: [
+                        'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=500&q=80',
+                        'https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=500&q=80'
+                    ],
+                    ownerName: 'Kisumu Homes',
+                    ownerPhone: '254734567891',
+                    ownerWhatsapp: '254734567891',
+                    availableFrom: 'January 1',
+                    deposit: 95000
                 }
             ];
             
@@ -2808,8 +3195,8 @@
             return phone;
         }
         
-        function listProperty() {
-            showToast('List a property feature coming soon!', 'info');
+        function showListPropertyForm() {
+            showToast('List a property feature coming soon! For now, please contact +254 784 599 322 on WhatsApp.', 'info');
         }
         
         function loadMoreProperties() {
