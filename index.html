@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.5, maximum-scale=1.0, user-scalable=no">
-    <title>SokoInn | Shop, Hire, Rent - All in One Platform</title>
+    <title>SokoInn Marketplace | Trusted Products from Verified Sellers</title>
     
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#800000">
@@ -13,107 +13,29 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
     
-    <!-- Performance optimizations -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://images.unsplash.com">
-    
     <style>
         /* ==================== CSS VARIABLES ==================== */
         :root {
-            --primary: #800000;
-            --secondary: #000000;
-            --accent: #2563eb;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
+            --maroon: #800000;
+            --black: #000000;
             --white: #FFFFFF;
-            --gray-50: #f9fafb;
+            --light-maroon: #a62a2a;
+            --dark-maroon: #660000;
             --gray-100: #f5f5f5;
             --gray-200: #e5e5e5;
             --gray-300: #d4d4d4;
             --gray-400: #a3a3a3;
             --gray-500: #737373;
-            --gray-600: #525252;
-            --gray-700: #404040;
-            --gray-800: #262626;
-            --gray-900: #171717;
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
             --radius-sm: 4px;
             --radius-md: 8px;
             --radius-lg: 12px;
-            --radius-xl: 16px;
             --transition: all 0.2s ease;
-            --section-padding: 2rem 0;
         }
         
-        /* ==================== SECTION COLORS ==================== */
-        .products-section {
-            background: linear-gradient(135deg, var(--primary) 0%, #660000 100%);
-        }
-        
-        .jobs-section {
-            background: linear-gradient(135deg, var(--accent) 0%, #1d4ed8 100%);
-        }
-        
-        .skills-section {
-            background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
-        }
-        
-        .rentals-section {
-            background: linear-gradient(135deg, var(--warning) 0%, #d97706 100%);
-        }
-        
-        /* ==================== RESET & BASE ==================== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-        
-        html {
-            font-size: 16px;
-            scroll-behavior: smooth;
-            scroll-padding-top: 80px;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            line-height: 1.5;
-            color: var(--gray-900);
-            background: var(--white);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
-        }
-        
-        section {
-            padding: var(--section-padding);
-        }
-        
-        .section-title {
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            color: var(--white);
-        }
-        
-        .section-subtitle {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.9);
-            text-align: center;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        /* ==================== IMPROVED BOTTOM NAVIGATION ==================== */
+        /* ==================== BOTTOM NAVIGATION ==================== */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -123,11 +45,11 @@
             border-top: 1px solid var(--gray-200);
             display: flex;
             justify-content: space-around;
-            padding: 0.5rem 0;
+            padding: 0.75rem 0;
             z-index: 1000;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
             transform: translateY(100%);
             transition: transform 0.3s ease;
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
         }
         
         .bottom-nav.visible {
@@ -138,21 +60,17 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 0.5rem;
+            padding: 0.25rem;
             border-radius: var(--radius-md);
             transition: var(--transition);
             text-decoration: none;
             color: var(--gray-500);
-            min-width: 70px;
+            min-width: 60px;
         }
         
         .nav-item.active {
-            color: var(--primary);
+            color: var(--maroon);
             background: rgba(128, 0, 0, 0.1);
-        }
-        
-        .nav-item:hover {
-            background: var(--gray-100);
         }
         
         .nav-icon {
@@ -165,24 +83,11 @@
             font-weight: 500;
         }
         
-        .nav-badge {
-            position: absolute;
-            top: -2px;
-            right: 0;
-            background: var(--danger);
-            color: white;
-            font-size: 0.625rem;
-            padding: 1px 4px;
-            border-radius: 10px;
-            min-width: 16px;
-            text-align: center;
-        }
-        
-        /* ==================== IMPROVED HEADER ==================== */
+        /* ==================== HEADER ==================== */
         .header {
             position: sticky;
             top: 0;
-            z-index: 999;
+            z-index: 100;
             background: var(--white);
             border-bottom: 1px solid var(--gray-200);
             box-shadow: var(--shadow-sm);
@@ -202,65 +107,178 @@
             gap: 0.5rem;
             font-weight: 700;
             font-size: 1.25rem;
-            color: var(--primary);
+            color: var(--maroon);
         }
         
         .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: var(--primary);
+            width: 32px;
+            height: 32px;
+            background: var(--maroon);
             color: var(--white);
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: var(--radius-md);
+            border-radius: var(--radius-sm);
             font-weight: 700;
         }
         
-        /* ==================== CATEGORY FILTERS ==================== */
-        .category-filters {
+        /* ==================== IMPROVED HERO SECTION ==================== */
+        .hero {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            color: var(--white);
+            text-align: center;
             display: flex;
-            gap: 0.5rem;
-            overflow-x: auto;
-            padding: 0.5rem 0;
-            margin-bottom: 1.5rem;
-            scrollbar-width: none;
+            align-items: center;
+            justify-content: center;
         }
         
-        .category-filters::-webkit-scrollbar {
-            display: none;
+        .hero-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
         
-        .filter-chip {
-            padding: 0.5rem 1rem;
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        
+        .hero-slide.active {
+            opacity: 1;
+        }
+        
+        .hero-slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(128,0,0,0.8));
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.125rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        /* ==================== CATEGORIES ==================== */
+        .categories {
+            padding: 2rem 0;
             background: var(--white);
-            border: 1px solid var(--gray-300);
-            border-radius: 50px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--gray-700);
-            white-space: nowrap;
-            cursor: pointer;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+        
+        .category-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
             transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            cursor: pointer;
         }
         
-        .filter-chip:hover {
-            border-color: var(--primary);
-            color: var(--primary);
+        .category-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+            border-color: var(--maroon);
         }
         
-        .filter-chip.active {
-            background: var(--primary);
-            border-color: var(--primary);
+        .category-card.active {
+            border-color: var(--maroon);
+            background: var(--maroon);
             color: var(--white);
         }
         
-        /* ==================== LISTING CARD IMPROVEMENTS ==================== */
-        .listing-card {
+        .category-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--maroon);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.5rem;
+            font-size: 1.25rem;
+        }
+        
+        /* ==================== PRODUCT GRID ==================== */
+        .products-section {
+            padding: 2rem 0;
+            background: var(--gray-100);
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 1rem;
+        }
+        
+        @media (min-width: 320px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .product-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .product-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+        
+        .product-card {
             background: var(--white);
-            border-radius: var(--radius-lg);
+            border-radius: var(--radius-md);
             overflow: hidden;
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-sm);
             transition: var(--transition);
             position: relative;
             display: flex;
@@ -268,157 +286,131 @@
             height: 100%;
         }
         
-        .listing-card:hover {
+        .product-card:hover {
+            box-shadow: var(--shadow-md);
             transform: translateY(-4px);
-            box-shadow: var(--shadow-xl);
         }
         
-        .listing-image {
-            aspect-ratio: 4/3;
+        .product-image {
+            aspect-ratio: 1/1;
             background: var(--gray-100);
             position: relative;
             overflow: hidden;
         }
         
-        .listing-image img {
+        .product-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.3s ease;
         }
         
-        .listing-card:hover .listing-image img {
+        .product-card:hover .product-image img {
             transform: scale(1.05);
         }
         
-        .listing-badge {
+        .image-counter {
             position: absolute;
-            top: 0.75rem;
-            left: 0.75rem;
-            padding: 0.25rem 0.75rem;
+            bottom: 0.5rem;
+            right: 0.5rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 0.25rem 0.5rem;
             border-radius: var(--radius-sm);
             font-size: 0.75rem;
+            z-index: 2;
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 0.5rem;
+            left: 0.5rem;
+            background: var(--maroon);
+            color: var(--white);
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.625rem;
             font-weight: 600;
             z-index: 2;
         }
         
-        .badge-product {
-            background: var(--primary);
-            color: var(--white);
-        }
-        
-        .badge-job {
-            background: var(--accent);
-            color: var(--white);
-        }
-        
-        .badge-skill {
-            background: var(--success);
-            color: var(--white);
-        }
-        
-        .badge-rental {
-            background: var(--warning);
-            color: var(--white);
-        }
-        
-        .listing-content {
-            padding: 1rem;
+        .product-content {
+            padding: 0.75rem;
             flex: 1;
             display: flex;
             flex-direction: column;
         }
         
-        .listing-title {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
+        .product-title {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            line-height: 1.4;
         }
         
-        .listing-price {
-            font-size: 1.25rem;
-            font-weight: 800;
+        .product-price {
+            font-size: 0.9375rem;
+            font-weight: 700;
+            color: var(--maroon);
             margin-bottom: 0.5rem;
         }
         
-        .listing-meta {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
-            color: var(--gray-600);
-        }
-        
-        .meta-icon {
+        .product-seller {
+            font-size: 0.75rem;
             color: var(--gray-500);
-            font-size: 1rem;
-        }
-        
-        .listing-seller {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            padding: 0.75rem;
-            background: var(--gray-50);
-            border-radius: var(--radius-md);
-        }
-        
-        .seller-avatar {
-            width: 32px;
-            height: 32px;
-            background: var(--primary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 0.875rem;
-        }
-        
-        .seller-info {
-            flex: 1;
-        }
-        
-        .seller-name {
-            font-weight: 600;
-            font-size: 0.875rem;
-            margin-bottom: 0.125rem;
-        }
-        
-        .seller-rating {
+            margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
             gap: 0.25rem;
-            font-size: 0.75rem;
-            color: var(--gray-500);
         }
         
         .seller-verified {
-            color: var(--success);
-            margin-left: 0.25rem;
+            color: #10b981;
+            font-size: 0.75rem;
         }
         
-        .listing-actions {
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .product-actions {
             display: flex;
             gap: 0.5rem;
             margin-top: auto;
         }
         
-        /* ==================== CONTACT BUTTON IMPROVEMENTS ==================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: var(--transition);
+            white-space: nowrap;
+            min-height: 36px;
+        }
+        
+        .btn-primary {
+            background: var(--maroon);
+            color: var(--white);
+            flex: 1;
+        }
+        
+        .btn-secondary {
+            background: var(--gray-100);
+            color: var(--black);
+            min-width: 36px;
+        }
+        
+        /* ==================== CONTACT BUTTONS ==================== */
         .contact-toggle {
             position: relative;
         }
@@ -445,14 +437,8 @@
         }
         
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .contact-option {
@@ -469,11 +455,7 @@
         
         .contact-option:hover {
             background: var(--gray-100);
-            color: var(--primary);
-        }
-        
-        .contact-icon {
-            font-size: 1rem;
+            color: var(--maroon);
         }
         
         .whatsapp-option {
@@ -481,265 +463,73 @@
         }
         
         .call-option {
-            color: var(--primary);
+            color: var(--maroon);
         }
         
-        .sms-option {
-            color: var(--accent);
+        /* ==================== PRODUCT MODAL WITH MULTIPLE IMAGES ==================== */
+        .product-gallery {
+            position: relative;
+            aspect-ratio: 1/1;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: 1rem;
         }
         
-        .email-option {
-            color: var(--gray-600);
+        .gallery-main {
+            width: 100%;
+            height: 100%;
+            position: relative;
         }
         
-        /* ==================== BUTTON IMPROVEMENTS ==================== */
-        .btn {
-            display: inline-flex;
+        .gallery-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-thumbnails {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: var(--gray-100);
+            border-radius: var(--radius-md);
+            overflow-x: auto;
+        }
+        
+        .thumbnail {
+            width: 60px;
+            height: 60px;
+            flex-shrink: 0;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+        
+        .thumbnail.active {
+            border-color: var(--maroon);
+        }
+        
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0.625rem 1rem;
-            border-radius: var(--radius-md);
-            font-size: 0.875rem;
-            font-weight: 600;
-            transition: var(--transition);
-            white-space: nowrap;
-            border: none;
             cursor: pointer;
-            gap: 0.5rem;
-        }
-        
-        .btn-primary {
-            background: var(--primary);
-            color: var(--white);
-        }
-        
-        .btn-primary:hover {
-            background: #660000;
-        }
-        
-        .btn-secondary {
-            background: var(--gray-100);
-            color: var(--gray-700);
-            border: 1px solid var(--gray-300);
-        }
-        
-        .btn-secondary:hover {
-            background: var(--gray-200);
-        }
-        
-        .btn-accent {
-            background: var(--accent);
-            color: var(--white);
-        }
-        
-        .btn-accent:hover {
-            background: #1d4ed8;
-        }
-        
-        .btn-success {
-            background: var(--success);
-            color: var(--white);
-        }
-        
-        .btn-success:hover {
-            background: #059669;
-        }
-        
-        .btn-warning {
-            background: var(--warning);
-            color: var(--white);
-        }
-        
-        .btn-warning:hover {
-            background: #d97706;
-        }
-        
-        .btn-block {
-            width: 100%;
-        }
-        
-        /* ==================== HERO SECTION ==================== */
-        .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, #660000 100%);
-            color: var(--white);
-            padding: 3rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80') center/cover;
-            opacity: 0.2;
-        }
-        
-        .hero-content {
-            position: relative;
             z-index: 2;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
         }
         
-        .hero h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
+        .gallery-prev { left: 10px; }
+        .gallery-next { right: 10px; }
         
-        .hero p {
-            font-size: 1.125rem;
-            opacity: 0.9;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .platform-cards {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-        
-        @media (min-width: 768px) {
-            .platform-cards {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-        
-        .platform-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            text-align: center;
-            transition: var(--transition);
-            cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .platform-card:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-4px);
-        }
-        
-        .platform-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-        
-        .platform-title {
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-        
-        .platform-count {
-            font-size: 0.875rem;
-            opacity: 0.8;
-        }
-        
-        /* ==================== GRID LAYOUTS ==================== */
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-        
-        .grid {
-            display: grid;
-            gap: 1.5rem;
-        }
-        
-        .grid-1 { grid-template-columns: 1fr; }
-        .grid-2 { grid-template-columns: repeat(2, 1fr); }
-        .grid-3 { grid-template-columns: repeat(3, 1fr); }
-        .grid-4 { grid-template-columns: repeat(4, 1fr); }
-        .grid-5 { grid-template-columns: repeat(5, 1fr); }
-        .grid-6 { grid-template-columns: repeat(6, 1fr); }
-        
-        @media (max-width: 640px) {
-            .grid-2, .grid-3, .grid-4, .grid-5, .grid-6 {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (min-width: 641px) and (max-width: 1024px) {
-            .grid-4, .grid-5, .grid-6 {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        
-        /* ==================== UTILITY CLASSES ==================== */
-        .text-center { text-align: center; }
-        .mb-1 { margin-bottom: 0.25rem; }
-        .mb-2 { margin-bottom: 0.5rem; }
-        .mb-3 { margin-bottom: 1rem; }
-        .mb-4 { margin-bottom: 1.5rem; }
-        .mb-6 { margin-bottom: 2rem; }
-        .mt-1 { margin-top: 0.25rem; }
-        .mt-2 { margin-top: 0.5rem; }
-        .mt-3 { margin-top: 1rem; }
-        .mt-4 { margin-top: 1.5rem; }
-        .mt-6 { margin-top: 2rem; }
-        .hidden { display: none !important; }
-        .flex { display: flex; }
-        .items-center { align-items: center; }
-        .justify-center { justify-content: center; }
-        .justify-between { justify-content: space-between; }
-        .gap-1 { gap: 0.25rem; }
-        .gap-2 { gap: 0.5rem; }
-        .gap-3 { gap: 1rem; }
-        .gap-4 { gap: 1.5rem; }
-        .w-full { width: 100%; }
-        .text-sm { font-size: 0.875rem; }
-        .text-xs { font-size: 0.75rem; }
-        .font-medium { font-weight: 500; }
-        .font-semibold { font-weight: 600; }
-        .font-bold { font-weight: 700; }
-        .text-primary { color: var(--primary); }
-        .text-accent { color: var(--accent); }
-        .text-success { color: var(--success); }
-        .text-warning { color: var(--warning); }
-        .text-gray-500 { color: var(--gray-500); }
-        .text-white { color: var(--white); }
-        .bg-primary { background: var(--primary); }
-        .bg-accent { background: var(--accent); }
-        .bg-success { background: var(--success); }
-        .bg-warning { background: var(--warning); }
-        .bg-white { background: var(--white); }
-        
-        /* ==================== LOADING & SKELETON ==================== */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--gray-300);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        .skeleton {
-            background: linear-gradient(90deg, var(--gray-100) 25%, var(--gray-200) 50%, var(--gray-100) 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
-            border-radius: var(--radius-md);
-        }
-        
-        /* ==================== MODAL IMPROVEMENTS ==================== */
+        /* ==================== MODAL STYLES ==================== */
         .modal {
             position: fixed;
             top: 0;
@@ -747,8 +537,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
-            z-index: 1100;
+            z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -765,116 +554,107 @@
         
         .modal-content {
             background: var(--white);
-            border-radius: var(--radius-xl);
+            border-radius: var(--radius-md);
             max-width: 500px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
-            box-shadow: var(--shadow-xl);
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
-        }
-        
-        .modal.active .modal-content {
-            transform: translateY(0);
+            box-shadow: var(--shadow-lg);
         }
         
         .modal-header {
-            padding: 1.5rem 1.5rem 1rem;
-            position: sticky;
-            top: 0;
-            background: var(--white);
-            z-index: 1;
+            padding: 1rem;
             border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--maroon);
+            color: var(--white);
         }
         
         .modal-title {
-            font-size: 1.25rem;
             font-weight: 700;
-            color: var(--gray-900);
+            font-size: 1.125rem;
         }
         
         .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
             width: 32px;
             height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--gray-100);
+            color: var(--white);
             border-radius: 50%;
-            color: var(--gray-700);
-            cursor: pointer;
-            transition: var(--transition);
         }
         
-        .modal-close:hover {
-            background: var(--gray-200);
+        /* ==================== UTILITY CLASSES ==================== */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
         }
         
-        .modal-body {
-            padding: 1.5rem;
+        .text-center { text-align: center; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-4 { margin-bottom: 1.5rem; }
+        .mt-4 { margin-top: 1.5rem; }
+        .hidden { display: none !important; }
+        .flex { display: flex; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .gap-2 { gap: 0.5rem; }
+        .w-full { width: 100%; }
+        .text-sm { font-size: 0.875rem; }
+        .text-xs { font-size: 0.75rem; }
+        .font-semibold { font-weight: 600; }
+        .font-bold { font-weight: 700; }
+        
+        /* ==================== LOADING ==================== */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gray-300);
+            border-top-color: var(--maroon);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
         
-        /* ==================== CONTACT MODAL ==================== */
-        .contact-modal .modal-content {
-            max-width: 400px;
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
         
-        .contact-options-modal {
-            display: grid;
-            gap: 1rem;
-        }
-        
-        .contact-option-modal {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            border: 1px solid var(--gray-200);
-            border-radius: var(--radius-lg);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        
-        .contact-option-modal:hover {
-            border-color: var(--primary);
-            background: var(--gray-50);
-        }
-        
-        .contact-icon-modal {
-            font-size: 1.5rem;
-            width: 48px;
-            height: 48px;
+        /* ==================== SCROLL TO TOP ==================== */
+        .scroll-top {
+            position: fixed;
+            bottom: 5rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            background: var(--maroon);
+            color: var(--white);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            background: var(--gray-100);
+            box-shadow: var(--shadow-md);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 99;
         }
         
-        .contact-info {
-            flex: 1;
-        }
-        
-        .contact-label {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-            color: var(--gray-900);
-        }
-        
-        .contact-detail {
-            font-size: 0.875rem;
-            color: var(--gray-600);
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
         }
         
         /* ==================== FOOTER ==================== */
         .footer {
-            background: var(--gray-900);
+            background: var(--black);
             color: var(--white);
-            padding: 3rem 0 1.5rem;
+            padding: 3rem 0 5rem;
         }
         
         .footer-content {
@@ -884,9 +664,9 @@
             margin-bottom: 2rem;
         }
         
-        @media (min-width: 768px) {
+        @media (min-width: 640px) {
             .footer-content {
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(3, 1fr);
             }
         }
         
@@ -894,7 +674,7 @@
             font-size: 1rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            color: var(--primary);
+            color: var(--maroon);
         }
         
         .footer-links {
@@ -909,14 +689,11 @@
             font-size: 0.875rem;
             opacity: 0.8;
             transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
         
         .footer-links a:hover {
             opacity: 1;
-            color: var(--primary);
+            color: var(--maroon);
         }
         
         .footer-bottom {
@@ -926,212 +703,65 @@
             font-size: 0.75rem;
             opacity: 0.6;
         }
-        
-        /* ==================== RESPONSIVE ADJUSTMENTS ==================== */
-        @media (max-width: 640px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
-            
-            .section-title {
-                font-size: 1.5rem;
-            }
-            
-            .listing-actions {
-                flex-direction: column;
-            }
-            
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .platform-cards {
-                grid-template-columns: 1fr;
-            }
-            
-            .grid-2 {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* ==================== ANIMATIONS ==================== */
-        .fade-in {
-            animation: fadeIn 0.3s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .slide-up {
-            animation: slideUp 0.3s ease;
-        }
-        
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
     </style>
 </head>
 <body>
-    <!-- Install Button -->
-    <button class="install-button" id="installButton">
-        📱 Install App
-    </button>
-    
     <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="header-content">
-                <a href="#" class="logo">
+                <a href="index.html" class="logo">
                     <span class="logo-icon">S</span>
                     <span>SokoInn</span>
                 </a>
                 
-                <button class="btn btn-primary" onclick="showAddListingModal()">
-                    + Add Listing
-                </button>
+                <div class="flex items-center gap-2">
+                    <button class="btn btn-primary" onclick="showSellerModal()">
+                        Sell on SokoInn
+                    </button>
+                </div>
             </div>
         </div>
     </header>
     
     <!-- Hero Section -->
     <section class="hero">
+        <div class="hero-slideshow" id="heroSlideshow">
+            <!-- Slides will be added dynamically -->
+        </div>
+        
+        <div class="hero-content">
+            <h1>Discover Quality Products from Trusted Kenyan Sellers</h1>
+            <p>Shop directly with verified sellers. WhatsApp-first shopping experience.</p>
+        </div>
+    </section>
+    
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
         <div class="container">
-            <div class="hero-content">
-                <h1>Your All-in-One Marketplace</h1>
-                <p>Shop products, find jobs, hire skilled professionals, and rent properties - all in one platform!</p>
-                
-                <div class="platform-cards">
-                    <div class="platform-card" onclick="scrollToSection('products')">
-                        <div class="platform-icon">🛍️</div>
-                        <div class="platform-title">Products</div>
-                        <div class="platform-count" id="productsCount">0 listings</div>
-                    </div>
-                    
-                    <div class="platform-card" onclick="scrollToSection('jobs')">
-                        <div class="platform-icon">💼</div>
-                        <div class="platform-title">Jobs</div>
-                        <div class="platform-count" id="jobsCount">0 listings</div>
-                    </div>
-                    
-                    <div class="platform-card" onclick="scrollToSection('skills')">
-                        <div class="platform-icon">🔧</div>
-                        <div class="platform-title">Skills</div>
-                        <div class="platform-count" id="skillsCount">0 listings</div>
-                    </div>
-                    
-                    <div class="platform-card" onclick="scrollToSection('rentals')">
-                        <div class="platform-icon">🏠</div>
-                        <div class="platform-title">Rentals</div>
-                        <div class="platform-count" id="rentalsCount">0 listings</div>
-                    </div>
-                </div>
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="category-grid" id="categoryGrid">
+                <!-- Categories will be loaded dynamically -->
             </div>
         </div>
     </section>
     
     <!-- Products Section -->
-    <section id="products" class="products-section">
+    <section class="products-section" id="products">
         <div class="container">
-            <h2 class="section-title">Featured Products</h2>
-            <p class="section-subtitle">Discover quality products from trusted sellers</p>
-            
-            <div class="category-filters" id="productsFilters">
-                <!-- Product filters will be loaded dynamically -->
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="section-title" style="color: var(--black); margin: 0;">Featured Products</h2>
+                <a href="#" class="text-sm font-semibold text-maroon" onclick="showAllProducts()">View All →</a>
             </div>
             
-            <div class="grid grid-4" id="productsGrid">
+            <div class="product-grid" id="productGrid">
                 <!-- Products will be loaded dynamically -->
             </div>
             
-            <div class="text-center mt-6">
-                <button class="btn btn-white" onclick="loadMore('products')">
-                    <span class="loading hidden" id="productsLoading"></span>
+            <div class="text-center mt-4">
+                <button class="btn btn-primary" onclick="loadMoreProducts()">
+                    <span class="loading hidden" id="loadingSpinner"></span>
                     Load More Products
-                </button>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Jobs Section -->
-    <section id="jobs" class="jobs-section">
-        <div class="container">
-            <h2 class="section-title">Latest Job Opportunities</h2>
-            <p class="section-subtitle">Find your dream job or post openings</p>
-            
-            <div class="category-filters" id="jobsFilters">
-                <!-- Job filters will be loaded dynamically -->
-            </div>
-            
-            <div class="grid grid-3" id="jobsGrid">
-                <!-- Jobs will be loaded dynamically -->
-            </div>
-            
-            <div class="text-center mt-6">
-                <button class="btn btn-white" onclick="loadMore('jobs')">
-                    <span class="loading hidden" id="jobsLoading"></span>
-                    Load More Jobs
-                </button>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Skills Section -->
-    <section id="skills" class="skills-section">
-        <div class="container">
-            <h2 class="section-title">Skilled Professionals</h2>
-            <p class="section-subtitle">Find experts for your projects or offer your skills</p>
-            
-            <div class="category-filters" id="skillsFilters">
-                <!-- Skill filters will be loaded dynamically -->
-            </div>
-            
-            <div class="grid grid-3" id="skillsGrid">
-                <!-- Skills will be loaded dynamically -->
-            </div>
-            
-            <div class="text-center mt-6">
-                <button class="btn btn-white" onclick="loadMore('skills')">
-                    <span class="loading hidden" id="skillsLoading"></span>
-                    Load More Skills
-                </button>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Rentals Section -->
-    <section id="rentals" class="rentals-section">
-        <div class="container">
-            <h2 class="section-title">Homes & Rentals</h2>
-            <p class="section-subtitle">Find your perfect space or list your property</p>
-            
-            <div class="category-filters" id="rentalsFilters">
-                <!-- Rental filters will be loaded dynamically -->
-            </div>
-            
-            <div class="grid grid-3" id="rentalsGrid">
-                <!-- Rentals will be loaded dynamically -->
-            </div>
-            
-            <div class="text-center mt-6">
-                <button class="btn btn-white" onclick="loadMore('rentals')">
-                    <span class="loading hidden" id="rentalsLoading"></span>
-                    Load More Rentals
                 </button>
             </div>
         </div>
@@ -1142,35 +772,25 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>SokoInn Platform</h3>
+                    <h3>SokoInn Marketplace</h3>
                     <p style="font-size: 0.875rem; opacity: 0.8; margin-bottom: 1rem;">
-                        Your all-in-one marketplace for shopping, hiring, and renting.
+                        Connecting trusted sellers with quality-conscious buyers.
                     </p>
                     <div class="footer-links">
-                        <li><a href="#products">🛍️ Products</a></li>
-                        <li><a href="#jobs">💼 Jobs</a></li>
-                        <li><a href="#skills">🔧 Skills</a></li>
-                        <li><a href="#rentals">🏠 Rentals</a></li>
+                        <li><a href="index.html">🛍️ Products</a></li>
+                        <li><a href="jobs.html">💼 Jobs</a></li>
+                        <li><a href="skills.html">🔧 Skills</a></li>
+                        <li><a href="rentals.html">🏠 Rentals</a></li>
                     </div>
                 </div>
                 
                 <div class="footer-section">
-                    <h3>For Users</h3>
+                    <h3>For Sellers</h3>
                     <div class="footer-links">
-                        <li><a href="#" onclick="showAddListingModal()">➕ Post Listing</a></li>
-                        <li><a href="#" onclick="showSearchModal()">🔍 Advanced Search</a></li>
-                        <li><a href="#" onclick="showSavedListings()">⭐ Saved Items</a></li>
-                        <li><a href="#" onclick="showHelp()">❓ Help Center</a></li>
-                    </div>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Legal</h3>
-                    <div class="footer-links">
-                        <li><a href="#" onclick="showTerms()">📄 Terms of Service</a></li>
-                        <li><a href="#" onclick="showPrivacy()">🔒 Privacy Policy</a></li>
-                        <li><a href="#" onclick="showSafety()">🛡️ Safety Guidelines</a></li>
-                        <li><a href="#" onclick="showCommunity()">👥 Community Rules</a></li>
+                        <li><a href="#" onclick="showSellerModal()">Register as Seller</a></li>
+                        <li><a href="#" onclick="showSellerGuide()">Seller Guide</a></li>
+                        <li><a href="#" onclick="showTerms()">Terms & Conditions</a></li>
+                        <li><a href="#" onclick="showSupport()">Support Center</a></li>
                     </div>
                 </div>
                 
@@ -1191,268 +811,189 @@
         </div>
     </footer>
     
-    <!-- Bottom Navigation (Mobile) -->
+    <!-- Bottom Navigation -->
     <nav class="bottom-nav" id="bottomNav">
-        <a href="#products" class="nav-item" data-section="products">
+        <a href="index.html" class="nav-item active">
             <span class="nav-icon">🛍️</span>
             <span class="nav-label">Shop</span>
         </a>
-        <a href="#jobs" class="nav-item" data-section="jobs">
+        <a href="jobs.html" class="nav-item">
             <span class="nav-icon">💼</span>
             <span class="nav-label">Jobs</span>
         </a>
-        <a href="#skills" class="nav-item" data-section="skills">
+        <a href="skills.html" class="nav-item">
             <span class="nav-icon">🔧</span>
             <span class="nav-label">Skills</span>
         </a>
-        <a href="#rentals" class="nav-item" data-section="rentals">
+        <a href="rentals.html" class="nav-item">
             <span class="nav-icon">🏠</span>
             <span class="nav-label">Rentals</span>
         </a>
-        <a href="#" class="nav-item" onclick="showAddListingModal()">
-            <span class="nav-icon" style="color: var(--primary); font-size: 1.5rem;">+</span>
-            <span class="nav-label">Post</span>
+        <a href="#" class="nav-item" onclick="showSellerModal()">
+            <span class="nav-icon" style="color: var(--maroon);">+</span>
+            <span class="nav-label">Sell</span>
         </a>
     </nav>
     
-    <!-- Listing Detail Modal -->
-    <div class="modal" id="listingModal">
+    <!-- Scroll to Top -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</button>
+    
+    <!-- Product Detail Modal -->
+    <div class="modal" id="productModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="listingModalTitle">Listing Details</h3>
-                <button class="modal-close" onclick="closeModal('listingModal')">✕</button>
+                <h3 class="modal-title">Product Details</h3>
+                <button class="modal-close" onclick="closeModal('productModal')">✕</button>
             </div>
-            <div class="modal-body" id="listingModalBody">
-                <!-- Listing details will be loaded dynamically -->
+            <div class="modal-body" id="productModalBody">
+                <!-- Product details will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Seller Registration Modal -->
+    <div class="modal" id="sellerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Register as Seller</h3>
+                <button class="modal-close" onclick="closeModal('sellerModal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <form id="sellerForm">
+                    <div style="display: grid; gap: 1rem;">
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Business Name *</label>
+                            <input type="text" name="businessName" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm);">
+                        </div>
+                        
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Your Name *</label>
+                            <input type="text" name="ownerName" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm);">
+                        </div>
+                        
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">WhatsApp Number *</label>
+                            <input type="tel" name="whatsappNumber" required placeholder="254712345678" style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm);">
+                        </div>
+                        
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Location *</label>
+                            <input type="text" name="location" required placeholder="e.g., Nairobi, Kenya" style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm);">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary w-full">Submit Application</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
     
     <!-- Contact Options Modal -->
-    <div class="modal contact-modal" id="contactModal">
+    <div class="modal" id="contactModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Contact Options</h3>
+                <h3 class="modal-title">Contact Seller</h3>
                 <button class="modal-close" onclick="closeModal('contactModal')">✕</button>
             </div>
-            <div class="modal-body">
-                <div class="contact-options-modal" id="contactOptionsList">
-                    <!-- Contact options will be loaded dynamically -->
-                </div>
+            <div class="modal-body" id="contactModalBody">
+                <!-- Contact options will be loaded dynamically -->
             </div>
         </div>
     </div>
-    
-    <!-- Add Listing Modal -->
-    <div class="modal" id="addListingModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Post New Listing</h3>
-                <button class="modal-close" onclick="closeModal('addListingModal')">✕</button>
-            </div>
-            <div class="modal-body">
-                <div class="grid grid-2 gap-3 mb-4">
-                    <button class="btn btn-primary" onclick="showListingForm('product')">
-                        🛍️ Product
-                    </button>
-                    <button class="btn btn-accent" onclick="showListingForm('job')">
-                        💼 Job
-                    </button>
-                    <button class="btn btn-success" onclick="showListingForm('skill')">
-                        🔧 Skill
-                    </button>
-                    <button class="btn btn-warning" onclick="showListingForm('rental')">
-                        🏠 Rental
-                    </button>
-                </div>
-                
-                <div id="listingFormContainer">
-                    <!-- Listing form will be loaded dynamically -->
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Toast Notification -->
-    <div class="toast" id="toast"></div>
-    
+
     <script>
         // ==================== CONFIGURATION ====================
         const CONFIG = {
             BACKEND_URL: 'https://script.google.com/macros/s/AKfycbxFV5ZB1KikI62uxGKU3XWZCk6nOUqE05R0MSK6LuzRKQWqwidMVQ1yDvEQ045vCmW4_w/exec',
             ITEMS_PER_PAGE: 12,
-            DEFAULT_IMAGES: {
-                product: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&q=80',
-                job: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=500&q=80',
-                skill: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=500&q=80',
-                rental: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=500&q=80'
-            },
-            
-            // Categories for each section
-            CATEGORIES: {
-                products: [
-                    'Fashion & Clothing', 'Electronics', 'Home & Living',
-                    'Beauty & Personal Care', 'Sports & Outdoors', 'Books & Stationery',
-                    'Food & Groceries', 'Art & Crafts', 'Bags & Accessories',
-                    'Shoes', 'Jewelry & Watches', 'Toys & Games'
-                ],
-                jobs: [
-                    'Administrative', 'Customer Service', 'Finance & Accounting',
-                    'Human Resources', 'IT & Technology', 'Marketing & Communications',
-                    'Sales & Business Development', 'Operations & Logistics',
-                    'Healthcare', 'Education & Training', 'Hospitality & Tourism',
-                    'Construction & Trades'
-                ],
-                skills: [
-                    'Plumbing', 'Electrical', 'Carpentry', 'Painting', 'Cleaning',
-                    'Cooking & Catering', 'Driving', 'Gardening', 'Beauty Services',
-                    'Tutoring', 'IT Support', 'Graphic Design'
-                ],
-                rentals: [
-                    'Apartments', 'Houses', 'Rooms', 'Commercial Space',
-                    'Office Space', 'Land', 'Vacation Homes', 'Event Venues'
-                ]
-            }
+            DEFAULT_IMAGE: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&q=80'
         };
         
         // ==================== STATE MANAGEMENT ====================
-        const state = {
-            currentSection: 'products',
-            listings: {
-                products: [],
-                jobs: [],
-                skills: [],
-                rentals: []
-            },
-            pagination: {
-                products: { page: 1, hasMore: true },
-                jobs: { page: 1, hasMore: true },
-                skills: { page: 1, hasMore: true },
-                rentals: { page: 1, hasMore: true }
-            },
-            filters: {
-                products: 'all',
-                jobs: 'all',
-                skills: 'all',
-                rentals: 'all'
-            },
+        let state = {
+            products: [],
+            filteredProducts: [],
+            categories: [],
+            currentPage: 1,
             isLoading: false,
-            lastScrollY: 0,
-            scrollDirection: 'up'
-        };
-        
-        // ==================== DOM ELEMENTS ====================
-        const elements = {
-            // Section elements
-            productsGrid: document.getElementById('productsGrid'),
-            jobsGrid: document.getElementById('jobsGrid'),
-            skillsGrid: document.getElementById('skillsGrid'),
-            rentalsGrid: document.getElementById('rentalsGrid'),
-            
-            // Filter elements
-            productsFilters: document.getElementById('productsFilters'),
-            jobsFilters: document.getElementById('jobsFilters'),
-            skillsFilters: document.getElementById('skillsFilters'),
-            rentalsFilters: document.getElementById('rentalsFilters'),
-            
-            // Loading elements
-            productsLoading: document.getElementById('productsLoading'),
-            jobsLoading: document.getElementById('jobsLoading'),
-            skillsLoading: document.getElementById('skillsLoading'),
-            rentalsLoading: document.getElementById('rentalsLoading'),
-            
-            // Count elements
-            productsCount: document.getElementById('productsCount'),
-            jobsCount: document.getElementById('jobsCount'),
-            skillsCount: document.getElementById('skillsCount'),
-            rentalsCount: document.getElementById('rentalsCount'),
-            
-            // Bottom nav
-            bottomNav: document.getElementById('bottomNav'),
-            
-            // Modals
-            listingModal: document.getElementById('listingModal'),
-            listingModalTitle: document.getElementById('listingModalTitle'),
-            listingModalBody: document.getElementById('listingModalBody'),
-            contactModal: document.getElementById('contactModal'),
-            contactOptionsList: document.getElementById('contactOptionsList'),
-            addListingModal: document.getElementById('addListingModal'),
-            listingFormContainer: document.getElementById('listingFormContainer'),
-            
-            // Toast
-            toast: document.getElementById('toast')
+            selectedCategory: 'all',
+            searchQuery: '',
+            currentSlide: 0,
+            heroInterval: null
         };
         
         // ==================== INITIALIZATION ====================
         document.addEventListener('DOMContentLoaded', () => {
-            initBottomNav();
+            initHeroSlideshow();
             initScrollDetection();
-            loadAllData();
-            setupIntersectionObserver();
+            initBottomNav();
+            loadCategories();
+            loadProducts();
         });
+        
+        // ==================== HERO SLIDESHOW ====================
+        function initHeroSlideshow() {
+            const images = [
+                'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=1200&h=600&fit=crop',
+                'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1200&h=600&fit=crop',
+                'https://images.unsplash.com/photo-1557223562-6c77ef16210f?w=1200&h=600&fit=crop'
+            ];
+            
+            const slideshow = document.getElementById('heroSlideshow');
+            images.forEach((image, index) => {
+                const slide = document.createElement('div');
+                slide.className = `hero-slide ${index === 0 ? 'active' : ''}`;
+                slide.style.backgroundImage = `url('${image}')`;
+                slideshow.appendChild(slide);
+            });
+            
+            // Auto slide every 5 seconds
+            state.heroInterval = setInterval(() => {
+                const slides = document.querySelectorAll('.hero-slide');
+                slides[state.currentSlide].classList.remove('active');
+                state.currentSlide = (state.currentSlide + 1) % slides.length;
+                slides[state.currentSlide].classList.add('active');
+            }, 5000);
+        }
         
         // ==================== BOTTOM NAVIGATION ====================
         function initBottomNav() {
-            // Show/hide bottom nav based on scroll
-            window.addEventListener('scroll', handleScroll);
+            let lastScrollY = window.scrollY;
+            let ticking = false;
             
-            // Handle nav item clicks
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const section = item.getAttribute('data-section') || item.getAttribute('href')?.replace('#', '');
-                    if (section) {
-                        scrollToSection(section);
-                        setActiveNavItem(section);
-                    }
-                });
-            });
-        }
-        
-        function handleScroll() {
-            const currentScrollY = window.scrollY;
-            const scrollDiff = currentScrollY - state.lastScrollY;
-            
-            // Update scroll direction
-            state.scrollDirection = scrollDiff > 0 ? 'down' : 'up';
-            state.lastScrollY = currentScrollY;
-            
-            // Show/hide bottom nav
-            if (currentScrollY > 100 && state.scrollDirection === 'down') {
-                elements.bottomNav.classList.remove('visible');
-            } else {
-                elements.bottomNav.classList.add('visible');
-            }
-            
-            // Update active nav item based on scroll position
-            updateActiveNavItemOnScroll();
-        }
-        
-        function updateActiveNavItemOnScroll() {
-            const sections = ['products', 'jobs', 'skills', 'rentals'];
-            const scrollPosition = window.scrollY + 100;
-            
-            for (const section of sections) {
-                const element = document.getElementById(section);
-                if (element) {
-                    const rect = element.getBoundingClientRect();
-                    const top = rect.top + window.scrollY;
-                    const bottom = top + rect.height;
-                    
-                    if (scrollPosition >= top && scrollPosition < bottom) {
-                        setActiveNavItem(section);
-                        state.currentSection = section;
-                        break;
-                    }
+            window.addEventListener('scroll', () => {
+                lastScrollY = window.scrollY;
+                
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        const bottomNav = document.getElementById('bottomNav');
+                        const scrollTop = document.getElementById('scrollTop');
+                        
+                        // Show/hide bottom nav based on scroll direction
+                        if (lastScrollY > 100) {
+                            bottomNav.classList.add('visible');
+                        } else {
+                            bottomNav.classList.remove('visible');
+                        }
+                        
+                        // Show/hide scroll to top button
+                        if (lastScrollY > 500) {
+                            scrollTop.classList.add('visible');
+                        } else {
+                            scrollTop.classList.remove('visible');
+                        }
+                        
+                        ticking = false;
+                    });
+                    ticking = true;
                 }
-            }
-        }
-        
-        function setActiveNavItem(section) {
+            });
+            
+            // Set active nav item based on current page
+            const currentPage = window.location.pathname.split('/').pop();
             document.querySelectorAll('.nav-item').forEach(item => {
-                const itemSection = item.getAttribute('data-section') || 
-                                   item.getAttribute('href')?.replace('#', '');
-                if (itemSection === section) {
+                const href = item.getAttribute('href');
+                if (href === currentPage || (currentPage === '' && href === 'index.html')) {
                     item.classList.add('active');
                 } else {
                     item.classList.remove('active');
@@ -1461,485 +1002,384 @@
         }
         
         // ==================== DATA LOADING ====================
-        async function loadAllData() {
+        async function loadCategories() {
             try {
-                // Load products first
-                await loadSectionData('products');
-                
-                // Load other sections in parallel
-                await Promise.all([
-                    loadSectionData('jobs'),
-                    loadSectionData('skills'),
-                    loadSectionData('rentals')
-                ]);
-                
-                // Update counts
-                updateCounts();
-                
-            } catch (error) {
-                console.error('Error loading data:', error);
-                showToast('Failed to load data. Please try again.', 'error');
-            }
-        }
-        
-        async function loadSectionData(section) {
-            if (state.isLoading) return;
-            
-            state.isLoading = true;
-            showLoading(section, true);
-            
-            try {
-                const response = await fetch(
-                    `${CONFIG.BACKEND_URL}?action=get${capitalizeFirstLetter(section)}&limit=${CONFIG.ITEMS_PER_PAGE}&page=${state.pagination[section].page}`
-                );
-                
+                const response = await fetch(`${CONFIG.BACKEND_URL}?action=getCategories&type=product`);
                 const data = await response.json();
                 
                 if (data.success && data.data) {
-                    state.listings[section] = [...state.listings[section], ...data.data];
-                    state.pagination[section].hasMore = data.pagination?.hasNext || false;
-                    
-                    renderSection(section);
-                    renderFilters(section);
+                    state.categories = data.data;
+                    renderCategories();
                 }
             } catch (error) {
-                console.error(`Error loading ${section}:`, error);
-                // Load sample data as fallback
-                loadSampleData(section);
-            } finally {
-                state.isLoading = false;
-                showLoading(section, false);
+                console.error('Error loading categories:', error);
+                // Use default categories
+                state.categories = [
+                    { name: 'Fashion', icon: '👕', count: 0 },
+                    { name: 'Electronics', icon: '📱', count: 0 },
+                    { name: 'Home & Living', icon: '🏠', count: 0 },
+                    { name: 'Beauty', icon: '💄', count: 0 },
+                    { name: 'Sports', icon: '⚽', count: 0 },
+                    { name: 'Food', icon: '🍎', count: 0 }
+                ];
+                renderCategories();
             }
         }
         
-        function loadSampleData(section) {
-            const sampleData = getSampleListings(section);
-            state.listings[section] = sampleData;
-            renderSection(section);
-            renderFilters(section);
-            showToast(`Using sample ${section} data`, 'info');
+        async function loadProducts() {
+            if (state.isLoading) return;
+            
+            state.isLoading = true;
+            document.getElementById('loadingSpinner').classList.remove('hidden');
+            
+            try {
+                const response = await fetch(
+                    `${CONFIG.BACKEND_URL}?action=getProducts&limit=${CONFIG.ITEMS_PER_PAGE}&page=${state.currentPage}`
+                );
+                const data = await response.json();
+                
+                if (data.success && data.data) {
+                    const newProducts = data.data.map(product => ({
+                        ...product,
+                        images: product.images || [CONFIG.DEFAULT_IMAGE],
+                        rating: product.rating || 4.0,
+                        reviewCount: product.reviewCount || 0
+                    }));
+                    
+                    if (state.currentPage === 1) {
+                        state.products = newProducts;
+                    } else {
+                        state.products = [...state.products, ...newProducts];
+                    }
+                    
+                    state.filteredProducts = [...state.products];
+                    renderProducts();
+                    updateCategoryCounts();
+                }
+            } catch (error) {
+                console.error('Error loading products:', error);
+                // Load sample products as fallback
+                loadSampleProducts();
+            } finally {
+                state.isLoading = false;
+                document.getElementById('loadingSpinner').classList.add('hidden');
+            }
+        }
+        
+        function loadSampleProducts() {
+            const sampleProducts = [
+                {
+                    listingId: 'PROD001',
+                    title: 'Genuine Leather Handbag',
+                    price: 4500,
+                    sellerName: 'Luxury Bags Kenya',
+                    sellerVerification: 'verified',
+                    sellerRating: 4.8,
+                    sellerTotalReviews: 24,
+                    sellerLocation: 'Nairobi',
+                    sellerPhone: '254712345678',
+                    sellerWhatsapp: '254712345678',
+                    images: [
+                        'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500&q=80',
+                        'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=500&q=80',
+                        'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&q=80'
+                    ],
+                    rating: 4.5,
+                    reviewCount: 24,
+                    category: 'Fashion',
+                    description: 'Premium genuine leather handbag with multiple compartments.',
+                    stock: 5
+                },
+                {
+                    listingId: 'PROD002',
+                    title: 'Wireless Bluetooth Headphones',
+                    price: 2800,
+                    sellerName: 'Tech Gadgets KE',
+                    sellerVerification: 'verified',
+                    sellerRating: 4.2,
+                    sellerTotalReviews: 36,
+                    sellerLocation: 'Nairobi',
+                    sellerPhone: '254723456789',
+                    sellerWhatsapp: '254723456789',
+                    images: [
+                        'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80',
+                        'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=500&q=80'
+                    ],
+                    rating: 4.2,
+                    reviewCount: 36,
+                    category: 'Electronics',
+                    description: 'High-quality wireless headphones with noise cancellation.',
+                    stock: 8
+                }
+            ];
+            
+            state.products = sampleProducts;
+            state.filteredProducts = [...sampleProducts];
+            renderProducts();
+            updateCategoryCounts();
         }
         
         // ==================== RENDERING ====================
-        function renderSection(section) {
-            const gridElement = elements[`${section}Grid`];
-            const listings = getFilteredListings(section);
+        function renderCategories() {
+            const categoryGrid = document.getElementById('categoryGrid');
+            categoryGrid.innerHTML = '';
             
-            if (listings.length === 0) {
-                gridElement.innerHTML = `
-                    <div class="text-center" style="grid-column: 1 / -1; padding: 3rem 1rem; background: rgba(255,255,255,0.1); border-radius: var(--radius-lg);">
+            // Add "All" category
+            const allCategory = document.createElement('div');
+            allCategory.className = `category-card ${state.selectedCategory === 'all' ? 'active' : ''}`;
+            allCategory.innerHTML = `
+                <div class="category-icon">📦</div>
+                <div class="category-name">All</div>
+            `;
+            allCategory.onclick = () => {
+                state.selectedCategory = 'all';
+                filterProducts();
+                updateActiveCategory();
+            };
+            categoryGrid.appendChild(allCategory);
+            
+            // Add other categories
+            state.categories.forEach(category => {
+                const categoryElement = document.createElement('div');
+                categoryElement.className = `category-card`;
+                categoryElement.innerHTML = `
+                    <div class="category-icon">${category.icon || '📦'}</div>
+                    <div class="category-name">${category.name}</div>
+                `;
+                categoryElement.onclick = () => {
+                    state.selectedCategory = category.name;
+                    filterProducts();
+                    updateActiveCategory();
+                };
+                categoryGrid.appendChild(categoryElement);
+            });
+        }
+        
+        function updateActiveCategory() {
+            const categoryCards = document.querySelectorAll('.category-card');
+            categoryCards.forEach(card => {
+                const categoryName = card.querySelector('.category-name').textContent;
+                if ((categoryName === 'All' && state.selectedCategory === 'all') || 
+                    categoryName === state.selectedCategory) {
+                    card.classList.add('active');
+                } else {
+                    card.classList.remove('active');
+                }
+            });
+        }
+        
+        function renderProducts() {
+            const productGrid = document.getElementById('productGrid');
+            const productsToShow = state.filteredProducts.slice(0, state.currentPage * CONFIG.ITEMS_PER_PAGE);
+            
+            if (productsToShow.length === 0) {
+                productGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem;">
                         <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;">🔍</div>
-                        <h3 style="color: white; margin-bottom: 0.5rem;">No ${section} found</h3>
-                        <p style="color: rgba(255,255,255,0.8);">Try changing your filters or check back later.</p>
+                        <h3 style="margin-bottom: 0.5rem;">No products found</h3>
+                        <p style="color: var(--gray-500);">Try changing your category filter</p>
                     </div>
                 `;
                 return;
             }
             
-            gridElement.innerHTML = listings.map(listing => createListingCard(listing, section)).join('');
-        }
-        
-        function createListingCard(listing, type) {
-            const images = listing.images || [CONFIG.DEFAULT_IMAGES[type]];
-            const mainImage = images[0];
-            const badgeClass = `badge-${type}`;
-            
-            // Format price/rate based on type
-            let priceDisplay = '';
-            if (type === 'product') {
-                priceDisplay = `KSh ${formatNumber(listing.price)}`;
-            } else if (type === 'job') {
-                priceDisplay = `KSh ${formatNumber(listing.salaryMin)} - ${formatNumber(listing.salaryMax)}`;
-            } else if (type === 'skill') {
-                priceDisplay = `KSh ${formatNumber(listing.hourlyRate)}/hr`;
-            } else if (type === 'rental') {
-                priceDisplay = `KSh ${formatNumber(listing.monthlyRent)}/month`;
-            }
-            
-            // Get seller/provider info based on type
-            const sellerInfo = getSellerInfo(listing, type);
-            
-            return `
-            <div class="listing-card fade-in">
-                <span class="listing-badge ${badgeClass}">${type.toUpperCase()}</span>
+            productGrid.innerHTML = productsToShow.map(product => {
+                const images = product.images || [CONFIG.DEFAULT_IMAGE];
+                const imageCount = images.length;
                 
-                <div class="listing-image">
-                    <img src="${mainImage}" alt="${listing.title || listing.jobTitle || listing.skillTitle || listing.propertyTitle}"
-                         loading="lazy"
-                         onerror="this.src='${CONFIG.DEFAULT_IMAGES[type]}'">
-                </div>
-                
-                <div class="listing-content">
-                    <h3 class="listing-title">
-                        ${listing.title || listing.jobTitle || listing.skillTitle || listing.propertyTitle}
-                    </h3>
+                return `
+                <div class="product-card">
+                    ${product.stock === 0 ? '<span class="product-badge">Sold Out</span>' : ''}
+                    ${product.stock > 0 && product.stock <= 3 ? '<span class="product-badge">Low Stock</span>' : ''}
                     
-                    <div class="listing-price">${priceDisplay}</div>
-                    
-                    <div class="listing-meta">
-                        <div class="meta-item">
-                            <span class="meta-icon">📍</span>
-                            <span>${sellerInfo.location || 'Nairobi'}</span>
-                        </div>
-                        
-                        ${listing.category ? `
-                        <div class="meta-item">
-                            <span class="meta-icon">🏷️</span>
-                            <span>${listing.category}</span>
-                        </div>
-                        ` : ''}
+                    <div class="product-image">
+                        <img src="${images[0]}" alt="${product.title}" 
+                             onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
+                        ${imageCount > 1 ? `<div class="image-counter">+${imageCount - 1}</div>` : ''}
                     </div>
                     
-                    <div class="listing-seller">
-                        <div class="seller-avatar">
-                            ${sellerInfo.name.charAt(0)}
-                        </div>
-                        <div class="seller-info">
-                            <div class="seller-name">
-                                ${sellerInfo.name}
-                                ${sellerInfo.verified ? '<span class="seller-verified">✓</span>' : ''}
-                            </div>
-                            <div class="seller-rating">
-                                ⭐ ${sellerInfo.rating || '4.5'} (${sellerInfo.reviews || '0'})
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="listing-actions">
-                        <button class="btn btn-primary btn-block" 
-                                onclick="viewListing('${listing.listingId}', '${type}')">
-                            View Details
-                        </button>
+                    <div class="product-content">
+                        <h3 class="product-title">${product.title}</h3>
+                        <div class="product-price">KSh ${product.price.toLocaleString()}</div>
                         
-                        <div class="contact-toggle">
-                            <button class="btn btn-secondary" onclick="toggleContactOptions(this, '${listing.listingId}', '${type}')">
-                                Contact
+                        <div class="product-seller">
+                            ${product.sellerName}
+                            ${product.sellerVerification === 'verified' ? '<span class="seller-verified">✓</span>' : ''}
+                        </div>
+                        
+                        <div class="product-rating">
+                            <span style="color: #fbbf24;">${'★'.repeat(Math.floor(product.rating))}${'☆'.repeat(5 - Math.floor(product.rating))}</span>
+                            <span style="font-size: 0.75rem; color: var(--gray-500);">(${product.reviewCount})</span>
+                        </div>
+                        
+                        <div class="product-actions">
+                            <button class="btn btn-primary" onclick="viewProduct('${product.listingId}')">
+                                View
                             </button>
-                            <div class="contact-options">
-                                <a href="#" class="contact-option whatsapp-option" 
-                                   onclick="contactViaWhatsApp('${listing.listingId}', '${type}')">
-                                    <span class="contact-icon">💬</span>
-                                    WhatsApp
-                                </a>
-                                <a href="#" class="contact-option call-option" 
-                                   onclick="contactViaCall('${listing.listingId}', '${type}')">
-                                    <span class="contact-icon">📞</span>
-                                    Call
-                                </a>
-                                <a href="#" class="contact-option sms-option" 
-                                   onclick="contactViaSMS('${listing.listingId}', '${type}')">
-                                    <span class="contact-icon">💬</span>
-                                    SMS
-                                </a>
-                                <a href="#" class="contact-option email-option" 
-                                   onclick="contactViaEmail('${listing.listingId}', '${type}')">
-                                    <span class="contact-icon">📧</span>
-                                    Email
-                                </a>
+                            <div class="contact-toggle">
+                                <button class="btn btn-secondary" onclick="toggleContactOptions(this, '${product.listingId}')">
+                                    Contact
+                                </button>
+                                <div class="contact-options">
+                                    <a href="#" class="contact-option whatsapp-option" 
+                                       onclick="contactSeller('${product.listingId}', 'whatsapp')">
+                                        💬 WhatsApp
+                                    </a>
+                                    <a href="#" class="contact-option call-option" 
+                                       onclick="contactSeller('${product.listingId}', 'call')">
+                                        📞 Call
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            `;
+                `;
+            }).join('');
         }
         
-        function getSellerInfo(listing, type) {
-            switch (type) {
-                case 'product':
-                    return {
-                        name: listing.sellerName || 'Seller',
-                        rating: listing.sellerRating,
-                        reviews: listing.sellerTotalReviews,
-                        location: listing.sellerLocation,
-                        verified: listing.sellerVerification === 'verified',
-                        phone: listing.sellerPhone,
-                        whatsapp: listing.sellerWhatsapp,
-                        email: listing.sellerEmail
-                    };
-                case 'job':
-                    return {
-                        name: listing.employerName || 'Employer',
-                        rating: listing.employerRating,
-                        reviews: listing.employerTotalReviews,
-                        location: listing.location,
-                        verified: listing.employerVerification === 'verified',
-                        phone: listing.employerPhone,
-                        whatsapp: listing.employerWhatsapp,
-                        email: listing.employerEmail
-                    };
-                case 'skill':
-                    return {
-                        name: listing.providerName || 'Provider',
-                        rating: listing.providerRating,
-                        reviews: listing.providerTotalReviews,
-                        location: listing.providerLocation,
-                        verified: listing.providerVerification === 'verified',
-                        phone: listing.providerPhone,
-                        whatsapp: listing.providerWhatsapp,
-                        email: listing.providerEmail
-                    };
-                case 'rental':
-                    return {
-                        name: listing.landlordName || 'Landlord',
-                        rating: listing.landlordRating,
-                        reviews: listing.landlordTotalReviews,
-                        location: listing.location,
-                        verified: listing.landlordVerification === 'verified',
-                        phone: listing.landlordPhone,
-                        whatsapp: listing.landlordWhatsapp,
-                        email: listing.landlordEmail
-                    };
-                default:
-                    return { name: 'Provider', rating: 4.5, reviews: 0, location: 'Nairobi' };
-            }
-        }
-        
-        function renderFilters(section) {
-            const filterElement = elements[`${section}Filters`];
-            const categories = CONFIG.CATEGORIES[section] || [];
-            
-            const filterChips = [
-                `<div class="filter-chip ${state.filters[section] === 'all' ? 'active' : ''}" 
-                      onclick="filterSection('${section}', 'all')">
-                    All
-                </div>`
-            ];
-            
-            categories.forEach(category => {
-                const count = countListingsByCategory(section, category);
-                filterChips.push(`
-                    <div class="filter-chip ${state.filters[section] === category ? 'active' : ''}" 
-                          onclick="filterSection('${section}', '${category}')">
-                        ${category} (${count})
-                    </div>
-                `);
-            });
-            
-            filterElement.innerHTML = filterChips.join('');
-        }
-        
-        // ==================== FILTERING ====================
-        function filterSection(section, category) {
-            state.filters[section] = category;
-            renderFilters(section);
-            renderSection(section);
-        }
-        
-        function getFilteredListings(section) {
-            let listings = state.listings[section];
-            
-            if (state.filters[section] !== 'all') {
-                listings = listings.filter(listing => 
-                    listing.category === state.filters[section]
-                );
-            }
-            
-            return listings;
-        }
-        
-        function countListingsByCategory(section, category) {
-            return state.listings[section].filter(listing => 
-                listing.category === category
-            ).length;
-        }
-        
-        // ==================== LISTING DETAILS ====================
-        async function viewListing(listingId, type) {
+        // ==================== PRODUCT DETAILS ====================
+        async function viewProduct(productId) {
             try {
-                const response = await fetch(
-                    `${CONFIG.BACKEND_URL}?action=get${capitalizeFirstLetter(type)}&listingId=${listingId}`
-                );
+                // Find product in state
+                const product = state.products.find(p => p.listingId === productId);
                 
-                const data = await response.json();
-                
-                if (data.success && data.data) {
-                    showListingModal(data.data, type);
+                if (!product) {
+                    showToast('Product not found', 'error');
+                    return;
                 }
-            } catch (error) {
-                console.error('Error loading listing details:', error);
-                showToast('Failed to load details', 'error');
-            }
-        }
-        
-        function showListingModal(listing, type) {
-            const sellerInfo = getSellerInfo(listing, type);
-            const images = listing.images || [CONFIG.DEFAULT_IMAGES[type]];
-            
-            let detailsHTML = '';
-            if (type === 'product') {
-                detailsHTML = getProductDetailsHTML(listing);
-            } else if (type === 'job') {
-                detailsHTML = getJobDetailsHTML(listing);
-            } else if (type === 'skill') {
-                detailsHTML = getSkillDetailsHTML(listing);
-            } else if (type === 'rental') {
-                detailsHTML = getRentalDetailsHTML(listing);
-            }
-            
-            elements.listingModalTitle.textContent = 
-                listing.title || listing.jobTitle || listing.skillTitle || listing.propertyTitle;
-            
-            elements.listingModalBody.innerHTML = `
-                <div class="slide-up">
-                    <!-- Image Gallery -->
-                    <div style="margin-bottom: 1.5rem;">
-                        <div style="position: relative; aspect-ratio: 16/9; border-radius: var(--radius-lg); overflow: hidden; background: var(--gray-100);">
-                            <img src="${images[0]}" alt="Main image" 
-                                 style="width: 100%; height: 100%; object-fit: cover;"
-                                 onerror="this.src='${CONFIG.DEFAULT_IMAGES[type]}'">
+                
+                const images = product.images || [CONFIG.DEFAULT_IMAGE];
+                
+                let galleryHTML = '';
+                let thumbnailsHTML = '';
+                
+                images.forEach((img, index) => {
+                    galleryHTML += `
+                        <div class="gallery-slide ${index === 0 ? 'active' : ''}">
+                            <img src="${img}" alt="Image ${index + 1}" 
+                                 onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
                         </div>
-                        ${images.length > 1 ? `
-                        <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem; overflow-x: auto;">
-                            ${images.slice(1).map((img, i) => `
-                                <img src="${img}" alt="Image ${i+2}" 
-                                     style="width: 80px; height: 80px; object-fit: cover; border-radius: var(--radius-md); cursor: pointer;"
-                                     onclick="this.parentElement.previousElementSibling.querySelector('img').src = this.src"
-                                     onerror="this.src='${CONFIG.DEFAULT_IMAGES[type]}'">
-                            `).join('')}
-                        </div>
-                        ` : ''}
-                    </div>
+                    `;
                     
-                    <!-- Seller Info -->
-                    <div style="background: var(--gray-50); padding: 1rem; border-radius: var(--radius-lg); margin-bottom: 1.5rem;">
-                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                            <div style="width: 50px; height: 50px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1.25rem;">
-                                ${sellerInfo.name.charAt(0)}
+                    thumbnailsHTML += `
+                        <div class="thumbnail ${index === 0 ? 'active' : ''}" 
+                             onclick="changeGalleryImage(${index})">
+                            <img src="${img}" alt="Thumbnail ${index + 1}"
+                                 onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
+                        </div>
+                    `;
+                });
+                
+                document.getElementById('productModalBody').innerHTML = `
+                    <div style="padding: 1rem;">
+                        <div class="product-gallery">
+                            <div class="gallery-main" id="galleryMain">
+                                ${galleryHTML}
                             </div>
-                            <div style="flex: 1;">
-                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
-                                    <h4 style="font-weight: 600; color: var(--gray-900);">${sellerInfo.name}</h4>
-                                    ${sellerInfo.verified ? '<span style="color: var(--success);">✓</span>' : ''}
-                                </div>
-                                <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--gray-600);">
-                                    <span>⭐ ${sellerInfo.rating || '4.5'}</span>
-                                    <span>(${sellerInfo.reviews || '0'} reviews)</span>
-                                    <span>•</span>
-                                    <span>📍 ${sellerInfo.location}</span>
-                                </div>
-                            </div>
+                            ${images.length > 1 ? `
+                                <div class="gallery-nav gallery-prev" onclick="prevGalleryImage()">‹</div>
+                                <div class="gallery-nav gallery-next" onclick="nextGalleryImage()">›</div>
+                            ` : ''}
                         </div>
                         
-                        <button class="btn btn-primary w-full" onclick="showContactOptions('${listing.listingId}', '${type}')">
-                            Contact ${type === 'job' ? 'Employer' : type === 'rental' ? 'Landlord' : type === 'skill' ? 'Provider' : 'Seller'}
-                        </button>
+                        ${images.length > 1 ? `
+                        <div class="gallery-thumbnails">
+                            ${thumbnailsHTML}
+                        </div>
+                        ` : ''}
+                        
+                        <div style="margin-top: 1.5rem;">
+                            <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">${product.title}</h3>
+                            <div style="font-size: 1.5rem; font-weight: 800; color: var(--maroon); margin-bottom: 1rem;">
+                                KSh ${product.price.toLocaleString()}
+                            </div>
+                            
+                            <div style="background: var(--gray-100); padding: 1rem; border-radius: var(--radius-md); margin-bottom: 1rem;">
+                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                    <div style="width: 40px; height: 40px; background: var(--maroon); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600;">
+                                        ${product.sellerName.charAt(0)}
+                                    </div>
+                                    <div>
+                                        <div style="font-weight: 600; margin-bottom: 0.25rem;">
+                                            ${product.sellerName}
+                                            ${product.sellerVerification === 'verified' ? '<span style="color: #10b981;">✓</span>' : ''}
+                                        </div>
+                                        <div style="font-size: 0.875rem; color: var(--gray-500);">
+                                            ⭐ ${product.sellerRating || 4.0} (${product.sellerTotalReviews || 0} reviews)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <button class="btn btn-primary" style="flex: 1;" onclick="showContactOptions('${product.listingId}')">
+                                        Contact Seller
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            ${product.description ? `
+                            <div style="margin-bottom: 1rem;">
+                                <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Description</h4>
+                                <p style="color: var(--gray-600); line-height: 1.6;">${product.description}</p>
+                            </div>
+                            ` : ''}
+                            
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.5rem;">
+                                <button class="btn btn-secondary" onclick="saveProduct('${product.listingId}')">
+                                    ⭐ Save
+                                </button>
+                                <button class="btn btn-primary" onclick="showContactOptions('${product.listingId}')">
+                                    💬 Contact Now
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <!-- Listing Details -->
-                    ${detailsHTML}
-                    
-                    <!-- Action Buttons -->
-                    <div style="display: flex; gap: 0.75rem; margin-top: 1.5rem;">
-                        <button class="btn btn-secondary" style="flex: 1;" onclick="saveListing('${listing.listingId}', '${type}')">
-                            ⭐ Save
-                        </button>
-                        <button class="btn btn-primary" style="flex: 1;" onclick="showContactOptions('${listing.listingId}', '${type}')">
-                            📞 Contact Now
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            showModal('listingModal');
+                `;
+                
+                // Initialize gallery
+                window.currentGalleryImages = images;
+                window.currentGalleryIndex = 0;
+                
+                // Show modal
+                document.getElementById('productModal').classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+            } catch (error) {
+                console.error('Error viewing product:', error);
+                showToast('Failed to load product details', 'error');
+            }
         }
+        
+        // Gallery functions
+        window.changeGalleryImage = function(index) {
+            const slides = document.querySelectorAll('.gallery-slide');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            thumbnails[index].classList.add('active');
+            
+            window.currentGalleryIndex = index;
+        };
+        
+        window.prevGalleryImage = function() {
+            const newIndex = (window.currentGalleryIndex - 1 + window.currentGalleryImages.length) % window.currentGalleryImages.length;
+            window.changeGalleryImage(newIndex);
+        };
+        
+        window.nextGalleryImage = function() {
+            const newIndex = (window.currentGalleryIndex + 1) % window.currentGalleryImages.length;
+            window.changeGalleryImage(newIndex);
+        };
         
         // ==================== CONTACT FUNCTIONS ====================
-        async function showContactOptions(listingId, type) {
-            try {
-                const response = await fetch(
-                    `${CONFIG.BACKEND_URL}?action=get${capitalizeFirstLetter(type)}&listingId=${listingId}`
-                );
-                
-                const data = await response.json();
-                
-                if (data.success && data.data) {
-                    const listing = data.data;
-                    const sellerInfo = getSellerInfo(listing, type);
-                    
-                    let contactOptionsHTML = '';
-                    
-                    // WhatsApp option
-                    if (sellerInfo.whatsapp) {
-                        const whatsappUrl = `https://wa.me/${sellerInfo.whatsapp}?text=${encodeURIComponent(`Hi, I'm interested in your ${type} listing on SokoInn. Can you provide more details?`)}`;
-                        contactOptionsHTML += `
-                            <a href="${whatsappUrl}" target="_blank" class="contact-option-modal">
-                                <div class="contact-icon-modal" style="color: #25D366;">💬</div>
-                                <div class="contact-info">
-                                    <div class="contact-label">WhatsApp</div>
-                                    <div class="contact-detail">${formatPhoneNumber(sellerInfo.whatsapp)}</div>
-                                </div>
-                            </a>
-                        `;
-                    }
-                    
-                    // Call option
-                    if (sellerInfo.phone) {
-                        const callUrl = `tel:${sellerInfo.phone}`;
-                        contactOptionsHTML += `
-                            <a href="${callUrl}" class="contact-option-modal">
-                                <div class="contact-icon-modal" style="color: var(--primary);">📞</div>
-                                <div class="contact-info">
-                                    <div class="contact-label">Call</div>
-                                    <div class="contact-detail">${formatPhoneNumber(sellerInfo.phone)}</div>
-                                </div>
-                            </a>
-                        `;
-                    }
-                    
-                    // SMS option
-                    if (sellerInfo.phone) {
-                        const smsUrl = `sms:${sellerInfo.phone}?body=${encodeURIComponent('Hi, I saw your listing on SokoInn.')}`;
-                        contactOptionsHTML += `
-                            <a href="${smsUrl}" class="contact-option-modal">
-                                <div class="contact-icon-modal" style="color: var(--accent);">💬</div>
-                                <div class="contact-info">
-                                    <div class="contact-label">SMS</div>
-                                    <div class="contact-detail">${formatPhoneNumber(sellerInfo.phone)}</div>
-                                </div>
-                            </a>
-                        `;
-                    }
-                    
-                    // Email option
-                    if (sellerInfo.email) {
-                        const emailUrl = `mailto:${sellerInfo.email}?subject=${encodeURIComponent('Inquiry about your SokoInn listing')}`;
-                        contactOptionsHTML += `
-                            <a href="${emailUrl}" class="contact-option-modal">
-                                <div class="contact-icon-modal" style="color: var(--gray-600);">📧</div>
-                                <div class="contact-info">
-                                    <div class="contact-label">Email</div>
-                                    <div class="contact-detail">${sellerInfo.email}</div>
-                                </div>
-                            </a>
-                        `;
-                    }
-                    
-                    if (!contactOptionsHTML) {
-                        contactOptionsHTML = `
-                            <div style="text-align: center; padding: 2rem; color: var(--gray-500);">
-                                No contact information available
-                            </div>
-                        `;
-                    }
-                    
-                    elements.contactOptionsList.innerHTML = contactOptionsHTML;
-                    showModal('contactModal');
-                    
-                    // Track contact click
-                    trackContactClick(listingId, type);
-                }
-            } catch (error) {
-                console.error('Error loading contact options:', error);
-                showToast('Failed to load contact options', 'error');
-            }
-        }
-        
-        function toggleContactOptions(button, listingId, type) {
+        function toggleContactOptions(button, productId) {
             const options = button.nextElementSibling;
             const isVisible = options.classList.contains('show');
             
-            // Close all other contact option dropdowns
+            // Close all other dropdowns
             document.querySelectorAll('.contact-options').forEach(el => {
                 if (el !== options) el.classList.remove('show');
             });
@@ -1957,45 +1397,135 @@
                 };
                 setTimeout(() => document.addEventListener('click', closeHandler), 10);
             }
-            
-            // Track contact click
-            trackContactClick(listingId, type);
         }
         
-        async function trackContactClick(listingId, type) {
-            try {
-                await fetch(CONFIG.BACKEND_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        action: 'updateContactClicks',
-                        listingId: listingId,
-                        type: type
-                    })
-                });
-            } catch (error) {
-                console.error('Error tracking contact click:', error);
+        async function showContactOptions(productId) {
+            const product = state.products.find(p => p.listingId === productId);
+            
+            if (!product) return;
+            
+            document.getElementById('contactModalBody').innerHTML = `
+                <div style="padding: 1rem;">
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <div style="width: 60px; height: 60px; background: var(--maroon); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1.5rem; margin: 0 auto 1rem;">
+                            ${product.sellerName.charAt(0)}
+                        </div>
+                        <h4 style="font-weight: 600; margin-bottom: 0.25rem;">${product.sellerName}</h4>
+                        <p style="color: var(--gray-500); font-size: 0.875rem;">Seller of "${product.title}"</p>
+                    </div>
+                    
+                    <div style="display: grid; gap: 0.75rem;">
+                        ${product.sellerWhatsapp ? `
+                        <a href="https://wa.me/${product.sellerWhatsapp}?text=${encodeURIComponent(`Hi, I'm interested in your "${product.title}" for KSh ${product.price.toLocaleString()}`)}" 
+                           target="_blank"
+                           style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: #25D366; color: white; border-radius: var(--radius-md); text-decoration: none;">
+                            <span style="font-size: 1.25rem;">💬</span>
+                            <div>
+                                <div style="font-weight: 600;">WhatsApp</div>
+                                <div style="font-size: 0.875rem; opacity: 0.9;">${formatPhoneNumber(product.sellerWhatsapp)}</div>
+                            </div>
+                        </a>
+                        ` : ''}
+                        
+                        ${product.sellerPhone ? `
+                        <a href="tel:${product.sellerPhone}" 
+                           style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--maroon); color: white; border-radius: var(--radius-md); text-decoration: none;">
+                            <span style="font-size: 1.25rem;">📞</span>
+                            <div>
+                                <div style="font-weight: 600;">Call</div>
+                                <div style="font-size: 0.875rem; opacity: 0.9;">${formatPhoneNumber(product.sellerPhone)}</div>
+                            </div>
+                        </a>
+                        ` : ''}
+                    </div>
+                    
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: var(--gray-100); border-radius: var(--radius-md);">
+                        <p style="font-size: 0.875rem; color: var(--gray-600); text-align: center;">
+                            When contacting, mention you found them on SokoInn
+                        </p>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('contactModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        async function contactSeller(productId, method) {
+            const product = state.products.find(p => p.listingId === productId);
+            
+            if (!product) return;
+            
+            let url;
+            const message = `Hi, I'm interested in your "${product.title}" for KSh ${product.price.toLocaleString()}`;
+            
+            if (method === 'whatsapp' && product.sellerWhatsapp) {
+                url = `https://wa.me/${product.sellerWhatsapp}?text=${encodeURIComponent(message)}`;
+            } else if (method === 'call' && product.sellerPhone) {
+                url = `tel:${product.sellerPhone}`;
+            }
+            
+            if (url) {
+                window.open(url, '_blank');
+                showToast(`Opening ${method === 'whatsapp' ? 'WhatsApp' : 'Phone'}...`, 'info');
             }
         }
         
-        // ==================== HELPER FUNCTIONS ====================
-        function capitalizeFirstLetter(string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
+        // ==================== UTILITY FUNCTIONS ====================
+        function filterProducts() {
+            if (state.selectedCategory === 'all') {
+                state.filteredProducts = [...state.products];
+            } else {
+                state.filteredProducts = state.products.filter(product => 
+                    product.category === state.selectedCategory
+                );
+            }
+            state.currentPage = 1;
+            renderProducts();
         }
         
-        function formatNumber(num) {
-            return num?.toLocaleString('en-US') || '0';
+        function updateCategoryCounts() {
+            const categoryCounts = {};
+            state.products.forEach(product => {
+                if (product.category) {
+                    categoryCounts[product.category] = (categoryCounts[product.category] || 0) + 1;
+                }
+            });
+            
+            // Update category counts in UI if needed
         }
         
         function formatPhoneNumber(phone) {
-            return phone?.replace(/(\d{3})(\d{3})(\d{4})/, '$1 $2 $3') || '';
+            return phone?.replace(/(\d{3})(\d{3})(\d{3,4})/, '$1 $2 $3') || '';
         }
         
-        function showLoading(section, show) {
-            const loadingElement = elements[`${section}Loading`];
-            if (loadingElement) {
-                loadingElement.classList.toggle('hidden', !show);
+        function loadMoreProducts() {
+            if (!state.isLoading) {
+                state.currentPage++;
+                loadProducts();
             }
+        }
+        
+        function showAllProducts() {
+            state.selectedCategory = 'all';
+            filterProducts();
+            updateActiveCategory();
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function initScrollDetection() {
+            window.addEventListener('scroll', () => {
+                const scrollTop = document.getElementById('scrollTop');
+                if (window.scrollY > 300) {
+                    scrollTop.classList.add('visible');
+                } else {
+                    scrollTop.classList.remove('visible');
+                }
+            });
+        }
+        
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         
         function showModal(modalId) {
@@ -2009,307 +1539,112 @@
         }
         
         function showToast(message, type = 'info') {
-            elements.toast.textContent = message;
-            elements.toast.className = `toast ${type}`;
-            elements.toast.classList.add('show');
+            // Create toast element
+            const toast = document.createElement('div');
+            toast.textContent = message;
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 100px;
+                right: 20px;
+                background: ${type === 'error' ? '#ef4444' : type === 'success' ? '#10b981' : '#3b82f6'};
+                color: white;
+                padding: 0.75rem 1rem;
+                border-radius: var(--radius-md);
+                box-shadow: var(--shadow-lg);
+                z-index: 1001;
+                max-width: 300px;
+                animation: slideInRight 0.3s ease;
+            `;
+            
+            document.body.appendChild(toast);
             
             setTimeout(() => {
-                elements.toast.classList.remove('show');
+                toast.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
             }, 3000);
         }
         
-        function scrollToSection(sectionId) {
-            const element = document.getElementById(sectionId);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-                setActiveNavItem(sectionId);
-                state.currentSection = sectionId;
+        function saveProduct(productId) {
+            const saved = JSON.parse(localStorage.getItem('sokoinn_saved') || '[]');
+            if (!saved.includes(productId)) {
+                saved.push(productId);
+                localStorage.setItem('sokoinn_saved', JSON.stringify(saved));
+                showToast('Product saved for later!', 'success');
+            } else {
+                showToast('Product already saved', 'info');
             }
         }
         
-        function updateCounts() {
-            elements.productsCount.textContent = `${state.listings.products.length} listings`;
-            elements.jobsCount.textContent = `${state.listings.jobs.length} listings`;
-            elements.skillsCount.textContent = `${state.listings.skills.length} listings`;
-            elements.rentalsCount.textContent = `${state.listings.rentals.length} listings`;
-        }
+        // Modal helper functions
+        window.showSellerModal = function() {
+            document.getElementById('sellerModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
         
-        function loadMore(section) {
-            if (state.pagination[section].hasMore && !state.isLoading) {
-                state.pagination[section].page++;
-                loadSectionData(section);
-            }
-        }
+        window.showSellerGuide = function() {
+            showToast('Seller guide coming soon!', 'info');
+        };
         
-        // ==================== EVENT LISTENERS ====================
-        window.addEventListener('scroll', () => {
-            const scrollPosition = window.scrollY + window.innerHeight;
-            const documentHeight = document.documentElement.scrollHeight;
+        window.showTerms = function() {
+            showToast('Terms & Conditions coming soon!', 'info');
+        };
+        
+        window.showSupport = function() {
+            showToast('Support center coming soon!', 'info');
+        };
+        
+        window.showFeedback = function() {
+            showToast('Feedback feature coming soon!', 'info');
+        };
+        
+        // Seller form submission
+        document.getElementById('sellerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
             
-            // Load more when near bottom for current section
-            if (scrollPosition > documentHeight - 500) {
-                loadMore(state.currentSection);
+            const formData = new FormData(this);
+            const sellerData = {
+                businessName: formData.get('businessName'),
+                ownerName: formData.get('ownerName'),
+                whatsappNumber: formData.get('whatsappNumber'),
+                location: formData.get('location')
+            };
+            
+            // Validate WhatsApp number
+            if (!sellerData.whatsappNumber.match(/^254[17]\d{8}$/)) {
+                showToast('Please enter a valid Kenyan WhatsApp number (e.g., 254712345678)', 'error');
+                return;
+            }
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<div class="loading"></div> Submitting...';
+            
+            try {
+                const response = await fetch(CONFIG.BACKEND_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'registerSeller',
+                        ...sellerData
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showToast('Application submitted! We\'ll contact you via WhatsApp within 24 hours.', 'success');
+                    this.reset();
+                    closeModal('sellerModal');
+                } else {
+                    throw new Error(data.message || 'Registration failed');
+                }
+            } catch (error) {
+                showToast(error.message || 'Failed to submit application', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Application';
             }
         });
-        
-        // ==================== SAMPLE DATA GENERATION ====================
-        function getSampleListings(type) {
-            const samples = {
-                products: [
-                    {
-                        listingId: 'PROD_001',
-                        type: 'product',
-                        title: 'Genuine Leather Handbag',
-                        price: 4500,
-                        category: 'Fashion & Clothing',
-                        images: ['https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500&q=80'],
-                        sellerName: 'Sarah Kamau',
-                        sellerRating: 4.8,
-                        sellerTotalReviews: 24,
-                        sellerLocation: 'Nairobi',
-                        sellerVerification: 'verified'
-                    }
-                ],
-                jobs: [
-                    {
-                        listingId: 'JOB_001',
-                        type: 'job',
-                        jobTitle: 'Digital Marketing Specialist',
-                        salaryMin: 80000,
-                        salaryMax: 120000,
-                        category: 'Marketing & Communications',
-                        images: ['https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&q=80'],
-                        employerName: 'Tech Solutions Kenya',
-                        employerRating: 4.5,
-                        employerTotalReviews: 12,
-                        location: 'Nairobi',
-                        employerVerification: 'verified'
-                    }
-                ],
-                skills: [
-                    {
-                        listingId: 'SKILL_001',
-                        type: 'skill',
-                        skillTitle: 'Professional Plumbing Services',
-                        hourlyRate: 1500,
-                        category: 'Plumbing',
-                        images: ['https://images.unsplash.com/photo-1621967299229-c6e7085b9f3f?w=500&q=80'],
-                        providerName: 'James Omondi',
-                        providerRating: 4.9,
-                        providerTotalReviews: 36,
-                        providerLocation: 'Nairobi',
-                        providerVerification: 'verified'
-                    }
-                ],
-                rentals: [
-                    {
-                        listingId: 'RENT_001',
-                        type: 'rental',
-                        propertyTitle: 'Modern 2-Bedroom Apartment',
-                        monthlyRent: 65000,
-                        category: 'Apartments',
-                        images: ['https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=500&q=80'],
-                        landlordName: 'Mary Wanjiku',
-                        landlordRating: 4.7,
-                        landlordTotalReviews: 28,
-                        location: 'Kilimani',
-                        landlordVerification: 'verified'
-                    }
-                ]
-            };
-            
-            return samples[type] || [];
-        }
-        
-        // ==================== MODAL FUNCTIONS ====================
-        window.showAddListingModal = function() {
-            showModal('addListingModal');
-        };
-        
-        window.showListingForm = function(type) {
-            const formHTML = getListingFormHTML(type);
-            elements.listingFormContainer.innerHTML = formHTML;
-        };
-        
-        function getListingFormHTML(type) {
-            const forms = {
-                product: `
-                    <form onsubmit="submitListingForm(event, 'product')">
-                        <div style="display: grid; gap: 1rem;">
-                            <div>
-                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Product Title *</label>
-                                <input type="text" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-md);">
-                            </div>
-                            
-                            <div>
-                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Category *</label>
-                                <select required style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-md);">
-                                    <option value="">Select category</option>
-                                    ${CONFIG.CATEGORIES.products.map(cat => `<option value="${cat}">${cat}</option>`).join('')}
-                                </select>
-                            </div>
-                            
-                            <div>
-                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Price (KSh) *</label>
-                                <input type="number" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-md);">
-                            </div>
-                            
-                            <div>
-                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Description *</label>
-                                <textarea required rows="4" style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-md);"></textarea>
-                            </div>
-                            
-                            <button type="submit" class="btn btn-primary w-full">Post Product</button>
-                        </div>
-                    </form>
-                `,
-                job: `
-                    <form onsubmit="submitListingForm(event, 'job')">
-                        <div style="display: grid; gap: 1rem;">
-                            <div>
-                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Job Title *</label>
-                                <input type="text" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-md);">
-                            </div>
-                            
-                            <div>
-                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Company Name *</label>
-                                <input type="text" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-md);">
-                            </div>
-                            
-                            <div>
-                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Salary Range (KSh) *</label>
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
-                                    <input type="number" placeholder="Min" required style="padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-md);">
-                                    <input type="number" placeholder="Max" required style="padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: var(--radius-md);">
-                                </div>
-                            </div>
-                            
-                            <button type="submit" class="btn btn-accent w-full">Post Job</button>
-                        </div>
-                    </form>
-                `
-            };
-            
-            return forms[type] || '<p>Form coming soon</p>';
-        }
-        
-        // ==================== DETAILS HTML GENERATORS ====================
-        function getProductDetailsHTML(listing) {
-            return `
-                <div style="background: var(--white); padding: 1.5rem; border-radius: var(--radius-lg);">
-                    <h4 style="font-weight: 600; margin-bottom: 1rem; color: var(--gray-900);">Product Details</h4>
-                    
-                    <div style="display: grid; gap: 1rem;">
-                        ${listing.description ? `
-                        <div>
-                            <div style="font-weight: 500; margin-bottom: 0.5rem; color: var(--gray-700);">Description</div>
-                            <p style="color: var(--gray-600); line-height: 1.6;">${listing.description}</p>
-                        </div>
-                        ` : ''}
-                        
-                        ${listing.condition ? `
-                        <div>
-                            <div style="font-weight: 500; margin-bottom: 0.5rem; color: var(--gray-700);">Condition</div>
-                            <div style="color: var(--gray-600);">${listing.condition}</div>
-                        </div>
-                        ` : ''}
-                        
-                        ${listing.stock ? `
-                        <div>
-                            <div style="font-weight: 500; margin-bottom: 0.5rem; color: var(--gray-700);">Stock Available</div>
-                            <div style="color: var(--gray-600);">${listing.stock} units</div>
-                        </div>
-                        ` : ''}
-                    </div>
-                </div>
-            `;
-        }
-        
-        function getJobDetailsHTML(listing) {
-            return `
-                <div style="background: var(--white); padding: 1.5rem; border-radius: var(--radius-lg);">
-                    <h4 style="font-weight: 600; margin-bottom: 1rem; color: var(--gray-900);">Job Details</h4>
-                    
-                    <div style="display: grid; gap: 1rem;">
-                        ${listing.jobDescription ? `
-                        <div>
-                            <div style="font-weight: 500; margin-bottom: 0.5rem; color: var(--gray-700);">Description</div>
-                            <p style="color: var(--gray-600); line-height: 1.6;">${listing.jobDescription}</p>
-                        </div>
-                        ` : ''}
-                        
-                        ${listing.jobType ? `
-                        <div>
-                            <div style="font-weight: 500; margin-bottom: 0.5rem; color: var(--gray-700);">Job Type</div>
-                            <div style="color: var(--gray-600);">${listing.jobType}</div>
-                        </div>
-                        ` : ''}
-                        
-                        ${listing.experienceLevel ? `
-                        <div>
-                            <div style="font-weight: 500; margin-bottom: 0.5rem; color: var(--gray-700);">Experience Level</div>
-                            <div style="color: var(--gray-600);">${listing.experienceLevel}</div>
-                        </div>
-                        ` : ''}
-                    </div>
-                </div>
-            `;
-        }
-        
-        // Similar functions for skill and rental details...
-        
-        // ==================== GLOBAL FUNCTIONS ====================
-        window.contactViaWhatsApp = function(listingId, type) {
-            // Implementation for direct WhatsApp contact
-            showToast('Opening WhatsApp...', 'info');
-        };
-        
-        window.contactViaCall = function(listingId, type) {
-            // Implementation for direct call
-            showToast('Opening phone dialer...', 'info');
-        };
-        
-        window.contactViaSMS = function(listingId, type) {
-            // Implementation for SMS
-            showToast('Opening SMS...', 'info');
-        };
-        
-        window.contactViaEmail = function(listingId, type) {
-            // Implementation for email
-            showToast('Opening email...', 'info');
-        };
-        
-        window.saveListing = function(listingId, type) {
-            const saved = JSON.parse(localStorage.getItem('sokoinn_saved') || '{}');
-            if (!saved[listingId]) {
-                saved[listingId] = { type, timestamp: Date.now() };
-                localStorage.setItem('sokoinn_saved', JSON.stringify(saved));
-                showToast('Listing saved!', 'success');
-            } else {
-                showToast('Already saved', 'info');
-            }
-        };
-        
-        window.showSavedListings = function() {
-            const saved = JSON.parse(localStorage.getItem('sokoinn_saved') || '{}');
-            if (Object.keys(saved).length === 0) {
-                showToast('No saved listings', 'info');
-            } else {
-                showToast(`You have ${Object.keys(saved).length} saved listings`, 'info');
-            }
-        };
-        
-        // Placeholder functions for other features
-        window.showSearchModal = function() { showToast('Search feature coming soon', 'info'); };
-        window.showHelp = function() { showToast('Help center coming soon', 'info'); };
-        window.showTerms = function() { showToast('Terms of service coming soon', 'info'); };
-        window.showPrivacy = function() { showToast('Privacy policy coming soon', 'info'); };
-        window.showSafety = function() { showToast('Safety guidelines coming soon', 'info'); };
-        window.showCommunity = function() { showToast('Community rules coming soon', 'info'); };
-        window.showFeedback = function() { showToast('Feedback feature coming soon', 'info'); };
-        
-        // Initialize
-        loadAllData();
     </script>
 </body>
 </html>
