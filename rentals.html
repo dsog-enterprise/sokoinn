@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.5, maximum-scale=1.0, user-scalable=no">
+    <title>Rentals & Properties | SokoInn Marketplace</title>
+    <style>
+        :root {
+            --primary: #f59e0b;
+            --white: #FFFFFF;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-500: #737373;
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --radius-md: 8px;
+            --transition: all 0.2s ease;
+        }
+        
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-md);
+            padding: 1rem 0;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--primary);
+        }
+        
+        .rentals-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 1.5rem;
+            padding: 2rem 0;
+        }
+        
+        @media (min-width: 768px) {
+            .rentals-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .rentals-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .rental-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+        
+        .rental-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .rental-image {
+            height: 200px;
+            background: var(--gray-100);
+            overflow: hidden;
+        }
+        
+        .rental-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .rental-content {
+            padding: 1.5rem;
+        }
+        
+        .rental-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+        
+        .rental-type {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .rental-price {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .rental-location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray-500);
+            margin-bottom: 1rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            background: #d97706;
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-top: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-around;
+            padding: 0.75rem 0;
+            z-index: 1000;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.25rem;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+            text-decoration: none;
+            color: var(--gray-500);
+            min-width: 60px;
+        }
+        
+        .nav-item.active {
+            color: var(--primary);
+            background: rgba(245, 158, 11, 0.1);
+        }
+        
+        .nav-icon {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .nav-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .footer {
+            background: #1f2937;
+            color: var(--white);
+            padding: 3rem 0 5rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--white);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">S</span>
+                <span>SokoInn</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <h1 class="page-title">🏠 Rentals & Properties</h1>
+        
+        <div class="rentals-grid" id="rentalsGrid">
+            <!-- Rentals will be loaded dynamically -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 2rem;">
+                <div>
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">SokoInn</h3>
+                    <p style="color: #d1d5db; font-size: 0.875rem;">
+                        Find your perfect space.
+                    </p>
+                </div>
+                <div>
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">🛍️ Products</a></li>
+                        <li><a href="jobs.html">💼 Jobs</a></li>
+                        <li><a href="skills.html">🔧 Skills</a></li>
+                        <li><a href="rentals.html">🏠 Rentals</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:support@sokoinn.com">📧 support@sokoinn.com</a></li>
+                        <li><a href="tel:+254784599322">📞 +254 784 599 322</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 1.5rem; border-top: 1px solid #374151;">
+                <p style="color: #9ca3af; font-size: 0.75rem;">
+                    &copy; 2024 SokoInn Marketplace. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span class="nav-icon">🛍️</span>
+            <span class="nav-label">Shop</span>
+        </a>
+        <a href="jobs.html" class="nav-item">
+            <span class="nav-icon">💼</span>
+            <span class="nav-label">Jobs</span>
+        </a>
+        <a href="skills.html" class="nav-item">
+            <span class="nav-icon">🔧</span>
+            <span class="nav-label">Skills</span>
+        </a>
+        <a href="rentals.html" class="nav-item active">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">Rentals</span>
+        </a>
+    </nav>
+
+    <script>
+        const CONFIG = {
+            BACKEND_URL: 'https://script.google.com/macros/s/AKfycbxFV5ZB1KikI62uxGKU3XWZCk6nOUqE05R0MSK6LuzRKQWqwidMVQ1yDvEQ045vCmW4_w/exec'
+        };
+
+        async function loadRentals() {
+            try {
+                const response = await fetch(`${CONFIG.BACKEND_URL}?action=getRentals&limit=20`);
+                const data = await response.json();
+                
+                if (data.success && data.data) {
+                    renderRentals(data.data);
+                } else {
+                    renderSampleRentals();
+                }
+            } catch (error) {
+                console.error('Error loading rentals:', error);
+                renderSampleRentals();
+            }
+        }
+
+        function renderRentals(rentals) {
+            const rentalsGrid = document.getElementById('rentalsGrid');
+            
+            if (rentals.length === 0) {
+                rentalsGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;">🏠</div>
+                        <h3 style="margin-bottom: 0.5rem;">No rentals available</h3>
+                        <p style="color: var(--gray-500);">Check back later for new listings</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            rentalsGrid.innerHTML = rentals.map(rental => `
+                <div class="rental-card">
+                    <div class="rental-image">
+                        <img src="${rental.images?.[0] || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=500&q=80'}" 
+                             alt="${rental.propertyTitle || rental.title}">
+                    </div>
+                    <div class="rental-content">
+                        <h3 class="rental-title">${rental.propertyTitle || rental.title}</h3>
+                        <div class="rental-type">${rental.propertyType || 'Property'}</div>
+                        <div class="rental-price">
+                            KSh ${(rental.monthlyRent || 0).toLocaleString()}/month
+                        </div>
+                        <div class="rental-location">
+                            📍 ${rental.location || 'Nairobi'}
+                        </div>
+                        <button class="btn" onclick="viewRental('${rental.listingId}')">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderSampleRentals() {
+            const sampleRentals = [
+                {
+                    listingId: 'RENT001',
+                    propertyTitle: '2-Bedroom Apartment in Kilimani',
+                    propertyType: 'Apartment',
+                    monthlyRent: 65000,
+                    location: 'Kilimani, Nairobi'
+                },
+                {
+                    listingId: 'RENT002',
+                    propertyTitle: 'Modern Studio Apartment',
+                    propertyType: 'Studio',
+                    monthlyRent: 35000,
+                    location: 'Westlands, Nairobi'
+                },
+                {
+                    listingId: 'RENT003',
+                    propertyTitle: '3-Bedroom House with Garden',
+                    propertyType: 'House',
+                    monthlyRent: 120000,
+                    location: 'Karen, Nairobi'
+                }
+            ];
+            
+            renderRentals(sampleRentals);
+        }
+
+        function viewRental(rentalId) {
+            alert(`Viewing rental ${rentalId} - Feature coming soon!`);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', loadRentals);
+    </script>
+</body>
+</html>
