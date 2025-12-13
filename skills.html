@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.8, maximum-scale=1.0, user-scalable=no">
-    <title>Skills & Services | SokoInn Marketplace</title>    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Skills & Services | SokoInn Marketplace</title>
+    
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#800000">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -65,6 +66,234 @@
             cursor: pointer;
         }
         
+        /* ==================== RESPONSIVE HEADER ==================== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            padding: 0.75rem 0;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 640px) {
+            .header-content {
+                gap: 0.5rem;
+            }
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: var(--maroon);
+            text-decoration: none;
+            min-width: max-content;
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--maroon);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        /* ==================== SEARCH BAR - RESPONSIVE ==================== */
+        .search-container {
+            position: relative;
+            flex: 1;
+            min-width: 0;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+            .search-container {
+                order: 3;
+                width: 100%;
+                margin-top: 0.5rem;
+                max-width: none;
+            }
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--white);
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-md);
+            padding: 0.5rem;
+            box-shadow: var(--shadow-sm);
+            min-width: 0;
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            padding: 0.5rem;
+            font-size: 0.875rem;
+            outline: none;
+            background: transparent;
+            min-width: 0;
+        }
+        
+        .search-button {
+            background: var(--maroon);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: 0.5rem 1rem;
+            margin-left: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        @media (max-width: 480px) {
+            .search-button {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.75rem;
+            }
+        }
+        
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-md);
+            margin-top: 0.25rem;
+            max-height: 300px;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+            z-index: 1001;
+            display: none;
+        }
+        
+        .search-suggestions.active {
+            display: block;
+        }
+        
+        .suggestion-item {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--gray-200);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: var(--transition);
+        }
+        
+        .suggestion-item:hover {
+            background: var(--gray-100);
+        }
+        
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+        
+        .suggestion-image {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        
+        .suggestion-details {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+        }
+        
+        .suggestion-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .suggestion-location {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .no-suggestions {
+            padding: 1rem;
+            text-align: center;
+            color: var(--gray-500);
+            font-size: 0.875rem;
+        }
+        
+        /* ==================== LOCATION BADGE - SUBTLE ==================== */
+        .location-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.5rem;
+            background: var(--gray-100);
+            border-radius: var(--radius-md);
+            font-size: 0.75rem;
+            color: var(--gray-700);
+            border: 1px solid var(--gray-300);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .location-badge {
+                font-size: 0.7rem;
+                padding: 0.25rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .location-badge {
+                font-size: 0.65rem;
+                min-width: max-content;
+            }
+        }
+        
+        /* ==================== HEADER ACTIONS ==================== */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .header-actions {
+                order: 2;
+                margin-left: auto;
+            }
+        }
+        
         /* ==================== BOTTOM NAVIGATION ==================== */
         .bottom-nav {
             position: fixed;
@@ -108,105 +337,256 @@
             font-weight: 500;
         }
         
-        /* ==================== HEADER ==================== */
-        .header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: var(--white);
-            border-bottom: 1px solid var(--gray-200);
-            box-shadow: var(--shadow-sm);
-            padding: 0.75rem 0;
-        }
-        
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 700;
-            font-size: 1.125rem;
-            color: var(--maroon);
-            text-decoration: none;
-        }
-        
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--maroon);
-            color: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-sm);
-            font-weight: 700;
-        }
-        
-        /* ==================== HERO SECTION ==================== */
+        /* ==================== IMPROVED HERO SECTION ==================== */
         .hero {
             position: relative;
-            height: 200px;
+            height: 250px;
             overflow: hidden;
             color: var(--white);
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(to right, var(--maroon), var(--dark-maroon));
+            margin-bottom: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .hero {
+                height: 300px;
+            }
+        }
+        
+        .hero-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            cursor: pointer;
+        }
+        
+        .hero-slide.active {
+            opacity: 1;
+        }
+        
+        .hero-slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(128,0,0,0.6));
         }
         
         .hero-content {
             position: relative;
             z-index: 2;
-            max-width: 800px;
+            max-width: 900px;
             padding: 1.5rem;
-        }
-        
-        .hero h1 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            line-height: 1.3;
-        }
-        
-        .hero p {
-            font-size: 1rem;
-            opacity: 0.9;
-            margin-bottom: 0;
+            width: 90%;
         }
         
         @media (max-width: 480px) {
-            .hero {
-                height: 180px;
+            .hero-content {
+                padding: 1rem;
             }
-            
+        }
+        
+        .hero h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+        
+        @media (min-width: 640px) {
             .hero h1 {
-                font-size: 1.5rem;
+                font-size: 1.75rem;
             }
-            
+        }
+        
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+        }
+        
+        .hero p {
+            font-size: 0.875rem;
+            opacity: 0.95;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        @media (min-width: 768px) {
             .hero p {
-                font-size: 0.875rem;
+                font-size: 1rem;
             }
+        }
+        
+        @media (min-width: 1024px) {
+            .hero p {
+                font-size: 1.125rem;
+            }
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: var(--maroon);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        
+        @media (min-width: 768px) {
+            .hero-badge {
+                font-size: 0.875rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+        
+        .hero-cta {
+            display: inline-block;
+            background: white;
+            color: var(--maroon);
+            padding: 0.6rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-top: 0.75rem;
+            transition: var(--transition);
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        @media (min-width: 768px) {
+            .hero-cta {
+                padding: 0.75rem 2rem;
+                font-size: 1rem;
+            }
+        }
+        
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+            background: #f0f0f0;
+        }
+        
+        .hero-indicators {
+            position: absolute;
+            bottom: 1rem;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            z-index: 3;
+        }
+        
+        .hero-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        @media (min-width: 768px) {
+            .hero-indicator {
+                width: 10px;
+                height: 10px;
+            }
+        }
+        
+        .hero-indicator.active {
+            background: white;
+            transform: scale(1.2);
         }
         
         /* ==================== SKILLS SECTION ==================== */
         .skills-section {
-            padding: 2rem 0 1rem;
+            padding: 1.5rem 0 1rem;
             background: var(--gray-100);
         }
         
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        
+        @media (max-width: 480px) {
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+        
         .section-title {
-            font-size: 1.375rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: var(--black);
-            margin-bottom: 1.5rem;
-            text-align: center;
+            margin: 0;
+        }
+        
+        @media (min-width: 768px) {
+            .section-title {
+                font-size: 1.375rem;
+            }
+        }
+        
+        .location-display {
+            color: var(--maroon);
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        @media (max-width: 480px) {
+            .location-display {
+                font-size: 0.8rem;
+            }
+        }
+        
+        .view-all-link {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--maroon);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        
+        @media (max-width: 480px) {
+            .view-all-link {
+                font-size: 0.8rem;
+            }
         }
         
         .skills-grid {
@@ -215,30 +595,29 @@
             gap: 1rem;
         }
         
-        @media (min-width: 320px) {
+        @media (min-width: 480px) {
             .skills-grid {
-                grid-template-columns: repeat(1, 1fr);
-                gap: 0.75rem;
+                gap: 1.25rem;
             }
         }
         
-        @media (min-width: 480px) {
+        @media (min-width: 640px) {
             .skills-grid {
-                gap: 1rem;
+                grid-template-columns: repeat(2, 1fr);
             }
         }
         
         @media (min-width: 768px) {
             .skills-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 1.25rem;
+                gap: 1.5rem;
             }
         }
         
         @media (min-width: 1024px) {
             .skills-grid {
                 grid-template-columns: repeat(3, 1fr);
-                gap: 1.5rem;
+                gap: 1.75rem;
             }
         }
         
@@ -252,7 +631,7 @@
             display: flex;
             flex-direction: column;
             height: 100%;
-            min-height: 280px;
+            min-height: 320px;
             border: 1px solid var(--gray-200);
         }
         
@@ -260,6 +639,65 @@
             box-shadow: var(--shadow-md);
             transform: translateY(-2px);
             border-color: var(--maroon);
+        }
+        
+        .skill-image {
+            height: 140px;
+            background: var(--gray-100);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .skill-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .skill-card:hover .skill-image img {
+            transform: scale(1.05);
+        }
+        
+        .skill-badge {
+            position: absolute;
+            top: 0.75rem;
+            left: 0.75rem;
+            background: var(--maroon);
+            color: var(--white);
+            padding: 0.3rem 0.6rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.65rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        @media (min-width: 768px) {
+            .skill-badge {
+                font-size: 0.75rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+        
+        .provider-avatar {
+            position: absolute;
+            bottom: -20px;
+            right: 1rem;
+            width: 60px;
+            height: 60px;
+            background: var(--white);
+            border-radius: 50%;
+            border: 3px solid var(--white);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            z-index: 2;
+        }
+        
+        .provider-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         .skill-content {
@@ -279,6 +717,12 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
             min-height: 2.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .skill-title {
+                font-size: 1.125rem;
+            }
         }
         
         .skill-provider {
@@ -308,11 +752,18 @@
             display: inline-block;
             background: var(--gray-100);
             color: var(--gray-600);
-            padding: 0.25rem 0.5rem;
+            padding: 0.3rem 0.6rem;
             border-radius: var(--radius-sm);
             font-size: 0.75rem;
             font-weight: 500;
             margin-bottom: 1rem;
+        }
+        
+        .skill-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin-bottom: 0.75rem;
         }
         
         .skill-description {
@@ -327,17 +778,11 @@
             overflow: hidden;
         }
         
-        .skill-rating {
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-            margin-bottom: 0.75rem;
-        }
-        
         .skill-actions {
             display: flex;
             gap: 0.5rem;
             margin-top: auto;
+            min-height: 2.5rem;
         }
         
         .btn {
@@ -370,6 +815,7 @@
             background: var(--gray-100);
             color: var(--black);
             min-width: 36px;
+            flex-shrink: 0;
         }
         
         .btn-secondary:hover {
@@ -438,6 +884,213 @@
             color: var(--maroon);
         }
         
+        /* ==================== WHATSAPP CHATBOT ==================== */
+        .chatbot-button {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            z-index: 999;
+            transition: var(--transition);
+            border: none;
+        }
+        
+        @media (max-width: 480px) {
+            .chatbot-button {
+                width: 50px;
+                height: 50px;
+                bottom: 70px;
+                right: 15px;
+            }
+        }
+        
+        .chatbot-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+        
+        .chatbot-button .whatsapp-icon {
+            font-size: 2rem;
+            color: white;
+        }
+        
+        @media (max-width: 480px) {
+            .chatbot-button .whatsapp-icon {
+                font-size: 1.75rem;
+            }
+        }
+        
+        .chatbot-button .notification {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+            background: #ff4757;
+            border-radius: 50%;
+            color: white;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 480px) {
+            .chatbot-button .notification {
+                width: 18px;
+                height: 18px;
+                font-size: 0.625rem;
+            }
+        }
+        
+        .chatbot-container {
+            position: fixed;
+            bottom: 150px;
+            right: 20px;
+            width: 320px;
+            height: 450px;
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+        
+        @media (max-width: 480px) {
+            .chatbot-container {
+                width: 280px;
+                height: 400px;
+                right: 15px;
+                bottom: 130px;
+            }
+        }
+        
+        .chatbot-container.active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .chatbot-header {
+            background: #25D366;
+            color: white;
+            padding: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .chatbot-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.125rem;
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+        
+        .chatbot-messages {
+            flex: 1;
+            padding: 0.75rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .chatbot-message {
+            max-width: 80%;
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--radius-md);
+            line-height: 1.4;
+            font-size: 0.875rem;
+        }
+        
+        .chatbot-message.bot {
+            background: #f0f0f0;
+            align-self: flex-start;
+            border-bottom-left-radius: var(--radius-sm);
+        }
+        
+        .chatbot-message.user {
+            background: #25D366;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: var(--radius-sm);
+        }
+        
+        .chatbot-input {
+            padding: 0.75rem;
+            border-top: 1px solid var(--gray-200);
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: 0.875rem;
+        }
+        
+        .chatbot-input button {
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            padding: 0.5rem 0.75rem;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .chatbot-quick-actions {
+            padding: 0.5rem 0.75rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            border-top: 1px solid var(--gray-200);
+        }
+        
+        .chatbot-quick-btn {
+            padding: 0.4rem 0.6rem;
+            background: var(--gray-100);
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .chatbot-quick-btn:hover {
+            background: var(--gray-200);
+        }
+        
         /* ==================== UTILITY CLASSES ==================== */
         .container {
             width: 100%;
@@ -449,6 +1102,12 @@
         @media (max-width: 640px) {
             .container {
                 padding: 0 0.75rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 0.5rem;
             }
         }
         
@@ -526,6 +1185,16 @@
             font-size: 1.25rem;
         }
         
+        @media (max-width: 480px) {
+            .scroll-top {
+                width: 36px;
+                height: 36px;
+                font-size: 1.125rem;
+                bottom: 4.5rem;
+                right: 0.75rem;
+            }
+        }
+        
         .scroll-top.visible {
             opacity: 1;
             visibility: visible;
@@ -550,6 +1219,15 @@
             max-width: 300px;
             animation: slideInRight 0.3s ease;
             font-size: 0.875rem;
+        }
+        
+        @media (max-width: 480px) {
+            .toast {
+                right: 10px;
+                left: 10px;
+                max-width: none;
+                text-align: center;
+            }
         }
         
         .toast.error {
@@ -583,6 +1261,142 @@
             to {
                 transform: translateX(100%);
                 opacity: 0;
+            }
+        }
+        
+        /* ==================== LOAD MORE BUTTON ==================== */
+        .load-more-container {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+        }
+        
+        .load-more-btn {
+            background: var(--maroon);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-md);
+            padding: 0.75rem 2rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            min-width: 180px;
+        }
+        
+        @media (max-width: 480px) {
+            .load-more-btn {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.8rem;
+                min-width: 160px;
+            }
+        }
+        
+        .load-more-btn:hover {
+            background: var(--dark-maroon);
+            transform: translateY(-2px);
+        }
+        
+        .load-more-btn:disabled {
+            background: var(--gray-400);
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* ==================== EMPTY STATE ==================== */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+        
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        .empty-state-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            margin-bottom: 0.5rem;
+        }
+        
+        .empty-state-message {
+            color: var(--gray-500);
+            font-size: 0.875rem;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        
+        /* ==================== IMAGE LOADING STATES ==================== */
+        .image-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--gray-200) 25%, var(--gray-300) 50%, var(--gray-200) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            z-index: 1;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        .skill-image img.loaded {
+            position: relative;
+            z-index: 2;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        
+        /* ==================== FILTERS ==================== */
+        .skill-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .filter-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            margin-bottom: 0.25rem;
+        }
+        
+        .filter-select {
+            padding: 0.5rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-sm);
+            font-size: 0.875rem;
+            background: var(--white);
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .skill-filters {
+                flex-direction: column;
+            }
+            
+            .filter-group {
+                min-width: 100%;
             }
         }
         
@@ -670,28 +1484,6 @@
         .modal-body {
             padding: 1rem;
         }
-        
-        /* ==================== NO RESULTS ==================== */
-        .no-results {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 3rem 1rem;
-        }
-        
-        .no-results-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            opacity: 0.5;
-        }
-        
-        .no-results-title {
-            margin-bottom: 0.5rem;
-            color: var(--gray-600);
-        }
-        
-        .no-results-text {
-            color: var(--gray-500);
-        }
     </style>
 </head>
 <body>
@@ -708,44 +1500,157 @@
                     <span class="logo-icon">S</span>
                     <span>SokoInn</span>
                 </a>
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <!-- Removed Offer Service button -->
+                </div>
                 
-                <div class="flex items-center gap-2">
-                    <button class="btn btn-primary" onclick="offerSkill()">
-                        Offer a Service
-                    </button>
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" 
+                               class="search-input" 
+                               id="searchInput"
+                               placeholder="Search services, skills..."
+                               oninput="handleSearchInput()">
+                        <button class="search-button" onclick="performSearch()">Search</button>
+                    </div>
+                    <div class="search-suggestions" id="searchSuggestions"></div>
                 </div>
             </div>
         </div>
     </header>
     
-    <!-- Hero Section -->
+    <!-- Hero Section with Ads -->
     <section class="hero">
+        <div class="hero-slideshow" id="heroSlideshow">
+            <!-- Slides will be added dynamically -->
+        </div>
+        
         <div class="hero-content">
-            <h1>🔧 Find Skilled Professionals</h1>
-            <p>Connect with trusted service providers across Kenya</p>
+            <div class="hero-badge">Professional Services</div>
+            <h1>Find Trusted Professionals</h1>
+            <p>Connect with skilled service providers for all your needs across Kenya</p>
+            <a href="#" class="hero-cta" onclick="showOfferServiceModal()">
+                Offer a Service
+            </a>
+        </div>
+        
+        <div class="hero-indicators" id="heroIndicators">
+            <!-- Indicators will be added dynamically -->
         </div>
     </section>
     
     <!-- Skills Section -->
     <section class="skills-section" id="skills">
         <div class="container">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="section-title" style="color: var(--black); margin: 0;">Available Services</h2>
-                <a href="#" class="text-sm font-semibold text-maroon" onclick="refreshSkills(event)">Refresh Services →</a>
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Available Services</h2>
+                    <div class="location-display">
+                        in <span id="currentLocationText">Your Area</span>
+                    </div>
+                </div>
+                <a href="#" class="view-all-link" onclick="showAllServices(event)">View All →</a>
+            </div>
+            
+            <!-- Skill Filters -->
+            <div class="skill-filters">
+                <div class="filter-group">
+                    <label class="filter-label">Service Category</label>
+                    <select class="filter-select" id="categoryFilter" onchange="filterServices()">
+                        <option value="all">All Categories</option>
+                        <option value="home">Home Services</option>
+                        <option value="creative">Creative</option>
+                        <option value="technical">Technical</option>
+                        <option value="professional">Professional</option>
+                        <option value="health">Health & Wellness</option>
+                        <option value="education">Education</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label class="filter-label">Location</label>
+                    <select class="filter-select" id="locationFilter" onchange="filterServices()">
+                        <option value="all">All Locations</option>
+                        <option value="nairobi">Nairobi</option>
+                        <option value="mombasa">Mombasa</option>
+                        <option value="kisumu">Kisumu</option>
+                        <option value="nakuru">Nakuru</option>
+                        <option value="eldoret">Eldoret</option>
+                        <option value="remote">Remote</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label class="filter-label">Rate Range</label>
+                    <select class="filter-select" id="rateFilter" onchange="filterServices()">
+                        <option value="all">Any Rate</option>
+                        <option value="0-1000">Under KSh 1,000/hr</option>
+                        <option value="1000-2500">KSh 1,000 - 2,500/hr</option>
+                        <option value="2500-5000">KSh 2,500 - 5,000/hr</option>
+                        <option value="5000+">Over KSh 5,000/hr</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label class="filter-label">Rating</label>
+                    <select class="filter-select" id="ratingFilter" onchange="filterServices()">
+                        <option value="all">Any Rating</option>
+                        <option value="4.5+">4.5+ Stars</option>
+                        <option value="4.0+">4.0+ Stars</option>
+                        <option value="3.5+">3.5+ Stars</option>
+                    </select>
+                </div>
             </div>
             
             <div class="skills-grid" id="skillsGrid">
                 <!-- Skills will be loaded dynamically -->
             </div>
             
-            <div class="text-center mt-4">
-                <button class="btn btn-primary" onclick="loadMoreSkills()" id="loadMoreBtn">
+            <div class="load-more-container">
+                <button class="load-more-btn" onclick="loadMoreSkills()" id="loadMoreBtn">
                     <span class="loading hidden" id="loadingSpinner"></span>
                     Load More Services
                 </button>
             </div>
         </div>
     </section>
+    
+    <!-- WhatsApp Chatbot -->
+    <button class="chatbot-button" onclick="toggleChatbot()">
+        <div class="whatsapp-icon">💬</div>
+        <div class="notification hidden" id="chatbotNotification">1</div>
+    </button>
+    
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <div class="chatbot-title">
+                <div class="whatsapp-icon">💬</div>
+                SokoInn Assistant
+            </div>
+            <button class="chatbot-close" onclick="toggleChatbot()">✕</button>
+        </div>
+        
+        <div class="chatbot-messages" id="chatbotMessages">
+            <!-- Messages will be added here -->
+        </div>
+        
+        <div class="chatbot-quick-actions" id="quickActions">
+            <button class="chatbot-quick-btn" onclick="sendQuickMessage('How to hire?')">How to hire?</button>
+            <button class="chatbot-quick-btn" onclick="sendQuickMessage('Offer a service')">Offer a service</button>
+            <button class="chatbot-quick-btn" onclick="sendQuickMessage('Service rates')">Service rates</button>
+            <button class="chatbot-quick-btn" onclick="sendQuickMessage('Contact provider')">Contact provider</button>
+        </div>
+        
+        <div class="chatbot-input">
+            <input type="text" 
+                   id="chatbotInput" 
+                   placeholder="Type your question..."
+                   onkeypress="handleChatbotKeyPress(event)">
+            <button onclick="sendChatbotMessage()">Send</button>
+        </div>
+    </div>
     
     <!-- Bottom Navigation -->
     <nav class="bottom-nav" id="bottomNav">
@@ -765,7 +1670,7 @@
             <span class="nav-icon">🏠</span>
             <span class="nav-label">Rentals</span>
         </a>
-        <a href="#" class="nav-item" onclick="offerSkill()">
+        <a href="#" class="nav-item" onclick="showOfferServiceModal()">
             <span class="nav-icon" style="color: var(--maroon);">+</span>
             <span class="nav-label">Offer</span>
         </a>
@@ -804,31 +1709,629 @@
         // ==================== CONFIGURATION ====================
         const CONFIG = {
             BACKEND_URL: 'https://script.google.com/macros/s/AKfycbzrOY9Lqu1feQJmqgZXn368Lo-HQ14-1LVRsY5pob7hNlo7uo2YlwlseeiI6GHTAanWnw/exec',
-            ITEMS_PER_PAGE: 9
+            ITEMS_PER_PAGE: 9,
+            DEFAULT_IMAGE: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=500&q=80',
+            ADMIN_WHATSAPP: '254784599322',
+            KENYAN_CITIES: ['Nairobi', 'Mombasa', 'Kisumu', 'Nakuru', 'Eldoret', 'Thika', 'Malindi', 'Kitale']
         };
         
         // ==================== STATE MANAGEMENT ====================
         let state = {
             skills: [],
+            filteredSkills: [],
+            allSkills: [],
             currentPage: 1,
             isLoading: false,
-            hasMore: true
+            hasMore: false,
+            searchQuery: '',
+            currentSlide: 0,
+            heroInterval: null,
+            chatbotOpen: false,
+            unreadMessages: 0,
+            detectedCity: null,
+            isLocationDetected: false,
+            searchTimeout: null,
+            filters: {
+                category: 'all',
+                location: 'all',
+                rate: 'all',
+                rating: 'all'
+            }
         };
         
         // ==================== INITIALIZATION ====================
         document.addEventListener('DOMContentLoaded', () => {
+            initHeroSlideshow();
             initScrollDetection();
             initBottomNav();
-            loadSkills();
+            initChatbot();
+            
+            // Start silent location detection
+            detectUserLocationSilently();
+            
+            // Load sample skills
+            loadSampleSkills();
+            
+            // Also try to load from backend in background
+            setTimeout(() => {
+                loadSkillsFromBackend();
+            }, 1000);
+            
+            // Close search suggestions when clicking outside
+            document.addEventListener('click', (e) => {
+                const searchContainer = document.querySelector('.search-container');
+                if (!searchContainer.contains(e.target)) {
+                    hideSearchSuggestions();
+                }
+            });
+            
+            // Initialize skills grid
+            renderSkills();
         });
+        
+        // ==================== SILENT LOCATION DETECTION ====================
+        async function detectUserLocationSilently() {
+            try {
+                const savedLocation = localStorage.getItem('sokoinn_user_location');
+                if (savedLocation) {
+                    const { city, timestamp } = JSON.parse(savedLocation);
+                    if (Date.now() - timestamp < 24 * 60 * 60 * 1000) {
+                        state.detectedCity = city;
+                        state.isLocationDetected = true;
+                        updateLocationUI();
+                        return;
+                    }
+                }
+                
+                await getLocationFromIP();
+                
+            } catch (error) {
+                console.warn('Silent location detection failed:', error);
+                state.detectedCity = 'Nairobi';
+                state.isLocationDetected = true;
+                updateLocationUI();
+            }
+        }
+        
+        async function getLocationFromIP() {
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                
+                if (data && data.city) {
+                    state.detectedCity = data.city;
+                    
+                    localStorage.setItem('sokoinn_user_location', JSON.stringify({
+                        city: data.city,
+                        timestamp: Date.now()
+                    }));
+                } else {
+                    const randomIndex = Math.floor(Math.random() * CONFIG.KENYAN_CITIES.length);
+                    state.detectedCity = CONFIG.KENYAN_CITIES[randomIndex];
+                }
+            } catch (error) {
+                state.detectedCity = 'Nairobi';
+            }
+            
+            state.isLocationDetected = true;
+            updateLocationUI();
+        }
+        
+        function updateLocationUI() {
+            const locationBadge = document.getElementById('locationBadge');
+            const locationText = document.getElementById('locationText');
+            const currentLocationText = document.getElementById('currentLocationText');
+            
+            if (state.detectedCity) {
+                if (locationBadge && locationText) {
+                    locationBadge.classList.remove('hidden');
+                    const displayCity = state.detectedCity.length > 12 ? 
+                        state.detectedCity.substring(0, 10) + '...' : state.detectedCity;
+                    locationText.textContent = displayCity;
+                }
+                
+                if (currentLocationText) {
+                    currentLocationText.textContent = state.detectedCity;
+                }
+                
+                // Set location filter
+                const locationFilter = document.getElementById('locationFilter');
+                if (locationFilter) {
+                    const cityLower = state.detectedCity.toLowerCase();
+                    const options = Array.from(locationFilter.options);
+                    const matchingOption = options.find(option => 
+                        option.value === cityLower || option.text.toLowerCase().includes(cityLower)
+                    );
+                    
+                    if (matchingOption) {
+                        locationFilter.value = matchingOption.value;
+                        state.filters.location = matchingOption.value;
+                    }
+                }
+            }
+        }
+        
+        // ==================== ENHANCED HERO SLIDESHOW ====================
+        function initHeroSlideshow() {
+            const ads = [
+                {
+                    image: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=1200&h=600&fit=crop',
+                    title: 'Professional Services',
+                    description: 'Find trusted professionals for all your needs',
+                    cta: 'Browse Services',
+                    link: '#skills',
+                    badge: 'Featured'
+                },
+                {
+                    image: 'https://images.unsplash.com/photo-1507206130118-b5907f817163?w=1200&h=600&fit=crop',
+                    title: 'Offer Your Skills',
+                    description: 'Monetize your expertise and grow your business',
+                    cta: 'Offer Service',
+                    link: '#',
+                    badge: 'For Providers'
+                },
+                {
+                    image: 'https://images.unsplash.com/photo-1556761175-4b7c6c9f4e42?w=1200&h=600&fit=crop',
+                    title: 'Verified Professionals',
+                    description: 'All providers are vetted for quality and reliability',
+                    cta: 'Learn More',
+                    link: '#',
+                    badge: 'Trusted'
+                }
+            ];
+            
+            const slideshow = document.getElementById('heroSlideshow');
+            const indicators = document.getElementById('heroIndicators');
+            
+            ads.forEach((ad, index) => {
+                // Create slide
+                const slide = document.createElement('div');
+                slide.className = `hero-slide ${index === 0 ? 'active' : ''}`;
+                slide.style.backgroundImage = `url('${ad.image}?w=1200&h=600&fit=crop')`;
+                slide.onclick = () => {
+                    if (ad.link.startsWith('#')) {
+                        if (ad.link === '#skills') {
+                            document.getElementById('skills').scrollIntoView({ behavior: 'smooth' });
+                        }
+                    } else {
+                        window.open(ad.link, '_blank');
+                    }
+                };
+                slideshow.appendChild(slide);
+                
+                // Create indicator
+                const indicator = document.createElement('div');
+                indicator.className = `hero-indicator ${index === 0 ? 'active' : ''}`;
+                indicator.onclick = () => changeHeroSlide(index);
+                indicators.appendChild(indicator);
+            });
+            
+            // Update hero content for first ad
+            updateHeroContent(ads[0]);
+            
+            // Auto slide every 8 seconds
+            state.heroInterval = setInterval(() => {
+                const slides = document.querySelectorAll('.hero-slide');
+                const indicators = document.querySelectorAll('.hero-indicator');
+                
+                slides[state.currentSlide].classList.remove('active');
+                indicators[state.currentSlide].classList.remove('active');
+                
+                state.currentSlide = (state.currentSlide + 1) % slides.length;
+                
+                slides[state.currentSlide].classList.add('active');
+                indicators[state.currentSlide].classList.add('active');
+                
+                updateHeroContent(ads[state.currentSlide]);
+            }, 8000);
+        }
+        
+        function updateHeroContent(ad) {
+            const content = document.querySelector('.hero-content');
+            content.innerHTML = `
+                <div class="hero-badge">${ad.badge}</div>
+                <h1>${ad.title}</h1>
+                <p>${ad.description}</p>
+                <a href="${ad.link}" class="hero-cta" onclick="${ad.link.startsWith('#') ? 'event.preventDefault();' : ''}">
+                    ${ad.cta}
+                </a>
+            `;
+            
+            // Add click handler for hash links
+            const ctaLink = content.querySelector('.hero-cta');
+            if (ad.link.startsWith('#')) {
+                ctaLink.onclick = (e) => {
+                    e.preventDefault();
+                    if (ad.link === '#skills') {
+                        document.getElementById('skills').scrollIntoView({ behavior: 'smooth' });
+                    }
+                };
+            }
+        }
+        
+        function changeHeroSlide(index) {
+            clearInterval(state.heroInterval);
+            state.currentSlide = index;
+            
+            const slides = document.querySelectorAll('.hero-slide');
+            const indicators = document.querySelectorAll('.hero-indicator');
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            indicators[index].classList.add('active');
+            
+            // Restart interval
+            state.heroInterval = setInterval(() => {
+                const nextIndex = (state.currentSlide + 1) % slides.length;
+                changeHeroSlide(nextIndex);
+            }, 8000);
+        }
+        
+        // ==================== SEARCH FUNCTIONALITY ====================
+        function handleSearchInput() {
+            const searchInput = document.getElementById('searchInput');
+            const query = searchInput.value.trim();
+            
+            if (state.searchTimeout) {
+                clearTimeout(state.searchTimeout);
+            }
+            
+            if (query.length === 0) {
+                hideSearchSuggestions();
+                return;
+            }
+            
+            state.searchTimeout = setTimeout(() => {
+                showSearchSuggestions(query);
+            }, 300);
+        }
+        
+        function showSearchSuggestions(query) {
+            const suggestionsContainer = document.getElementById('searchSuggestions');
+            
+            if (!query || query.length < 2) {
+                suggestionsContainer.classList.remove('active');
+                return;
+            }
+            
+            const searchResults = searchServices(query, 5);
+            
+            if (searchResults.length === 0) {
+                suggestionsContainer.innerHTML = `
+                    <div class="no-suggestions">
+                        No services found for "${query}"
+                    </div>
+                `;
+            } else {
+                suggestionsContainer.innerHTML = searchResults.map(skill => `
+                    <div class="suggestion-item" onclick="selectSearchSuggestion('${skill.listingId}')">
+                        <img src="${skill.image || CONFIG.DEFAULT_IMAGE}" 
+                             alt="${skill.skillTitle}"
+                             class="suggestion-image"
+                             onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
+                        <div class="suggestion-details">
+                            <div class="suggestion-title">${skill.skillTitle}</div>
+                            <div class="suggestion-location">📍 ${skill.location} • ${skill.skillType}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            suggestionsContainer.classList.add('active');
+        }
+        
+        function hideSearchSuggestions() {
+            const suggestionsContainer = document.getElementById('searchSuggestions');
+            suggestionsContainer.classList.remove('active');
+        }
+        
+        function selectSearchSuggestion(skillId) {
+            hideSearchSuggestions();
+            viewSkill(skillId);
+        }
+        
+        function performSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const query = searchInput.value.trim();
+            
+            if (query.length === 0) {
+                // Reset search
+                state.searchQuery = '';
+                filterServices();
+                
+                // Update section title
+                const sectionTitle = document.querySelector('.section-title');
+                const locationDisplay = document.querySelector('.location-display');
+                if (sectionTitle && locationDisplay) {
+                    sectionTitle.textContent = 'Available Services';
+                    locationDisplay.innerHTML = `in <span id="currentLocationText">${state.detectedCity || 'Your Area'}</span>`;
+                }
+                return;
+            }
+            
+            state.searchQuery = query;
+            const searchResults = searchServices(query);
+            
+            // Update filtered skills
+            state.filteredSkills = searchResults;
+            state.currentPage = 1;
+            
+            // Update UI
+            const sectionTitle = document.querySelector('.section-title');
+            const locationDisplay = document.querySelector('.location-display');
+            if (sectionTitle && locationDisplay) {
+                sectionTitle.textContent = 'Search Results';
+                locationDisplay.textContent = `for "${query}"`;
+            }
+            
+            renderSkills();
+            hideSearchSuggestions();
+            
+            // Scroll to skills section
+            document.getElementById('skills').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function searchServices(query, limit = null) {
+            const searchTerms = query.toLowerCase().split(' ');
+            
+            const results = state.allSkills.filter(skill => {
+                const searchableText = `
+                    ${skill.skillTitle || ''}
+                    ${skill.providerName || ''}
+                    ${skill.description || ''}
+                    ${skill.location || ''}
+                    ${skill.skillType || ''}
+                `.toLowerCase();
+                
+                return searchTerms.every(term => searchableText.includes(term));
+            });
+            
+            // Sort by relevance
+            results.sort((a, b) => {
+                const aTitle = a.skillTitle.toLowerCase();
+                const bTitle = b.skillTitle.toLowerCase();
+                const queryLower = query.toLowerCase();
+                
+                if (aTitle === queryLower) return -1;
+                if (bTitle === queryLower) return 1;
+                
+                if (aTitle.startsWith(queryLower)) return -1;
+                if (bTitle.startsWith(queryLower)) return 1;
+                
+                return (b.rating || 0) - (a.rating || 0);
+            });
+            
+            return limit ? results.slice(0, limit) : results;
+        }
+        
+        // ==================== FILTER FUNCTIONALITY ====================
+        function filterServices() {
+            // Get filter values
+            state.filters = {
+                category: document.getElementById('categoryFilter').value,
+                location: document.getElementById('locationFilter').value,
+                rate: document.getElementById('rateFilter').value,
+                rating: document.getElementById('ratingFilter').value
+            };
+            
+            // Apply filters
+            let filtered = state.allSkills;
+            
+            // Apply search filter if exists
+            if (state.searchQuery) {
+                filtered = searchServices(state.searchQuery);
+            }
+            
+            // Apply other filters
+            filtered = filtered.filter(skill => {
+                // Category filter
+                if (state.filters.category !== 'all') {
+                    const skillCategory = skill.skillType?.toLowerCase() || '';
+                    if (!skillCategory.includes(state.filters.category)) return false;
+                }
+                
+                // Location filter
+                if (state.filters.location !== 'all') {
+                    if (state.filters.location === 'remote' && skill.location !== 'Remote') return false;
+                    if (state.filters.location !== 'remote') {
+                        const skillLocation = skill.location?.toLowerCase() || '';
+                        if (!skillLocation.includes(state.filters.location)) return false;
+                    }
+                }
+                
+                // Rate filter
+                if (state.filters.rate !== 'all') {
+                    const hourlyRate = skill.hourlyRate || 0;
+                    
+                    switch (state.filters.rate) {
+                        case '0-1000':
+                            if (hourlyRate > 1000) return false;
+                            break;
+                        case '1000-2500':
+                            if (hourlyRate < 1000 || hourlyRate > 2500) return false;
+                            break;
+                        case '2500-5000':
+                            if (hourlyRate < 2500 || hourlyRate > 5000) return false;
+                            break;
+                        case '5000+':
+                            if (hourlyRate < 5000) return false;
+                            break;
+                    }
+                }
+                
+                // Rating filter
+                if (state.filters.rating !== 'all') {
+                    const rating = skill.rating || 0;
+                    
+                    switch (state.filters.rating) {
+                        case '4.5+':
+                            if (rating < 4.5) return false;
+                            break;
+                        case '4.0+':
+                            if (rating < 4.0) return false;
+                            break;
+                        case '3.5+':
+                            if (rating < 3.5) return false;
+                            break;
+                    }
+                }
+                
+                return true;
+            });
+            
+            state.filteredSkills = filtered;
+            state.currentPage = 1;
+            renderSkills();
+        }
+        
+        // ==================== WHATSAPP CHATBOT ====================
+        function initChatbot() {
+            addBotMessage("Hello! I'm your SokoInn services assistant. How can I help you find skilled professionals or offer your services?");
+            loadChatHistory();
+        }
+        
+        function toggleChatbot() {
+            const chatbot = document.getElementById('chatbotContainer');
+            const notification = document.getElementById('chatbotNotification');
+            
+            state.chatbotOpen = !state.chatbotOpen;
+            chatbot.classList.toggle('active', state.chatbotOpen);
+            
+            if (state.chatbotOpen) {
+                state.unreadMessages = 0;
+                notification.classList.add('hidden');
+                saveChatHistory();
+                
+                setTimeout(() => {
+                    const messages = document.getElementById('chatbotMessages');
+                    messages.scrollTop = messages.scrollHeight;
+                }, 100);
+            }
+        }
+        
+        function addBotMessage(text) {
+            const messages = document.getElementById('chatbotMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chatbot-message bot';
+            messageDiv.textContent = text;
+            messages.appendChild(messageDiv);
+            
+            messages.scrollTop = messages.scrollHeight;
+            saveChatHistory();
+        }
+        
+        function addUserMessage(text) {
+            const messages = document.getElementById('chatbotMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chatbot-message user';
+            messageDiv.textContent = text;
+            messages.appendChild(messageDiv);
+            
+            messages.scrollTop = messages.scrollHeight;
+            saveChatHistory();
+        }
+        
+        function handleChatbotKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendChatbotMessage();
+            }
+        }
+        
+        function sendChatbotMessage() {
+            const input = document.getElementById('chatbotInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            addUserMessage(message);
+            input.value = '';
+            
+            setTimeout(() => processUserMessage(message), 500);
+        }
+        
+        function sendQuickMessage(message) {
+            const input = document.getElementById('chatbotInput');
+            input.value = message;
+            sendChatbotMessage();
+        }
+        
+        function processUserMessage(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            const responses = {
+                'hello': "Hello! Welcome to SokoInn Services. How can I assist you with finding or offering professional services?",
+                'hi': "Hi there! 👋 I'm here to help you connect with skilled professionals or offer your services.",
+                'help': "I can help you with:\n1. Finding service providers\n2. Hiring professionals\n3. Offering your services\n4. Service rates and reviews\n5. Contacting providers\nWhat would you like to know?",
+                'hire': "To hire a service provider:\n1. Browse available services\n2. Use filters to find what you need\n3. Click 'View Details' on any service\n4. Contact the provider directly\n5. Discuss scope, rate, and timeline",
+                'offer': "To offer your services:\n1. Click 'Offer a Service' in bottom nav\n2. Fill out your service details\n3. Set your rates and availability\n4. Get connected with clients\n5. Build your reputation with reviews",
+                'rate': "Service rates vary based on:\n• Type of service\n• Provider experience\n• Location\n• Duration and complexity\n• Market demand\nBrowse services to see current rates.",
+                'review': "Provider reviews help you:\n• Verify quality of work\n• Check reliability\n• See past client experiences\n• Make informed decisions\nAlways check reviews before hiring.",
+                'contact': "Need help? Contact our admin at +254 784 599 322 via WhatsApp for immediate assistance.",
+                'thank': "You're welcome! 😊 Let me know if you need anything else.",
+                'bye': "Goodbye! Best of luck with your service needs or offerings."
+            };
+            
+            let response = null;
+            for (const [keyword, reply] of Object.entries(responses)) {
+                if (lowerMessage.includes(keyword)) {
+                    response = reply;
+                    break;
+                }
+            }
+            
+            if (!response) {
+                response = `I'm not sure about that. For specific service inquiries, please browse our services or contact +254 784 599 322.`;
+                
+                setTimeout(() => {
+                    const quickActions = document.getElementById('quickActions');
+                    const adminBtn = document.createElement('button');
+                    adminBtn.className = 'chatbot-quick-btn';
+                    adminBtn.textContent = 'Contact Admin';
+                    adminBtn.onclick = () => {
+                        window.open(`https://wa.me/${CONFIG.ADMIN_WHATSAPP}?text=Hi,%20I%20need%20help%20with:%20${encodeURIComponent(message)}`, '_blank');
+                    };
+                    quickActions.appendChild(adminBtn);
+                }, 1000);
+            }
+            
+            addBotMessage(response);
+            
+            if (!state.chatbotOpen) {
+                state.unreadMessages++;
+                const notification = document.getElementById('chatbotNotification');
+                notification.textContent = state.unreadMessages;
+                notification.classList.remove('hidden');
+            }
+        }
+        
+        function saveChatHistory() {
+            const messages = document.getElementById('chatbotMessages');
+            try {
+                localStorage.setItem('sokoinn_chat_history_skills', messages.innerHTML);
+            } catch (e) {
+                console.warn('Could not save chat history');
+            }
+        }
+        
+        function loadChatHistory() {
+            try {
+                const saved = localStorage.getItem('sokoinn_chat_history_skills');
+                if (saved) {
+                    document.getElementById('chatbotMessages').innerHTML = saved;
+                }
+            } catch (e) {
+                console.warn('Could not load chat history');
+            }
+        }
         
         // ==================== BOTTOM NAVIGATION ====================
         function initBottomNav() {
-            // Set active nav item based on current page
             const currentPage = window.location.pathname.split('/').pop() || 'skills.html';
             document.querySelectorAll('.nav-item').forEach(item => {
                 const href = item.getAttribute('href');
-                if (href === currentPage) {
+                if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
                     item.classList.add('active');
                 } else {
                     item.classList.remove('active');
@@ -837,72 +2340,52 @@
         }
         
         // ==================== DATA LOADING ====================
-        async function loadSkills() {
-            if (state.isLoading || !state.hasMore) return;
+        async function loadSkillsFromBackend() {
+            if (state.isLoading) return;
             
             state.isLoading = true;
-            document.getElementById('loadingSpinner').classList.remove('hidden');
-            document.getElementById('loadMoreBtn').disabled = true;
             
             try {
                 const response = await fetch(
-                    `${CONFIG.BACKEND_URL}?action=getSkills&limit=${CONFIG.ITEMS_PER_PAGE}&page=${state.currentPage}`
+                    `${CONFIG.BACKEND_URL}?action=getSkills&limit=${CONFIG.ITEMS_PER_PAGE}&page=${state.currentPage}`,
+                    { method: 'GET', mode: 'cors' }
                 );
                 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                
-                if (data.success && data.data && Array.isArray(data.data)) {
-                    const newSkills = data.data.map(skill => ({
-                        ...skill,
-                        skillTitle: skill.skillTitle || skill.title || 'Professional Service',
-                        providerName: skill.providerName || skill.serviceProvider || 'Service Provider',
-                        hourlyRate: skill.hourlyRate || skill.rate || 0,
-                        location: skill.serviceArea || skill.location || 'Nairobi',
-                        skillType: skill.skillType || skill.category || 'Professional',
-                        description: skill.description || skill.serviceDescription || 'Professional service available.',
-                        rating: skill.rating || 4.0,
-                        reviewCount: skill.reviewCount || 0,
-                        providerPhone: skill.providerPhone || skill.contactPhone || '',
-                        providerWhatsapp: skill.providerWhatsapp || skill.whatsappNumber || ''
-                    }));
+                if (response.ok) {
+                    const data = await response.json();
                     
-                    if (state.currentPage === 1) {
+                    if (data.success && data.data && Array.isArray(data.data) && data.data.length > 0) {
+                        const newSkills = data.data.map(skill => ({
+                            ...skill,
+                            listingId: skill.listingId || `SKILL${Date.now()}${Math.random().toString(36).substr(2, 9)}`,
+                            skillTitle: skill.skillTitle || skill.title || 'Professional Service',
+                            providerName: skill.providerName || skill.serviceProvider || 'Service Provider',
+                            providerAvatar: skill.providerAvatar || 'https://ui-avatars.com/api/?name=' + (skill.providerName || 'Provider') + '&background=800000&color=fff',
+                            hourlyRate: skill.hourlyRate || skill.rate || 0,
+                            location: skill.serviceArea || skill.location || 'Nairobi',
+                            skillType: skill.skillType || skill.category || 'Professional',
+                            description: skill.description || skill.serviceDescription || 'Professional service available.',
+                            rating: skill.rating || 4.0,
+                            reviewCount: skill.reviewCount || 0,
+                            providerPhone: skill.providerPhone || skill.contactPhone || '',
+                            providerWhatsapp: skill.providerWhatsapp || skill.whatsappNumber || '',
+                            image: skill.image || CONFIG.DEFAULT_IMAGE
+                        }));
+                        
                         state.skills = newSkills;
-                    } else {
-                        state.skills = [...state.skills, ...newSkills];
+                        state.allSkills = newSkills;
+                        state.filteredSkills = [...newSkills];
+                        state.hasMore = newSkills.length === CONFIG.ITEMS_PER_PAGE;
+                        
+                        filterServices();
+                        renderSkills();
+                        showToast('Services loaded!', 'success');
                     }
-                    
-                    state.hasMore = newSkills.length === CONFIG.ITEMS_PER_PAGE;
-                    
-                    renderSkills();
-                    
-                } else {
-                    throw new Error('Invalid data format');
                 }
             } catch (error) {
-                console.error('Error loading skills:', error);
-                showToast('Failed to load services. Please try again.', 'error');
-                // Load sample skills as fallback
-                if (state.currentPage === 1) {
-                    loadSampleSkills();
-                }
+                console.error('Error loading skills from backend:', error);
             } finally {
                 state.isLoading = false;
-                document.getElementById('loadingSpinner').classList.add('hidden');
-                document.getElementById('loadMoreBtn').disabled = false;
-                
-                // Update load more button text
-                const loadMoreBtn = document.getElementById('loadMoreBtn');
-                if (!state.hasMore && state.skills.length > 0) {
-                    loadMoreBtn.textContent = 'No more services';
-                    loadMoreBtn.disabled = true;
-                } else {
-                    loadMoreBtn.textContent = 'Load More Services';
-                }
             }
         }
         
@@ -912,116 +2395,192 @@
                     listingId: 'SKILL001',
                     skillTitle: 'Professional Plumbing Services',
                     providerName: 'James Plumbing Solutions',
+                    providerAvatar: 'https://ui-avatars.com/api/?name=James+Plumbing&background=800000&color=fff',
                     hourlyRate: 1500,
                     location: 'Nairobi',
                     skillType: 'Home Services',
-                    description: 'Expert plumbing services including installation, repair, and maintenance for residential and commercial properties.',
+                    description: 'Expert plumbing services including installation, repair, and maintenance for residential and commercial properties. 24/7 emergency services available.',
                     rating: 4.8,
                     reviewCount: 42,
                     providerPhone: '254712345678',
-                    providerWhatsapp: '254712345678'
+                    providerWhatsapp: '254712345678',
+                    image: 'https://images.unsplash.com/photo-1621967299229-c6f7a0056d5b?w=500&q=80'
                 },
                 {
                     listingId: 'SKILL002',
                     skillTitle: 'Electrical Installation & Repair',
                     providerName: 'Electric Solutions Ltd',
+                    providerAvatar: 'https://ui-avatars.com/api/?name=Electric+Solutions&background=800000&color=fff',
                     hourlyRate: 2000,
                     location: 'Nairobi',
-                    skillType: 'Electrical',
-                    description: 'Certified electrical services including wiring, installation, troubleshooting, and electrical system maintenance.',
+                    skillType: 'Technical',
+                    description: 'Certified electrical services including wiring, installation, troubleshooting, and electrical system maintenance. NEMA certified professionals.',
                     rating: 4.7,
                     reviewCount: 38,
                     providerPhone: '254723456789',
-                    providerWhatsapp: '254723456789'
+                    providerWhatsapp: '254723456789',
+                    image: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=500&q=80'
                 },
                 {
                     listingId: 'SKILL003',
                     skillTitle: 'Graphic Design & Branding',
                     providerName: 'Creative Designs Studio',
+                    providerAvatar: 'https://ui-avatars.com/api/?name=Creative+Designs&background=800000&color=fff',
                     hourlyRate: 1200,
                     location: 'Remote',
                     skillType: 'Creative',
-                    description: 'Professional graphic design services including logo design, branding, marketing materials, and digital graphics.',
+                    description: 'Professional graphic design services including logo design, branding, marketing materials, and digital graphics. Fast turnaround time.',
                     rating: 4.9,
                     reviewCount: 56,
                     providerPhone: '254734567890',
-                    providerWhatsapp: '254734567890'
+                    providerWhatsapp: '254734567890',
+                    image: 'https://images.unsplash.com/photo-1561070791-4c9b95a9e2a9?w=500&q=80'
                 },
                 {
                     listingId: 'SKILL004',
                     skillTitle: 'Carpentry & Furniture Making',
                     providerName: 'Woodcraft Masters',
+                    providerAvatar: 'https://ui-avatars.com/api/?name=Woodcraft+Masters&background=800000&color=fff',
                     hourlyRate: 1800,
                     location: 'Nairobi',
-                    skillType: 'Craftsmanship',
-                    description: 'Custom furniture design and manufacturing, carpentry repairs, and woodworking services.',
+                    skillType: 'Home Services',
+                    description: 'Custom furniture design and manufacturing, carpentry repairs, and woodworking services. Quality materials and craftsmanship guaranteed.',
                     rating: 4.6,
                     reviewCount: 31,
                     providerPhone: '254745678901',
-                    providerWhatsapp: '254745678901'
+                    providerWhatsapp: '254745678901',
+                    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500&q=80'
                 },
                 {
                     listingId: 'SKILL005',
                     skillTitle: 'Web Development',
                     providerName: 'Tech Solutions Kenya',
+                    providerAvatar: 'https://ui-avatars.com/api/?name=Tech+Solutions&background=800000&color=fff',
                     hourlyRate: 2500,
                     location: 'Remote',
-                    skillType: 'Technology',
-                    description: 'Professional website development, e-commerce solutions, and web application development services.',
+                    skillType: 'Technical',
+                    description: 'Professional website development, e-commerce solutions, and web application development services. Modern technologies and responsive design.',
                     rating: 4.8,
                     reviewCount: 48,
                     providerPhone: '254756789012',
-                    providerWhatsapp: '254756789012'
+                    providerWhatsapp: '254756789012',
+                    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=500&q=80'
                 },
                 {
                     listingId: 'SKILL006',
-                    skillTitle: 'Cleaning Services',
+                    skillTitle: 'Professional Cleaning Services',
                     providerName: 'Sparkle Clean',
+                    providerAvatar: 'https://ui-avatars.com/api/?name=Sparkle+Clean&background=800000&color=fff',
                     hourlyRate: 800,
                     location: 'Nairobi',
                     skillType: 'Home Services',
-                    description: 'Professional cleaning services for homes, offices, and commercial spaces with eco-friendly products.',
+                    description: 'Professional cleaning services for homes, offices, and commercial spaces with eco-friendly products. Deep cleaning and regular maintenance.',
                     rating: 4.5,
                     reviewCount: 67,
                     providerPhone: '254767890123',
-                    providerWhatsapp: '254767890123'
+                    providerWhatsapp: '254767890123',
+                    image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=500&q=80'
+                },
+                {
+                    listingId: 'SKILL007',
+                    skillTitle: 'Personal Fitness Trainer',
+                    providerName: 'FitLife Kenya',
+                    providerAvatar: 'https://ui-avatars.com/api/?name=FitLife+Kenya&background=800000&color=fff',
+                    hourlyRate: 1500,
+                    location: 'Nairobi',
+                    skillType: 'Health',
+                    description: 'Certified personal trainer offering customized workout plans, nutrition guidance, and fitness coaching for all levels.',
+                    rating: 4.7,
+                    reviewCount: 29,
+                    providerPhone: '254778901234',
+                    providerWhatsapp: '254778901234',
+                    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&q=80'
+                },
+                {
+                    listingId: 'SKILL008',
+                    skillTitle: 'Photography Services',
+                    providerName: 'Capture Moments',
+                    providerAvatar: 'https://ui-avatars.com/api/?name=Capture+Moments&background=800000&color=fff',
+                    hourlyRate: 3000,
+                    location: 'Nairobi',
+                    skillType: 'Creative',
+                    description: 'Professional photography for events, portraits, products, and commercial shoots. High-quality equipment and editing included.',
+                    rating: 4.9,
+                    reviewCount: 52,
+                    providerPhone: '254789012345',
+                    providerWhatsapp: '254789012345',
+                    image: 'https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=500&q=80'
+                },
+                {
+                    listingId: 'SKILL009',
+                    skillTitle: 'Legal Consultation',
+                    providerName: 'Legal Associates Kenya',
+                    providerAvatar: 'https://ui-avatars.com/api/?name=Legal+Associates&background=800000&color=fff',
+                    hourlyRate: 5000,
+                    location: 'Nairobi',
+                    skillType: 'Professional',
+                    description: 'Legal advice and consultation services for individuals and businesses. Specializing in contract law and business setup.',
+                    rating: 4.8,
+                    reviewCount: 41,
+                    providerPhone: '254790123456',
+                    providerWhatsapp: '254790123456',
+                    image: 'https://images.unsplash.com/photo-1589391886085-8b6b0ac72a1a?w=500&q=80'
                 }
             ];
             
             state.skills = sampleSkills;
+            state.allSkills = sampleSkills;
+            state.filteredSkills = [...sampleSkills];
             state.hasMore = false;
+            
+            filterServices();
             renderSkills();
+            
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            loadMoreBtn.textContent = 'No more services';
+            loadMoreBtn.disabled = true;
         }
         
         // ==================== RENDERING ====================
         function renderSkills() {
             const skillsGrid = document.getElementById('skillsGrid');
-            const skillsToShow = state.skills.slice(0, state.currentPage * CONFIG.ITEMS_PER_PAGE);
+            const skillsToShow = state.filteredSkills.slice(0, state.currentPage * CONFIG.ITEMS_PER_PAGE);
             
-            if (state.currentPage === 1 && skillsToShow.length === 0) {
+            if (skillsToShow.length === 0) {
                 skillsGrid.innerHTML = `
-                    <div class="no-results">
-                        <div class="no-results-icon">🔧</div>
-                        <h3 class="no-results-title">No services available</h3>
-                        <p class="no-results-text">Check back later for skilled professionals</p>
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🔧</div>
+                        <h3 class="empty-state-title">No services found</h3>
+                        <p class="empty-state-message">
+                            ${state.searchQuery ? 
+                                `No services found for "${state.searchQuery}"` : 
+                                'Try adjusting your filters or check back soon for new services'}
+                        </p>
                     </div>
                 `;
                 return;
             }
             
-            // If loading more, append to existing skills
-            if (state.currentPage > 1) {
-                const newSkillsHTML = skillsToShow.slice(-CONFIG.ITEMS_PER_PAGE).map(skill => 
-                    createSkillHTML(skill)
-                ).join('');
-                
-                skillsGrid.innerHTML += newSkillsHTML;
-            } else {
-                // First load, replace all skills
-                skillsGrid.innerHTML = skillsToShow.map(skill => 
-                    createSkillHTML(skill)
-                ).join('');
-            }
+            skillsGrid.innerHTML = '';
+            
+            skillsToShow.forEach(skill => {
+                skillsGrid.innerHTML += createSkillHTML(skill);
+            });
+            
+            // Initialize image loading
+            setTimeout(() => {
+                document.querySelectorAll('.skill-image img').forEach(img => {
+                    if (img.complete) {
+                        img.classList.add('loaded');
+                    } else {
+                        img.onload = () => img.classList.add('loaded');
+                        img.onerror = () => {
+                            img.src = CONFIG.DEFAULT_IMAGE;
+                            img.classList.add('loaded');
+                        };
+                    }
+                });
+            }, 100);
         }
         
         function createSkillHTML(skill) {
@@ -1029,8 +2588,27 @@
                 ? `KSh ${skill.hourlyRate.toLocaleString()}/hr`
                 : 'Rate negotiable';
             
+            const isRemote = skill.location === 'Remote';
+            const isPopular = skill.rating >= 4.5 && skill.reviewCount > 30;
+            
             return `
             <div class="skill-card">
+                ${isPopular ? '<span class="skill-badge">Popular</span>' : ''}
+                ${isRemote ? '<span class="skill-badge" style="background: #10b981;">Remote</span>' : ''}
+                
+                <div class="skill-image">
+                    <div class="image-placeholder"></div>
+                    <img src="${skill.image || CONFIG.DEFAULT_IMAGE}" 
+                         alt="${skill.skillTitle}"
+                         onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
+                </div>
+                
+                <div class="provider-avatar">
+                    <img src="${skill.providerAvatar}" 
+                         alt="${skill.providerName}"
+                         onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(skill.providerName || 'Provider')}&background=800000&color=fff'">
+                </div>
+                
                 <div class="skill-content">
                     <h3 class="skill-title">${skill.skillTitle}</h3>
                     <div class="skill-provider">${skill.providerName}</div>
@@ -1044,7 +2622,7 @@
                     
                     <div class="skill-rating">
                         <span style="color: #fbbf24;">${'★'.repeat(Math.floor(skill.rating))}${'☆'.repeat(5 - Math.floor(skill.rating))}</span>
-                        <span style="font-size: 0.75rem; color: var(--gray-500);">(${skill.reviewCount})</span>
+                        <span style="font-size: 0.75rem; color: var(--gray-500);">(${skill.reviewCount} reviews)</span>
                     </div>
                     
                     <div class="skill-description">
@@ -1080,7 +2658,7 @@
         async function viewSkill(skillId) {
             try {
                 // Find skill in state
-                const skill = state.skills.find(s => s.listingId === skillId);
+                const skill = state.allSkills.find(s => s.listingId === skillId);
                 
                 if (!skill) {
                     showToast('Service not found', 'error');
@@ -1093,44 +2671,59 @@
                 
                 document.getElementById('skillModalBody').innerHTML = `
                     <div>
-                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">${skill.skillTitle}</h3>
-                        <div style="font-size: 1rem; font-weight: 600; color: var(--maroon); margin-bottom: 0.5rem;">
-                            ${skill.providerName}
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="width: 80px; height: 80px; border-radius: var(--radius-md); overflow: hidden;">
+                                <img src="${skill.image || CONFIG.DEFAULT_IMAGE}" 
+                                     alt="${skill.skillTitle}"
+                                     style="width: 100%; height: 100%; object-fit: cover;"
+                                     onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
+                            </div>
+                            <div>
+                                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem;">${skill.skillTitle}</h3>
+                                <div style="font-size: 1rem; font-weight: 600; color: var(--maroon);">
+                                    ${skill.providerName}
+                                </div>
+                            </div>
                         </div>
                         
                         <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.5rem;">
-                            <div style="background: var(--gray-100); padding: 0.5rem 1rem; border-radius: var(--radius-md);">
-                                <div style="font-size: 0.875rem; color: var(--gray-500);">Rate</div>
-                                <div style="font-weight: 700; color: var(--maroon);">${rateDisplay}</div>
+                            <div style="background: var(--gray-100); padding: 0.75rem 1rem; border-radius: var(--radius-md); flex: 1; min-width: 200px;">
+                                <div style="font-size: 0.875rem; color: var(--gray-500); margin-bottom: 0.25rem;">Rate</div>
+                                <div style="font-weight: 800; color: var(--maroon);">${rateDisplay}</div>
                             </div>
                             
-                            <div style="background: var(--gray-100); padding: 0.5rem 1rem; border-radius: var(--radius-md);">
-                                <div style="font-size: 0.875rem; color: var(--gray-500);">Location</div>
+                            <div style="background: var(--gray-100); padding: 0.75rem 1rem; border-radius: var(--radius-md); flex: 1; min-width: 200px;">
+                                <div style="font-size: 0.875rem; color: var(--gray-500); margin-bottom: 0.25rem;">Location</div>
                                 <div style="font-weight: 700;">📍 ${skill.location}</div>
                             </div>
-                            
-                            <div style="background: var(--gray-100); padding: 0.5rem 1rem; border-radius: var(--radius-md);">
-                                <div style="font-size: 0.875rem; color: var(--gray-500);">Category</div>
+                        </div>
+                        
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.5rem;">
+                            <div style="background: var(--gray-100); padding: 0.75rem 1rem; border-radius: var(--radius-md);">
+                                <div style="font-size: 0.875rem; color: var(--gray-500); margin-bottom: 0.25rem;">Category</div>
                                 <div style="font-weight: 700;">${skill.skillType}</div>
                             </div>
                             
-                            <div style="background: var(--gray-100); padding: 0.5rem 1rem; border-radius: var(--radius-md);">
-                                <div style="font-size: 0.875rem; color: var(--gray-500);">Rating</div>
+                            <div style="background: var(--gray-100); padding: 0.75rem 1rem; border-radius: var(--radius-md);">
+                                <div style="font-size: 0.875rem; color: var(--gray-500); margin-bottom: 0.25rem;">Rating</div>
                                 <div style="font-weight: 700; color: #f59e0b;">
-                                    ${'★'.repeat(Math.floor(skill.rating))}${'☆'.repeat(5 - Math.floor(skill.rating))} (${skill.reviewCount})
+                                    ${'★'.repeat(Math.floor(skill.rating))}${'☆'.repeat(5 - Math.floor(skill.rating))} (${skill.reviewCount} reviews)
                                 </div>
                             </div>
                         </div>
                         
                         <div style="margin-bottom: 1.5rem;">
-                            <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Service Description</h4>
-                            <p style="color: var(--gray-600); line-height: 1.6;">${skill.description}</p>
+                            <h4 style="font-weight: 600; margin-bottom: 0.75rem; font-size: 1.125rem;">Service Description</h4>
+                            <div style="color: var(--gray-600); line-height: 1.6; white-space: pre-line;">${skill.description}</div>
                         </div>
                         
                         <div style="background: var(--gray-100); padding: 1rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
                             <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                                <div style="width: 40px; height: 40px; background: var(--maroon); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600;">
-                                    ${skill.providerName.charAt(0)}
+                                <div style="width: 60px; height: 60px; border-radius: 50%; overflow: hidden;">
+                                    <img src="${skill.providerAvatar}" 
+                                         alt="${skill.providerName}"
+                                         style="width: 100%; height: 100%; object-fit: cover;"
+                                         onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(skill.providerName || 'Provider')}&background=800000&color=fff'">
                                 </div>
                                 <div>
                                     <div style="font-weight: 600; margin-bottom: 0.25rem;">
@@ -1146,7 +2739,7 @@
                             </button>
                         </div>
                         
-                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.5rem;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;">
                             <button class="btn btn-secondary" onclick="saveSkill('${skill.listingId}')">
                                 ⭐ Save Service
                             </button>
@@ -1157,7 +2750,6 @@
                     </div>
                 `;
                 
-                // Show modal
                 showModal('skillModal');
                 
             } catch (error) {
@@ -1197,20 +2789,24 @@
         }
         
         async function showContactOptions(skillId) {
-            const skill = state.skills.find(s => s.listingId === skillId);
+            const skill = state.allSkills.find(s => s.listingId === skillId);
             
             if (!skill) return;
             
-            const whatsappMessage = `Hi, I'm interested in your "${skill.skillTitle}" service on SokoInn`;
+            const whatsappMessage = `Hi, I'm interested in your "${skill.skillTitle}" service on SokoInn. Could you provide more details?`;
             
             document.getElementById('contactModalBody').innerHTML = `
                 <div>
                     <div style="text-align: center; margin-bottom: 1.5rem;">
-                        <div style="width: 60px; height: 60px; background: var(--maroon); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1.5rem; margin: 0 auto 1rem;">
-                            ${skill.providerName.charAt(0)}
+                        <div style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem;">
+                            <img src="${skill.providerAvatar}" 
+                                 alt="${skill.providerName}"
+                                 style="width: 100%; height: 100%; object-fit: cover;"
+                                 onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(skill.providerName || 'Provider')}&background=800000&color=fff'">
                         </div>
                         <h4 style="font-weight: 600; margin-bottom: 0.25rem;">${skill.providerName}</h4>
                         <p style="color: var(--gray-500); font-size: 0.875rem;">Service: "${skill.skillTitle}"</p>
+                        <p style="color: var(--gray-500); font-size: 0.875rem;">📍 ${skill.location}</p>
                     </div>
                     
                     <div style="display: grid; gap: 0.75rem;">
@@ -1240,8 +2836,14 @@
                     
                     <div style="margin-top: 1.5rem; padding: 1rem; background: var(--gray-100); border-radius: var(--radius-md);">
                         <p style="font-size: 0.875rem; color: var(--gray-600); text-align: center;">
-                            When contacting, mention you found them on SokoInn
+                            When contacting, mention you found them on SokoInn and discuss:
                         </p>
+                        <ul style="font-size: 0.75rem; color: var(--gray-600); padding-left: 1rem; margin-top: 0.5rem;">
+                            <li>Service requirements</li>
+                            <li>Timeline</li>
+                            <li>Rate confirmation</li>
+                            <li>Location details</li>
+                        </ul>
                     </div>
                 </div>
             `;
@@ -1255,12 +2857,12 @@
                 event.stopPropagation();
             }
             
-            const skill = state.skills.find(s => s.listingId === skillId);
+            const skill = state.allSkills.find(s => s.listingId === skillId);
             
             if (!skill) return;
             
             if (method === 'whatsapp' && skill.providerWhatsapp) {
-                const message = `Hi, I'm interested in your "${skill.skillTitle}" service on SokoInn`;
+                const message = `Hi, I'm interested in your "${skill.skillTitle}" service on SokoInn. Could you provide more details?`;
                 const url = `https://wa.me/${skill.providerWhatsapp}?text=${encodeURIComponent(message)}`;
                 window.open(url, '_blank');
                 showToast(`Opening WhatsApp...`, 'info');
@@ -1287,21 +2889,54 @@
             return phone;
         }
         
-        function offerSkill() {
+        function showOfferServiceModal() {
             showToast('Offer a service feature coming soon!', 'info');
         }
         
-        function refreshSkills(event) {
+        function showAllServices(event) {
             if (event) event.preventDefault();
             state.currentPage = 1;
             state.hasMore = true;
-            loadSkills();
+            
+            // Reset search and filters
+            state.searchQuery = '';
+            state.filters = {
+                category: 'all',
+                location: 'all',
+                rate: 'all',
+                rating: 'all'
+            };
+            
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.value = '';
+            }
+            
+            // Reset filter dropdowns
+            document.getElementById('categoryFilter').value = 'all';
+            document.getElementById('locationFilter').value = 'all';
+            document.getElementById('rateFilter').value = 'all';
+            document.getElementById('ratingFilter').value = 'all';
+            
+            // Show all skills
+            state.filteredSkills = [...state.allSkills];
+            
+            // Update section title
+            const sectionTitle = document.querySelector('.section-title');
+            const locationDisplay = document.querySelector('.location-display');
+            if (sectionTitle && locationDisplay) {
+                sectionTitle.textContent = 'All Services';
+                locationDisplay.innerHTML = `in <span id="currentLocationText">${state.detectedCity || 'Kenya'}</span>`;
+            }
+            
+            renderSkills();
+            document.getElementById('skills').scrollIntoView({ behavior: 'smooth' });
         }
         
         function loadMoreSkills() {
             if (!state.isLoading && state.hasMore) {
                 state.currentPage++;
-                loadSkills();
+                loadSkillsFromBackend();
             }
         }
         
@@ -1344,8 +2979,6 @@
             if (modal) {
                 modal.classList.remove('active');
                 document.body.style.overflow = '';
-                
-                // Clear modal content for skill modal
                 if (modalId === 'skillModal') {
                     document.getElementById('skillModalBody').innerHTML = '';
                 }
@@ -1353,17 +2986,12 @@
         }
         
         function showToast(message, type = 'info') {
-            // Remove existing toast
             const existingToast = document.querySelector('.toast');
-            if (existingToast) {
-                existingToast.remove();
-            }
+            if (existingToast) existingToast.remove();
             
-            // Create toast element
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
             toast.textContent = message;
-            
             document.body.appendChild(toast);
             
             setTimeout(() => {
@@ -1382,11 +3010,25 @@
         // Close modals with Escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
-                const modals = document.querySelectorAll('.modal.active');
-                modals.forEach(modal => {
-                    closeModal(modal.id);
-                });
+                if (state.chatbotOpen) {
+                    toggleChatbot();
+                } else {
+                    const modals = document.querySelectorAll('.modal.active');
+                    modals.forEach(modal => closeModal(modal.id));
+                }
             }
+        });
+        
+        // Initialize notification
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                if (!state.chatbotOpen && state.unreadMessages === 0) {
+                    state.unreadMessages = 1;
+                    const notification = document.getElementById('chatbotNotification');
+                    notification.textContent = '1';
+                    notification.classList.remove('hidden');
+                }
+            }, 3000);
         });
     </script>
 </body>
