@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.5, maximum-scale=1.0, user-scalable=no">
+    <title>Skills & Services | SokoInn Marketplace</title>
+    <style>
+        :root {
+            --primary: #10b981;
+            --white: #FFFFFF;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-500: #737373;
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --radius-md: 8px;
+            --transition: all 0.2s ease;
+        }
+        
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-md);
+            padding: 1rem 0;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--primary);
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 1.5rem;
+            padding: 2rem 0;
+        }
+        
+        @media (min-width: 768px) {
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .skills-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .skill-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            padding: 1.5rem;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .skill-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+        
+        .skill-provider {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .skill-rate {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .skill-location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray-500);
+            margin-bottom: 1rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            background: #059669;
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-top: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-around;
+            padding: 0.75rem 0;
+            z-index: 1000;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.25rem;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+            text-decoration: none;
+            color: var(--gray-500);
+            min-width: 60px;
+        }
+        
+        .nav-item.active {
+            color: var(--primary);
+            background: rgba(16, 185, 129, 0.1);
+        }
+        
+        .nav-icon {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .nav-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .footer {
+            background: #1f2937;
+            color: var(--white);
+            padding: 3rem 0 5rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--white);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">S</span>
+                <span>SokoInn</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <h1 class="page-title">🔧 Skills & Services</h1>
+        
+        <div class="skills-grid" id="skillsGrid">
+            <!-- Skills will be loaded dynamically -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 2rem;">
+                <div>
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">SokoInn</h3>
+                    <p style="color: #d1d5db; font-size: 0.875rem;">
+                        Connect with skilled professionals.
+                    </p>
+                </div>
+                <div>
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">🛍️ Products</a></li>
+                        <li><a href="jobs.html">💼 Jobs</a></li>
+                        <li><a href="skills.html">🔧 Skills</a></li>
+                        <li><a href="rentals.html">🏠 Rentals</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:support@sokoinn.com">📧 support@sokoinn.com</a></li>
+                        <li><a href="tel:+254784599322">📞 +254 784 599 322</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 1.5rem; border-top: 1px solid #374151;">
+                <p style="color: #9ca3af; font-size: 0.75rem;">
+                    &copy; 2024 SokoInn Marketplace. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <span class="nav-icon">🛍️</span>
+            <span class="nav-label">Shop</span>
+        </a>
+        <a href="jobs.html" class="nav-item">
+            <span class="nav-icon">💼</span>
+            <span class="nav-label">Jobs</span>
+        </a>
+        <a href="skills.html" class="nav-item active">
+            <span class="nav-icon">🔧</span>
+            <span class="nav-label">Skills</span>
+        </a>
+        <a href="rentals.html" class="nav-item">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">Rentals</span>
+        </a>
+    </nav>
+
+    <script>
+        const CONFIG = {
+            BACKEND_URL: 'https://script.google.com/macros/s/AKfycbxFV5ZB1KikI62uxGKU3XWZCk6nOUqE05R0MSK6LuzRKQWqwidMVQ1yDvEQ045vCmW4_w/exec'
+        };
+
+        async function loadSkills() {
+            try {
+                const response = await fetch(`${CONFIG.BACKEND_URL}?action=getSkills&limit=20`);
+                const data = await response.json();
+                
+                if (data.success && data.data) {
+                    renderSkills(data.data);
+                } else {
+                    renderSampleSkills();
+                }
+            } catch (error) {
+                console.error('Error loading skills:', error);
+                renderSampleSkills();
+            }
+        }
+
+        function renderSkills(skills) {
+            const skillsGrid = document.getElementById('skillsGrid');
+            
+            if (skills.length === 0) {
+                skillsGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;">🔧</div>
+                        <h3 style="margin-bottom: 0.5rem;">No services available</h3>
+                        <p style="color: var(--gray-500);">Check back later for skilled professionals</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            skillsGrid.innerHTML = skills.map(skill => `
+                <div class="skill-card">
+                    <h3 class="skill-title">${skill.skillTitle || skill.title}</h3>
+                    <div class="skill-provider">${skill.providerName || 'Service Provider'}</div>
+                    <div class="skill-rate">
+                        KSh ${(skill.hourlyRate || 0).toLocaleString()}/hr
+                    </div>
+                    <div class="skill-location">
+                        📍 ${skill.serviceArea || skill.location || 'Nairobi'}
+                    </div>
+                    <button class="btn" onclick="viewSkill('${skill.listingId}')">
+                        Hire Now
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function renderSampleSkills() {
+            const sampleSkills = [
+                {
+                    listingId: 'SKILL001',
+                    skillTitle: 'Professional Plumbing',
+                    providerName: 'James Plumbing Services',
+                    hourlyRate: 1500,
+                    serviceArea: 'Nairobi'
+                },
+                {
+                    listingId: 'SKILL002',
+                    skillTitle: 'Electrical Installation',
+                    providerName: 'Electric Solutions Ltd',
+                    hourlyRate: 2000,
+                    serviceArea: 'Nairobi'
+                },
+                {
+                    listingId: 'SKILL003',
+                    skillTitle: 'Graphic Design',
+                    providerName: 'Creative Designs',
+                    hourlyRate: 1200,
+                    serviceArea: 'Remote'
+                }
+            ];
+            
+            renderSkills(sampleSkills);
+        }
+
+        function viewSkill(skillId) {
+            alert(`Viewing skill ${skillId} - Feature coming soon!`);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', loadSkills);
+    </script>
+</body>
+</html>
