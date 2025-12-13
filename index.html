@@ -1351,7 +1351,7 @@
         </div>
     </div>
 
-    <script>
+        <script>
         // ==================== CONFIGURATION ====================
         const CONFIG = {
             BACKEND_URL: 'https://script.google.com/macros/s/AKfycbzrOY9Lqu1feQJmqgZXn368Lo-HQ14-1LVRsY5pob7hNlo7uo2YlwlseeiI6GHTAanWnw/exec',
@@ -1366,12 +1366,11 @@
             filteredProducts: [],
             currentPage: 1,
             isLoading: false,
-            hasMore: true,
+            hasMore: false,
             selectedCategory: 'all',
             searchQuery: '',
             currentSlide: 0,
             heroInterval: null,
-            imageObserver: null,
             currentImages: [],
             currentImageIndex: 0,
             chatbotOpen: false,
@@ -1383,9 +1382,15 @@
             initHeroSlideshow();
             initScrollDetection();
             initBottomNav();
-            initImageLoading();
             initChatbot();
-            loadProducts();
+            
+            // Load sample products immediately
+            loadSampleProducts();
+            
+            // Also try to load from backend in background
+            setTimeout(() => {
+                loadProductsFromBackend();
+            }, 1000);
         });
         
         // ==================== ENHANCED HERO SLIDESHOW ====================
@@ -1718,70 +1723,68 @@
         }
         
         // ==================== DATA LOADING ====================
-        async function loadProducts() {
-            if (state.isLoading || !state.hasMore) return;
+        async function loadProductsFromBackend() {
+            if (state.isLoading) return;
             
             state.isLoading = true;
-            document.getElementById('loadingSpinner').classList.remove('hidden');
-            document.getElementById('loadMoreBtn').disabled = true;
             
             try {
+                console.log('Attempting to fetch products from backend...');
+                
                 const response = await fetch(
-                    `${CONFIG.BACKEND_URL}?action=getProducts&limit=${CONFIG.ITEMS_PER_PAGE}&page=${state.currentPage}`
+                    `${CONFIG.BACKEND_URL}?action=getProducts&limit=${CONFIG.ITEMS_PER_PAGE}&page=1`,
+                    {
+                        method: 'GET',
+                        mode: 'cors'
+                    }
                 );
                 
-                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                console.log('Response status:', response.status);
                 
-                const data = await response.json();
-                
-                if (data.success && data.data && Array.isArray(data.data)) {
-                    const newProducts = data.data.map(product => ({
-                        ...product,
-                        images: Array.isArray(product.images) && product.images.length > 0 ? product.images : [CONFIG.DEFAULT_IMAGE],
-                        rating: product.rating || 4.0,
-                        reviewCount: product.reviewCount || 0,
-                        category: product.category || 'Uncategorized'
-                    }));
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Received data from backend:', data);
                     
-                    if (state.currentPage === 1) {
+                    if (data.success && data.data && Array.isArray(data.data) && data.data.length > 0) {
+                        const newProducts = data.data.map(product => ({
+                            ...product,
+                            images: Array.isArray(product.images) && product.images.length > 0 ? product.images : [CONFIG.DEFAULT_IMAGE],
+                            rating: product.rating || 4.0,
+                            reviewCount: product.reviewCount || 0,
+                            category: product.category || 'Uncategorized'
+                        }));
+                        
+                        // Replace sample products with real ones
                         state.products = newProducts;
-                    } else {
-                        state.products = [...state.products, ...newProducts];
+                        state.filteredProducts = [...newProducts];
+                        state.hasMore = newProducts.length === CONFIG.ITEMS_PER_PAGE;
+                        
+                        renderProducts();
+                        showToast('Products loaded from server!', 'success');
                     }
-                    
-                    state.filteredProducts = [...state.products];
-                    state.hasMore = newProducts.length === CONFIG.ITEMS_PER_PAGE;
-                    
-                    renderProducts();
-                } else {
-                    throw new Error('Invalid data format');
                 }
             } catch (error) {
-                console.error('Error loading products:', error);
-                showToast('Failed to load products. Please try again.', 'error');
-                if (state.currentPage === 1) {
-                    loadSampleProducts();
-                }
+                console.error('Error loading products from backend:', error);
+                // Keep showing sample products
             } finally {
                 state.isLoading = false;
-                document.getElementById('loadingSpinner').classList.add('hidden');
-                document.getElementById('loadMoreBtn').disabled = false;
-                
-                const loadMoreBtn = document.getElementById('loadMoreBtn');
-                if (!state.hasMore && state.products.length > 0) {
-                    loadMoreBtn.textContent = 'No more products';
-                    loadMoreBtn.disabled = true;
-                } else {
-                    loadMoreBtn.textContent = 'Load More Products';
-                }
+            }
+        }
+        
+        function loadProducts() {
+            // For now, always load sample products
+            // Backend loading is handled separately in loadProductsFromBackend()
+            if (state.products.length === 0) {
+                loadSampleProducts();
             }
         }
         
         function loadSampleProducts() {
+            console.log('Loading sample products...');
             const sampleProducts = [
                 {
                     listingId: 'PROD001',
-                    title: 'Genuine Leather Handbag',
+                    title: 'Genuine Leather Handbag - Premium Quality',
                     price: 4500,
                     sellerName: 'Luxury Bags Kenya',
                     sellerVerification: 'verified',
@@ -1798,12 +1801,13 @@
                     rating: 4.5,
                     reviewCount: 24,
                     category: 'Fashion',
-                    description: 'Premium genuine leather handbag with multiple compartments.',
-                    stock: 5
+                    description: 'Premium genuine leather handbag with multiple compartments, perfect for work and casual use. Water-resistant and durable.',
+                    stock: 5,
+                    condition: 'New'
                 },
                 {
                     listingId: 'PROD002',
-                    title: 'Wireless Bluetooth Headphones',
+                    title: 'Wireless Bluetooth Headphones - Noise Cancelling',
                     price: 2800,
                     sellerName: 'Tech Gadgets KE',
                     sellerVerification: 'verified',
@@ -1819,12 +1823,13 @@
                     rating: 4.2,
                     reviewCount: 36,
                     category: 'Electronics',
-                    description: 'High-quality wireless headphones with noise cancellation.',
-                    stock: 8
+                    description: 'High-quality wireless headphones with active noise cancellation. 30-hour battery life, comfortable for all-day use.',
+                    stock: 8,
+                    condition: 'New'
                 },
                 {
                     listingId: 'PROD003',
-                    title: 'Organic Coffee Beans',
+                    title: 'Organic Coffee Beans - Kenyan AA Grade',
                     price: 1200,
                     sellerName: 'Kenya Coffee Co.',
                     sellerVerification: 'verified',
@@ -1834,17 +1839,19 @@
                     sellerPhone: '254734567890',
                     sellerWhatsapp: '254734567890',
                     images: [
-                        'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500&q=80'
+                        'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500&q=80',
+                        'https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?w=500&q=80'
                     ],
                     rating: 4.7,
                     reviewCount: 42,
-                    category: 'Food',
-                    description: 'Fresh organic coffee beans from Kenyan highlands.',
-                    stock: 15
+                    category: 'Food & Beverages',
+                    description: 'Fresh organic coffee beans from Kenyan highlands. AA grade, perfect for espresso or filter coffee. 500g pack.',
+                    stock: 15,
+                    condition: 'New'
                 },
                 {
                     listingId: 'PROD004',
-                    title: "Men's Running Shoes",
+                    title: "Men's Running Shoes - Nike Air Max",
                     price: 3500,
                     sellerName: 'Sports Gear Kenya',
                     sellerVerification: 'verified',
@@ -1854,13 +1861,191 @@
                     sellerPhone: '254745678901',
                     sellerWhatsapp: '254745678901',
                     images: [
-                        'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80'
+                        'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80',
+                        'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500&q=80'
                     ],
                     rating: 4.4,
                     reviewCount: 31,
-                    category: 'Sports',
-                    description: 'Comfortable running shoes for men.',
-                    stock: 3
+                    category: 'Sports & Fitness',
+                    description: 'Comfortable running shoes for men with excellent cushioning. Size 8-12 available. Perfect for jogging and gym.',
+                    stock: 3,
+                    condition: 'New'
+                },
+                {
+                    listingId: 'PROD005',
+                    title: 'Smart Watch - Fitness Tracker',
+                    price: 3200,
+                    sellerName: 'Gadget World',
+                    sellerVerification: 'verified',
+                    sellerRating: 4.1,
+                    sellerTotalReviews: 18,
+                    sellerLocation: 'Nairobi',
+                    sellerPhone: '254756789012',
+                    sellerWhatsapp: '254756789012',
+                    images: [
+                        'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80',
+                        'https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&q=80'
+                    ],
+                    rating: 4.1,
+                    reviewCount: 18,
+                    category: 'Electronics',
+                    description: 'Smart watch with heart rate monitor, sleep tracking, and smartphone notifications. Water resistant.',
+                    stock: 6,
+                    condition: 'New'
+                },
+                {
+                    listingId: 'PROD006',
+                    title: 'Kitchen Blender - 1000W Power',
+                    price: 2200,
+                    sellerName: 'Home Appliances Ltd',
+                    sellerVerification: 'verified',
+                    sellerRating: 4.6,
+                    sellerTotalReviews: 29,
+                    sellerLocation: 'Nakuru',
+                    sellerPhone: '254767890123',
+                    sellerWhatsapp: '254767890123',
+                    images: [
+                        'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=500&q=80',
+                        'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=500&q=80'
+                    ],
+                    rating: 4.6,
+                    reviewCount: 29,
+                    category: 'Home & Kitchen',
+                    description: 'Powerful kitchen blender with 1000W motor. Perfect for smoothies, soups, and sauces. Includes 2-year warranty.',
+                    stock: 10,
+                    condition: 'New'
+                },
+                {
+                    listingId: 'PROD007',
+                    title: "Women's Handbag - Designer Collection",
+                    price: 2800,
+                    sellerName: 'Fashion Hub KE',
+                    sellerVerification: 'verified',
+                    sellerRating: 4.3,
+                    sellerTotalReviews: 22,
+                    sellerLocation: 'Nairobi',
+                    sellerPhone: '254778901234',
+                    sellerWhatsapp: '254778901234',
+                    images: [
+                        'https://images.unsplash.com/photo-1594221708779-94832b432bbd?w=500&q=80',
+                        'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500&q=80'
+                    ],
+                    rating: 4.3,
+                    reviewCount: 22,
+                    category: 'Fashion',
+                    description: "Trendy women's handbag with multiple compartments. Available in black, brown, and red colors.",
+                    stock: 7,
+                    condition: 'New'
+                },
+                {
+                    listingId: 'PROD008',
+                    title: 'Office Desk - Wooden Executive',
+                    price: 8500,
+                    sellerName: 'Furniture Kenya',
+                    sellerVerification: 'verified',
+                    sellerRating: 4.5,
+                    sellerTotalReviews: 15,
+                    sellerLocation: 'Nairobi',
+                    sellerPhone: '254789012345',
+                    sellerWhatsapp: '254789012345',
+                    images: [
+                        'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=500&q=80',
+                        'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=500&q=80'
+                    ],
+                    rating: 4.5,
+                    reviewCount: 15,
+                    category: 'Furniture',
+                    description: 'Executive wooden office desk with drawers and cable management. Dimensions: 150cm x 75cm x 75cm.',
+                    stock: 2,
+                    condition: 'New'
+                },
+                {
+                    listingId: 'PROD009',
+                    title: 'Samsung Galaxy S21 - 128GB',
+                    price: 45000,
+                    sellerName: 'Mobile World Kenya',
+                    sellerVerification: 'verified',
+                    sellerRating: 4.7,
+                    sellerTotalReviews: 58,
+                    sellerLocation: 'Nairobi',
+                    sellerPhone: '254790123456',
+                    sellerWhatsapp: '254790123456',
+                    images: [
+                        'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500&q=80',
+                        'https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=500&q=80'
+                    ],
+                    rating: 4.7,
+                    reviewCount: 58,
+                    category: 'Electronics',
+                    description: 'Samsung Galaxy S21 5G, 128GB storage, 8GB RAM. Original box and accessories included. 1-year warranty.',
+                    stock: 4,
+                    condition: 'New'
+                },
+                {
+                    listingId: 'PROD010',
+                    title: 'Men\'s Formal Suit - 3 Piece',
+                    price: 6500,
+                    sellerName: 'Classic Tailors',
+                    sellerVerification: 'verified',
+                    sellerRating: 4.4,
+                    sellerTotalReviews: 27,
+                    sellerLocation: 'Nairobi',
+                    sellerPhone: '254701234567',
+                    sellerWhatsapp: '254701234567',
+                    images: [
+                        'https://images.unsplash.com/photo-1594938374187-7f7d7e8a1c8e?w=500&q=80',
+                        'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&q=80'
+                    ],
+                    rating: 4.4,
+                    reviewCount: 27,
+                    category: 'Fashion',
+                    description: 'Premium 3-piece men\'s formal suit. Available in navy blue, charcoal gray, and black. Tailored fit.',
+                    stock: 6,
+                    condition: 'New'
+                },
+                {
+                    listingId: 'PROD011',
+                    title: 'Laptop Stand - Aluminum Adjustable',
+                    price: 1800,
+                    sellerName: 'Office Solutions KE',
+                    sellerVerification: 'verified',
+                    sellerRating: 4.3,
+                    sellerTotalReviews: 19,
+                    sellerLocation: 'Nairobi',
+                    sellerPhone: '254712345679',
+                    sellerWhatsapp: '254712345679',
+                    images: [
+                        'https://images.unsplash.com/photo-1586950012036-b957f2c7cbfa?w=500&q=80',
+                        'https://images.unsplash.com/photo-1586953208448-b95a87b4e2e5?w=500&q=80'
+                    ],
+                    rating: 4.3,
+                    reviewCount: 19,
+                    category: 'Office Supplies',
+                    description: 'Aluminum laptop stand with adjustable height. Ergonomic design for comfortable working.',
+                    stock: 12,
+                    condition: 'New'
+                },
+                {
+                    listingId: 'PROD012',
+                    title: 'Yoga Mat - Premium Non-Slip',
+                    price: 1500,
+                    sellerName: 'FitLife Kenya',
+                    sellerVerification: 'verified',
+                    sellerRating: 4.6,
+                    sellerTotalReviews: 33,
+                    sellerLocation: 'Nairobi',
+                    sellerPhone: '254723456780',
+                    sellerWhatsapp: '254723456780',
+                    images: [
+                        'https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=500&q=80',
+                        'https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?w=500&q=80'
+                    ],
+                    rating: 4.6,
+                    reviewCount: 33,
+                    category: 'Sports & Fitness',
+                    description: 'Premium non-slip yoga mat with carrying strap. Extra thick for joint protection. Available in 5 colors.',
+                    stock: 9,
+                    condition: 'New'
                 }
             ];
             
@@ -1868,6 +2053,11 @@
             state.filteredProducts = [...sampleProducts];
             state.hasMore = false;
             renderProducts();
+            
+            // Update load more button
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            loadMoreBtn.textContent = 'No more products';
+            loadMoreBtn.disabled = true;
         }
         
         // ==================== RENDERING ====================
@@ -1886,21 +2076,13 @@
                 return;
             }
             
-            let newProductsHTML = '';
+            // Clear the grid
+            productGrid.innerHTML = '';
             
-            if (state.currentPage > 1) {
-                const startIndex = (state.currentPage - 1) * CONFIG.ITEMS_PER_PAGE;
-                const newProducts = productsToShow.slice(startIndex);
-                newProductsHTML = newProducts.map(product => 
-                    createProductHTML(product)
-                ).join('');
-                
-                productGrid.innerHTML += newProductsHTML;
-            } else {
-                productGrid.innerHTML = productsToShow.map(product => 
-                    createProductHTML(product)
-                ).join('');
-            }
+            // Add all products to show
+            productsToShow.forEach(product => {
+                productGrid.innerHTML += createProductHTML(product);
+            });
             
             // Initialize image click events
             setTimeout(() => {
@@ -2135,6 +2317,12 @@
                                 <p style="color: var(--gray-600); line-height: 1.6;">${product.description}</p>
                             </div>
                             ` : ''}
+                            
+                            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
+                                ${product.category ? `<span style="background: var(--gray-200); padding: 0.25rem 0.5rem; border-radius: var(--radius-sm); font-size: 0.75rem;">${product.category}</span>` : ''}
+                                ${product.condition ? `<span style="background: var(--gray-200); padding: 0.25rem 0.5rem; border-radius: var(--radius-sm); font-size: 0.75rem;">${product.condition}</span>` : ''}
+                                ${product.stock ? `<span style="background: var(--gray-200); padding: 0.25rem 0.5rem; border-radius: var(--radius-sm); font-size: 0.75rem;">Stock: ${product.stock}</span>` : ''}
+                            </div>
                             
                             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.5rem;">
                                 <button class="btn btn-secondary" onclick="saveProduct('${product.listingId}')">
