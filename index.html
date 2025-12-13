@@ -66,12 +66,71 @@
             cursor: pointer;
         }
         
-        /* ==================== SEARCH BAR ==================== */
+        /* ==================== RESPONSIVE HEADER ==================== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            padding: 0.75rem 0;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 640px) {
+            .header-content {
+                gap: 0.5rem;
+            }
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: var(--maroon);
+            text-decoration: none;
+            min-width: max-content;
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--maroon);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        /* ==================== SEARCH BAR - RESPONSIVE ==================== */
         .search-container {
             position: relative;
             flex: 1;
+            min-width: 0;
             max-width: 500px;
             margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+            .search-container {
+                order: 3;
+                width: 100%;
+                margin-top: 0.5rem;
+                max-width: none;
+            }
         }
         
         .search-box {
@@ -82,6 +141,7 @@
             border-radius: var(--radius-md);
             padding: 0.5rem;
             box-shadow: var(--shadow-sm);
+            min-width: 0;
         }
         
         .search-input {
@@ -91,6 +151,7 @@
             font-size: 0.875rem;
             outline: none;
             background: transparent;
+            min-width: 0;
         }
         
         .search-button {
@@ -102,6 +163,15 @@
             margin-left: 0.5rem;
             font-size: 0.875rem;
             font-weight: 600;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        @media (max-width: 480px) {
+            .search-button {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.75rem;
+            }
         }
         
         .search-suggestions {
@@ -147,11 +217,13 @@
             height: 40px;
             border-radius: var(--radius-sm);
             object-fit: cover;
+            flex-shrink: 0;
         }
         
         .suggestion-details {
             flex: 1;
             min-width: 0;
+            overflow: hidden;
         }
         
         .suggestion-title {
@@ -172,6 +244,9 @@
         .suggestion-location {
             font-size: 0.75rem;
             color: var(--gray-500);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .no-suggestions {
@@ -181,26 +256,75 @@
             font-size: 0.875rem;
         }
         
-        /* ==================== LOCATION BADGE ==================== */
+        /* ==================== LOCATION BADGE - SUBTLE ==================== */
         .location-badge {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.25rem 0.75rem;
+            padding: 0.25rem 0.5rem;
             background: var(--gray-100);
             border-radius: var(--radius-md);
             font-size: 0.75rem;
             color: var(--gray-700);
             border: 1px solid var(--gray-300);
+            white-space: nowrap;
+            flex-shrink: 0;
         }
         
-        .location-loading {
-            animation: pulse 1.5s infinite;
+        @media (max-width: 768px) {
+            .location-badge {
+                font-size: 0.7rem;
+                padding: 0.25rem;
+            }
         }
         
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+        @media (max-width: 480px) {
+            .location-badge {
+                font-size: 0.65rem;
+                min-width: max-content;
+            }
+        }
+        
+        /* ==================== HEADER ACTIONS ==================== */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .header-actions {
+                order: 2;
+                margin-left: auto;
+            }
+        }
+        
+        .header-button {
+            background: var(--maroon);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: 0.5rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 480px) {
+            .header-button {
+                padding: 0.5rem;
+                font-size: 0.7rem;
+            }
+            
+            .header-button span:not(.mobile-hidden) {
+                display: none;
+            }
+            
+            .header-button .mobile-hidden {
+                display: inline;
+            }
         }
         
         /* ==================== BOTTOM NAVIGATION ==================== */
@@ -246,28 +370,28 @@
             font-weight: 500;
         }
         
-        /* ==================== IMPROVED HERO SECTION FOR ADS ==================== */
+        /* ==================== IMPROVED HERO SECTION ==================== */
         .hero {
             position: relative;
-            height: 400px;
+            height: 300px;
             overflow: hidden;
             color: var(--white);
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
         
         @media (min-width: 768px) {
             .hero {
-                height: 450px;
+                height: 350px;
             }
         }
         
         @media (min-width: 1024px) {
             .hero {
-                height: 500px;
+                height: 400px;
             }
         }
         
@@ -310,47 +434,98 @@
             position: relative;
             z-index: 2;
             max-width: 900px;
-            padding: 2rem;
+            padding: 1.5rem;
+            width: 90%;
+        }
+        
+        @media (max-width: 480px) {
+            .hero-content {
+                padding: 1rem;
+            }
         }
         
         .hero h1 {
-            font-size: 2.25rem;
+            font-size: 1.5rem;
             font-weight: 800;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             line-height: 1.2;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
         }
         
+        @media (min-width: 640px) {
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+        }
+        
         .hero p {
-            font-size: 1.125rem;
+            font-size: 0.875rem;
             opacity: 0.95;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        @media (min-width: 768px) {
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .hero p {
+                font-size: 1.125rem;
+            }
         }
         
         .hero-badge {
             display: inline-block;
             background: var(--maroon);
             color: white;
-            padding: 0.5rem 1rem;
+            padding: 0.4rem 0.8rem;
             border-radius: var(--radius-sm);
-            font-size: 0.875rem;
+            font-size: 0.75rem;
             font-weight: 600;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        @media (min-width: 768px) {
+            .hero-badge {
+                font-size: 0.875rem;
+                padding: 0.5rem 1rem;
+            }
         }
         
         .hero-cta {
             display: inline-block;
             background: white;
             color: var(--maroon);
-            padding: 0.75rem 2rem;
+            padding: 0.6rem 1.5rem;
             border-radius: var(--radius-md);
             font-weight: 700;
-            font-size: 1rem;
-            margin-top: 1rem;
+            font-size: 0.875rem;
+            margin-top: 0.75rem;
             transition: var(--transition);
             text-decoration: none;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        @media (min-width: 768px) {
+            .hero-cta {
+                padding: 0.75rem 2rem;
+                font-size: 1rem;
+            }
         }
         
         .hero-cta:hover {
@@ -361,7 +536,7 @@
         
         .hero-indicators {
             position: absolute;
-            bottom: 1.5rem;
+            bottom: 1rem;
             left: 0;
             right: 0;
             display: flex;
@@ -371,12 +546,19 @@
         }
         
         .hero-indicator {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.5);
             cursor: pointer;
             transition: var(--transition);
+        }
+        
+        @media (min-width: 768px) {
+            .hero-indicator {
+                width: 10px;
+                height: 10px;
+            }
         }
         
         .hero-indicator.active {
@@ -384,90 +566,83 @@
             transform: scale(1.2);
         }
         
-        @media (max-width: 640px) {
-            .hero {
-                height: 350px;
-            }
-            
-            .hero h1 {
-                font-size: 1.75rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
-        }
-        
-        /* ==================== HEADER ==================== */
-        .header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: var(--white);
-            border-bottom: 1px solid var(--gray-200);
-            box-shadow: var(--shadow-sm);
-            padding: 0.75rem 0;
-        }
-        
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 700;
-            font-size: 1.125rem;
-            color: var(--maroon);
-            text-decoration: none;
-        }
-        
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--maroon);
-            color: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-sm);
-            font-weight: 700;
-        }
-        
-        /* ==================== PRODUCT GRID ==================== */
+        /* ==================== PRODUCTS SECTION ==================== */
         .products-section {
-            padding: 2rem 0 1rem;
+            padding: 1.5rem 0 1rem;
             background: var(--gray-100);
         }
         
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        
+        @media (max-width: 480px) {
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+        
         .section-title {
-            font-size: 1.375rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: var(--black);
-            margin-bottom: 1.5rem;
-            text-align: center;
+            margin: 0;
+        }
+        
+        @media (min-width: 768px) {
+            .section-title {
+                font-size: 1.375rem;
+            }
+        }
+        
+        .location-display {
+            color: var(--maroon);
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        @media (max-width: 480px) {
+            .location-display {
+                font-size: 0.8rem;
+            }
+        }
+        
+        .view-all-link {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--maroon);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        
+        @media (max-width: 480px) {
+            .view-all-link {
+                font-size: 0.8rem;
+            }
         }
         
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(1, 1fr);
-            gap: 1rem;
-        }
-        
-        @media (min-width: 320px) {
-            .product-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.75rem;
-            }
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
         }
         
         @media (min-width: 480px) {
             .product-grid {
                 gap: 1rem;
+            }
+        }
+        
+        @media (min-width: 640px) {
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
             }
         }
         
@@ -501,7 +676,13 @@
             display: flex;
             flex-direction: column;
             height: 100%;
-            min-height: 320px;
+            min-height: 280px;
+        }
+        
+        @media (max-width: 360px) {
+            .product-card {
+                min-height: 260px;
+            }
         }
         
         .product-card:hover {
@@ -537,10 +718,17 @@
             right: 0.5rem;
             background: rgba(0, 0, 0, 0.7);
             color: white;
-            padding: 0.25rem 0.5rem;
+            padding: 0.2rem 0.4rem;
             border-radius: var(--radius-sm);
-            font-size: 0.75rem;
+            font-size: 0.625rem;
             z-index: 2;
+        }
+        
+        @media (min-width: 768px) {
+            .image-counter {
+                font-size: 0.75rem;
+                padding: 0.25rem 0.5rem;
+            }
         }
         
         .product-badge {
@@ -549,11 +737,18 @@
             left: 0.5rem;
             background: var(--maroon);
             color: var(--white);
-            padding: 0.25rem 0.5rem;
+            padding: 0.2rem 0.4rem;
             border-radius: var(--radius-sm);
-            font-size: 0.625rem;
+            font-size: 0.5rem;
             font-weight: 600;
             z-index: 2;
+        }
+        
+        @media (min-width: 768px) {
+            .product-badge {
+                font-size: 0.625rem;
+                padding: 0.25rem 0.5rem;
+            }
         }
         
         .product-content {
@@ -561,33 +756,61 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+            min-height: 0;
+        }
+        
+        @media (max-width: 360px) {
+            .product-content {
+                padding: 0.5rem;
+            }
         }
         
         .product-title {
-            font-size: 0.8125rem;
+            font-size: 0.75rem;
             font-weight: 600;
             margin-bottom: 0.25rem;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            min-height: 2.5rem;
+            min-height: 2.25rem;
+            line-height: 1.3;
+        }
+        
+        @media (min-width: 768px) {
+            .product-title {
+                font-size: 0.8125rem;
+                min-height: 2.5rem;
+            }
         }
         
         .product-price {
-            font-size: 0.9375rem;
+            font-size: 0.8125rem;
             font-weight: 700;
             color: var(--maroon);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        @media (min-width: 768px) {
+            .product-price {
+                font-size: 0.9375rem;
+            }
         }
         
         .product-seller {
-            font-size: 0.75rem;
+            font-size: 0.625rem;
             color: var(--gray-500);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
             display: flex;
             align-items: center;
             gap: 0.25rem;
+            min-height: 1.25rem;
+        }
+        
+        @media (min-width: 768px) {
+            .product-seller {
+                font-size: 0.75rem;
+            }
         }
         
         .seller-verified {
@@ -599,13 +822,14 @@
             display: flex;
             align-items: center;
             gap: 0.25rem;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
         }
         
         .product-actions {
             display: flex;
             gap: 0.5rem;
             margin-top: auto;
+            min-height: 2.5rem;
         }
         
         .btn {
@@ -614,14 +838,21 @@
             justify-content: center;
             padding: 0.5rem;
             border-radius: var(--radius-sm);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
             transition: var(--transition);
             white-space: nowrap;
-            min-height: 36px;
+            min-height: 32px;
             border: none;
             cursor: pointer;
             font-family: inherit;
+        }
+        
+        @media (min-width: 768px) {
+            .btn {
+                font-size: 0.75rem;
+                min-height: 36px;
+            }
         }
         
         .btn-primary {
@@ -637,7 +868,8 @@
         .btn-secondary {
             background: var(--gray-100);
             color: var(--black);
-            min-width: 36px;
+            min-width: 32px;
+            flex-shrink: 0;
         }
         
         .btn-secondary:hover {
@@ -648,10 +880,16 @@
         .product-gallery {
             position: relative;
             width: 100%;
-            height: 300px;
+            height: 250px;
             border-radius: var(--radius-md);
             overflow: hidden;
             margin-bottom: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .product-gallery {
+                height: 300px;
+            }
         }
         
         .gallery-main {
@@ -689,8 +927,8 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             background: rgba(0, 0, 0, 0.5);
             color: white;
             border: none;
@@ -700,7 +938,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.25rem;
+        }
+        
+        @media (min-width: 768px) {
+            .gallery-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
         }
         
         .gallery-nav:hover {
@@ -708,11 +954,11 @@
         }
         
         .gallery-prev {
-            left: 1rem;
+            left: 0.75rem;
         }
         
         .gallery-next {
-            right: 1rem;
+            right: 0.75rem;
         }
         
         .gallery-thumbnails {
@@ -721,11 +967,12 @@
             overflow-x: auto;
             padding: 0.5rem 0;
             margin-bottom: 1rem;
+            -webkit-overflow-scrolling: touch;
         }
         
         .thumbnail {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: var(--radius-sm);
             overflow: hidden;
             cursor: pointer;
@@ -771,7 +1018,7 @@
         .image-viewer-content {
             position: relative;
             width: 90%;
-            height: 80%;
+            height: 70%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -794,37 +1041,6 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 1.5rem;
-            color: white;
-            transition: var(--transition);
-            border: none;
-        }
-        
-        .image-viewer-nav:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-50%) scale(1.1);
-        }
-        
-        .image-viewer-prev {
-            left: 20px;
-        }
-        
-        .image-viewer-next {
-            right: 20px;
-        }
-        
-        .image-viewer-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
             width: 40px;
             height: 40px;
             background: rgba(255, 255, 255, 0.2);
@@ -839,6 +1055,55 @@
             border: none;
         }
         
+        @media (min-width: 768px) {
+            .image-viewer-nav {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+        }
+        
+        .image-viewer-nav:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .image-viewer-prev {
+            left: 1rem;
+        }
+        
+        .image-viewer-next {
+            right: 1rem;
+        }
+        
+        .image-viewer-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.125rem;
+            color: white;
+            transition: var(--transition);
+            border: none;
+        }
+        
+        @media (min-width: 768px) {
+            .image-viewer-close {
+                width: 40px;
+                height: 40px;
+                font-size: 1.25rem;
+                top: 1.25rem;
+                right: 1.25rem;
+            }
+        }
+        
         .image-viewer-close:hover {
             background: rgba(255, 255, 255, 0.3);
             transform: scale(1.1);
@@ -846,7 +1111,7 @@
         
         .image-viewer-counter {
             position: absolute;
-            bottom: 20px;
+            bottom: 1rem;
             left: 0;
             right: 0;
             text-align: center;
@@ -857,7 +1122,7 @@
         
         .image-viewer-thumbnails {
             position: absolute;
-            bottom: 60px;
+            bottom: 3rem;
             left: 0;
             right: 0;
             display: flex;
@@ -867,11 +1132,12 @@
             overflow-x: auto;
             max-width: 90%;
             margin: 0 auto;
+            -webkit-overflow-scrolling: touch;
         }
         
         .image-viewer-thumbnail {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: var(--radius-sm);
             overflow: hidden;
             cursor: pointer;
@@ -879,6 +1145,13 @@
             transition: var(--transition);
             flex-shrink: 0;
             border: 2px solid transparent;
+        }
+        
+        @media (min-width: 768px) {
+            .image-viewer-thumbnail {
+                width: 50px;
+                height: 50px;
+            }
         }
         
         .image-viewer-thumbnail.active {
@@ -973,6 +1246,15 @@
             border: none;
         }
         
+        @media (max-width: 480px) {
+            .chatbot-button {
+                width: 50px;
+                height: 50px;
+                bottom: 70px;
+                right: 15px;
+            }
+        }
+        
         .chatbot-button:hover {
             transform: scale(1.1);
             box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
@@ -981,6 +1263,12 @@
         .chatbot-button .whatsapp-icon {
             font-size: 2rem;
             color: white;
+        }
+        
+        @media (max-width: 480px) {
+            .chatbot-button .whatsapp-icon {
+                font-size: 1.75rem;
+            }
         }
         
         .chatbot-button .notification {
@@ -999,12 +1287,20 @@
             font-weight: 600;
         }
         
+        @media (max-width: 480px) {
+            .chatbot-button .notification {
+                width: 18px;
+                height: 18px;
+                font-size: 0.625rem;
+            }
+        }
+        
         .chatbot-container {
             position: fixed;
             bottom: 150px;
             right: 20px;
-            width: 350px;
-            height: 500px;
+            width: 320px;
+            height: 450px;
             background: white;
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-lg);
@@ -1017,6 +1313,24 @@
             transition: all 0.3s ease;
         }
         
+        @media (max-width: 480px) {
+            .chatbot-container {
+                width: 280px;
+                height: 400px;
+                right: 15px;
+                bottom: 130px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .chatbot-container {
+                width: 250px;
+                height: 380px;
+                right: 10px;
+                bottom: 120px;
+            }
+        }
+        
         .chatbot-container.active {
             display: flex;
             opacity: 1;
@@ -1026,7 +1340,7 @@
         .chatbot-header {
             background: #25D366;
             color: white;
-            padding: 1rem;
+            padding: 0.75rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -1038,31 +1352,33 @@
             align-items: center;
             gap: 0.5rem;
             font-weight: 600;
+            font-size: 0.875rem;
         }
         
         .chatbot-close {
             background: none;
             border: none;
             color: white;
-            font-size: 1.25rem;
+            font-size: 1.125rem;
             cursor: pointer;
             padding: 0.25rem;
         }
         
         .chatbot-messages {
             flex: 1;
-            padding: 1rem;
+            padding: 0.75rem;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 0.75rem;
         }
         
         .chatbot-message {
             max-width: 80%;
-            padding: 0.75rem;
+            padding: 0.5rem 0.75rem;
             border-radius: var(--radius-md);
             line-height: 1.4;
+            font-size: 0.875rem;
         }
         
         .chatbot-message.bot {
@@ -1079,7 +1395,7 @@
         }
         
         .chatbot-input {
-            padding: 1rem;
+            padding: 0.75rem;
             border-top: 1px solid var(--gray-200);
             display: flex;
             gap: 0.5rem;
@@ -1087,10 +1403,11 @@
         
         .chatbot-input input {
             flex: 1;
-            padding: 0.75rem;
+            padding: 0.5rem 0.75rem;
             border: 1px solid var(--gray-300);
             border-radius: var(--radius-md);
             font-family: inherit;
+            font-size: 0.875rem;
         }
         
         .chatbot-input button {
@@ -1098,13 +1415,14 @@
             color: white;
             border: none;
             border-radius: var(--radius-md);
-            padding: 0.75rem 1rem;
+            padding: 0.5rem 0.75rem;
             cursor: pointer;
             font-weight: 600;
+            font-size: 0.875rem;
         }
         
         .chatbot-quick-actions {
-            padding: 0.75rem 1rem;
+            padding: 0.5rem 0.75rem;
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
@@ -1112,11 +1430,11 @@
         }
         
         .chatbot-quick-btn {
-            padding: 0.5rem 0.75rem;
+            padding: 0.4rem 0.6rem;
             background: var(--gray-100);
             border: none;
             border-radius: var(--radius-md);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             cursor: pointer;
             transition: var(--transition);
         }
@@ -1224,6 +1542,12 @@
             }
         }
         
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 0.5rem;
+            }
+        }
+        
         .text-center { text-align: center; }
         .mb-2 { margin-bottom: 0.5rem; }
         .mb-4 { margin-bottom: 1.5rem; }
@@ -1298,6 +1622,16 @@
             font-size: 1.25rem;
         }
         
+        @media (max-width: 480px) {
+            .scroll-top {
+                width: 36px;
+                height: 36px;
+                font-size: 1.125rem;
+                bottom: 4.5rem;
+                right: 0.75rem;
+            }
+        }
+        
         .scroll-top.visible {
             opacity: 1;
             visibility: visible;
@@ -1322,6 +1656,15 @@
             max-width: 300px;
             animation: slideInRight 0.3s ease;
             font-size: 0.875rem;
+        }
+        
+        @media (max-width: 480px) {
+            .toast {
+                right: 10px;
+                left: 10px;
+                max-width: none;
+                text-align: center;
+            }
         }
         
         .toast.error {
@@ -1382,12 +1725,79 @@
             opacity: 1 !important;
             visibility: visible !important;
         }
+        
         .seller-location {
             font-size: 0.75rem;
             color: var(--gray-500);
             display: flex;
             align-items: center;
             gap: 0.25rem;
+        }
+        
+        /* ==================== LOAD MORE BUTTON ==================== */
+        .load-more-container {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+        }
+        
+        .load-more-btn {
+            background: var(--maroon);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-md);
+            padding: 0.75rem 2rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            min-width: 180px;
+        }
+        
+        @media (max-width: 480px) {
+            .load-more-btn {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.8rem;
+                min-width: 160px;
+            }
+        }
+        
+        .load-more-btn:hover {
+            background: var(--dark-maroon);
+            transform: translateY(-2px);
+        }
+        
+        .load-more-btn:disabled {
+            background: var(--gray-400);
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* ==================== EMPTY STATE ==================== */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+        
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        .empty-state-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            margin-bottom: 0.5rem;
+        }
+        
+        .empty-state-message {
+            color: var(--gray-500);
+            font-size: 0.875rem;
+            max-width: 300px;
+            margin: 0 auto;
         }
     </style>
 </head>
@@ -1406,6 +1816,14 @@
                     <span>SokoInn</span>
                 </a>
                 
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <button class="header-button" onclick="showSellerModal()">
+                        <span>List Product</span>
+                        <span class="mobile-hidden">+</span>
+                    </button>
+                </div>
+                
                 <!-- Search Bar -->
                 <div class="search-container">
                     <div class="search-box">
@@ -1417,18 +1835,6 @@
                         <button class="search-button" onclick="performSearch()">Search</button>
                     </div>
                     <div class="search-suggestions" id="searchSuggestions"></div>
-                </div>
-                
-                <!-- Location Badge -->
-                <div class="location-badge" id="locationBadge">
-                    <span class="location-loading">📍</span>
-                    <span id="locationText">Detecting location...</span>
-                </div>
-                
-                <div class="flex items-center gap-2">
-                    <button class="btn btn-primary" onclick="showSellerModal()">
-                        Sell on SokoInn
-                    </button>
                 </div>
             </div>
         </div>
@@ -1473,20 +1879,22 @@
     <!-- Products Section -->
     <section class="products-section" id="products">
         <div class="container">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="section-title" style="color: var(--black); margin: 0;">
-                    <span id="locationProductsText">Featured Products in</span>
-                    <span id="currentLocationText" style="color: var(--maroon);">Your Area</span>
-                </h2>
-                <a href="#" class="text-sm font-semibold text-maroon" onclick="showAllProducts(event)">View All →</a>
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Featured Products</h2>
+                    <div class="location-display">
+                        in <span id="currentLocationText">Your Area</span>
+                    </div>
+                </div>
+                <a href="#" class="view-all-link" onclick="showAllProducts(event)">View All →</a>
             </div>
             
             <div class="product-grid" id="productGrid">
                 <!-- Products will be loaded dynamically -->
             </div>
             
-            <div class="text-center mt-4">
-                <button class="btn btn-primary" onclick="loadMoreProducts()" id="loadMoreBtn">
+            <div class="load-more-container">
+                <button class="load-more-btn" onclick="loadMoreProducts()" id="loadMoreBtn">
                     <span class="loading hidden" id="loadingSpinner"></span>
                     Load More Products
                 </button>
@@ -1634,7 +2042,7 @@
         let state = {
             products: [],
             filteredProducts: [],
-            allProducts: [], // Store all products before location filtering
+            allProducts: [],
             currentPage: 1,
             isLoading: false,
             hasMore: false,
@@ -1647,8 +2055,9 @@
             chatbotOpen: false,
             unreadMessages: 0,
             userLocation: null,
-            detectedCity: 'Nairobi', // Default to Nairobi
-            searchTimeout: null
+            detectedCity: null,
+            searchTimeout: null,
+            isLocationDetected: false
         };
         
         // ==================== INITIALIZATION ====================
@@ -1658,8 +2067,8 @@
             initBottomNav();
             initChatbot();
             
-            // Detect user location
-            detectUserLocation();
+            // Start silent location detection
+            detectUserLocationSilently();
             
             // Load sample products
             loadSampleProducts();
@@ -1676,31 +2085,36 @@
                     hideSearchSuggestions();
                 }
             });
+            
+            // Initialize product grid
+            renderProducts();
         });
         
-        // ==================== LOCATION DETECTION ====================
-        async function detectUserLocation() {
+        // ==================== SILENT LOCATION DETECTION ====================
+        async function detectUserLocationSilently() {
             try {
-                // Try HTML5 Geolocation first
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(
-                        async (position) => {
-                            const { latitude, longitude } = position.coords;
-                            await getCityFromCoordinates(latitude, longitude);
-                        },
-                        async () => {
-                            // Fallback to IP-based geolocation
-                            await getLocationFromIP();
-                        },
-                        { timeout: 5000 }
-                    );
-                } else {
-                    // Fallback to IP-based geolocation
-                    await getLocationFromIP();
+                // Try to get location from localStorage first
+                const savedLocation = localStorage.getItem('sokoinn_user_location');
+                if (savedLocation) {
+                    const { city, timestamp } = JSON.parse(savedLocation);
+                    // Use saved location if less than 1 day old
+                    if (Date.now() - timestamp < 24 * 60 * 60 * 1000) {
+                        state.detectedCity = city;
+                        state.isLocationDetected = true;
+                        updateLocationUI();
+                        filterProductsByLocation();
+                        return;
+                    }
                 }
+                
+                // Try IP-based geolocation first (no permission needed)
+                await getLocationFromIP();
+                
             } catch (error) {
-                console.warn('Location detection failed:', error);
-                state.detectedCity = 'Nairobi'; // Default city
+                console.warn('Silent location detection failed:', error);
+                // Default to Nairobi but don't show to user
+                state.detectedCity = 'Nairobi';
+                state.isLocationDetected = true;
                 updateLocationUI();
                 filterProductsByLocation();
             }
@@ -1708,7 +2122,7 @@
         
         async function getLocationFromIP() {
             try {
-                // Use a free IP geolocation service
+                // Use free IP geolocation service
                 const response = await fetch('https://ipapi.co/json/');
                 const data = await response.json();
                 
@@ -1719,89 +2133,77 @@
                         country: data.country_name,
                         region: data.region
                     };
+                    
+                    // Save to localStorage
+                    localStorage.setItem('sokoinn_user_location', JSON.stringify({
+                        city: data.city,
+                        timestamp: Date.now()
+                    }));
                 } else {
-                    // Fallback to Kenyan cities
+                    // Fallback to a random Kenyan city
                     const randomIndex = Math.floor(Math.random() * CONFIG.KENYAN_CITIES.length);
                     state.detectedCity = CONFIG.KENYAN_CITIES[randomIndex];
                 }
             } catch (error) {
-                console.warn('IP geolocation failed:', error);
+                // Fallback to default
                 state.detectedCity = 'Nairobi';
             }
             
-            updateLocationUI();
-            filterProductsByLocation();
-        }
-        
-        async function getCityFromCoordinates(lat, lng) {
-            try {
-                const response = await fetch(
-                    `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
-                );
-                const data = await response.json();
-                
-                if (data && data.address) {
-                    const city = data.address.city || data.address.town || data.address.village;
-                    if (city) {
-                        state.detectedCity = city;
-                        state.userLocation = {
-                            city: city,
-                            country: data.address.country,
-                            coordinates: { lat, lng }
-                        };
-                    }
-                }
-            } catch (error) {
-                console.warn('Reverse geocoding failed:', error);
-                // Fallback to IP-based detection
-                await getLocationFromIP();
-                return;
-            }
-            
+            state.isLocationDetected = true;
             updateLocationUI();
             filterProductsByLocation();
         }
         
         function updateLocationUI() {
+            const locationBadge = document.getElementById('locationBadge');
             const locationText = document.getElementById('locationText');
             const currentLocationText = document.getElementById('currentLocationText');
-            const locationBadge = document.getElementById('locationBadge');
             
-            if (locationText && currentLocationText) {
-                locationText.textContent = state.detectedCity;
-                currentLocationText.textContent = state.detectedCity;
+            if (state.detectedCity) {
+                // Show location badge only after detection
+                if (locationBadge && locationText) {
+                    locationBadge.classList.remove('hidden');
+                    const displayCity = state.detectedCity.length > 12 ? 
+                        state.detectedCity.substring(0, 10) + '...' : state.detectedCity;
+                    locationText.textContent = displayCity;
+                }
                 
-                // Remove loading animation
-                const locationIcon = locationBadge.querySelector('.location-loading');
-                if (locationIcon) {
-                    locationIcon.classList.remove('location-loading');
-                    locationIcon.textContent = '📍';
+                // Update current location text
+                if (currentLocationText) {
+                    currentLocationText.textContent = state.detectedCity;
                 }
             }
         }
         
         function filterProductsByLocation() {
-            if (!state.detectedCity || !state.allProducts.length) return;
+            if (!state.detectedCity || !state.allProducts.length || !state.isLocationDetected) {
+                return;
+            }
             
             // Filter products by location
             state.filteredProducts = state.allProducts.filter(product => {
-                if (!product.sellerLocation) return true; // Show products without location
+                if (!product.sellerLocation) return true;
                 
-                // Simple location matching (case-insensitive)
                 const productLocation = product.sellerLocation.toLowerCase();
                 const userCity = state.detectedCity.toLowerCase();
                 
-                // Check if product location contains user city or vice versa
+                // Check for location match
                 return productLocation.includes(userCity) || 
                        userCity.includes(productLocation) ||
-                       // Also check for partial matches (e.g., "Nairobi" matches "Nairobi CBD")
                        productLocation.split(' ').some(word => userCity.includes(word)) ||
                        userCity.split(' ').some(word => productLocation.includes(word));
             });
             
-            // If no products found in user's location, show all products
+            // If no products found in user's location, show products from nearby cities
             if (state.filteredProducts.length === 0) {
-                state.filteredProducts = [...state.allProducts];
+                state.filteredProducts = state.allProducts.filter(product => {
+                    if (!product.sellerLocation) return true;
+                    
+                    // Check if product is from any major Kenyan city
+                    return CONFIG.KENYAN_CITIES.some(city => 
+                        product.sellerLocation.toLowerCase().includes(city.toLowerCase())
+                    );
+                }).slice(0, 8); // Limit to 8 products
             }
             
             renderProducts();
@@ -1822,7 +2224,7 @@
                 return;
             }
             
-            // Debounce search for better performance
+            // Debounce search
             state.searchTimeout = setTimeout(() => {
                 showSearchSuggestions(query);
             }, 300);
@@ -1836,7 +2238,7 @@
                 return;
             }
             
-            const searchResults = searchProducts(query, 5); // Get top 5 results
+            const searchResults = searchProducts(query, 5);
             
             if (searchResults.length === 0) {
                 suggestionsContainer.innerHTML = `
@@ -1878,15 +2280,21 @@
             const query = searchInput.value.trim();
             
             if (query.length === 0) {
-                // If search is empty, reset to location-filtered products
+                // Reset to location-filtered products
                 state.searchQuery = '';
                 filterProductsByLocation();
+                
+                // Update section title
+                const sectionTitle = document.querySelector('.section-title');
+                const locationDisplay = document.querySelector('.location-display');
+                if (sectionTitle && locationDisplay) {
+                    sectionTitle.textContent = 'Featured Products';
+                    locationDisplay.innerHTML = `in <span id="currentLocationText">${state.detectedCity || 'Your Area'}</span>`;
+                }
                 return;
             }
             
             state.searchQuery = query;
-            
-            // Search through all products
             const searchResults = searchProducts(query);
             
             // Update filtered products
@@ -1894,9 +2302,11 @@
             state.currentPage = 1;
             
             // Update UI
-            const locationProductsText = document.getElementById('locationProductsText');
-            if (locationProductsText) {
-                locationProductsText.textContent = `Search results for "${query}"`;
+            const sectionTitle = document.querySelector('.section-title');
+            const locationDisplay = document.querySelector('.location-display');
+            if (sectionTitle && locationDisplay) {
+                sectionTitle.textContent = 'Search Results';
+                locationDisplay.textContent = `for "${query}"`;
             }
             
             renderProducts();
@@ -1904,9 +2314,6 @@
             
             // Scroll to products section
             document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
-            
-            // Show search query in input
-            searchInput.value = query;
         }
         
         function searchProducts(query, limit = null) {
@@ -1918,27 +2325,23 @@
                     ${product.description || ''}
                     ${product.category || ''}
                     ${product.sellerName || ''}
-                    ${product.sellerLocation || ''}
                 `.toLowerCase();
                 
-                // Check if all search terms are found in the product
                 return searchTerms.every(term => searchableText.includes(term));
             });
             
-            // Sort by relevance (exact matches first)
+            // Sort by relevance
             results.sort((a, b) => {
                 const aTitle = a.title.toLowerCase();
                 const bTitle = b.title.toLowerCase();
+                const queryLower = query.toLowerCase();
                 
-                // Exact title match gets highest priority
-                if (aTitle === query.toLowerCase()) return -1;
-                if (bTitle === query.toLowerCase()) return 1;
+                if (aTitle === queryLower) return -1;
+                if (bTitle === queryLower) return 1;
                 
-                // Then check for title starts with query
-                if (aTitle.startsWith(query.toLowerCase())) return -1;
-                if (bTitle.startsWith(query.toLowerCase())) return 1;
+                if (aTitle.startsWith(queryLower)) return -1;
+                if (bTitle.startsWith(queryLower)) return 1;
                 
-                // Then by rating
                 return (b.rating || 0) - (a.rating || 0);
             });
             
@@ -1951,7 +2354,7 @@
                 {
                     image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1200&h=600&fit=crop',
                     title: 'Premium Ad Space',
-                    description: 'Showcase your brand to thousands of active buyers',
+                    description: 'Reach thousands of active buyers daily',
                     cta: 'Book Now',
                     link: 'https://wa.me/254784599322?text=Hi,%20I want to book ad space on SokoInn',
                     badge: 'Sponsored'
@@ -1959,7 +2362,7 @@
                 {
                     image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=600&fit=crop',
                     title: 'Boost Your Sales',
-                    description: 'Get featured in our hero section and increase visibility',
+                    description: 'Get featured in our hero section',
                     cta: 'Learn More',
                     link: 'https://wa.me/254784599322?text=Hi,%20tell me more about advertising on SokoInn',
                     badge: 'Featured'
@@ -2052,10 +2455,8 @@
             const thumbnailsContainer = document.getElementById('viewerThumbnails');
             const imageCounter = document.getElementById('imageCounter');
             
-            // Load main image
             viewerImage.src = images[startIndex];
             
-            // Create thumbnails
             thumbnailsContainer.innerHTML = '';
             images.forEach((img, index) => {
                 const thumbnail = document.createElement('div');
@@ -2065,10 +2466,7 @@
                 thumbnailsContainer.appendChild(thumbnail);
             });
             
-            // Update counter
             imageCounter.textContent = `${startIndex + 1} / ${images.length}`;
-            
-            // Show viewer
             viewer.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -2183,17 +2581,17 @@
             const responses = {
                 'hello': "Hello! Welcome to SokoInn. How can I assist you today?",
                 'hi': "Hi there! 👋 I'm here to help you with anything about SokoInn.",
-                'help': "I can help you with:\n1. Buying products\n2. Becoming a seller\n3. Advertising on our platform\n4. Contacting support\n5. General inquiries\nWhat would you like to know?",
-                'buy': "To buy products:\n1. Browse products on the homepage\n2. Click 'View' on any product\n3. Use the 'Contact Seller' button to message the seller directly\n4. Arrange payment and delivery with the seller\n\nAll transactions are direct between buyer and seller for your safety.",
-                'seller': "To become a seller:\n1. Click 'Sell on SokoInn' in the header\n2. Fill out the registration form\n3. We'll contact you within 24 hours\n4. Once verified, you can list your products\n\nBenefits:\n• Reach thousands of buyers\n• WhatsApp-first communication\n• Verified seller badge\n• Featured listings available",
-                'ad': "For advertising opportunities:\n1. Hero section ads (high visibility)\n2. Featured product listings\n3. Category sponsorships\n\nContact our admin directly at +254 784 599 322 for rates and availability.",
+                'help': "I can help you with:\n1. Buying products\n2. Becoming a seller\n3. Advertising\n4. Contacting support\n5. General inquiries\nWhat would you like to know?",
+                'buy': "To buy products:\n1. Browse products on the homepage\n2. Click 'View' on any product\n3. Use the 'Contact Seller' button\n4. Arrange payment and delivery directly with the seller",
+                'seller': "To become a seller:\n1. Click 'List Product' in the header\n2. Fill out the registration form\n3. We'll contact you within 24 hours\n4. Once verified, you can list your products",
+                'ad': "For advertising opportunities:\n1. Hero section ads (high visibility)\n2. Featured product listings\n3. Category sponsorships\n\nContact +254 784 599 322 for rates.",
                 'support': "Need support? Contact our admin at +254 784 599 322 via WhatsApp for immediate assistance.",
-                'price': "Prices vary by ad placement:\n• Hero section: Contact for pricing\n• Featured listings: Contact for pricing\n• Category sponsorship: Contact for pricing\n\nMessage +254 784 599 322 for current rates.",
-                'contact': "You can contact us:\n• WhatsApp: +254 784 599 322\n• Email: info@sokoinn.com\n• Website: www.sokoinn.com\n\nOur admin responds within 24 hours.",
+                'price': "Prices vary by ad placement:\n• Hero section: Contact for pricing\n• Featured listings: Contact for pricing\n• Category sponsorship: Contact for pricing",
+                'contact': "You can contact us:\n• WhatsApp: +254 784 599 322\n• Email: info@sokoinn.com\n• Website: www.sokoinn.com",
                 'thank': "You're welcome! 😊 Let me know if you need anything else.",
-                'bye': "Goodbye! Feel free to come back anytime you need help. Have a great day!",
-                'how': "I can help you with:\n• How to buy products\n• How to become a seller\n• How to advertise\n• How to contact sellers\n• How to get support\n\nWhat specifically would you like to know?",
-                'what': "SokoInn is a marketplace connecting buyers with verified sellers in Kenya. We focus on WhatsApp-first communication for easy transactions."
+                'bye': "Goodbye! Feel free to come back anytime you need help.",
+                'how': "I can help you with:\n• How to buy products\n• How to become a seller\n• How to advertise\n• How to contact sellers\n• How to get support",
+                'what': "SokoInn is a marketplace connecting buyers with verified sellers in Kenya."
             };
             
             let response = null;
@@ -2205,7 +2603,7 @@
             }
             
             if (!response) {
-                response = `I'm not sure about that. Let me connect you with our admin who can help you better. Please contact +254 784 599 322 directly for this inquiry.`;
+                response = `I'm not sure about that. Please contact +254 784 599 322 directly for this inquiry.`;
                 
                 setTimeout(() => {
                     const quickActions = document.getElementById('quickActions');
@@ -2287,14 +2685,13 @@
                         }));
                         
                         state.products = newProducts;
-                        state.allProducts = newProducts; // Store all products
+                        state.allProducts = newProducts;
                         state.filteredProducts = [...newProducts];
                         state.hasMore = newProducts.length === CONFIG.ITEMS_PER_PAGE;
                         
-                        // Apply location filtering after loading
                         filterProductsByLocation();
                         renderProducts();
-                        showToast('Products loaded from server!', 'success');
+                        showToast('Products loaded!', 'success');
                     }
                 }
             } catch (error) {
@@ -2308,7 +2705,7 @@
             const sampleProducts = [
                 {
                     listingId: 'PROD001',
-                    title: 'Genuine Leather Handbag - Premium Quality',
+                    title: 'Genuine Leather Handbag',
                     price: 4500,
                     sellerName: 'Luxury Bags Kenya',
                     sellerVerification: 'verified',
@@ -2319,19 +2716,18 @@
                     sellerWhatsapp: '254712345678',
                     images: [
                         'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500&q=80',
-                        'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=500&q=80',
-                        'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&q=80'
+                        'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=500&q=80'
                     ],
                     rating: 4.5,
                     reviewCount: 24,
                     category: 'Fashion',
-                    description: 'Premium genuine leather handbag with multiple compartments, perfect for work and casual use. Water-resistant and durable.',
+                    description: 'Premium genuine leather handbag with multiple compartments.',
                     stock: 5,
                     condition: 'New'
                 },
                 {
                     listingId: 'PROD002',
-                    title: 'Wireless Bluetooth Headphones - Noise Cancelling',
+                    title: 'Wireless Bluetooth Headphones',
                     price: 2800,
                     sellerName: 'Tech Gadgets KE',
                     sellerVerification: 'verified',
@@ -2347,13 +2743,13 @@
                     rating: 4.2,
                     reviewCount: 36,
                     category: 'Electronics',
-                    description: 'High-quality wireless headphones with active noise cancellation. 30-hour battery life, comfortable for all-day use.',
+                    description: 'High-quality wireless headphones with active noise cancellation.',
                     stock: 8,
                     condition: 'New'
                 },
                 {
                     listingId: 'PROD003',
-                    title: 'Organic Coffee Beans - Kenyan AA Grade',
+                    title: 'Organic Coffee Beans',
                     price: 1200,
                     sellerName: 'Kenya Coffee Co.',
                     sellerVerification: 'verified',
@@ -2369,13 +2765,13 @@
                     rating: 4.7,
                     reviewCount: 42,
                     category: 'Food & Beverages',
-                    description: 'Fresh organic coffee beans from Kenyan highlands. AA grade, perfect for espresso or filter coffee. 500g pack.',
+                    description: 'Fresh organic coffee beans from Kenyan highlands.',
                     stock: 15,
                     condition: 'New'
                 },
                 {
                     listingId: 'PROD004',
-                    title: "Men's Running Shoes - Nike Air Max",
+                    title: "Men's Running Shoes",
                     price: 3500,
                     sellerName: 'Sports Gear Kenya',
                     sellerVerification: 'verified',
@@ -2391,7 +2787,7 @@
                     rating: 4.4,
                     reviewCount: 31,
                     category: 'Sports & Fitness',
-                    description: 'Comfortable running shoes for men with excellent cushioning. Size 8-12 available. Perfect for jogging and gym.',
+                    description: 'Comfortable running shoes for men with excellent cushioning.',
                     stock: 3,
                     condition: 'New'
                 },
@@ -2413,7 +2809,7 @@
                     rating: 4.1,
                     reviewCount: 18,
                     category: 'Electronics',
-                    description: 'Smart watch with heart rate monitor, sleep tracking, and smartphone notifications. Water resistant.',
+                    description: 'Smart watch with heart rate monitor and sleep tracking.',
                     stock: 6,
                     condition: 'New'
                 },
@@ -2429,19 +2825,18 @@
                     sellerPhone: '254767890123',
                     sellerWhatsapp: '254767890123',
                     images: [
-                        'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=500&q=80',
                         'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=500&q=80'
                     ],
                     rating: 4.6,
                     reviewCount: 29,
                     category: 'Home & Kitchen',
-                    description: 'Powerful kitchen blender with 1000W motor. Perfect for smoothies, soups, and sauces. Includes 2-year warranty.',
+                    description: 'Powerful kitchen blender with 1000W motor.',
                     stock: 10,
                     condition: 'New'
                 },
                 {
                     listingId: 'PROD007',
-                    title: "Women's Handbag - Designer Collection",
+                    title: "Women's Handbag",
                     price: 2800,
                     sellerName: 'Fashion Hub KE',
                     sellerVerification: 'verified',
@@ -2457,13 +2852,13 @@
                     rating: 4.3,
                     reviewCount: 22,
                     category: 'Fashion',
-                    description: "Trendy women's handbag with multiple compartments. Available in black, brown, and red colors.",
+                    description: "Trendy women's handbag with multiple compartments.",
                     stock: 7,
                     condition: 'New'
                 },
                 {
                     listingId: 'PROD008',
-                    title: 'Office Desk - Wooden Executive',
+                    title: 'Office Desk - Wooden',
                     price: 8500,
                     sellerName: 'Furniture Kenya',
                     sellerVerification: 'verified',
@@ -2479,13 +2874,13 @@
                     rating: 4.5,
                     reviewCount: 15,
                     category: 'Furniture',
-                    description: 'Executive wooden office desk with drawers and cable management. Dimensions: 150cm x 75cm x 75cm.',
+                    description: 'Executive wooden office desk with drawers.',
                     stock: 2,
                     condition: 'New'
                 },
                 {
                     listingId: 'PROD009',
-                    title: 'Samsung Galaxy S21 - 128GB',
+                    title: 'Samsung Galaxy S21',
                     price: 45000,
                     sellerName: 'Mobile World Kenya',
                     sellerVerification: 'verified',
@@ -2501,13 +2896,13 @@
                     rating: 4.7,
                     reviewCount: 58,
                     category: 'Electronics',
-                    description: 'Samsung Galaxy S21 5G, 128GB storage, 8GB RAM. Original box and accessories included. 1-year warranty.',
+                    description: 'Samsung Galaxy S21 5G, 128GB storage.',
                     stock: 4,
                     condition: 'New'
                 },
                 {
                     listingId: 'PROD010',
-                    title: "Men's Formal Suit - 3 Piece",
+                    title: "Men's Formal Suit",
                     price: 6500,
                     sellerName: 'Classic Tailors',
                     sellerVerification: 'verified',
@@ -2523,13 +2918,13 @@
                     rating: 4.4,
                     reviewCount: 27,
                     category: 'Fashion',
-                    description: 'Premium 3-piece men\'s formal suit. Available in navy blue, charcoal gray, and black. Tailored fit.',
+                    description: 'Premium 3-piece men\'s formal suit.',
                     stock: 6,
                     condition: 'New'
                 },
                 {
                     listingId: 'PROD011',
-                    title: 'Laptop Stand - Aluminum Adjustable',
+                    title: 'Laptop Stand - Adjustable',
                     price: 1800,
                     sellerName: 'Office Solutions KE',
                     sellerVerification: 'verified',
@@ -2545,13 +2940,13 @@
                     rating: 4.3,
                     reviewCount: 19,
                     category: 'Office Supplies',
-                    description: 'Aluminum laptop stand with adjustable height. Ergonomic design for comfortable working.',
+                    description: 'Aluminum laptop stand with adjustable height.',
                     stock: 12,
                     condition: 'New'
                 },
                 {
                     listingId: 'PROD012',
-                    title: 'Yoga Mat - Premium Non-Slip',
+                    title: 'Yoga Mat - Non-Slip',
                     price: 1500,
                     sellerName: 'FitLife Kenya',
                     sellerVerification: 'verified',
@@ -2567,20 +2962,23 @@
                     rating: 4.6,
                     reviewCount: 33,
                     category: 'Sports & Fitness',
-                    description: 'Premium non-slip yoga mat with carrying strap. Extra thick for joint protection. Available in 5 colors.',
+                    description: 'Premium non-slip yoga mat with carrying strap.',
                     stock: 9,
                     condition: 'New'
                 }
             ];
             
             state.products = sampleProducts;
-            state.allProducts = sampleProducts; // Store all products
+            state.allProducts = sampleProducts;
             state.filteredProducts = [...sampleProducts];
             state.hasMore = false;
             
-            // Apply location filtering
-            filterProductsByLocation();
-            renderProducts();
+            // Apply location filtering if location is detected
+            if (state.isLocationDetected) {
+                filterProductsByLocation();
+            } else {
+                renderProducts();
+            }
             
             const loadMoreBtn = document.getElementById('loadMoreBtn');
             loadMoreBtn.textContent = 'No more products';
@@ -2592,12 +2990,16 @@
             const productGrid = document.getElementById('productGrid');
             const productsToShow = state.filteredProducts.slice(0, state.currentPage * CONFIG.ITEMS_PER_PAGE);
             
-            if (state.currentPage === 1 && productsToShow.length === 0) {
+            if (productsToShow.length === 0) {
                 productGrid.innerHTML = `
-                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem;">
-                        <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;">🔍</div>
-                        <h3 style="margin-bottom: 0.5rem; color: var(--gray-600);">No products available in ${state.detectedCity}</h3>
-                        <p style="color: var(--gray-500);">Try changing your location or check back soon</p>
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🔍</div>
+                        <h3 class="empty-state-title">No products found</h3>
+                        <p class="empty-state-message">
+                            ${state.searchQuery ? 
+                                `No products found for "${state.searchQuery}"` : 
+                                'Try changing your location or check back soon for new products'}
+                        </p>
                     </div>
                 `;
                 return;
@@ -2609,6 +3011,7 @@
                 productGrid.innerHTML += createProductHTML(product);
             });
             
+            // Initialize image click events
             setTimeout(() => {
                 document.querySelectorAll('.product-image').forEach((imageDiv, index) => {
                     const product = state.filteredProducts[index];
@@ -2695,7 +3098,7 @@
         function loadMoreProducts() {
             if (!state.isLoading && state.hasMore) {
                 state.currentPage++;
-                loadProducts();
+                loadProductsFromBackend();
             }
         }
         
@@ -2704,21 +3107,22 @@
             state.currentPage = 1;
             state.hasMore = true;
             
-            // Reset search and location filters
+            // Reset search
             state.searchQuery = '';
-            state.filteredProducts = [...state.allProducts];
-            
-            const locationProductsText = document.getElementById('locationProductsText');
-            const currentLocationText = document.getElementById('currentLocationText');
             const searchInput = document.getElementById('searchInput');
-            
-            if (locationProductsText && currentLocationText) {
-                locationProductsText.textContent = 'All Products';
-                currentLocationText.textContent = '';
-            }
-            
             if (searchInput) {
                 searchInput.value = '';
+            }
+            
+            // Show all products
+            state.filteredProducts = [...state.allProducts];
+            
+            // Update section title
+            const sectionTitle = document.querySelector('.section-title');
+            const locationDisplay = document.querySelector('.location-display');
+            if (sectionTitle && locationDisplay) {
+                sectionTitle.textContent = 'All Products';
+                locationDisplay.innerHTML = '';
             }
             
             renderProducts();
@@ -3002,10 +3406,9 @@
             
             if (slides[index]) {
                 slides[index].classList.add('active');
-                // Force image reload if needed
                 const img = slides[index].querySelector('img');
                 if (img && img.src) {
-                    img.src = img.src; // Trigger reload
+                    img.src = img.src;
                 }
             }
             if (thumbnails[index]) thumbnails[index].classList.add('active');
@@ -3063,7 +3466,7 @@
             };
             
             if (!sellerData.whatsappNumber.match(/^254[17]\d{8}$/)) {
-                showToast('Please enter a valid Kenyan WhatsApp number (e.g., 254712345678)', 'error');
+                showToast('Please enter a valid Kenyan WhatsApp number', 'error');
                 return;
             }
             
@@ -3084,7 +3487,7 @@
                 const data = await response.json();
                 
                 if (data.success) {
-                    showToast('Application submitted! We\'ll contact you via WhatsApp within 24 hours.', 'success');
+                    showToast('Application submitted! We\'ll contact you via WhatsApp.', 'success');
                     this.reset();
                     closeModal('sellerModal');
                 } else {
