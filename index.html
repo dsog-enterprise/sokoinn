@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=2.8, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1.0, user-scalable=no">
     <title>SokoInn Marketplace | Trusted Products from Verified Sellers</title>
     
     <!-- PWA Meta Tags -->
@@ -47,11 +47,23 @@
             line-height: 1.5;
             color: var(--black);
             background: var(--gray-100);
+            padding-bottom: 60px; /* Space for bottom nav */
         }
         
         img {
             max-width: 100%;
             height: auto;
+            display: block;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        button {
+            font-family: inherit;
+            cursor: pointer;
         }
         
         /* ==================== BOTTOM NAVIGATION ==================== */
@@ -221,7 +233,7 @@
         
         /* ==================== PRODUCT GRID ==================== */
         .products-section {
-            padding: 2rem 0 6rem;
+            padding: 2rem 0 1rem;
             background: var(--gray-100);
         }
         
@@ -302,10 +314,9 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.3s ease;
-        }
-        
-        .product-image.loading img {
-            opacity: 0;
+            display: block;
+            opacity: 1 !important; /* Force image visibility */
+            visibility: visible !important;
         }
         
         .product-card:hover .product-image img {
@@ -466,6 +477,12 @@
             text-decoration: none;
             transition: var(--transition);
             font-size: 0.875rem;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-family: inherit;
         }
         
         .contact-option:hover {
@@ -509,6 +526,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
         
         .gallery-thumbnails {
@@ -546,6 +564,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
         
         .gallery-nav {
@@ -564,6 +583,7 @@
             font-size: 1.25rem;
             color: var(--maroon);
             user-select: none;
+            border: none;
         }
         
         .gallery-nav:hover {
@@ -652,6 +672,10 @@
         
         .modal-close:hover {
             background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .modal-body {
+            padding: 1rem;
         }
         
         /* ==================== UTILITY CLASSES ==================== */
@@ -802,30 +826,29 @@
             }
         }
         
-        /* ==================== LAZY LOAD IMAGES ==================== */
-        .lazy-image {
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .lazy-image.loaded {
-            opacity: 1;
-        }
-        
+        /* ==================== IMAGE LOADING STATES ==================== */
         .image-placeholder {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background: linear-gradient(90deg, var(--gray-200) 25%, var(--gray-300) 50%, var(--gray-200) 75%);
             background-size: 200% 100%;
             animation: loading 1.5s infinite;
+            z-index: 1;
         }
         
         @keyframes loading {
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
+        }
+        
+        .product-image img.loaded {
+            position: relative;
+            z-index: 2;
+            opacity: 1 !important;
+            visibility: visible !important;
         }
     </style>
 </head>
@@ -981,8 +1004,7 @@
         const CONFIG = {
             BACKEND_URL: 'https://script.google.com/macros/s/AKfycbzrOY9Lqu1feQJmqgZXn368Lo-HQ14-1LVRsY5pob7hNlo7uo2YlwlseeiI6GHTAanWnw/exec',
             ITEMS_PER_PAGE: 12,
-            DEFAULT_IMAGE: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&q=80',
-            LAZY_LOAD_THRESHOLD: 100 // pixels from viewport to start loading
+            DEFAULT_IMAGE: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&q=80'
         };
         
         // ==================== STATE MANAGEMENT ====================
@@ -1004,7 +1026,7 @@
             initHeroSlideshow();
             initScrollDetection();
             initBottomNav();
-            initImageLazyLoading();
+            initImageLoading();
             loadProducts();
         });
         
@@ -1047,35 +1069,32 @@
             });
         }
         
-        // ==================== IMAGE LAZY LOADING ====================
-        function initImageLazyLoading() {
+        // ==================== IMAGE LOADING ====================
+        function initImageLoading() {
+            // Simple image loading without lazy loading to ensure images show immediately
             if ('IntersectionObserver' in window) {
-                state.imageObserver = new IntersectionObserver((entries, observer) => {
+                state.imageObserver = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             const img = entry.target;
                             const src = img.getAttribute('data-src');
                             if (src) {
                                 img.src = src;
-                                img.classList.add('loaded');
-                                img.removeAttribute('data-src');
-                                observer.unobserve(img);
+                                img.onload = () => {
+                                    img.classList.add('loaded');
+                                };
+                                img.onerror = () => {
+                                    img.src = CONFIG.DEFAULT_IMAGE;
+                                    img.classList.add('loaded');
+                                };
+                                state.imageObserver.unobserve(img);
                             }
                         }
                     });
                 }, {
-                    rootMargin: `${CONFIG.LAZY_LOAD_THRESHOLD}px`
+                    threshold: 0.1,
+                    rootMargin: '50px'
                 });
-            }
-        }
-        
-        function lazyLoadImage(img) {
-            if (state.imageObserver) {
-                state.imageObserver.observe(img);
-            } else {
-                // Fallback for browsers without IntersectionObserver
-                img.src = img.getAttribute('data-src');
-                img.classList.add('loaded');
             }
         }
         
@@ -1101,7 +1120,7 @@
                 if (data.success && data.data && Array.isArray(data.data)) {
                     const newProducts = data.data.map(product => ({
                         ...product,
-                        images: Array.isArray(product.images) ? product.images : [CONFIG.DEFAULT_IMAGE],
+                        images: Array.isArray(product.images) && product.images.length > 0 ? product.images : [CONFIG.DEFAULT_IMAGE],
                         rating: product.rating || 4.0,
                         reviewCount: product.reviewCount || 0,
                         category: product.category || 'Uncategorized'
@@ -1118,12 +1137,6 @@
                     
                     renderProducts();
                     
-                    // Start lazy loading for newly added images
-                    setTimeout(() => {
-                        document.querySelectorAll('.product-image img[data-src]').forEach(img => {
-                            lazyLoadImage(img);
-                        });
-                    }, 100);
                 } else {
                     throw new Error('Invalid data format');
                 }
@@ -1259,9 +1272,13 @@
                 return;
             }
             
-            // If loading more, append to existing products
+            let newProductsHTML = '';
+            
+            // If loading more, we need to create HTML for new products only
             if (state.currentPage > 1) {
-                const newProductsHTML = productsToShow.slice(-CONFIG.ITEMS_PER_PAGE).map(product => 
+                const startIndex = (state.currentPage - 1) * CONFIG.ITEMS_PER_PAGE;
+                const newProducts = productsToShow.slice(startIndex);
+                newProductsHTML = newProducts.map(product => 
                     createProductHTML(product)
                 ).join('');
                 
@@ -1272,6 +1289,11 @@
                     createProductHTML(product)
                 ).join('');
             }
+            
+            // Load images immediately (no lazy loading)
+            setTimeout(() => {
+                loadAllProductImages();
+            }, 100);
         }
         
         function createProductHTML(product) {
@@ -1286,10 +1308,10 @@
                 
                 <div class="product-image">
                     <div class="image-placeholder"></div>
-                    <img class="lazy-image" 
-                         data-src="${firstImage}"
+                    <img src="${firstImage}" 
                          alt="${product.title}"
-                         onerror="this.src='${CONFIG.DEFAULT_IMAGE}'; this.classList.add('loaded')">
+                         onerror="this.src='${CONFIG.DEFAULT_IMAGE}'; this.classList.add('loaded')"
+                         class="loaded">
                     ${imageCount > 1 ? `<div class="image-counter">+${imageCount - 1}</div>` : ''}
                 </div>
                 
@@ -1298,7 +1320,7 @@
                     <div class="product-price">KSh ${product.price.toLocaleString()}</div>
                     
                     <div class="product-seller">
-                        ${product.sellerLocation}
+                        ${product.sellerName}
                         ${product.sellerVerification === 'verified' ? '<span class="seller-verified">✓</span>' : ''}
                     </div>
                     
@@ -1312,24 +1334,37 @@
                             View
                         </button>
                         <div class="contact-toggle">
-                            <button class="btn btn-secondary" onclick="toggleContactOptions(this, '${product.listingId}')">
+                            <button class="btn btn-secondary" onclick="toggleContactOptions(this, '${product.listingId}', event)">
                                 Contact
                             </button>
                             <div class="contact-options">
-                                <a href="#" class="contact-option whatsapp-option" 
+                                <button class="contact-option whatsapp-option" 
                                    onclick="contactSeller('${product.listingId}', 'whatsapp', event)">
                                     💬 WhatsApp
-                                </a>
-                                <a href="#" class="contact-option call-option" 
+                                </button>
+                                <button class="contact-option call-option" 
                                    onclick="contactSeller('${product.listingId}', 'call', event)">
                                     📞 Call
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             `;
+        }
+        
+        function loadAllProductImages() {
+            // Load all product images immediately
+            document.querySelectorAll('.product-image img').forEach(img => {
+                if (img.complete) {
+                    img.classList.add('loaded');
+                } else {
+                    img.onload = () => {
+                        img.classList.add('loaded');
+                    };
+                }
+            });
         }
         
         // ==================== PRODUCT DETAILS ====================
@@ -1366,14 +1401,14 @@
                 });
                 
                 document.getElementById('productModalBody').innerHTML = `
-                    <div style="padding: 1rem;">
+                    <div>
                         <div class="product-gallery">
                             <div class="gallery-main" id="galleryMain">
                                 ${galleryHTML}
                             </div>
                             ${images.length > 1 ? `
-                                <div class="gallery-nav gallery-prev" onclick="prevGalleryImage()">‹</div>
-                                <div class="gallery-nav gallery-next" onclick="nextGalleryImage()">›</div>
+                                <button class="gallery-nav gallery-prev" onclick="prevGalleryImage()">‹</button>
+                                <button class="gallery-nav gallery-next" onclick="nextGalleryImage()">›</button>
                             ` : ''}
                         </div>
                         
@@ -1451,8 +1486,8 @@
             slides.forEach(slide => slide.classList.remove('active'));
             thumbnails.forEach(thumb => thumb.classList.remove('active'));
             
-            slides[index].classList.add('active');
-            thumbnails[index].classList.add('active');
+            if (slides[index]) slides[index].classList.add('active');
+            if (thumbnails[index]) thumbnails[index].classList.add('active');
             
             window.currentGalleryIndex = index;
         };
@@ -1468,9 +1503,11 @@
         };
         
         // ==================== CONTACT FUNCTIONS ====================
-        function toggleContactOptions(button, productId) {
-            event.preventDefault();
-            event.stopPropagation();
+        function toggleContactOptions(button, productId, event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
             
             const options = button.nextElementSibling;
             const isVisible = options.classList.contains('show');
@@ -1500,8 +1537,10 @@
             
             if (!product) return;
             
+            const whatsappMessage = `Hi, I'm interested in your "${product.title}" for KSh ${product.price.toLocaleString()} on SokoInn`;
+            
             document.getElementById('contactModalBody').innerHTML = `
-                <div style="padding: 1rem;">
+                <div>
                     <div style="text-align: center; margin-bottom: 1.5rem;">
                         <div style="width: 60px; height: 60px; background: var(--maroon); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1.5rem; margin: 0 auto 1rem;">
                             ${product.sellerName.charAt(0)}
@@ -1512,9 +1551,9 @@
                     
                     <div style="display: grid; gap: 0.75rem;">
                         ${product.sellerWhatsapp ? `
-                        <a href="https://wa.me/${product.sellerWhatsapp}?text=${encodeURIComponent(`Hi, I'm interested in your "${product.title}" for KSh ${product.price.toLocaleString()}`)}" 
+                        <a href="https://wa.me/${product.sellerWhatsapp}?text=${encodeURIComponent(whatsappMessage)}" 
                            target="_blank"
-                           style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: #25D366; color: white; border-radius: var(--radius-md); text-decoration: none;">
+                           style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: #25D366; color: white; border-radius: var(--radius-md); text-decoration: none; text-align: center; justify-content: center;">
                             <span style="font-size: 1.25rem;">💬</span>
                             <div>
                                 <div style="font-weight: 600;">WhatsApp</div>
@@ -1525,7 +1564,7 @@
                         
                         ${product.sellerPhone ? `
                         <a href="tel:${product.sellerPhone}" 
-                           style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--maroon); color: white; border-radius: var(--radius-md); text-decoration: none;">
+                           style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--maroon); color: white; border-radius: var(--radius-md); text-decoration: none; text-align: center; justify-content: center;">
                             <span style="font-size: 1.25rem;">📞</span>
                             <div>
                                 <div style="font-weight: 600;">Call</div>
@@ -1556,25 +1595,32 @@
             
             if (!product) return;
             
-            let url;
-            const message = `Hi, I'm interested in your "${product.title}" for KSh ${product.price.toLocaleString()}`;
-            
             if (method === 'whatsapp' && product.sellerWhatsapp) {
-                url = `https://wa.me/${product.sellerWhatsapp}?text=${encodeURIComponent(message)}`;
+                const message = `Hi, I'm interested in your "${product.title}" for KSh ${product.price.toLocaleString()} on SokoInn`;
+                const url = `https://wa.me/${product.sellerWhatsapp}?text=${encodeURIComponent(message)}`;
                 window.open(url, '_blank');
                 showToast(`Opening WhatsApp...`, 'info');
             } else if (method === 'call' && product.sellerPhone) {
-                url = `tel:${product.sellerPhone}`;
+                const url = `tel:${product.sellerPhone}`;
                 window.location.href = url;
             }
             
-            // Close dropdown
-            event.target.closest('.contact-options').classList.remove('show');
+            // Close dropdown if it exists
+            const dropdown = event?.target?.closest('.contact-options');
+            if (dropdown) {
+                dropdown.classList.remove('show');
+            }
         }
         
         // ==================== UTILITY FUNCTIONS ====================
         function formatPhoneNumber(phone) {
-            return phone?.replace(/(\d{3})(\d{3})(\d{3,4})/, '$1 $2 $3') || '';
+            if (!phone) return '';
+            const cleaned = phone.toString().replace(/\D/g, '');
+            const match = cleaned.match(/^(\d{3})(\d{3})(\d{3,4})$/);
+            if (match) {
+                return match[1] + ' ' + match[2] + ' ' + match[3];
+            }
+            return phone;
         }
         
         function loadMoreProducts() {
@@ -1600,15 +1646,6 @@
                 } else {
                     scrollTop.classList.remove('visible');
                 }
-                
-                // Infinite scroll (optional)
-                if (!state.isLoading && state.hasMore) {
-                    const scrollPosition = window.innerHeight + window.scrollY;
-                    const pageHeight = document.documentElement.scrollHeight;
-                    if (scrollPosition >= pageHeight - 500) {
-                        loadMoreProducts();
-                    }
-                }
             });
         }
         
@@ -1617,19 +1654,25 @@
         }
         
         function showModal(modalId) {
-            document.getElementById(modalId).classList.add('active');
-            document.body.style.overflow = 'hidden';
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
         }
         
         function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('active');
-            document.body.style.overflow = '';
-            
-            // Clear modal content
-            if (modalId === 'productModal') {
-                document.getElementById('productModalBody').innerHTML = '';
-                window.currentGalleryImages = null;
-                window.currentGalleryIndex = 0;
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                
+                // Clear modal content for product modal
+                if (modalId === 'productModal') {
+                    document.getElementById('productModalBody').innerHTML = '';
+                    window.currentGalleryImages = null;
+                    window.currentGalleryIndex = 0;
+                }
             }
         }
         
@@ -1733,6 +1776,11 @@
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Submit Application';
             }
+        });
+        
+        // Make sure images load properly on initial load
+        window.addEventListener('load', () => {
+            loadAllProductImages();
         });
     </script>
 </body>
