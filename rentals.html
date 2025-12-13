@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.8, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Rentals & Properties | SokoInn Marketplace</title>
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#800000">
@@ -65,6 +65,227 @@
             cursor: pointer;
         }
         
+        /* ==================== IMPROVED HEADER (MATCHING MAIN PAGE) ==================== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            padding: 0.75rem 0;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 640px) {
+            .header-content {
+                gap: 0.5rem;
+            }
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: var(--maroon);
+            text-decoration: none;
+            min-width: max-content;
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--maroon);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        /* ==================== SEARCH BAR ==================== */
+        .search-container {
+            position: relative;
+            flex: 1;
+            min-width: 0;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+            .search-container {
+                order: 3;
+                width: 100%;
+                margin-top: 0.5rem;
+                max-width: none;
+            }
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--white);
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-md);
+            padding: 0.5rem;
+            box-shadow: var(--shadow-sm);
+            min-width: 0;
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            padding: 0.5rem;
+            font-size: 0.875rem;
+            outline: none;
+            background: transparent;
+            min-width: 0;
+        }
+        
+        .search-button {
+            background: var(--maroon);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: 0.5rem 1rem;
+            margin-left: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-md);
+            margin-top: 0.25rem;
+            max-height: 300px;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+            z-index: 1001;
+            display: none;
+        }
+        
+        .search-suggestions.active {
+            display: block;
+        }
+        
+        .suggestion-item {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--gray-200);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: var(--transition);
+        }
+        
+        .suggestion-item:hover {
+            background: var(--gray-100);
+        }
+        
+        .suggestion-image {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        
+        .suggestion-details {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+        }
+        
+        .suggestion-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .suggestion-price {
+            font-size: 0.75rem;
+            color: var(--maroon);
+            font-weight: 700;
+        }
+        
+        .suggestion-location {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .no-suggestions {
+            padding: 1rem;
+            text-align: center;
+            color: var(--gray-500);
+            font-size: 0.875rem;
+        }
+        
+        /* ==================== LOCATION BADGE ==================== */
+        .location-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.5rem;
+            background: var(--gray-100);
+            border-radius: var(--radius-md);
+            font-size: 0.75rem;
+            color: var(--gray-700);
+            border: 1px solid var(--gray-300);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        /* ==================== HEADER ACTIONS ==================== */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .header-actions {
+                order: 2;
+                margin-left: auto;
+            }
+        }
+        
+        .header-button {
+            background: var(--maroon);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: 0.5rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        
         /* ==================== BOTTOM NAVIGATION ==================== */
         .bottom-nav {
             position: fixed;
@@ -108,46 +329,6 @@
             font-weight: 500;
         }
         
-        /* ==================== HEADER ==================== */
-        .header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: var(--white);
-            border-bottom: 1px solid var(--gray-200);
-            box-shadow: var(--shadow-sm);
-            padding: 0.75rem 0;
-        }
-        
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 700;
-            font-size: 1.125rem;
-            color: var(--maroon);
-            text-decoration: none;
-        }
-        
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--maroon);
-            color: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-sm);
-            font-weight: 700;
-        }
-        
         /* ==================== HERO SECTION ==================== */
         .hero {
             position: relative;
@@ -159,6 +340,7 @@
             align-items: center;
             justify-content: center;
             background: linear-gradient(to right, var(--maroon), var(--dark-maroon));
+            margin-bottom: 1.5rem;
         }
         
         .hero-content {
@@ -197,29 +379,58 @@
         
         /* ==================== RENTALS SECTION ==================== */
         .rentals-section {
-            padding: 2rem 0 1rem;
+            padding: 1.5rem 0 1rem;
             background: var(--gray-100);
         }
         
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        
+        @media (max-width: 480px) {
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+        
         .section-title {
-            font-size: 1.375rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: var(--black);
-            margin-bottom: 1.5rem;
-            text-align: center;
+            margin: 0;
+        }
+        
+        @media (min-width: 768px) {
+            .section-title {
+                font-size: 1.375rem;
+            }
+        }
+        
+        .location-display {
+            color: var(--maroon);
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .view-all-link {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--maroon);
+            text-decoration: none;
+            white-space: nowrap;
         }
         
         .rentals-grid {
             display: grid;
-            grid-template-columns: repeat(1, 1fr);
-            gap: 1rem;
-        }
-        
-        @media (min-width: 320px) {
-            .rentals-grid {
-                grid-template-columns: repeat(1, 1fr);
-                gap: 0.75rem;
-            }
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
         }
         
         @media (min-width: 480px) {
@@ -228,16 +439,22 @@
             }
         }
         
+        @media (min-width: 640px) {
+            .rentals-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
         @media (min-width: 768px) {
             .rentals-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
                 gap: 1.25rem;
             }
         }
         
         @media (min-width: 1024px) {
             .rentals-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(4, 1fr);
                 gap: 1.5rem;
             }
         }
@@ -252,7 +469,7 @@
             display: flex;
             flex-direction: column;
             height: 100%;
-            min-height: 380px;
+            min-height: 320px;
             border: 1px solid var(--gray-200);
         }
         
@@ -267,6 +484,7 @@
             background: var(--gray-100);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
         
         .rental-image img {
@@ -289,9 +507,9 @@
             right: 0.5rem;
             background: rgba(0, 0, 0, 0.7);
             color: white;
-            padding: 0.25rem 0.5rem;
+            padding: 0.2rem 0.4rem;
             border-radius: var(--radius-sm);
-            font-size: 0.75rem;
+            font-size: 0.625rem;
             z-index: 2;
         }
         
@@ -301,79 +519,81 @@
             left: 0.5rem;
             background: var(--maroon);
             color: var(--white);
-            padding: 0.25rem 0.5rem;
+            padding: 0.2rem 0.4rem;
             border-radius: var(--radius-sm);
-            font-size: 0.625rem;
+            font-size: 0.5rem;
             font-weight: 600;
             z-index: 2;
         }
         
         .rental-content {
-            padding: 1.25rem;
+            padding: 0.75rem;
             flex: 1;
             display: flex;
             flex-direction: column;
+            min-height: 0;
         }
         
         .rental-title {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--black);
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            min-height: 2.5rem;
+            min-height: 2.25rem;
+            line-height: 1.3;
         }
         
         .rental-price {
-            font-size: 1.25rem;
-            font-weight: 800;
+            font-size: 0.8125rem;
+            font-weight: 700;
             color: var(--maroon);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
         }
         
         .rental-type {
-            font-size: 0.875rem;
-            font-weight: 600;
+            font-size: 0.625rem;
             color: var(--maroon);
-            margin-bottom: 0.5rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
         }
         
         .rental-location {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 0.75rem;
+            gap: 0.25rem;
+            font-size: 0.625rem;
             color: var(--gray-500);
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
+            min-height: 1.25rem;
         }
         
         .rental-features {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
+            gap: 0.25rem;
+            margin-bottom: 0.5rem;
         }
         
         .rental-feature {
             display: inline-flex;
             align-items: center;
-            gap: 0.25rem;
+            gap: 0.125rem;
             background: var(--gray-100);
             color: var(--gray-600);
-            padding: 0.25rem 0.5rem;
+            padding: 0.125rem 0.25rem;
             border-radius: var(--radius-sm);
-            font-size: 0.75rem;
+            font-size: 0.5rem;
             font-weight: 500;
         }
         
         .rental-description {
-            font-size: 0.875rem;
+            font-size: 0.625rem;
             color: var(--gray-600);
-            margin-bottom: 1rem;
-            line-height: 1.5;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
             flex: 1;
             display: -webkit-box;
             -webkit-line-clamp: 3;
@@ -385,6 +605,7 @@
             display: flex;
             gap: 0.5rem;
             margin-top: auto;
+            min-height: 2.5rem;
         }
         
         .btn {
@@ -393,11 +614,11 @@
             justify-content: center;
             padding: 0.5rem;
             border-radius: var(--radius-sm);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
             transition: var(--transition);
             white-space: nowrap;
-            min-height: 36px;
+            min-height: 32px;
             border: none;
             cursor: pointer;
             font-family: inherit;
@@ -416,11 +637,159 @@
         .btn-secondary {
             background: var(--gray-100);
             color: var(--black);
-            min-width: 36px;
+            min-width: 32px;
+            flex-shrink: 0;
         }
         
         .btn-secondary:hover {
             background: var(--gray-200);
+        }
+        
+        /* ==================== FULLSCREEN IMAGE VIEWER (MATCHING MAIN PAGE) ==================== */
+        .image-viewer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .image-viewer.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .image-viewer-content {
+            position: relative;
+            width: 90%;
+            height: 70%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .image-viewer-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: var(--radius-sm);
+            animation: zoomIn 0.3s ease;
+        }
+        
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .image-viewer-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.25rem;
+            color: white;
+            transition: var(--transition);
+            border: none;
+        }
+        
+        .image-viewer-nav:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .image-viewer-prev {
+            left: 1rem;
+        }
+        
+        .image-viewer-next {
+            right: 1rem;
+        }
+        
+        .image-viewer-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.125rem;
+            color: white;
+            transition: var(--transition);
+            border: none;
+        }
+        
+        .image-viewer-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .image-viewer-counter {
+            position: absolute;
+            bottom: 1rem;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: white;
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+        
+        .image-viewer-thumbnails {
+            position: absolute;
+            bottom: 3rem;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            overflow-x: auto;
+            max-width: 90%;
+            margin: 0 auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .image-viewer-thumbnail {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: var(--transition);
+            flex-shrink: 0;
+            border: 2px solid transparent;
+        }
+        
+        .image-viewer-thumbnail.active {
+            opacity: 1;
+            border-color: var(--maroon);
+        }
+        
+        .image-viewer-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         /* ==================== CONTACT BUTTONS ==================== */
@@ -485,6 +854,369 @@
             color: var(--maroon);
         }
         
+        /* ==================== WHATSAPP CHATBOT ==================== */
+        .chatbot-button {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            z-index: 999;
+            transition: var(--transition);
+            border: none;
+        }
+        
+        .chatbot-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+        
+        .chatbot-button .whatsapp-icon {
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .chatbot-button .notification {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+            background: #ff4757;
+            border-radius: 50%;
+            color: white;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        .chatbot-container {
+            position: fixed;
+            bottom: 150px;
+            right: 20px;
+            width: 320px;
+            height: 450px;
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-container.active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .chatbot-header {
+            background: #25D366;
+            color: white;
+            padding: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .chatbot-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.125rem;
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+        
+        .chatbot-messages {
+            flex: 1;
+            padding: 0.75rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .chatbot-message {
+            max-width: 80%;
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--radius-md);
+            line-height: 1.4;
+            font-size: 0.875rem;
+        }
+        
+        .chatbot-message.bot {
+            background: #f0f0f0;
+            align-self: flex-start;
+            border-bottom-left-radius: var(--radius-sm);
+        }
+        
+        .chatbot-message.user {
+            background: #25D366;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: var(--radius-sm);
+        }
+        
+        .chatbot-input {
+            padding: 0.75rem;
+            border-top: 1px solid var(--gray-200);
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: 0.875rem;
+        }
+        
+        .chatbot-input button {
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            padding: 0.5rem 0.75rem;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .chatbot-quick-actions {
+            padding: 0.5rem 0.75rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            border-top: 1px solid var(--gray-200);
+        }
+        
+        .chatbot-quick-btn {
+            padding: 0.4rem 0.6rem;
+            background: var(--gray-100);
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .chatbot-quick-btn:hover {
+            background: var(--gray-200);
+        }
+        
+        /* ==================== PRODUCT MODAL GALLERY (MATCHING MAIN PAGE) ==================== */
+        .product-gallery {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        
+        .gallery-main {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .gallery-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gray-100);
+        }
+        
+        .gallery-slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+        
+        .gallery-slide img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 36px;
+            height: 36px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        
+        .gallery-nav:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        
+        .gallery-prev {
+            left: 0.75rem;
+        }
+        
+        .gallery-next {
+            right: 0.75rem;
+        }
+        
+        .gallery-thumbnails {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding: 0.5rem 0;
+            margin-bottom: 1rem;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .thumbnail {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: var(--transition);
+            flex-shrink: 0;
+            border: 2px solid transparent;
+        }
+        
+        .thumbnail.active {
+            opacity: 1;
+            border-color: var(--maroon);
+        }
+        
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* ==================== MODAL STYLES ==================== */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+            animation: modalSlideIn 0.3s ease;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--maroon);
+            color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        
+        .modal-title {
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+        
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            border-radius: 50%;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1.25rem;
+        }
+        
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .modal-body {
+            padding: 1rem;
+        }
+        
         /* ==================== UTILITY CLASSES ==================== */
         .container {
             width: 100%;
@@ -496,6 +1228,12 @@
         @media (max-width: 640px) {
             .container {
                 padding: 0 0.75rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 0.5rem;
             }
         }
         
@@ -658,207 +1396,77 @@
             visibility: visible !important;
         }
         
-        /* ==================== MODAL STYLES ==================== */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* ==================== LOAD MORE BUTTON ==================== */
+        .load-more-container {
+            text-align: center;
+            margin-top: 2rem;
             padding: 1rem;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
         }
         
-        .modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .modal-content {
-            background: var(--white);
-            border-radius: var(--radius-md);
-            max-width: 500px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: var(--shadow-lg);
-            animation: modalSlideIn 0.3s ease;
-        }
-        
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .modal-header {
-            padding: 1rem;
-            border-bottom: 1px solid var(--gray-200);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .load-more-btn {
             background: var(--maroon);
             color: var(--white);
-            position: sticky;
-            top: 0;
-            z-index: 1;
-        }
-        
-        .modal-title {
-            font-weight: 700;
-            font-size: 1.125rem;
-        }
-        
-        .modal-close {
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            border-radius: 50%;
             border: none;
-            background: none;
+            border-radius: var(--radius-md);
+            padding: 0.75rem 2rem;
+            font-size: 0.875rem;
+            font-weight: 600;
             cursor: pointer;
-            font-size: 1.25rem;
+            transition: var(--transition);
+            min-width: 180px;
         }
         
-        .modal-close:hover {
-            background: rgba(255, 255, 255, 0.1);
+        .load-more-btn:hover {
+            background: var(--dark-maroon);
+            transform: translateY(-2px);
         }
         
-        .modal-body {
-            padding: 1rem;
+        .load-more-btn:disabled {
+            background: var(--gray-400);
+            cursor: not-allowed;
+            transform: none;
         }
         
-        /* ==================== NO RESULTS ==================== */
-        .no-results {
+        /* ==================== EMPTY STATE ==================== */
+        .empty-state {
             grid-column: 1 / -1;
             text-align: center;
             padding: 3rem 1rem;
         }
         
-        .no-results-icon {
+        .empty-state-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
             opacity: 0.5;
         }
         
-        .no-results-title {
-            margin-bottom: 0.5rem;
+        .empty-state-title {
+            font-size: 1.125rem;
+            font-weight: 600;
             color: var(--gray-600);
+            margin-bottom: 0.5rem;
         }
         
-        .no-results-text {
+        .empty-state-message {
             color: var(--gray-500);
+            font-size: 0.875rem;
+            max-width: 300px;
+            margin: 0 auto;
         }
         
-        /* ==================== PRODUCT GALLERY STYLES ==================== */
-        .product-gallery {
-            position: relative;
-            aspect-ratio: 4/3;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            margin-bottom: 1rem;
-            background: var(--gray-100);
-        }
-        
-        .gallery-slide {
+        /* ==================== PROPERTY TYPE BADGES ==================== */
+        .type-badge {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .gallery-slide.active {
-            opacity: 1;
-        }
-        
-        .gallery-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        
-        .gallery-thumbnails {
-            display: flex;
-            gap: 0.5rem;
-            padding: 0.5rem;
-            background: var(--gray-100);
-            border-radius: var(--radius-md);
-            overflow-x: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-        
-        .gallery-thumbnails::-webkit-scrollbar {
-            display: none;
-        }
-        
-        .thumbnail {
-            width: 60px;
-            height: 60px;
-            flex-shrink: 0;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 0.2rem 0.4rem;
             border-radius: var(--radius-sm);
-            overflow: hidden;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: var(--transition);
-            background: var(--white);
-        }
-        
-        .thumbnail.active {
-            border-color: var(--maroon);
-        }
-        
-        .thumbnail img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        
-        .gallery-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
+            font-size: 0.5rem;
+            font-weight: 600;
             z-index: 2;
-            font-size: 1.25rem;
-            color: var(--maroon);
-            user-select: none;
-            border: none;
         }
-        
-        .gallery-nav:hover {
-            background: var(--white);
-        }
-        
-        .gallery-prev { left: 10px; }
-        .gallery-next { right: 10px; }
     </style>
 </head>
 <body>
@@ -876,9 +1484,27 @@
                     <span>SokoInn</span>
                 </a>
                 
-                <div class="flex items-center gap-2">
-                    <button class="btn btn-primary" onclick="listProperty()">
-                        List a Property
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" 
+                               class="search-input" 
+                               id="searchInput"
+                               placeholder="Search properties..."
+                               oninput="handleSearchInput()">
+                        <button class="search-button" onclick="performSearch()">Search</button>
+                    </div>
+                    <div class="search-suggestions" id="searchSuggestions"></div>
+                </div>
+                
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <div class="location-badge" id="locationBadge">
+                        📍 <span id="locationText">Location</span>
+                    </div>
+                    <button class="header-button" onclick="listProperty()">
+                        <span class="mobile-hidden">List Property</span>
+                        <span>+</span>
                     </button>
                 </div>
             </div>
@@ -893,26 +1519,80 @@
         </div>
     </section>
     
+    <!-- Fullscreen Image Viewer -->
+    <div class="image-viewer" id="imageViewer">
+        <button class="image-viewer-close" onclick="closeImageViewer()">✕</button>
+        <div class="image-viewer-content">
+            <img class="image-viewer-img" id="viewerImage" src="" alt="">
+            <button class="image-viewer-nav image-viewer-prev" onclick="prevImage()">‹</button>
+            <button class="image-viewer-nav image-viewer-next" onclick="nextImage()">›</button>
+        </div>
+        <div class="image-viewer-thumbnails" id="viewerThumbnails">
+            <!-- Thumbnails will be added dynamically -->
+        </div>
+        <div class="image-viewer-counter" id="imageCounter">1 / 3</div>
+    </div>
+    
     <!-- Rentals Section -->
     <section class="rentals-section" id="rentals">
         <div class="container">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="section-title" style="color: var(--black); margin: 0;">Available Properties</h2>
-                <a href="#" class="text-sm font-semibold text-maroon" onclick="refreshRentals(event)">Refresh Listings →</a>
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Available Properties</h2>
+                    <div class="location-display">
+                        in <span id="currentLocationText">Your Area</span>
+                    </div>
+                </div>
+                <a href="#" class="view-all-link" onclick="showAllProperties(event)">View All →</a>
             </div>
             
             <div class="rentals-grid" id="rentalsGrid">
-                <!-- Rentals will be loaded dynamically -->
+                <!-- Properties will be loaded dynamically -->
             </div>
             
-            <div class="text-center mt-4">
-                <button class="btn btn-primary" onclick="loadMoreRentals()" id="loadMoreBtn">
+            <div class="load-more-container">
+                <button class="load-more-btn" onclick="loadMoreProperties()" id="loadMoreBtn">
                     <span class="loading hidden" id="loadingSpinner"></span>
                     Load More Properties
                 </button>
             </div>
         </div>
     </section>
+    
+    <!-- WhatsApp Chatbot -->
+    <button class="chatbot-button" onclick="toggleChatbot()">
+        <div class="whatsapp-icon">💬</div>
+        <div class="notification hidden" id="chatbotNotification">1</div>
+    </button>
+    
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <div class="chatbot-title">
+                <div class="whatsapp-icon">💬</div>
+                SokoInn Assistant
+            </div>
+            <button class="chatbot-close" onclick="toggleChatbot()">✕</button>
+        </div>
+        
+        <div class="chatbot-messages" id="chatbotMessages">
+            <!-- Messages will be added here -->
+        </div>
+        
+        <div class="chatbot-quick-actions" id="quickActions">
+            <button class="chatbot-quick-btn" onclick="sendQuickMessage('How to rent?')">How to rent?</button>
+            <button class="chatbot-quick-btn" onclick="sendQuickMessage('List property')">List property</button>
+            <button class="chatbot-quick-btn" onclick="sendQuickMessage('Contact support')">Contact support</button>
+            <button class="chatbot-quick-btn" onclick="sendQuickMessage('Rental inquiry')">Rental inquiry</button>
+        </div>
+        
+        <div class="chatbot-input">
+            <input type="text" 
+                   id="chatbotInput" 
+                   placeholder="Type your question..."
+                   onkeypress="handleChatbotKeyPress(event)">
+            <button onclick="sendChatbotMessage()">Send</button>
+        </div>
+    </div>
     
     <!-- Bottom Navigation -->
     <nav class="bottom-nav" id="bottomNav">
@@ -949,7 +1629,7 @@
                 <button class="modal-close" onclick="closeModal('rentalModal')">✕</button>
             </div>
             <div class="modal-body" id="rentalModalBody">
-                <!-- Rental details will be loaded dynamically -->
+                <!-- Property details will be loaded dynamically -->
             </div>
         </div>
     </div>
@@ -971,28 +1651,465 @@
         // ==================== CONFIGURATION ====================
         const CONFIG = {
             BACKEND_URL: 'https://script.google.com/macros/s/AKfycbzrOY9Lqu1feQJmqgZXn368Lo-HQ14-1LVRsY5pob7hNlo7uo2YlwlseeiI6GHTAanWnw/exec',
-            ITEMS_PER_PAGE: 9,
-            DEFAULT_IMAGE: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=500&q=80'
+            ITEMS_PER_PAGE: 12,
+            DEFAULT_IMAGE: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=500&q=80',
+            ADMIN_WHATSAPP: '254784599322',
+            // Kenyan cities for location matching
+            KENYAN_CITIES: ['Nairobi', 'Mombasa', 'Kisumu', 'Nakuru', 'Eldoret', 'Thika', 'Malindi', 'Kitale', 'Garissa', 'Kakamega']
         };
         
         // ==================== STATE MANAGEMENT ====================
         let state = {
             rentals: [],
+            filteredRentals: [],
+            allRentals: [],
             currentPage: 1,
             isLoading: false,
-            hasMore: true
+            hasMore: false,
+            selectedCategory: 'all',
+            searchQuery: '',
+            currentImages: [],
+            currentImageIndex: 0,
+            chatbotOpen: false,
+            unreadMessages: 0,
+            userLocation: null,
+            detectedCity: null,
+            searchTimeout: null,
+            isLocationDetected: false
         };
         
         // ==================== INITIALIZATION ====================
         document.addEventListener('DOMContentLoaded', () => {
             initScrollDetection();
             initBottomNav();
-            loadRentals();
+            initChatbot();
+            
+            // Start silent location detection
+            detectUserLocationSilently();
+            
+            // Load sample rentals
+            loadSampleRentals();
+            
+            // Also try to load from backend in background
+            setTimeout(() => {
+                loadRentalsFromBackend();
+            }, 1000);
+            
+            // Close search suggestions when clicking outside
+            document.addEventListener('click', (e) => {
+                const searchContainer = document.querySelector('.search-container');
+                if (!searchContainer.contains(e.target)) {
+                    hideSearchSuggestions();
+                }
+            });
+            
+            // Initialize rentals grid
+            renderRentals();
         });
+        
+        // ==================== SILENT LOCATION DETECTION ====================
+        async function detectUserLocationSilently() {
+            try {
+                // Try to get location from localStorage first
+                const savedLocation = localStorage.getItem('sokoinn_user_location');
+                if (savedLocation) {
+                    const { city, timestamp } = JSON.parse(savedLocation);
+                    // Use saved location if less than 1 day old
+                    if (Date.now() - timestamp < 24 * 60 * 60 * 1000) {
+                        state.detectedCity = city;
+                        state.isLocationDetected = true;
+                        updateLocationUI();
+                        filterRentalsByLocation();
+                        return;
+                    }
+                }
+                
+                // Try IP-based geolocation first (no permission needed)
+                await getLocationFromIP();
+                
+            } catch (error) {
+                console.warn('Silent location detection failed:', error);
+                // Default to Nairobi but don't show to user
+                state.detectedCity = 'Nairobi';
+                state.isLocationDetected = true;
+                updateLocationUI();
+                filterRentalsByLocation();
+            }
+        }
+        
+        async function getLocationFromIP() {
+            try {
+                // Use free IP geolocation service
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                
+                if (data && data.city) {
+                    state.detectedCity = data.city;
+                    state.userLocation = {
+                        city: data.city,
+                        country: data.country_name,
+                        region: data.region
+                    };
+                    
+                    // Save to localStorage
+                    localStorage.setItem('sokoinn_user_location', JSON.stringify({
+                        city: data.city,
+                        timestamp: Date.now()
+                    }));
+                } else {
+                    // Fallback to a random Kenyan city
+                    const randomIndex = Math.floor(Math.random() * CONFIG.KENYAN_CITIES.length);
+                    state.detectedCity = CONFIG.KENYAN_CITIES[randomIndex];
+                }
+            } catch (error) {
+                // Fallback to default
+                state.detectedCity = 'Nairobi';
+            }
+            
+            state.isLocationDetected = true;
+            updateLocationUI();
+            filterRentalsByLocation();
+        }
+        
+        function updateLocationUI() {
+            const locationBadge = document.getElementById('locationBadge');
+            const locationText = document.getElementById('locationText');
+            const currentLocationText = document.getElementById('currentLocationText');
+            
+            if (state.detectedCity) {
+                // Show location badge only after detection
+                if (locationBadge && locationText) {
+                    locationBadge.classList.remove('hidden');
+                    const displayCity = state.detectedCity.length > 12 ? 
+                        state.detectedCity.substring(0, 10) + '...' : state.detectedCity;
+                    locationText.textContent = displayCity;
+                }
+                
+                // Update current location text
+                if (currentLocationText) {
+                    currentLocationText.textContent = state.detectedCity;
+                }
+            }
+        }
+        
+        function filterRentalsByLocation() {
+            if (!state.detectedCity || !state.allRentals.length || !state.isLocationDetected) {
+                return;
+            }
+            
+            // Filter rentals by location
+            state.filteredRentals = state.allRentals.filter(rental => {
+                if (!rental.location) return true;
+                
+                const rentalLocation = rental.location.toLowerCase();
+                const userCity = state.detectedCity.toLowerCase();
+                
+                // Check for location match
+                return rentalLocation.includes(userCity) || 
+                       userCity.includes(rentalLocation) ||
+                       rentalLocation.split(' ').some(word => userCity.includes(word)) ||
+                       userCity.split(' ').some(word => rentalLocation.includes(word));
+            });
+            
+            // If no rentals found in user's location, show rentals from nearby cities
+            if (state.filteredRentals.length === 0) {
+                state.filteredRentals = state.allRentals.filter(rental => {
+                    if (!rental.location) return true;
+                    
+                    // Check if rental is from any major Kenyan city
+                    return CONFIG.KENYAN_CITIES.some(city => 
+                        rental.location.toLowerCase().includes(city.toLowerCase())
+                    );
+                }).slice(0, 8); // Limit to 8 rentals
+            }
+            
+            renderRentals();
+        }
+        
+        // ==================== SEARCH FUNCTIONALITY ====================
+        function handleSearchInput() {
+            const searchInput = document.getElementById('searchInput');
+            const query = searchInput.value.trim();
+            
+            // Clear previous timeout
+            if (state.searchTimeout) {
+                clearTimeout(state.searchTimeout);
+            }
+            
+            if (query.length === 0) {
+                hideSearchSuggestions();
+                return;
+            }
+            
+            // Debounce search
+            state.searchTimeout = setTimeout(() => {
+                showSearchSuggestions(query);
+            }, 300);
+        }
+        
+        function showSearchSuggestions(query) {
+            const suggestionsContainer = document.getElementById('searchSuggestions');
+            
+            if (!query || query.length < 2) {
+                suggestionsContainer.classList.remove('active');
+                return;
+            }
+            
+            const searchResults = searchRentals(query, 5);
+            
+            if (searchResults.length === 0) {
+                suggestionsContainer.innerHTML = `
+                    <div class="no-suggestions">
+                        No properties found for "${query}"
+                    </div>
+                `;
+            } else {
+                suggestionsContainer.innerHTML = searchResults.map(rental => `
+                    <div class="suggestion-item" onclick="selectSearchSuggestion('${rental.listingId}')">
+                        <img src="${rental.images[0] || CONFIG.DEFAULT_IMAGE}" 
+                             alt="${rental.propertyTitle}"
+                             class="suggestion-image"
+                             onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
+                        <div class="suggestion-details">
+                            <div class="suggestion-title">${rental.propertyTitle}</div>
+                            <div class="suggestion-price">KSh ${rental.monthlyRent.toLocaleString()}/month</div>
+                            <div class="suggestion-location">📍 ${rental.location || 'Nairobi'}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            suggestionsContainer.classList.add('active');
+        }
+        
+        function hideSearchSuggestions() {
+            const suggestionsContainer = document.getElementById('searchSuggestions');
+            suggestionsContainer.classList.remove('active');
+        }
+        
+        function selectSearchSuggestion(rentalId) {
+            hideSearchSuggestions();
+            viewRental(rentalId);
+        }
+        
+        function performSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const query = searchInput.value.trim();
+            
+            if (query.length === 0) {
+                // Reset to location-filtered rentals
+                state.searchQuery = '';
+                filterRentalsByLocation();
+                
+                // Update section title
+                const sectionTitle = document.querySelector('.section-title');
+                const locationDisplay = document.querySelector('.location-display');
+                if (sectionTitle && locationDisplay) {
+                    sectionTitle.textContent = 'Available Properties';
+                    locationDisplay.innerHTML = `in <span id="currentLocationText">${state.detectedCity || 'Your Area'}</span>`;
+                }
+                return;
+            }
+            
+            state.searchQuery = query;
+            const searchResults = searchRentals(query);
+            
+            // Update filtered rentals
+            state.filteredRentals = searchResults;
+            state.currentPage = 1;
+            
+            // Update UI
+            const sectionTitle = document.querySelector('.section-title');
+            const locationDisplay = document.querySelector('.location-display');
+            if (sectionTitle && locationDisplay) {
+                sectionTitle.textContent = 'Search Results';
+                locationDisplay.textContent = `for "${query}"`;
+            }
+            
+            renderRentals();
+            hideSearchSuggestions();
+            
+            // Scroll to rentals section
+            document.getElementById('rentals').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function searchRentals(query, limit = null) {
+            const searchTerms = query.toLowerCase().split(' ');
+            
+            const results = state.allRentals.filter(rental => {
+                const searchableText = `
+                    ${rental.propertyTitle || ''}
+                    ${rental.description || ''}
+                    ${rental.propertyType || ''}
+                    ${rental.location || ''}
+                    ${rental.ownerName || ''}
+                `.toLowerCase();
+                
+                return searchTerms.every(term => searchableText.includes(term));
+            });
+            
+            // Sort by relevance
+            results.sort((a, b) => {
+                const aTitle = a.propertyTitle.toLowerCase();
+                const bTitle = b.propertyTitle.toLowerCase();
+                const queryLower = query.toLowerCase();
+                
+                if (aTitle === queryLower) return -1;
+                if (bTitle === queryLower) return 1;
+                
+                if (aTitle.startsWith(queryLower)) return -1;
+                if (bTitle.startsWith(queryLower)) return 1;
+                
+                return (b.monthlyRent || 0) - (a.monthlyRent || 0);
+            });
+            
+            return limit ? results.slice(0, limit) : results;
+        }
+        
+        // ==================== WHATSAPP CHATBOT ====================
+        function initChatbot() {
+            addBotMessage("Hello! I'm your SokoInn rental assistant. How can I help you find the perfect property? You can ask me about rental properties, listing your property, or any other questions about rentals.");
+            loadChatHistory();
+        }
+        
+        function toggleChatbot() {
+            const chatbot = document.getElementById('chatbotContainer');
+            const notification = document.getElementById('chatbotNotification');
+            
+            state.chatbotOpen = !state.chatbotOpen;
+            chatbot.classList.toggle('active', state.chatbotOpen);
+            
+            if (state.chatbotOpen) {
+                state.unreadMessages = 0;
+                notification.classList.add('hidden');
+                saveChatHistory();
+                
+                setTimeout(() => {
+                    const messages = document.getElementById('chatbotMessages');
+                    messages.scrollTop = messages.scrollHeight;
+                }, 100);
+            }
+        }
+        
+        function addBotMessage(text) {
+            const messages = document.getElementById('chatbotMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chatbot-message bot';
+            messageDiv.textContent = text;
+            messages.appendChild(messageDiv);
+            
+            messages.scrollTop = messages.scrollHeight;
+            saveChatHistory();
+        }
+        
+        function addUserMessage(text) {
+            const messages = document.getElementById('chatbotMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chatbot-message user';
+            messageDiv.textContent = text;
+            messages.appendChild(messageDiv);
+            
+            messages.scrollTop = messages.scrollHeight;
+            saveChatHistory();
+        }
+        
+        function handleChatbotKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendChatbotMessage();
+            }
+        }
+        
+        function sendChatbotMessage() {
+            const input = document.getElementById('chatbotInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            addUserMessage(message);
+            input.value = '';
+            
+            setTimeout(() => processUserMessage(message), 500);
+        }
+        
+        function sendQuickMessage(message) {
+            const input = document.getElementById('chatbotInput');
+            input.value = message;
+            sendChatbotMessage();
+        }
+        
+        function processUserMessage(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            const responses = {
+                'hello': "Hello! Welcome to SokoInn Rentals. How can I assist you today?",
+                'hi': "Hi there! 👋 I'm here to help you find the perfect rental property.",
+                'help': "I can help you with:\n1. Finding rental properties\n2. Listing your property\n3. Rental inquiries\n4. Contacting owners\n5. General rental questions\nWhat would you like to know?",
+                'rent': "To rent a property:\n1. Browse properties on this page\n2. Click 'View Details' on any property\n3. Use the 'Contact Owner' button\n4. Arrange viewing and rental terms directly with the owner",
+                'list': "To list your property:\n1. Click 'List Property' in the header\n2. We'll guide you through the listing process\n3. Once verified, your property will be visible to thousands of potential renters",
+                'property': "We have various property types:\n• Apartments\n• Houses\n• Commercial spaces\n• Hostels\n• Serviced apartments\nWhat type are you looking for?",
+                'price': "Rental prices vary by location and property type:\n• Apartments: 20,000 - 150,000 KSh/month\n• Houses: 50,000 - 500,000 KSh/month\n• Commercial: 30,000 - 300,000 KSh/month",
+                'contact': "You can contact us:\n• WhatsApp: +254 784 599 322\n• Email: rentals@sokoinn.com\n• Website: www.sokoinn.com/rentals",
+                'thank': "You're welcome! 😊 Let me know if you need anything else.",
+                'bye': "Goodbye! Feel free to come back anytime you need help finding a property.",
+                'how': "I can help you with:\n• How to rent a property\n• How to list your property\n• How to contact owners\n• How to get support",
+                'what': "SokoInn Rentals connects tenants with property owners across Kenya. We make finding and listing rental properties easy and secure."
+            };
+            
+            let response = null;
+            for (const [keyword, reply] of Object.entries(responses)) {
+                if (lowerMessage.includes(keyword)) {
+                    response = reply;
+                    break;
+                }
+            }
+            
+            if (!response) {
+                response = `I'm not sure about that. Please contact +254 784 599 322 directly for rental inquiries.`;
+                
+                setTimeout(() => {
+                    const quickActions = document.getElementById('quickActions');
+                    const adminBtn = document.createElement('button');
+                    adminBtn.className = 'chatbot-quick-btn';
+                    adminBtn.textContent = 'Contact Admin';
+                    adminBtn.onclick = () => {
+                        window.open(`https://wa.me/${CONFIG.ADMIN_WHATSAPP}?text=Hi,%20I%20need%20help%20with:%20${encodeURIComponent(message)}`, '_blank');
+                    };
+                    quickActions.appendChild(adminBtn);
+                }, 1000);
+            }
+            
+            addBotMessage(response);
+            
+            if (!state.chatbotOpen) {
+                state.unreadMessages++;
+                const notification = document.getElementById('chatbotNotification');
+                notification.textContent = state.unreadMessages;
+                notification.classList.remove('hidden');
+            }
+        }
+        
+        function saveChatHistory() {
+            const messages = document.getElementById('chatbotMessages');
+            try {
+                localStorage.setItem('sokoinn_chat_history', messages.innerHTML);
+            } catch (e) {
+                console.warn('Could not save chat history');
+            }
+        }
+        
+        function loadChatHistory() {
+            try {
+                const saved = localStorage.getItem('sokoinn_chat_history');
+                if (saved) {
+                    document.getElementById('chatbotMessages').innerHTML = saved;
+                }
+            } catch (e) {
+                console.warn('Could not load chat history');
+            }
+        }
         
         // ==================== BOTTOM NAVIGATION ====================
         function initBottomNav() {
-            // Set active nav item based on current page
             const currentPage = window.location.pathname.split('/').pop() || 'rentals.html';
             document.querySelectorAll('.nav-item').forEach(item => {
                 const href = item.getAttribute('href');
@@ -1005,81 +2122,53 @@
         }
         
         // ==================== DATA LOADING ====================
-        async function loadRentals() {
-            if (state.isLoading || !state.hasMore) return;
+        async function loadRentalsFromBackend() {
+            if (state.isLoading) return;
             
             state.isLoading = true;
-            document.getElementById('loadingSpinner').classList.remove('hidden');
-            document.getElementById('loadMoreBtn').disabled = true;
             
             try {
                 const response = await fetch(
-                    `${CONFIG.BACKEND_URL}?action=getRentals&limit=${CONFIG.ITEMS_PER_PAGE}&page=${state.currentPage}`
+                    `${CONFIG.BACKEND_URL}?action=getRentals&limit=${CONFIG.ITEMS_PER_PAGE}&page=1`,
+                    { method: 'GET', mode: 'cors' }
                 );
                 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                
-                if (data.success && data.data && Array.isArray(data.data)) {
-                    const newRentals = data.data.map(rental => ({
-                        ...rental,
-                        images: Array.isArray(rental.images) && rental.images.length > 0 ? rental.images : [CONFIG.DEFAULT_IMAGE],
-                        propertyTitle: rental.propertyTitle || rental.title || 'Rental Property',
-                        propertyType: rental.propertyType || rental.type || 'Apartment',
-                        monthlyRent: rental.monthlyRent || rental.rent || 0,
-                        location: rental.location || 'Nairobi',
-                        bedrooms: rental.bedrooms || 1,
-                        bathrooms: rental.bathrooms || 1,
-                        squareFeet: rental.squareFeet || rental.size || 0,
-                        description: rental.description || rental.propertyDescription || 'Well-maintained property available for rent.',
-                        ownerName: rental.ownerName || rental.listerName || 'Property Owner',
-                        ownerPhone: rental.ownerPhone || rental.contactPhone || '',
-                        ownerWhatsapp: rental.ownerWhatsapp || rental.whatsappNumber || '',
-                        availableFrom: rental.availableFrom || 'Immediately',
-                        deposit: rental.deposit || rental.securityDeposit || 0
-                    }));
+                if (response.ok) {
+                    const data = await response.json();
                     
-                    if (state.currentPage === 1) {
+                    if (data.success && data.data && Array.isArray(data.data) && data.data.length > 0) {
+                        const newRentals = data.data.map(rental => ({
+                            ...rental,
+                            images: Array.isArray(rental.images) && rental.images.length > 0 ? rental.images : [CONFIG.DEFAULT_IMAGE],
+                            propertyTitle: rental.propertyTitle || rental.title || 'Rental Property',
+                            propertyType: rental.propertyType || rental.type || 'Apartment',
+                            monthlyRent: rental.monthlyRent || rental.rent || 0,
+                            location: rental.location || 'Nairobi',
+                            bedrooms: rental.bedrooms || 1,
+                            bathrooms: rental.bathrooms || 1,
+                            squareFeet: rental.squareFeet || rental.size || 0,
+                            description: rental.description || rental.propertyDescription || 'Well-maintained property available for rent.',
+                            ownerName: rental.ownerName || rental.listerName || 'Property Owner',
+                            ownerPhone: rental.ownerPhone || rental.contactPhone || '',
+                            ownerWhatsapp: rental.ownerWhatsapp || rental.whatsappNumber || '',
+                            availableFrom: rental.availableFrom || 'Immediately',
+                            deposit: rental.deposit || rental.securityDeposit || 0
+                        }));
+                        
                         state.rentals = newRentals;
-                    } else {
-                        state.rentals = [...state.rentals, ...newRentals];
+                        state.allRentals = newRentals;
+                        state.filteredRentals = [...newRentals];
+                        state.hasMore = newRentals.length === CONFIG.ITEMS_PER_PAGE;
+                        
+                        filterRentalsByLocation();
+                        renderRentals();
+                        showToast('Properties loaded!', 'success');
                     }
-                    
-                    state.hasMore = newRentals.length === CONFIG.ITEMS_PER_PAGE;
-                    
-                    renderRentals();
-                    
-                    // Load images immediately
-                    setTimeout(() => {
-                        loadAllRentalImages();
-                    }, 100);
-                    
-                } else {
-                    throw new Error('Invalid data format');
                 }
             } catch (error) {
-                console.error('Error loading rentals:', error);
-                showToast('Failed to load properties. Please try again.', 'error');
-                // Load sample rentals as fallback
-                if (state.currentPage === 1) {
-                    loadSampleRentals();
-                }
+                console.error('Error loading rentals from backend:', error);
             } finally {
                 state.isLoading = false;
-                document.getElementById('loadingSpinner').classList.add('hidden');
-                document.getElementById('loadMoreBtn').disabled = false;
-                
-                // Update load more button text
-                const loadMoreBtn = document.getElementById('loadMoreBtn');
-                if (!state.hasMore && state.rentals.length > 0) {
-                    loadMoreBtn.textContent = 'No more properties';
-                    loadMoreBtn.disabled = true;
-                } else {
-                    loadMoreBtn.textContent = 'Load More Properties';
-                }
             }
         }
         
@@ -1094,10 +2183,11 @@
                     bedrooms: 2,
                     bathrooms: 2,
                     squareFeet: 900,
-                    description: 'Modern 2-bedroom apartment with balcony, fitted kitchen, and secure parking.',
+                    description: 'Modern 2-bedroom apartment with balcony, fitted kitchen, and secure parking. Recently renovated with modern finishes.',
                     images: [
                         'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=500&q=80',
-                        'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=500&q=80'
+                        'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=500&q=80',
+                        'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=500&q=80'
                     ],
                     ownerName: 'Kilimani Properties',
                     ownerPhone: '254712345678',
@@ -1114,9 +2204,10 @@
                     bedrooms: 1,
                     bathrooms: 1,
                     squareFeet: 450,
-                    description: 'Fully furnished studio apartment in prime Westlands location.',
+                    description: 'Fully furnished studio apartment in prime Westlands location. Includes utilities and WiFi.',
                     images: [
-                        'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=500&q=80'
+                        'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=500&q=80',
+                        'https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=500&q=80'
                     ],
                     ownerName: 'Westlands Realty',
                     ownerPhone: '254723456789',
@@ -1133,10 +2224,11 @@
                     bedrooms: 3,
                     bathrooms: 3,
                     squareFeet: 2200,
-                    description: 'Spacious family home with garden, garage, and servant quarters.',
+                    description: 'Spacious family home with garden, garage, and servant quarters. Perfect for families.',
                     images: [
                         'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=500&q=80',
-                        'https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=500&q=80'
+                        'https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=500&q=80',
+                        'https://images.unsplash.com/photo-1561518776-e76a5e48f731?w=500&q=80'
                     ],
                     ownerName: 'Karen Estates',
                     ownerPhone: '254734567890',
@@ -1153,9 +2245,10 @@
                     bedrooms: 1,
                     bathrooms: 1,
                     squareFeet: 550,
-                    description: 'Serviced apartment with housekeeping, WiFi, and gym access included.',
+                    description: 'Serviced apartment with housekeeping, WiFi, and gym access included. Perfect for professionals.',
                     images: [
-                        'https://images.unsplash.com/photo-1558036117-15e82a2c9a9a?w=500&q=80'
+                        'https://images.unsplash.com/photo-1558036117-15e82a2c9a9a?w=500&q=80',
+                        'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=500&q=80'
                     ],
                     ownerName: 'Upper Hill Suites',
                     ownerPhone: '254745678901',
@@ -1172,9 +2265,10 @@
                     bedrooms: 0,
                     bathrooms: 2,
                     squareFeet: 1200,
-                    description: 'Modern office space in prime CBD location, ready for immediate occupancy.',
+                    description: 'Modern office space in prime CBD location, ready for immediate occupancy. Includes reception area.',
                     images: [
-                        'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=500&q=80'
+                        'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=500&q=80',
+                        'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=500&q=80'
                     ],
                     ownerName: 'CBD Office Spaces',
                     ownerPhone: '254756789012',
@@ -1191,52 +2285,115 @@
                     bedrooms: 1,
                     bathrooms: 1,
                     squareFeet: 180,
-                    description: 'Affordable hostel room for students with shared kitchen facilities.',
+                    description: 'Affordable hostel room for students with shared kitchen facilities. Secure and clean environment.',
                     images: [
-                        'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500&q=80'
+                        'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500&q=80',
+                        'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=500&q=80'
                     ],
                     ownerName: 'Student Accommodations',
                     ownerPhone: '254767890123',
                     ownerWhatsapp: '254767890123',
                     availableFrom: 'Immediately',
                     deposit: 12000
+                },
+                {
+                    listingId: 'RENT007',
+                    propertyTitle: 'Luxury 4-Bedroom Villa',
+                    propertyType: 'Villa',
+                    monthlyRent: 250000,
+                    location: 'Runda, Nairobi',
+                    bedrooms: 4,
+                    bathrooms: 4,
+                    squareFeet: 3500,
+                    description: 'Luxury villa with swimming pool, spacious garden, and modern amenities. Perfect for executive living.',
+                    images: [
+                        'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=500&q=80',
+                        'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&q=80'
+                    ],
+                    ownerName: 'Runda Properties',
+                    ownerPhone: '254778901234',
+                    ownerWhatsapp: '254778901234',
+                    availableFrom: 'February 1',
+                    deposit: 250000
+                },
+                {
+                    listingId: 'RENT008',
+                    propertyTitle: 'Cozy 1-Bedroom Cottage',
+                    propertyType: 'Cottage',
+                    monthlyRent: 28000,
+                    location: 'Lavington, Nairobi',
+                    bedrooms: 1,
+                    bathrooms: 1,
+                    squareFeet: 400,
+                    description: 'Cozy cottage in quiet neighborhood. Includes small garden and parking space.',
+                    images: [
+                        'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=500&q=80',
+                        'https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=500&q=80'
+                    ],
+                    ownerName: 'Lavington Homes',
+                    ownerPhone: '254789012345',
+                    ownerWhatsapp: '254789012345',
+                    availableFrom: 'Immediately',
+                    deposit: 28000
                 }
             ];
             
             state.rentals = sampleRentals;
+            state.allRentals = sampleRentals;
+            state.filteredRentals = [...sampleRentals];
             state.hasMore = false;
-            renderRentals();
+            
+            // Apply location filtering if location is detected
+            if (state.isLocationDetected) {
+                filterRentalsByLocation();
+            } else {
+                renderRentals();
+            }
+            
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            loadMoreBtn.textContent = 'No more properties';
+            loadMoreBtn.disabled = true;
         }
         
         // ==================== RENDERING ====================
         function renderRentals() {
             const rentalsGrid = document.getElementById('rentalsGrid');
-            const rentalsToShow = state.rentals.slice(0, state.currentPage * CONFIG.ITEMS_PER_PAGE);
+            const rentalsToShow = state.filteredRentals.slice(0, state.currentPage * CONFIG.ITEMS_PER_PAGE);
             
-            if (state.currentPage === 1 && rentalsToShow.length === 0) {
+            if (rentalsToShow.length === 0) {
                 rentalsGrid.innerHTML = `
-                    <div class="no-results">
-                        <div class="no-results-icon">🏠</div>
-                        <h3 class="no-results-title">No properties available</h3>
-                        <p class="no-results-text">Check back later for new listings</p>
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🔍</div>
+                        <h3 class="empty-state-title">No properties found</h3>
+                        <p class="empty-state-message">
+                            ${state.searchQuery ? 
+                                `No properties found for "${state.searchQuery}"` : 
+                                'Try changing your location or check back soon for new properties'}
+                        </p>
                     </div>
                 `;
                 return;
             }
             
-            // If loading more, append to existing rentals
-            if (state.currentPage > 1) {
-                const newRentalsHTML = rentalsToShow.slice(-CONFIG.ITEMS_PER_PAGE).map(rental => 
-                    createRentalHTML(rental)
-                ).join('');
-                
-                rentalsGrid.innerHTML += newRentalsHTML;
-            } else {
-                // First load, replace all rentals
-                rentalsGrid.innerHTML = rentalsToShow.map(rental => 
-                    createRentalHTML(rental)
-                ).join('');
-            }
+            rentalsGrid.innerHTML = '';
+            
+            rentalsToShow.forEach(rental => {
+                rentalsGrid.innerHTML += createRentalHTML(rental);
+            });
+            
+            // Initialize image click events
+            setTimeout(() => {
+                document.querySelectorAll('.rental-image').forEach((imageDiv, index) => {
+                    const rental = state.filteredRentals[index];
+                    if (rental) {
+                        imageDiv.onclick = (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            openImageViewer(rental.images, 0);
+                        };
+                    }
+                });
+            }, 100);
         }
         
         function createRentalHTML(rental) {
@@ -1246,6 +2403,7 @@
             
             return `
             <div class="rental-card">
+                <div class="type-badge">${rental.propertyType}</div>
                 ${rental.deposit > 0 ? `<span class="rental-badge">Deposit: KSh ${rental.deposit.toLocaleString()}</span>` : ''}
                 
                 <div class="rental-image">
@@ -1278,7 +2436,7 @@
                     
                     <div class="rental-actions">
                         <button class="btn btn-primary" onclick="viewRental('${rental.listingId}')">
-                            View Details
+                            View
                         </button>
                         <div class="contact-toggle">
                             <button class="btn btn-secondary" onclick="toggleContactOptions(this, '${rental.listingId}', event)">
@@ -1301,25 +2459,69 @@
             `;
         }
         
-        function loadAllRentalImages() {
-            // Load all rental images immediately
-            document.querySelectorAll('.rental-image img').forEach(img => {
-                if (img.complete) {
-                    img.classList.add('loaded');
-                } else {
-                    img.onload = () => {
-                        img.classList.add('loaded');
-                    };
-                }
+        // ==================== IMAGE VIEWER ====================
+        function openImageViewer(images, startIndex = 0) {
+            state.currentImages = images;
+            state.currentImageIndex = startIndex;
+            
+            const viewer = document.getElementById('imageViewer');
+            const viewerImage = document.getElementById('viewerImage');
+            const thumbnailsContainer = document.getElementById('viewerThumbnails');
+            const imageCounter = document.getElementById('imageCounter');
+            
+            viewerImage.src = images[startIndex];
+            
+            thumbnailsContainer.innerHTML = '';
+            images.forEach((img, index) => {
+                const thumbnail = document.createElement('div');
+                thumbnail.className = `image-viewer-thumbnail ${index === startIndex ? 'active' : ''}`;
+                thumbnail.onclick = () => changeImage(index);
+                thumbnail.innerHTML = `<img src="${img}" alt="Thumbnail ${index + 1}" onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">`;
+                thumbnailsContainer.appendChild(thumbnail);
             });
+            
+            imageCounter.textContent = `${startIndex + 1} / ${images.length}`;
+            viewer.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeImageViewer() {
+            const viewer = document.getElementById('imageViewer');
+            viewer.classList.remove('active');
+            document.body.style.overflow = '';
+            state.currentImages = [];
+            state.currentImageIndex = 0;
+        }
+        
+        function changeImage(index) {
+            state.currentImageIndex = index;
+            const viewerImage = document.getElementById('viewerImage');
+            const thumbnails = document.querySelectorAll('.image-viewer-thumbnail');
+            const imageCounter = document.getElementById('imageCounter');
+            
+            viewerImage.src = state.currentImages[index];
+            
+            thumbnails.forEach((thumb, i) => {
+                thumb.classList.toggle('active', i === index);
+            });
+            
+            imageCounter.textContent = `${index + 1} / ${state.currentImages.length}`;
+        }
+        
+        function prevImage() {
+            const newIndex = (state.currentImageIndex - 1 + state.currentImages.length) % state.currentImages.length;
+            changeImage(newIndex);
+        }
+        
+        function nextImage() {
+            const newIndex = (state.currentImageIndex + 1) % state.currentImages.length;
+            changeImage(newIndex);
         }
         
         // ==================== RENTAL DETAILS ====================
         async function viewRental(rentalId) {
             try {
-                // Find rental in state
-                const rental = state.rentals.find(r => r.listingId === rentalId);
-                
+                const rental = state.allRentals.find(r => r.listingId === rentalId);
                 if (!rental) {
                     showToast('Property not found', 'error');
                     return;
@@ -1333,15 +2535,18 @@
                 images.forEach((img, index) => {
                     galleryHTML += `
                         <div class="gallery-slide ${index === 0 ? 'active' : ''}">
-                            <img src="${img}" alt="Image ${index + 1}" 
-                                 onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
+                            <img src="${img}" 
+                                 alt="Image ${index + 1}" 
+                                 onerror="this.src='${CONFIG.DEFAULT_IMAGE}'"
+                                 onclick="openImageViewer(${JSON.stringify(images)}, ${index})">
                         </div>
                     `;
                     
                     thumbnailsHTML += `
                         <div class="thumbnail ${index === 0 ? 'active' : ''}" 
                              onclick="changeGalleryImage(${index})">
-                            <img src="${img}" alt="Thumbnail ${index + 1}"
+                            <img src="${img}" 
+                                 alt="Thumbnail ${index + 1}"
                                  onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
                         </div>
                     `;
@@ -1369,6 +2574,30 @@
                             <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">${rental.propertyTitle}</h3>
                             <div style="font-size: 1.5rem; font-weight: 800; color: var(--maroon); margin-bottom: 1rem;">
                                 KSh ${rental.monthlyRent.toLocaleString()}/month
+                            </div>
+                            
+                            <div style="background: var(--gray-100); padding: 1rem; border-radius: var(--radius-md); margin-bottom: 1rem;">
+                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                    <div style="width: 40px; height: 40px; background: var(--maroon); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600;">
+                                        ${rental.ownerName.charAt(0)}
+                                    </div>
+                                    <div>
+                                        <div style="font-weight: 600; margin-bottom: 0.25rem;">
+                                            ${rental.ownerName}
+                                        </div>
+                                        <div style="font-size: 0.875rem; color: var(--gray-500);">
+                                            Property Owner
+                                        </div>
+                                        <div style="font-size: 0.875rem; color: var(--gray-500);">
+                                            📍 ${rental.location}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <button class="btn btn-primary" style="flex: 1;" onclick="showContactOptions('${rental.listingId}')">
+                                        Contact Owner
+                                    </button>
+                                </div>
                             </div>
                             
                             <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.5rem;">
@@ -1407,38 +2636,16 @@
                                 ` : ''}
                             </div>
                             
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Location</h4>
-                                <p style="color: var(--gray-600);">📍 ${rental.location}</p>
-                            </div>
-                            
+                            ${rental.description ? `
                             <div style="margin-bottom: 1.5rem;">
                                 <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Description</h4>
                                 <p style="color: var(--gray-600); line-height: 1.6;">${rental.description}</p>
                             </div>
-                            
-                            <div style="background: var(--gray-100); padding: 1rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
-                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                                    <div style="width: 40px; height: 40px; background: var(--maroon); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600;">
-                                        ${rental.ownerName.charAt(0)}
-                                    </div>
-                                    <div>
-                                        <div style="font-weight: 600; margin-bottom: 0.25rem;">
-                                            ${rental.ownerName}
-                                        </div>
-                                        <div style="font-size: 0.875rem; color: var(--gray-500);">
-                                            Property Owner
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary" style="width: 100%;" onclick="showContactOptions('${rental.listingId}')">
-                                    Contact Owner
-                                </button>
-                            </div>
+                            ` : ''}
                             
                             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.5rem;">
                                 <button class="btn btn-secondary" onclick="saveRental('${rental.listingId}')">
-                                    ⭐ Save Property
+                                    ⭐ Save
                                 </button>
                                 <button class="btn btn-primary" onclick="showContactOptions('${rental.listingId}')">
                                     💬 Contact Now
@@ -1448,11 +2655,8 @@
                     </div>
                 `;
                 
-                // Initialize gallery
                 window.currentGalleryImages = images;
                 window.currentGalleryIndex = 0;
-                
-                // Show modal
                 showModal('rentalModal');
                 
             } catch (error) {
@@ -1461,7 +2665,7 @@
             }
         }
         
-        // Gallery functions
+        // ==================== FIXED GALLERY FUNCTIONS ====================
         window.changeGalleryImage = function(index) {
             const slides = document.querySelectorAll('.gallery-slide');
             const thumbnails = document.querySelectorAll('.thumbnail');
@@ -1469,18 +2673,26 @@
             slides.forEach(slide => slide.classList.remove('active'));
             thumbnails.forEach(thumb => thumb.classList.remove('active'));
             
-            if (slides[index]) slides[index].classList.add('active');
+            if (slides[index]) {
+                slides[index].classList.add('active');
+                const img = slides[index].querySelector('img');
+                if (img && img.src) {
+                    img.src = img.src;
+                }
+            }
             if (thumbnails[index]) thumbnails[index].classList.add('active');
             
             window.currentGalleryIndex = index;
         };
         
         window.prevGalleryImage = function() {
+            if (!window.currentGalleryImages) return;
             const newIndex = (window.currentGalleryIndex - 1 + window.currentGalleryImages.length) % window.currentGalleryImages.length;
             window.changeGalleryImage(newIndex);
         };
         
         window.nextGalleryImage = function() {
+            if (!window.currentGalleryImages) return;
             const newIndex = (window.currentGalleryIndex + 1) % window.currentGalleryImages.length;
             window.changeGalleryImage(newIndex);
         };
@@ -1495,15 +2707,12 @@
             const options = button.nextElementSibling;
             const isVisible = options.classList.contains('show');
             
-            // Close all other dropdowns
             document.querySelectorAll('.contact-options').forEach(el => {
                 if (el !== options) el.classList.remove('show');
             });
             
-            // Toggle current dropdown
             options.classList.toggle('show', !isVisible);
             
-            // Close dropdown when clicking outside
             if (!isVisible) {
                 const closeHandler = (e) => {
                     if (!options.contains(e.target) && e.target !== button) {
@@ -1516,11 +2725,10 @@
         }
         
         async function showContactOptions(rentalId) {
-            const rental = state.rentals.find(r => r.listingId === rentalId);
-            
+            const rental = state.allRentals.find(r => r.listingId === rentalId);
             if (!rental) return;
             
-            const whatsappMessage = `Hi, I'm interested in your "${rental.propertyTitle}" property for KSh ${rental.monthlyRent.toLocaleString()}/month on SokoInn`;
+            const whatsappMessage = `Hi, I'm interested in your "${rental.propertyTitle}" property for KSh ${rental.monthlyRent.toLocaleString()}/month on SokoInn Rentals`;
             
             document.getElementById('contactModalBody').innerHTML = `
                 <div>
@@ -1529,7 +2737,7 @@
                             ${rental.ownerName.charAt(0)}
                         </div>
                         <h4 style="font-weight: 600; margin-bottom: 0.25rem;">${rental.ownerName}</h4>
-                        <p style="color: var(--gray-500); font-size: 0.875rem;">Property: "${rental.propertyTitle}"</p>
+                        <p style="color: var(--gray-500); font-size: 0.875rem;">Owner of "${rental.propertyTitle}"</p>
                     </div>
                     
                     <div style="display: grid; gap: 0.75rem;">
@@ -1559,7 +2767,7 @@
                     
                     <div style="margin-top: 1.5rem; padding: 1rem; background: var(--gray-100); border-radius: var(--radius-md);">
                         <p style="font-size: 0.875rem; color: var(--gray-600); text-align: center;">
-                            When contacting, mention you found them on SokoInn
+                            When contacting, mention you found them on SokoInn Rentals
                         </p>
                     </div>
                 </div>
@@ -1574,25 +2782,19 @@
                 event.stopPropagation();
             }
             
-            const rental = state.rentals.find(r => r.listingId === rentalId);
-            
+            const rental = state.allRentals.find(r => r.listingId === rentalId);
             if (!rental) return;
             
             if (method === 'whatsapp' && rental.ownerWhatsapp) {
-                const message = `Hi, I'm interested in your "${rental.propertyTitle}" property for KSh ${rental.monthlyRent.toLocaleString()}/month on SokoInn`;
-                const url = `https://wa.me/${rental.ownerWhatsapp}?text=${encodeURIComponent(message)}`;
-                window.open(url, '_blank');
+                const message = `Hi, I'm interested in your "${rental.propertyTitle}" property for KSh ${rental.monthlyRent.toLocaleString()}/month on SokoInn Rentals`;
+                window.open(`https://wa.me/${rental.ownerWhatsapp}?text=${encodeURIComponent(message)}`, '_blank');
                 showToast(`Opening WhatsApp...`, 'info');
             } else if (method === 'call' && rental.ownerPhone) {
-                const url = `tel:${rental.ownerPhone}`;
-                window.location.href = url;
+                window.location.href = `tel:${rental.ownerPhone}`;
             }
             
-            // Close dropdown if it exists
             const dropdown = event?.target?.closest('.contact-options');
-            if (dropdown) {
-                dropdown.classList.remove('show');
-            }
+            if (dropdown) dropdown.classList.remove('show');
         }
         
         // ==================== UTILITY FUNCTIONS ====================
@@ -1610,29 +2812,38 @@
             showToast('List a property feature coming soon!', 'info');
         }
         
-        function refreshRentals(event) {
+        function loadMoreProperties() {
+            if (!state.isLoading && state.hasMore) {
+                state.currentPage++;
+                loadRentalsFromBackend();
+            }
+        }
+        
+        function showAllProperties(event) {
             if (event) event.preventDefault();
             state.currentPage = 1;
             state.hasMore = true;
-            loadRentals();
-        }
-        
-        function loadMoreRentals() {
-            if (!state.isLoading && state.hasMore) {
-                state.currentPage++;
-                loadRentals();
+            
+            // Reset search
+            state.searchQuery = '';
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.value = '';
             }
-        }
-        
-        function saveRental(rentalId) {
-            const saved = JSON.parse(localStorage.getItem('sokoinn_saved_rentals') || '[]');
-            if (!saved.includes(rentalId)) {
-                saved.push(rentalId);
-                localStorage.setItem('sokoinn_saved_rentals', JSON.stringify(saved));
-                showToast('Property saved for later!', 'success');
-            } else {
-                showToast('Property already saved', 'info');
+            
+            // Show all rentals
+            state.filteredRentals = [...state.allRentals];
+            
+            // Update section title
+            const sectionTitle = document.querySelector('.section-title');
+            const locationDisplay = document.querySelector('.location-display');
+            if (sectionTitle && locationDisplay) {
+                sectionTitle.textContent = 'All Properties';
+                locationDisplay.innerHTML = '';
             }
+            
+            renderRentals();
+            document.getElementById('rentals').scrollIntoView({ behavior: 'smooth' });
         }
         
         function initScrollDetection() {
@@ -1663,28 +2874,19 @@
             if (modal) {
                 modal.classList.remove('active');
                 document.body.style.overflow = '';
-                
-                // Clear modal content for rental modal
                 if (modalId === 'rentalModal') {
                     document.getElementById('rentalModalBody').innerHTML = '';
-                    window.currentGalleryImages = null;
-                    window.currentGalleryIndex = 0;
                 }
             }
         }
         
         function showToast(message, type = 'info') {
-            // Remove existing toast
             const existingToast = document.querySelector('.toast');
-            if (existingToast) {
-                existingToast.remove();
-            }
+            if (existingToast) existingToast.remove();
             
-            // Create toast element
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
             toast.textContent = message;
-            
             document.body.appendChild(toast);
             
             setTimeout(() => {
@@ -1693,20 +2895,49 @@
             }, 3000);
         }
         
-        // Close modals when clicking outside
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal')) {
-                closeModal(e.target.id);
+        function saveRental(rentalId) {
+            const saved = JSON.parse(localStorage.getItem('sokoinn_saved_rentals') || '[]');
+            if (!saved.includes(rentalId)) {
+                saved.push(rentalId);
+                localStorage.setItem('sokoinn_saved_rentals', JSON.stringify(saved));
+                showToast('Property saved for later!', 'success');
+            } else {
+                showToast('Property already saved', 'info');
             }
+        }
+        
+        // Initialize on load
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.rental-image img').forEach(img => {
+                if (img.complete) {
+                    img.classList.add('loaded');
+                } else {
+                    img.onload = () => img.classList.add('loaded');
+                }
+            });
+            
+            setTimeout(() => {
+                if (!state.chatbotOpen && state.unreadMessages === 0) {
+                    state.unreadMessages = 1;
+                    const notification = document.getElementById('chatbotNotification');
+                    notification.textContent = '1';
+                    notification.classList.remove('hidden');
+                }
+            }, 3000);
         });
         
         // Close modals with Escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
-                const modals = document.querySelectorAll('.modal.active');
-                modals.forEach(modal => {
-                    closeModal(modal.id);
-                });
+                if (document.getElementById('imageViewer').classList.contains('active')) {
+                    closeImageViewer();
+                } else {
+                    const modals = document.querySelectorAll('.modal.active');
+                    modals.forEach(modal => closeModal(modal.id));
+                }
+                if (state.chatbotOpen) {
+                    toggleChatbot();
+                }
             }
         });
     </script>
