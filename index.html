@@ -4346,6 +4346,113 @@
         
         adjustChatbotPosition();
     });
+        // PWA Service Worker Registration
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/service-worker.js')
+              .then(registration => {
+                console.log('ServiceWorker registration successful with scope:', registration.scope);
+                
+                // Check for updates every hour
+                setInterval(() => {
+                  registration.update();
+                }, 60 * 60 * 1000);
+                
+                // Listen for controller change
+                navigator.serviceWorker.addEventListener('controllerchange', () => {
+                  console.log('Service Worker updated. Reloading page...');
+                  window.location.reload();
+                });
+              })
+              .catch(error => {
+                console.log('ServiceWorker registration failed:', error);
+              });
+          });
+        }
+        
+        // PWA Install Prompt
+        let deferredPrompt;
+        const installButton = document.createElement('button');
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+          // Prevent Chrome 67 and earlier from automatically showing the prompt
+          e.preventDefault();
+          // Stash the event so it can be triggered later
+          deferredPrompt = e;
+          
+          // Show custom install button
+          installButton.style.position = 'fixed';
+          installButton.style.bottom = '100px';
+          installButton.style.left = '50%';
+          installButton.style.transform = 'translateX(-50%)';
+          installButton.style.zIndex = '1001';
+          installButton.style.padding = '0.75rem 1.5rem';
+          installButton.style.background = 'linear-gradient(135deg, #800000, #a62a2a)';
+          installButton.style.color = 'white';
+          installButton.style.border = 'none';
+          installButton.style.borderRadius = '25px';
+          installButton.style.fontWeight = '600';
+          installButton.style.boxShadow = '0 6px 20px rgba(0,0,0,0.3)';
+          installButton.style.cursor = 'pointer';
+          installButton.style.display = 'flex';
+          installButton.style.alignItems = 'center';
+          installButton.style.gap = '0.5rem';
+          installButton.style.fontFamily = 'inherit';
+          installButton.innerHTML = '<i class="fas fa-download"></i> Install SokoInn App';
+          installButton.onclick = installApp;
+          
+          document.body.appendChild(installButton);
+          
+          // Auto-hide after 10 seconds
+          setTimeout(() => {
+            if (installButton.parentNode) {
+              installButton.style.opacity = '0';
+              installButton.style.transform = 'translateX(-50%) translateY(20px)';
+              setTimeout(() => {
+                if (installButton.parentNode) {
+                  installButton.remove();
+                }
+              }, 300);
+            }
+          }, 10000);
+        });
+        
+        function installApp() {
+          if (!deferredPrompt) return;
+          
+          // Show the install prompt
+          deferredPrompt.prompt();
+          
+          // Wait for the user to respond to the prompt
+          deferredPrompt.userChoice.then(choiceResult => {
+            if (choiceResult.outcome === 'accepted') {
+              console.log('User accepted the install prompt');
+            } else {
+              console.log('User dismissed the install prompt');
+            }
+            
+            // Remove the install button
+            if (installButton.parentNode) {
+              installButton.remove();
+            }
+            
+            deferredPrompt = null;
+          });
+        }
+        
+        // Detect if app is running in standalone mode
+        function isRunningStandalone() {
+          return (window.matchMedia('(display-mode: standalone)').matches) || 
+                 (window.navigator.standalone) || 
+                 (document.referrer.includes('android-app://'));
+        }
+        
+        // Adjust UI for standalone mode
+        if (isRunningStandalone()) {
+          document.documentElement.style.setProperty('--safe-area-top', 'env(safe-area-inset-top)');
+          document.documentElement.style.setProperty('--safe-area-bottom', 'env(safe-area-inset-bottom)');
+        }
     </script>
+    
 </body>
 </html>
