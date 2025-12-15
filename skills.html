@@ -1392,38 +1392,6 @@
             white-space: nowrap;
         }
         
-        .sell-item {
-            position: relative;
-            top: -15px;
-            background: linear-gradient(135deg, var(--maroon), var(--light-maroon));
-            color: var(--white);
-            padding: 0;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            min-width: auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 6px 20px rgba(128, 0, 0, 0.3);
-            border: 4px solid var(--white);
-        }
-        
-        .sell-item:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(128, 0, 0, 0.4);
-        }
-        
-        .sell-item .nav-icon {
-            font-size: 1.5rem;
-            margin-bottom: 0;
-            color: var(--white);
-        }
-        
-        .sell-item .nav-label {
-            display: none;
-        }
-        
         /* ==================== SEARCH SUGGESTIONS ==================== */
         .search-suggestions {
             position: absolute;
@@ -1819,6 +1787,26 @@
             outline: 2px solid var(--maroon);
             outline-offset: 2px;
         }
+        
+        /* ==================== LAZY LOADING FOR IMAGES ==================== */
+        .skill-image img {
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .skill-image img.loaded {
+            opacity: 1;
+        }
+        
+        /* ==================== BETTER BOTTOM NAV ==================== */
+        .bottom-nav {
+            justify-content: space-between;
+        }
+        
+        .nav-item {
+            flex: 1;
+            max-width: 100px;
+        }
     </style>
 </head>
 <body>
@@ -2082,8 +2070,9 @@
             <span class="nav-icon"><i class="fas fa-house-user"></i></span>
             <span class="nav-label">Rentals</span>
         </a>
-        <a href="#" class="nav-item sell-item" onclick="showOfferServiceModal()">
-            <span class="nav-icon"><i class="fas fa-plus"></i></span>
+        <a href="#" class="nav-item" onclick="toggleChatbot()">
+            <span class="nav-icon"><i class="fas fa-headset"></i></span>
+            <span class="nav-label">Support</span>
         </a>
     </nav>
     
@@ -2200,6 +2189,7 @@
             initChatbot();
             initLocationFiltering();
             initEventListeners();
+            initImageObserver();
             
             // Load skills from backend
             loadSkillsFromBackend();
@@ -2764,6 +2754,42 @@
             filterServices();
         }
 
+        // ==================== ENHANCED IMAGE LOADING ====================
+        function initImageObserver() {
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            if (img.dataset.src) {
+                                img.src = img.dataset.src;
+                                img.removeAttribute('data-src');
+                            }
+                            img.classList.add('loaded');
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                }, {
+                    rootMargin: '50px 0px',
+                    threshold: 0.1
+                });
+                
+                // Store observer for later use
+                window.imageObserver = imageObserver;
+            }
+        }
+
+        function lazyLoadImage(img) {
+            if (window.imageObserver && img.dataset.src) {
+                window.imageObserver.observe(img);
+            } else if (img.dataset.src) {
+                // Fallback for browsers without IntersectionObserver
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+                img.classList.add('loaded');
+            }
+        }
+
         // ==================== SKILLS LOADING AND MANAGEMENT ====================
         async function loadSkillsFromBackend() {
             if (state.isLoading) return;
@@ -3157,6 +3183,13 @@
             skillsToShow.forEach(skill => {
                 skillsGrid.innerHTML += createSkillHTML(skill);
             });
+            
+            // Initialize lazy loading for images
+            setTimeout(() => {
+                document.querySelectorAll('.skill-image img').forEach(img => {
+                    lazyLoadImage(img);
+                });
+            }, 100);
         }
 
         function createSkillHTML(skill) {
@@ -3174,16 +3207,18 @@
                 
                 <div class="skill-image">
                     <div class="image-placeholder"></div>
-                    <img src="${skill.image || CONFIG.DEFAULT_IMAGE}" 
+                    <img data-src="${skill.image || CONFIG.DEFAULT_IMAGE}" 
+                         src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3C/svg%3E"
                          alt="${skill.skillTitle}"
                          onerror="this.src='${CONFIG.DEFAULT_IMAGE}'; this.classList.add('loaded')"
-                         class="loaded">
+                         width="16" height="9">
                 </div>
                 
                 <div class="provider-avatar">
                     <img src="${skill.providerAvatar}" 
                          alt="${skill.providerName}"
-                         onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(skill.providerName || 'Provider')}&background=800000&color=fff'">
+                         onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(skill.providerName || 'Provider')}&background=800000&color=fff'"
+                         loading="lazy">
                 </div>
                 
                 <div class="skill-content">
@@ -3274,7 +3309,8 @@
                         <img src="${skill.image || CONFIG.DEFAULT_IMAGE}" 
                             alt="${skill.skillTitle}"
                             class="suggestion-image"
-                            onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
+                            onerror="this.src='${CONFIG.DEFAULT_IMAGE}'"
+                            loading="lazy">
                         <div class="suggestion-details">
                             <div class="suggestion-title">${skill.skillTitle}</div>
                             <div class="suggestion-location">📍 ${skill.location} • ${skill.skillType}</div>
@@ -3390,7 +3426,8 @@
                                 <img src="${skill.image || CONFIG.DEFAULT_IMAGE}" 
                                      alt="${skill.skillTitle}"
                                      style="width: 100%; height: 100%; object-fit: cover;"
-                                     onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
+                                     onerror="this.src='${CONFIG.DEFAULT_IMAGE}'"
+                                     loading="lazy">
                             </div>
                             <div>
                                 <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem;">${skill.skillTitle}</h3>
@@ -3437,7 +3474,8 @@
                                     <img src="${skill.providerAvatar}" 
                                          alt="${skill.providerName}"
                                          style="width: 100%; height: 100%; object-fit: cover;"
-                                         onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(skill.providerName || 'Provider')}&background=800000&color=fff'">
+                                         onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(skill.providerName || 'Provider')}&background=800000&color=fff'"
+                                         loading="lazy">
                                 </div>
                                 <div>
                                     <div style="font-weight: 600; margin-bottom: 0.25rem;">
@@ -3620,10 +3658,6 @@
                 return match[1] + ' ' + match[2] + ' ' + match[3];
             }
             return phone;
-        }
-
-        function showOfferServiceModal() {
-            showToast('Offer a service feature coming soon!', 'info');
         }
 
         function updateLoadMoreButton() {
