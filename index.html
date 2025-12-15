@@ -3806,121 +3806,186 @@
 
     // ==================== PRODUCT DETAIL MODAL ====================
     async function viewProduct(productId) {
-        try {
-            const product = state.allProducts.find(p => p.listingId === productId);
-            if (!product) {
-                showToast('Product not found', 'error');
-                return;
-            }
-            
-            const images = product.images || [CONFIG.DEFAULT_IMAGE];
-            
-            let galleryHTML = '';
-            let thumbnailsHTML = '';
-            
-            images.forEach((img, index) => {
-                galleryHTML += `
-                    <div class="gallery-slide ${index === 0 ? 'active' : ''}">
-                        <img src="${img}" 
-                            alt="Image ${index + 1}" 
-                            onerror="this.src='${CONFIG.DEFAULT_IMAGE}'"
-                            onclick="openImageViewer(${JSON.stringify(images)}, ${index})">
+    try {
+        const product = state.allProducts.find(p => p.listingId === productId);
+        if (!product) {
+            showToast('Product not found', 'error');
+            return;
+        }
+        
+        const images = product.images || [CONFIG.DEFAULT_IMAGE];
+        const whatsappMessage = `Hi, I'm interested in your "${product.title}" for KSh ${product.price.toLocaleString()} on SokoInn`;
+        
+        document.getElementById('productModalBody').innerHTML = `
+            <div>
+                <!-- Product Gallery -->
+                <div class="product-gallery">
+                    <div class="gallery-main" id="galleryMain">
+                        ${images.map((img, index) => `
+                            <div class="gallery-slide ${index === 0 ? 'active' : ''}">
+                                <img src="${img}" 
+                                    alt="Image ${index + 1}" 
+                                    onerror="this.src='${CONFIG.DEFAULT_IMAGE}'"
+                                    onclick="openImageViewer(${JSON.stringify(images)}, ${index})">
+                            </div>
+                        `).join('')}
                     </div>
-                `;
+                    ${images.length > 1 ? `
+                        <button class="gallery-nav gallery-prev" onclick="prevGalleryImage()">‹</button>
+                        <button class="gallery-nav gallery-next" onclick="nextGalleryImage()">›</button>
+                    ` : ''}
+                </div>
                 
-                thumbnailsHTML += `
-                    <div class="thumbnail ${index === 0 ? 'active' : ''}" 
-                        onclick="changeGalleryImage(${index})">
-                        <img src="${img}" 
-                            alt="Thumbnail ${index + 1}"
-                            onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
-                    </div>
-                `;
-            });
-            
-            document.getElementById('productModalBody').innerHTML = `
-                <div>
-                    <div class="product-gallery">
-                        <div class="gallery-main" id="galleryMain">
-                            ${galleryHTML}
+                <!-- Thumbnails -->
+                ${images.length > 1 ? `
+                <div class="gallery-thumbnails">
+                    ${images.map((img, index) => `
+                        <div class="thumbnail ${index === 0 ? 'active' : ''}" onclick="changeGalleryImage(${index})">
+                            <img src="${img}" alt="Thumbnail ${index + 1}" onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
                         </div>
-                        ${images.length > 1 ? `
-                            <button class="gallery-nav gallery-prev" onclick="prevGalleryImage()">‹</button>
-                            <button class="gallery-nav gallery-next" onclick="nextGalleryImage()">›</button>
-                        ` : ''}
+                    `).join('')}
+                </div>
+                ` : ''}
+                
+                <!-- Product Info -->
+                <div style="margin-top: 1.5rem;">
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: #333;">${product.title}</h3>
+                    <div style="font-size: 1.75rem; font-weight: 800; color: var(--maroon); margin-bottom: 1rem;">
+                        KSh ${product.price.toLocaleString()}
                     </div>
                     
-                    ${images.length > 1 ? `
-                    <div class="gallery-thumbnails">
-                        ${thumbnailsHTML}
+                    <!-- Seller Info -->
+                    <div style="background: var(--gray-100); padding: 1.25rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--maroon), var(--light-maroon)); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1.25rem;">
+                                ${product.sellerName.charAt(0)}
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                                    <span style="font-weight: 700; font-size: 1.125rem; color: #333;">${product.sellerName}</span>
+                                    ${product.sellerVerification === 'verified' ? '<span style="color: #10b981; font-size: 1rem;">✓</span>' : ''}
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+                                    <div style="display: flex; align-items: center; gap: 0.25rem; font-size: 0.875rem; color: var(--gray-600);">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span>${product.sellerLocation || 'Nairobi'}</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 0.25rem; font-size: 0.875rem; color: var(--gray-600);">
+                                        <i class="fas fa-star" style="color: #fbbf24;"></i>
+                                        <span>${product.sellerRating || 4.0} (${product.sellerTotalReviews || 0} reviews)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Contact Buttons -->
+                        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                            <div style="font-weight: 600; color: #333; margin-bottom: 0.5rem;">Contact Seller:</div>
+                            <div style="display: flex; gap: 0.75rem;">
+                                ${product.sellerWhatsapp ? `
+                                <a href="https://wa.me/${product.sellerWhatsapp}?text=${encodeURIComponent(whatsappMessage)}" 
+                                   target="_blank"
+                                   style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.875rem; background: linear-gradient(135deg, #25D366, #128C7E); color: white; border-radius: var(--radius-md); text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
+                                    <i class="fab fa-whatsapp" style="font-size: 1.125rem;"></i>
+                                    <span>WhatsApp</span>
+                                </a>
+                                ` : ''}
+                                
+                                ${product.sellerPhone ? `
+                                <a href="tel:${product.sellerPhone}" 
+                                   style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.875rem; background: linear-gradient(135deg, var(--maroon), var(--light-maroon)); color: white; border-radius: var(--radius-md); text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
+                                    <i class="fas fa-phone" style="font-size: 1.125rem;"></i>
+                                    <span>Call Now</span>
+                                </a>
+                                ` : ''}
+                            </div>
+                            
+                            <!-- Phone Numbers Display -->
+                            <div style="background: white; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--gray-200); margin-top: 0.5rem;">
+                                <div style="font-size: 0.8125rem; color: var(--gray-600); margin-bottom: 0.5rem; font-weight: 600;">Phone Numbers:</div>
+                                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                    ${product.sellerWhatsapp ? `
+                                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <i class="fab fa-whatsapp" style="color: #25D366;"></i>
+                                            <span style="font-size: 0.875rem; font-weight: 500;">WhatsApp:</span>
+                                        </div>
+                                        <span style="font-family: monospace; font-weight: 600;">${formatPhoneNumber(product.sellerWhatsapp)}</span>
+                                    </div>
+                                    ` : ''}
+                                    
+                                    ${product.sellerPhone ? `
+                                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <i class="fas fa-phone" style="color: var(--maroon);"></i>
+                                            <span style="font-size: 0.875rem; font-weight: 500;">Phone:</span>
+                                        </div>
+                                        <span style="font-family: monospace; font-weight: 600;">${formatPhoneNumber(product.sellerPhone)}</span>
+                                    </div>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Description -->
+                    ${product.description ? `
+                    <div style="margin-bottom: 1.5rem;">
+                        <h4 style="font-weight: 600; margin-bottom: 0.75rem; color: #333; font-size: 1.125rem;">Description</h4>
+                        <div style="background: var(--gray-100); padding: 1.25rem; border-radius: var(--radius-md);">
+                            <p style="color: var(--gray-600); line-height: 1.6; white-space: pre-line;">${product.description}</p>
+                        </div>
                     </div>
                     ` : ''}
                     
-                    <div style="margin-top: 1.5rem;">
-                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">${product.title}</h3>
-                        <div style="font-size: 1.5rem; font-weight: 800; color: var(--maroon); margin-bottom: 1rem;">
-                            KSh ${product.price.toLocaleString()}
-                        </div>
-                        
-                        <div style="background: var(--gray-100); padding: 1rem; border-radius: var(--radius-md); margin-bottom: 1rem;">
-                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                                <div style="width: 40px; height: 40px; background: var(--maroon); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600;">
-                                    ${product.sellerName.charAt(0)}
-                                </div>
-                                <div>
-                                    <div style="font-weight: 600; margin-bottom: 0.25rem;">
-                                        ${product.sellerName}
-                                        ${product.sellerVerification === 'verified' ? '<span style="color: #10b981; margin-left: 0.25rem;">✓</span>' : ''}
-                                    </div>
-                                    <div style="font-size: 0.875rem; color: var(--gray-500);">
-                                        📍 ${product.sellerLocation || 'Nairobi'}
-                                    </div>
-                                    <div style="font-size: 0.875rem; color: var(--gray-500);">
-                                        ⭐ ${product.sellerRating || 4.0} (${product.sellerTotalReviews || 0} reviews)
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="display: flex; gap: 0.5rem;">
-                                <button class="btn btn-primary" style="flex: 1;" onclick="showContactOptions('${product.listingId}')">
-                                    Contact Seller
-                                </button>
-                            </div>
-                        </div>
-                        
-                        ${product.description ? `
-                        <div style="margin-bottom: 1rem;">
-                            <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Description</h4>
-                            <p style="color: var(--gray-600); line-height: 1.6;">${product.description}</p>
+                    <!-- Product Details -->
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
+                        ${product.category ? `
+                        <div style="display: flex; align-items: center; gap: 0.5rem; background: var(--gray-100); padding: 0.5rem 0.875rem; border-radius: var(--radius-sm);">
+                            <i class="fas fa-tag" style="color: var(--gray-500);"></i>
+                            <span style="font-size: 0.875rem; font-weight: 500;">${product.category}</span>
                         </div>
                         ` : ''}
                         
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                            ${product.category ? `<span style="background: var(--gray-200); padding: 0.25rem 0.5rem; border-radius: var(--radius-sm); font-size: 0.75rem;">${product.category}</span>` : ''}
-                            ${product.condition ? `<span style="background: var(--gray-200); padding: 0.25rem 0.5rem; border-radius: var(--radius-sm); font-size: 0.75rem;">${product.condition}</span>` : ''}
-                            ${product.stock ? `<span style="background: var(--gray-200); padding: 0.25rem 0.5rem; border-radius: var(--radius-sm); font-size: 0.75rem;">Stock: ${product.stock}</span>` : ''}
+                        ${product.condition ? `
+                        <div style="display: flex; align-items: center; gap: 0.5rem; background: var(--gray-100); padding: 0.5rem 0.875rem; border-radius: var(--radius-sm);">
+                            <i class="fas fa-certificate" style="color: var(--gray-500);"></i>
+                            <span style="font-size: 0.875rem; font-weight: 500;">${product.condition}</span>
                         </div>
+                        ` : ''}
                         
-                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.5rem;">
-                            <button class="btn btn-secondary" onclick="saveProduct('${product.listingId}')">
-                                <i class="fas fa-star"></i> Save
-                            </button>
-                            <button class="btn btn-primary" onclick="showContactOptions('${product.listingId}')">
-                                <i class="fas fa-comment"></i> Contact Now
-                            </button>
+                        ${product.stock ? `
+                        <div style="display: flex; align-items: center; gap: 0.5rem; background: var(--gray-100); padding: 0.5rem 0.875rem; border-radius: var(--radius-sm);">
+                            <i class="fas fa-box" style="color: var(--gray-500);"></i>
+                            <span style="font-size: 0.875rem; font-weight: 500;">Stock: ${product.stock}</span>
                         </div>
+                        ` : ''}
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2rem;">
+                        <button class="btn btn-secondary" onclick="saveProduct('${product.listingId}')" style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                            <i class="fas fa-star"></i>
+                            <span>Save Product</span>
+                        </button>
+                        <button class="btn btn-primary" onclick="showContactOptions('${product.listingId}')" style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                            <i class="fas fa-share-alt"></i>
+                            <span>Share</span>
+                        </button>
                     </div>
                 </div>
-            `;
-            
-            window.currentGalleryImages = images;
-            window.currentGalleryIndex = 0;
-            showModal('productModal');
-            
-        } catch (error) {
-            console.error('Error viewing product:', error);
-            showToast('Failed to load product details', 'error');
-        }
+            </div>
+        `;
+        
+        window.currentGalleryImages = images;
+        window.currentGalleryIndex = 0;
+        showModal('productModal');
+        
+    } catch (error) {
+        console.error('Error viewing product:', error);
+        showToast('Failed to load product details', 'error');
     }
+}
 
     // ==================== IMAGE VIEWER FUNCTIONS ====================
     function openImageViewer(images, startIndex = 0) {
