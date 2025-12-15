@@ -16,7 +16,7 @@
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-       <style>
+    <style>
         /* ==================== CSS VARIABLES ==================== */
         :root {
             --maroon: #800000;
@@ -54,6 +54,7 @@
             color: var(--black);
             background: var(--gray-100);
             padding-bottom: 80px;
+            transition: padding-bottom 0.3s ease;
         }
         
         img {
@@ -296,37 +297,6 @@
         .header-action-btn:hover {
             background: var(--gray-200);
             transform: translateY(-1px);
-        }
-        
-        .header-action-btn.sell-btn {
-            background: linear-gradient(135deg, var(--maroon), var(--light-maroon));
-            color: white;
-            font-weight: 600;
-            padding: 0.5rem 1rem;
-            width: auto;
-            border-radius: var(--radius-lg);
-            gap: 0.5rem;
-        }
-        
-        .header-action-btn.sell-btn:hover {
-            box-shadow: var(--shadow-md);
-        }
-        
-        .badge {
-            position: absolute;
-            top: -2px;
-            right: -2px;
-            width: 18px;
-            height: 18px;
-            background: #ff4757;
-            border-radius: 50%;
-            color: white;
-            font-size: 0.65rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            border: 2px solid white;
         }
         
         .menu-toggle {
@@ -689,10 +659,10 @@
             }
         }
         
-        /* ==================== RESPONSIVE CHATBOT IMPROVEMENTS ==================== */
+        /* ==================== ENHANCED RESPONSIVE CHATBOT ==================== */
         .chatbot-button {
             position: fixed;
-            bottom: 90px;
+            bottom: 20px;
             right: 20px;
             width: 60px;
             height: 60px;
@@ -704,7 +674,7 @@
             cursor: pointer;
             box-shadow: var(--shadow-xl);
             z-index: 999;
-            transition: var(--transition);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: none;
             animation: float 3s ease-in-out infinite;
         }
@@ -716,7 +686,7 @@
         
         @media (max-width: 768px) {
             .chatbot-button {
-                bottom: 85px;
+                bottom: 80px;
                 right: 15px;
                 width: 56px;
                 height: 56px;
@@ -725,7 +695,7 @@
         
         @media (max-width: 480px) {
             .chatbot-button {
-                bottom: 80px;
+                bottom: 75px;
                 right: 10px;
                 width: 52px;
                 height: 52px;
@@ -774,10 +744,12 @@
         
         .chatbot-container {
             position: fixed;
-            bottom: 160px;
+            bottom: 90px;
             right: 20px;
             width: 380px;
+            max-width: calc(100vw - 40px);
             height: 500px;
+            max-height: calc(100vh - 100px);
             background: white;
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-xl);
@@ -825,23 +797,31 @@
             }
         }
         
+        /* Mobile fullscreen mode */
+        @media (max-width: 768px) {
+            .chatbot-container.mobile-fullscreen {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                height: 100%;
+                max-height: 100%;
+                border-radius: 0;
+                margin: 0;
+                z-index: 1001;
+            }
+            
+            .chatbot-container.mobile-fullscreen .chatbot-header {
+                padding-top: env(safe-area-inset-top);
+            }
+        }
+        
         .chatbot-container.active {
             display: flex;
             opacity: 1;
             transform: translateY(0) scale(1);
-        }
-        
-        .chatbot-container.mobile-full {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            width: 100%;
-            height: 100%;
-            max-height: 100%;
-            border-radius: 0;
-            margin: 0;
         }
         
         .chatbot-header {
@@ -897,6 +877,7 @@
             gap: 0.75rem;
             min-height: 0;
             scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
         }
         
         .chatbot-messages::-webkit-scrollbar {
@@ -989,6 +970,7 @@
             min-height: 44px;
             outline: none;
             transition: var(--transition);
+            -webkit-appearance: none;
         }
         
         .chatbot-input input:focus {
@@ -1538,7 +1520,7 @@
             color: var(--maroon);
         }
         
-        /* ==================== BOTTOM NAVIGATION ==================== */
+        /* ==================== RESPONSIVE BOTTOM NAVIGATION ==================== */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -1552,6 +1534,16 @@
             z-index: 1000;
             box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(10px);
+            transform: translateY(0);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .bottom-nav.hidden {
+            transform: translateY(100%);
+        }
+        
+        .bottom-nav.visible {
+            transform: translateY(0);
         }
         
         .nav-item {
@@ -2437,10 +2429,6 @@
                         <i class="fas fa-comment"></i>
                         <div class="badge hidden" id="chatbotNotification">1</div>
                     </button>
-                    <button class="header-action-btn sell-btn" onclick="showSellerModal()">
-                        <i class="fas fa-plus"></i>
-                        <span>List Product</span>
-                    </button>
                     <button class="menu-toggle" onclick="toggleMobileMenu()" aria-label="Menu">
                         <i class="fas fa-bars"></i>
                     </button>
@@ -2463,9 +2451,6 @@
             </a>
             <a href="rentals.html" class="mobile-menu-item">
                 <i class="fas fa-house-user"></i> Rentals
-            </a>
-            <a href="#" class="mobile-menu-item" onclick="showSellerModal()">
-                <i class="fas fa-plus-circle"></i> Sell on SokoInn
             </a>
             <a href="#" class="mobile-menu-item" onclick="toggleChatbot()">
                 <i class="fas fa-headset"></i> Help & Support
@@ -2603,8 +2588,8 @@
         </div>
     </div>
     
-    <!-- Enhanced Bottom Navigation -->
-    <nav class="bottom-nav" id="bottomNav">
+    <!-- Enhanced Responsive Bottom Navigation -->
+    <nav class="bottom-nav visible" id="bottomNav">
         <a href="index.html" class="nav-item active">
             <span class="nav-icon"><i class="fas fa-home"></i></span>
             <span class="nav-label">Home</span>
@@ -2621,10 +2606,6 @@
             <span class="nav-icon"><i class="fas fa-house-user"></i></span>
             <span class="nav-label">Rentals</span>
         </a>
-        <a href="#" class="nav-item sell-item" onclick="showSellerModal()">
-            <span class="nav-icon"><i class="fas fa-plus"></i></span>
-            <span class="nav-label">Sell</span>
-        </a>
     </nav>
     
     <!-- Enhanced Scroll to Top -->
@@ -2632,7 +2613,6 @@
         <i class="fas fa-chevron-up"></i>
     </button>
     
-    <!-- Rest of the modals remain similar with updated styling -->
     <!-- Product Detail Modal -->
     <div class="modal" id="productModal">
         <div class="modal-content">
@@ -2644,55 +2624,6 @@
             </div>
             <div class="modal-body" id="productModalBody">
                 <!-- Product details will be loaded dynamically -->
-            </div>
-        </div>
-    </div>
-    
-    <!-- Seller Registration Modal -->
-    <div class="modal" id="sellerModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Register as Seller</h3>
-                <button class="modal-close" onclick="closeModal('sellerModal')" aria-label="Close">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="sellerForm">
-                    <div style="display: grid; gap: 1.25rem; padding: 1.5rem;">
-                        <div>
-                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #333;">Business Name *</label>
-                            <input type="text" name="businessName" required style="width: 100%; padding: 0.875rem; border: 2px solid var(--gray-300); border-radius: var(--radius-md); font-family: inherit; font-size: 0.9375rem; transition: var(--transition);" 
-                                   onfocus="this.style.borderColor='var(--maroon)'; this.style.boxShadow='0 0 0 3px rgba(128, 0, 0, 0.1)'"
-                                   onblur="this.style.borderColor='var(--gray-300)'; this.style.boxShadow='none'">
-                        </div>
-                        
-                        <div>
-                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #333;">Your Name *</label>
-                            <input type="text" name="ownerName" required style="width: 100%; padding: 0.875rem; border: 2px solid var(--gray-300); border-radius: var(--radius-md); font-family: inherit; font-size: 0.9375rem; transition: var(--transition);"
-                                   onfocus="this.style.borderColor='var(--maroon)'; this.style.boxShadow='0 0 0 3px rgba(128, 0, 0, 0.1)'"
-                                   onblur="this.style.borderColor='var(--gray-300)'; this.style.boxShadow='none'">
-                        </div>
-                        
-                        <div>
-                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #333;">WhatsApp Number *</label>
-                            <input type="tel" name="whatsappNumber" required placeholder="254712345678" style="width: 100%; padding: 0.875rem; border: 2px solid var(--gray-300); border-radius: var(--radius-md); font-family: inherit; font-size: 0.9375rem; transition: var(--transition);"
-                                   onfocus="this.style.borderColor='var(--maroon)'; this.style.boxShadow='0 0 0 3px rgba(128, 0, 0, 0.1)'"
-                                   onblur="this.style.borderColor='var(--gray-300)'; this.style.boxShadow='none'">
-                        </div>
-                        
-                        <div>
-                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #333;">Location *</label>
-                            <input type="text" name="location" required placeholder="e.g., Nairobi, Kenya" style="width: 100%; padding: 0.875rem; border: 2px solid var(--gray-300); border-radius: var(--radius-md); font-family: inherit; font-size: 0.9375rem; transition: var(--transition);"
-                                   onfocus="this.style.borderColor='var(--maroon)'; this.style.boxShadow='0 0 0 3px rgba(128, 0, 0, 0.1)'"
-                                   onblur="this.style.borderColor='var(--gray-300)'; this.style.boxShadow='none'">
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary w-full" style="padding: 1rem; font-size: 1rem;">
-                            Submit Application
-                        </button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
@@ -2750,7 +2681,12 @@
         unreadMessages: 0,
         searchTimeout: null,
         mobileMenuOpen: false,
-        isTyping: false
+        isTyping: false,
+        lastScrollTop: 0,
+        isBottomNavVisible: true,
+        scrollDirection: 'down',
+        touchStartY: 0,
+        touchEndY: 0
     };
 
     // ==================== ENHANCED INITIALIZATION ====================
@@ -2766,6 +2702,7 @@
         initChatbot();
         initLocationFiltering();
         initEventListeners();
+        initTouchGestures();
         
         // Load products from backend
         loadProductsFromBackend();
@@ -2780,19 +2717,6 @@
     });
 
     function initEventListeners() {
-        // Seller form submission
-        const sellerForm = document.getElementById('sellerForm');
-        if (sellerForm) {
-            sellerForm.addEventListener('submit', handleSellerRegistration);
-        }
-        
-        // Close modals when clicking outside
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal')) {
-                closeModal(e.target.id);
-            }
-        });
-        
         // Escape key to close modals
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
@@ -2811,6 +2735,41 @@
         window.addEventListener('resize', () => {
             adjustChatbotPosition();
         });
+        
+        // Touch events for mobile gestures
+        document.addEventListener('touchstart', handleTouchStart, { passive: true });
+        document.addEventListener('touchend', handleTouchEnd, { passive: true });
+    }
+
+    function initTouchGestures() {
+        // Initialize touch variables
+        state.touchStartY = 0;
+        state.touchEndY = 0;
+    }
+
+    function handleTouchStart(e) {
+        state.touchStartY = e.changedTouches[0].screenY;
+    }
+
+    function handleTouchEnd(e) {
+        state.touchEndY = e.changedTouches[0].screenY;
+        handleSwipeGesture();
+    }
+
+    function handleSwipeGesture() {
+        const swipeThreshold = 50;
+        const swipeDistance = state.touchStartY - state.touchEndY;
+        
+        // Vertical swipe detection for bottom nav
+        if (Math.abs(swipeDistance) > swipeThreshold) {
+            if (swipeDistance > 0) {
+                // Swipe up - hide bottom nav
+                hideBottomNav();
+            } else {
+                // Swipe down - show bottom nav
+                showBottomNav();
+            }
+        }
     }
 
     function toggleMobileMenu() {
@@ -2935,6 +2894,12 @@
         }
         
         loadChatHistory();
+        
+        // Initialize mobile fullscreen mode if on mobile
+        if (window.innerWidth <= 768) {
+            const chatbot = document.getElementById('chatbotContainer');
+            chatbot.classList.add('mobile-fullscreen');
+        }
     }
 
     function toggleChatbot() {
@@ -2946,14 +2911,19 @@
         chatbot.classList.toggle('active', state.chatbotOpen);
         
         if (state.chatbotOpen) {
-            // On mobile, make chatbot full screen
+            // On mobile, ensure chatbot is in fullscreen mode
             if (window.innerWidth <= 768) {
-                chatbot.classList.add('mobile-full');
+                chatbot.classList.add('mobile-fullscreen');
             }
             
             state.unreadMessages = 0;
             notification.classList.add('hidden');
             saveChatHistory();
+            
+            // Hide bottom nav when chatbot is open on mobile
+            if (window.innerWidth <= 768) {
+                hideBottomNav();
+            }
             
             // Focus on input
             setTimeout(() => {
@@ -2962,7 +2932,12 @@
                 messages.scrollTop = messages.scrollHeight;
             }, 100);
         } else {
-            chatbot.classList.remove('mobile-full');
+            chatbot.classList.remove('mobile-fullscreen');
+            
+            // Show bottom nav when chatbot is closed on mobile
+            if (window.innerWidth <= 768) {
+                showBottomNav();
+            }
         }
         
         // Add animation to button
@@ -3059,7 +3034,7 @@
             'hi': "Hi there! 👋 I'm here to help you with anything about SokoInn.",
             'help': "I can help you with:<br><br>1. 📦 Buying products<br>2. 🛍️ Becoming a seller<br>3. 📢 Advertising<br>4. 📞 Contacting support<br>5. ❓ General inquiries<br><br>What would you like to know?",
             'buy': "To buy products:<br><br>1. Browse products on the homepage<br>2. Click 'View' on any product<br>3. Use the 'Contact Seller' button<br>4. Arrange payment and delivery directly with the seller<br><br>Need help with a specific purchase?",
-            'seller': "To become a seller:<br><br>1. Click 'List Product' in the header<br>2. Fill out the registration form<br>3. We'll contact you within 24 hours<br>4. Once verified, you can list your products<br><br>Want to start the registration process?",
+            'seller': "To become a seller:<br><br>1. Contact our admin directly at +254 784 599 322<br>2. We'll guide you through the verification process<br>3. Once verified, you can list your products<br><br>Want to start the registration process?",
             'ad': "For advertising opportunities:<br><br>📢 Hero section ads (high visibility)<br>⭐ Featured product listings<br>🏷️ Category sponsorships<br><br>Contact +254 784 599 322 for rates and availability.",
             'support': "Need support? Contact our admin at +254 784 599 322 via WhatsApp for immediate assistance.",
             'price': "Advertising prices vary by placement:<br><br>• Hero section: Contact for pricing<br>• Featured listings: Contact for pricing<br>• Category sponsorship: Contact for pricing<br><br>All prices are competitive and based on duration.",
@@ -3133,10 +3108,10 @@
         const isMobile = window.innerWidth <= 768;
         
         if (chatbot) {
-            if (isMobile && state.chatbotOpen) {
-                chatbot.classList.add('mobile-full');
+            if (isMobile) {
+                chatbot.classList.add('mobile-fullscreen');
             } else {
-                chatbot.classList.remove('mobile-full');
+                chatbot.classList.remove('mobile-fullscreen');
             }
         }
     }
@@ -3146,11 +3121,32 @@
         const scrollTopBtn = document.getElementById('scrollTop');
         
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Show/hide scroll to top button
+            if (scrollTop > 300) {
                 scrollTopBtn.classList.add('visible');
             } else {
                 scrollTopBtn.classList.remove('visible');
             }
+            
+            // Detect scroll direction for bottom nav
+            if (scrollTop > state.lastScrollTop) {
+                // Scrolling down
+                state.scrollDirection = 'down';
+                if (scrollTop > 100 && !state.chatbotOpen) {
+                    hideBottomNav();
+                }
+            } else {
+                // Scrolling up
+                state.scrollDirection = 'up';
+                if (scrollTop < state.lastScrollTop - 10) {
+                    showBottomNav();
+                }
+            }
+            
+            // Update last scroll position
+            state.lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
             
             hideSearchSuggestions();
         });
@@ -3158,13 +3154,6 @@
         if (window.scrollY > 300) {
             scrollTopBtn.classList.add('visible');
         }
-    }
-
-    function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
     }
 
     function initBottomNav() {
@@ -3177,6 +3166,53 @@
                 item.classList.remove('active');
             }
         });
+        
+        // Ensure bottom nav is visible on initial load
+        showBottomNav();
+    }
+
+    function showBottomNav() {
+        if (state.chatbotOpen && window.innerWidth <= 768) return;
+        
+        const bottomNav = document.getElementById('bottomNav');
+        if (bottomNav) {
+            bottomNav.classList.remove('hidden');
+            bottomNav.classList.add('visible');
+            state.isBottomNavVisible = true;
+            
+            // Adjust body padding
+            document.body.style.paddingBottom = '80px';
+        }
+    }
+
+    function hideBottomNav() {
+        const bottomNav = document.getElementById('bottomNav');
+        if (bottomNav) {
+            bottomNav.classList.add('hidden');
+            bottomNav.classList.remove('visible');
+            state.isBottomNavVisible = false;
+            
+            // Adjust body padding
+            document.body.style.paddingBottom = '20px';
+        }
+    }
+
+    function toggleBottomNav() {
+        if (state.isBottomNavVisible) {
+            hideBottomNav();
+        } else {
+            showBottomNav();
+        }
+    }
+
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        
+        // Show bottom nav when scrolling to top
+        setTimeout(showBottomNav, 300);
     }
 
     // ==================== LOCATION FILTERING ====================
@@ -4013,6 +4049,9 @@
         imageCounter.textContent = `${startIndex + 1} / ${images.length}`;
         viewer.classList.add('active');
         document.body.style.overflow = 'hidden';
+        
+        // Hide bottom nav when image viewer is open
+        hideBottomNav();
     }
 
     function closeImageViewer() {
@@ -4021,6 +4060,9 @@
         document.body.style.overflow = '';
         state.currentImages = [];
         state.currentImageIndex = 0;
+        
+        // Show bottom nav when image viewer is closed
+        showBottomNav();
     }
 
     function changeImage(index) {
@@ -4229,6 +4271,9 @@
         if (modal) {
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
+            
+            // Hide bottom nav when modal is open
+            hideBottomNav();
         }
     }
 
@@ -4240,6 +4285,9 @@
             if (modalId === 'productModal') {
                 document.getElementById('productModalBody').innerHTML = '';
             }
+            
+            // Show bottom nav when modal is closed
+            showBottomNav();
         }
     }
 
@@ -4275,59 +4323,6 @@
         }
     }
 
-    // ==================== SELLER REGISTRATION ====================
-    async function handleSellerRegistration(e) {
-        e.preventDefault();
-        
-        const formData = new FormData(this);
-        const sellerData = {
-            businessName: formData.get('businessName'),
-            ownerName: formData.get('ownerName'),
-            whatsappNumber: formData.get('whatsappNumber'),
-            location: formData.get('location')
-        };
-        
-        if (!sellerData.whatsappNumber.match(/^254[17]\d{8}$/)) {
-            showToast('Please enter a valid Kenyan WhatsApp number', 'error');
-            return;
-        }
-        
-        const submitBtn = this.querySelector('button[type="submit"]');
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<div class="loading"></div> Submitting...';
-        
-        try {
-            const response = await fetch(CONFIG.BACKEND_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    action: 'registerSeller',
-                    ...sellerData
-                })
-            });
-            
-            const data = await response.json();
-            
-            if (data.success) {
-                showToast('Application submitted! We\'ll contact you via WhatsApp.', 'success');
-                this.reset();
-                closeModal('sellerModal');
-            } else {
-                throw new Error(data.message || 'Registration failed');
-            }
-        } catch (error) {
-            showToast(error.message || 'Failed to submit application', 'error');
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Submit Application';
-        }
-    }
-
-    // ==================== MODAL HELPERS ====================
-    window.showSellerModal = function() {
-        showModal('sellerModal');
-    };
-
     // ==================== INITIALIZE ON WINDOW LOAD ====================
     window.addEventListener('load', () => {
         // Set up image loading
@@ -4351,6 +4346,6 @@
         
         adjustChatbotPosition();
     });
-</script>
+    </script>
 </body>
 </html>
