@@ -47,7 +47,7 @@
             line-height: 1.5;
             color: var(--black);
             background: var(--gray-100);
-            padding-bottom: 60px; /* Space for bottom nav */
+            padding-bottom: 80px;
         }
         
         img {
@@ -113,6 +113,64 @@
             border-radius: var(--radius-sm);
             font-weight: 700;
             flex-shrink: 0;
+        }
+        
+        /* ==================== ENHANCED LOCATION SELECTOR ==================== */
+        .location-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: auto;
+            margin-right: 0.5rem;
+            position: relative;
+        }
+        
+        @media (max-width: 768px) {
+            .location-selector {
+                order: 2;
+                margin-left: 0;
+                margin-right: 0;
+                min-width: 140px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .location-selector {
+                min-width: 120px;
+            }
+        }
+        
+        .location-icon {
+            color: var(--maroon);
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .location-dropdown {
+            padding: 0.4rem 0.75rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-sm);
+            background: var(--white);
+            color: var(--black);
+            font-size: 0.875rem;
+            cursor: pointer;
+            min-width: 120px;
+            max-width: 150px;
+            outline: none;
+            transition: var(--transition);
+        }
+        
+        .location-dropdown:hover, .location-dropdown:focus {
+            border-color: var(--maroon);
+            box-shadow: 0 0 0 2px rgba(128, 0, 0, 0.1);
+        }
+        
+        @media (max-width: 480px) {
+            .location-dropdown {
+                padding: 0.35rem 0.5rem;
+                font-size: 0.8rem;
+                min-width: 100px;
+            }
         }
         
         /* ==================== SEARCH BAR - RESPONSIVE ==================== */
@@ -256,35 +314,6 @@
             font-size: 0.875rem;
         }
         
-        /* ==================== LOCATION BADGE - SUBTLE ==================== */
-        .location-badge {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.25rem 0.5rem;
-            background: var(--gray-100);
-            border-radius: var(--radius-md);
-            font-size: 0.75rem;
-            color: var(--gray-700);
-            border: 1px solid var(--gray-300);
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-        
-        @media (max-width: 768px) {
-            .location-badge {
-                font-size: 0.7rem;
-                padding: 0.25rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .location-badge {
-                font-size: 0.65rem;
-                min-width: max-content;
-            }
-        }
-        
         /* ==================== HEADER ACTIONS ==================== */
         .header-actions {
             display: flex;
@@ -317,17 +346,61 @@
                 padding: 0.5rem;
                 font-size: 0.7rem;
             }
-            
-            .header-button span:not(.mobile-hidden) {
-                display: none;
-            }
-            
-            .header-button .mobile-hidden {
-                display: inline;
+        }
+        
+        /* ==================== LOCATION FILTER BUTTONS ==================== */
+        .location-filters {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.75rem 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 0.5rem 0 1.5rem;
+            scrollbar-width: none;
+            border-bottom: 1px solid var(--gray-200);
+            background: var(--white);
+            position: sticky;
+            top: 60px;
+            z-index: 99;
+        }
+        
+        .location-filters::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .location-filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 20px;
+            background: var(--white);
+            color: var(--black);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+        
+        @media (max-width: 480px) {
+            .location-filter-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
             }
         }
         
-        /* ==================== BOTTOM NAVIGATION ==================== */
+        .location-filter-btn:hover {
+            border-color: var(--maroon);
+            color: var(--maroon);
+        }
+        
+        .location-filter-btn.active {
+            background: var(--maroon);
+            color: var(--white);
+            border-color: var(--maroon);
+        }
+        
+        /* ==================== IMPROVED BOTTOM NAVIGATION ==================== */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -337,61 +410,164 @@
             border-top: 1px solid var(--gray-200);
             display: flex;
             justify-content: space-around;
-            padding: 0.75rem 0;
+            padding: 0.5rem 0;
             z-index: 1000;
             box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        @media (max-width: 480px) {
+            .bottom-nav {
+                padding: 0.4rem 0;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .bottom-nav {
+                padding: 0.35rem 0;
+                font-size: 0.8rem;
+            }
         }
         
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 0.25rem;
-            border-radius: var(--radius-md);
+            padding: 0.4rem 0.25rem;
+            border-radius: var(--radius-sm);
             transition: var(--transition);
             text-decoration: none;
             color: var(--gray-500);
-            min-width: 60px;
-            font-size: 0.875rem;
+            min-width: 55px;
+            font-size: 0.8rem;
+            position: relative;
+        }
+        
+        @media (max-width: 480px) {
+            .nav-item {
+                min-width: 50px;
+                padding: 0.3rem 0.2rem;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .nav-item {
+                min-width: 45px;
+                font-size: 0.7rem;
+            }
         }
         
         .nav-item.active {
             color: var(--maroon);
-            background: rgba(128, 0, 0, 0.1);
+            background: rgba(128, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+        
+        .nav-item:active {
+            transform: scale(0.95);
         }
         
         .nav-icon {
-            font-size: 1.25rem;
-            margin-bottom: 0.25rem;
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+            transition: var(--transition);
+        }
+        
+        @media (max-width: 480px) {
+            .nav-icon {
+                font-size: 1rem;
+                margin-bottom: 0.15rem;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .nav-icon {
+                font-size: 0.9rem;
+            }
+        }
+        
+        .nav-item.active .nav-icon {
+            transform: scale(1.1);
         }
         
         .nav-label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        @media (max-width: 480px) {
+            .nav-label {
+                font-size: 0.65rem;
+            }
+        }
+        
+        .nav-item.sell-item {
+            position: relative;
+            top: -10px;
+            background: var(--maroon);
+            color: var(--white);
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            min-width: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(128, 0, 0, 0.3);
+            border: 3px solid var(--white);
+        }
+        
+        @media (max-width: 480px) {
+            .nav-item.sell-item {
+                width: 46px;
+                height: 46px;
+                top: -8px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .nav-item.sell-item {
+                width: 42px;
+                height: 42px;
+                top: -6px;
+            }
+        }
+        
+        .nav-item.sell-item .nav-icon {
+            font-size: 1.3rem;
+            margin-bottom: 0;
+            color: var(--white);
+        }
+        
+        .nav-item.sell-item .nav-label {
+            display: none;
         }
         
         /* ==================== IMPROVED HERO SECTION ==================== */
         .hero {
             position: relative;
-            height: 300px;
+            height: 280px;
             overflow: hidden;
             color: var(--white);
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
         
         @media (min-width: 768px) {
             .hero {
-                height: 350px;
+                height: 320px;
             }
         }
         
         @media (min-width: 1024px) {
             .hero {
-                height: 400px;
+                height: 360px;
             }
         }
         
@@ -568,24 +744,26 @@
         
         /* ==================== PRODUCTS SECTION ==================== */
         .products-section {
-            padding: 1.5rem 0 1rem;
+            padding: 1rem 0 1rem;
             background: var(--gray-100);
+            min-height: 60vh;
         }
         
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             flex-wrap: wrap;
-            gap: 0.75rem;
+            gap: 0.5rem;
+            padding-top: 0.5rem;
         }
         
         @media (max-width: 480px) {
             .section-header {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 0.5rem;
+                gap: 0.25rem;
             }
         }
         
@@ -606,11 +784,18 @@
             color: var(--maroon);
             font-weight: 600;
             font-size: 0.875rem;
+            background: rgba(128, 0, 0, 0.1);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
         }
         
         @media (max-width: 480px) {
             .location-display {
                 font-size: 0.8rem;
+                padding: 0.2rem 0.6rem;
             }
         }
         
@@ -620,12 +805,22 @@
             color: var(--maroon);
             text-decoration: none;
             white-space: nowrap;
+            padding: 0.4rem 0.8rem;
+            border: 1px solid var(--maroon);
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
         }
         
         @media (max-width: 480px) {
             .view-all-link {
                 font-size: 0.8rem;
+                padding: 0.3rem 0.6rem;
             }
+        }
+        
+        .view-all-link:hover {
+            background: var(--maroon);
+            color: var(--white);
         }
         
         .product-grid {
@@ -1227,10 +1422,10 @@
             color: var(--maroon);
         }
         
-        /* ==================== WHATSAPP CHATBOT ==================== */
+        /* ==================== IMPROVED WHATSAPP CHATBOT ==================== */
         .chatbot-button {
             position: fixed;
-            bottom: 80px;
+            bottom: 100px;
             right: 20px;
             width: 60px;
             height: 60px;
@@ -1246,12 +1441,21 @@
             border: none;
         }
         
+        @media (max-width: 768px) {
+            .chatbot-button {
+                bottom: 90px;
+                right: 15px;
+                width: 56px;
+                height: 56px;
+            }
+        }
+        
         @media (max-width: 480px) {
             .chatbot-button {
+                bottom: 80px;
+                right: 10px;
                 width: 50px;
                 height: 50px;
-                bottom: 70px;
-                right: 15px;
             }
         }
         
@@ -1297,7 +1501,7 @@
         
         .chatbot-container {
             position: fixed;
-            bottom: 150px;
+            bottom: 170px;
             right: 20px;
             width: 320px;
             height: 450px;
@@ -1313,21 +1517,31 @@
             transition: all 0.3s ease;
         }
         
+        @media (max-width: 768px) {
+            .chatbot-container {
+                bottom: 160px;
+                right: 15px;
+                width: 300px;
+                height: 420px;
+            }
+        }
+        
         @media (max-width: 480px) {
             .chatbot-container {
                 width: 280px;
                 height: 400px;
-                right: 15px;
-                bottom: 130px;
+                right: 10px;
+                bottom: 150px;
             }
         }
         
         @media (max-width: 360px) {
             .chatbot-container {
-                width: 250px;
+                width: 260px;
                 height: 380px;
                 right: 10px;
-                bottom: 120px;
+                bottom: 140px;
+                max-height: 60vh;
             }
         }
         
@@ -1441,6 +1655,67 @@
         
         .chatbot-quick-btn:hover {
             background: var(--gray-200);
+        }
+        
+        /* ==================== IMPROVED SCROLL TO TOP ==================== */
+        .scroll-top {
+            position: fixed;
+            bottom: 5.5rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            background: var(--maroon);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-md);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 998;
+            border: none;
+            cursor: pointer;
+            font-size: 1.25rem;
+        }
+        
+        @media (max-width: 768px) {
+            .scroll-top {
+                bottom: 5rem;
+                right: 0.75rem;
+                width: 38px;
+                height: 38px;
+                font-size: 1.125rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .scroll-top {
+                width: 36px;
+                height: 36px;
+                font-size: 1.125rem;
+                bottom: 4.5rem;
+                right: 0.75rem;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .scroll-top {
+                width: 34px;
+                height: 34px;
+                bottom: 4.2rem;
+            }
+        }
+        
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-top:hover {
+            background: var(--dark-maroon);
+            transform: translateY(-2px);
         }
         
         /* ==================== MODAL STYLES ==================== */
@@ -1563,83 +1838,11 @@
         .font-semibold { font-weight: 600; }
         .font-bold { font-weight: 700; }
         
-        /* ==================== LOADING ==================== */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--gray-300);
-            border-top-color: var(--maroon);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-        }
-        
-        .loading-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        /* ==================== SCROLL TO TOP ==================== */
-        .scroll-top {
-            position: fixed;
-            bottom: 5rem;
-            right: 1rem;
-            width: 40px;
-            height: 40px;
-            background: var(--maroon);
-            color: var(--white);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--shadow-md);
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-            z-index: 99;
-            border: none;
-            cursor: pointer;
-            font-size: 1.25rem;
-        }
-        
-        @media (max-width: 480px) {
-            .scroll-top {
-                width: 36px;
-                height: 36px;
-                font-size: 1.125rem;
-                bottom: 4.5rem;
-                right: 0.75rem;
+        /* ==================== SAFE AREA SUPPORT ==================== */
+        @supports (padding: max(0px)) {
+            .bottom-nav {
+                padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
             }
-        }
-        
-        .scroll-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .scroll-top:hover {
-            background: var(--dark-maroon);
-            transform: translateY(-2px);
         }
         
         /* ==================== TOAST NOTIFICATION ==================== */
@@ -1687,17 +1890,6 @@
             to {
                 transform: translateX(0);
                 opacity: 1;
-            }
-        }
-        
-        @keyframes slideOutRight {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(100%);
-                opacity: 0;
             }
         }
         
@@ -1799,6 +1991,42 @@
             max-width: 300px;
             margin: 0 auto;
         }
+        
+        /* ==================== LOADING ==================== */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gray-300);
+            border-top-color: var(--maroon);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        
+        .loading-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
     </style>
 </head>
 <body>
@@ -1816,6 +2044,23 @@
                     <span>SokoInn</span>
                 </a>
                 
+                <!-- Enhanced Location Selector -->
+                <div class="location-selector">
+                    <span class="location-icon">📍</span>
+                    <select class="location-dropdown" id="locationDropdown" onchange="handleLocationChange()">
+                        <option value="">All Kenya</option>
+                        <option value="Nairobi">Nairobi</option>
+                        <option value="Mombasa">Mombasa</option>
+                        <option value="Kisumu">Kisumu</option>
+                        <option value="Nakuru">Nakuru</option>
+                        <option value="Eldoret">Eldoret</option>
+                        <option value="Thika">Thika</option>
+                        <option value="Malindi">Malindi</option>
+                        <option value="Kitale">Kitale</option>
+                        <option value="Kakamega">Kakamega</option>
+                    </select>
+                </div>
+                
                 <!-- Search Bar -->
                 <div class="search-container">
                     <div class="search-box">
@@ -1827,10 +2072,23 @@
                         <button class="search-button" onclick="performSearch()">Search</button>
                     </div>
                     <div class="search-suggestions" id="searchSuggestions"></div>
-                </div>
+                </div>               
             </div>
         </div>
     </header>
+    
+    <!-- Enhanced Location Filter Buttons -->
+    <div class="container">
+        <div class="location-filters" id="locationFilters">
+            <button class="location-filter-btn active" onclick="selectLocationFilter('')">All Kenya</button>
+            <button class="location-filter-btn" onclick="selectLocationFilter('Nairobi')">Nairobi</button>
+            <button class="location-filter-btn" onclick="selectLocationFilter('Mombasa')">Mombasa</button>
+            <button class="location-filter-btn" onclick="selectLocationFilter('Kisumu')">Kisumu</button>
+            <button class="location-filter-btn" onclick="selectLocationFilter('Nakuru')">Nakuru</button>
+            <button class="location-filter-btn" onclick="selectLocationFilter('Eldoret')">Eldoret</button>
+            <button class="location-filter-btn" onclick="selectLocationFilter('Thika')">Thika</button>
+        </div>
+    </div>
     
     <!-- Hero Section with Ads -->
     <section class="hero">
@@ -1873,9 +2131,9 @@
         <div class="container">
             <div class="section-header">
                 <div>
-                    <h2 class="section-title">Featured Products</h2>
-                    <div class="location-display">
-                        in <span id="currentLocationText">Your Area</span>
+                    <h2 class="section-title" id="sectionTitle">Featured Products</h2>
+                    <div class="location-display" id="locationDisplay">
+                        📍 <span id="currentLocationText">All Kenya</span>
                     </div>
                 </div>
                 <a href="#" class="view-all-link" onclick="showAllProducts(event)">View All →</a>
@@ -1910,7 +2168,7 @@
         </div>
         
         <div class="chatbot-messages" id="chatbotMessages">
-            <!-- Messages will be added here -->
+            <div class="chatbot-message bot">Hello! I'm your SokoInn assistant. How can I help you today?</div>
         </div>
         
         <div class="chatbot-quick-actions" id="quickActions">
@@ -1929,7 +2187,7 @@
         </div>
     </div>
     
-    <!-- Bottom Navigation -->
+    <!-- Enhanced Bottom Navigation -->
     <nav class="bottom-nav" id="bottomNav">
         <a href="index.html" class="nav-item active">
             <span class="nav-icon">🛍️</span>
@@ -1947,13 +2205,13 @@
             <span class="nav-icon">🏠</span>
             <span class="nav-label">Rentals</span>
         </a>
-        <a href="#" class="nav-item" onclick="showSellerModal()">
-            <span class="nav-icon" style="color: var(--maroon);">+</span>
+        <a href="#" class="nav-item sell-item" onclick="showSellerModal()">
+            <span class="nav-icon">+</span>
             <span class="nav-label">Sell</span>
         </a>
     </nav>
     
-    <!-- Scroll to Top -->
+    <!-- Improved Scroll to Top -->
     <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</button>
     
     <!-- Product Detail Modal -->
@@ -2025,11 +2283,9 @@
             BACKEND_URL: 'https://script.google.com/macros/s/AKfycbzrOY9Lqu1feQJmqgZXn368Lo-HQ14-1LVRsY5pob7hNlo7uo2YlwlseeiI6GHTAanWnw/exec',
             ITEMS_PER_PAGE: 12,
             DEFAULT_IMAGE: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&q=80',
-            ADMIN_WHATSAPP: '254784599322',
-            // Kenyan cities for location matching
-            KENYAN_CITIES: ['Nairobi', 'Mombasa', 'Kisumu', 'Nakuru', 'Eldoret', 'Thika', 'Malindi', 'Kitale', 'Garissa', 'Kakamega']
+            ADMIN_WHATSAPP: '254784599322'
         };
-        
+
         // ==================== STATE MANAGEMENT ====================
         let state = {
             products: [],
@@ -2037,8 +2293,8 @@
             allProducts: [],
             currentPage: 1,
             isLoading: false,
-            hasMore: false,
-            selectedCategory: 'all',
+            hasMore: true,
+            selectedLocation: '',
             searchQuery: '',
             currentSlide: 0,
             heroInterval: null,
@@ -2046,29 +2302,20 @@
             currentImageIndex: 0,
             chatbotOpen: false,
             unreadMessages: 0,
-            userLocation: null,
-            detectedCity: null,
-            searchTimeout: null,
-            isLocationDetected: false
+            searchTimeout: null
         };
-        
+
         // ==================== INITIALIZATION ====================
         document.addEventListener('DOMContentLoaded', () => {
             initHeroSlideshow();
             initScrollDetection();
             initBottomNav();
             initChatbot();
+            initLocationFiltering();
+            initEventListeners();
             
-            // Start silent location detection
-            detectUserLocationSilently();
-            
-            // Load sample products
-            loadSampleProducts();
-            
-            // Also try to load from backend in background
-            setTimeout(() => {
-                loadProductsFromBackend();
-            }, 1000);
+            // Load products from backend
+            loadProductsFromBackend();
             
             // Close search suggestions when clicking outside
             document.addEventListener('click', (e) => {
@@ -2077,622 +2324,243 @@
                     hideSearchSuggestions();
                 }
             });
-            
-            // Initialize product grid
-            renderProducts();
         });
-        
-        // ==================== SILENT LOCATION DETECTION ====================
-        async function detectUserLocationSilently() {
-            try {
-                // Try to get location from localStorage first
-                const savedLocation = localStorage.getItem('sokoinn_user_location');
-                if (savedLocation) {
-                    const { city, timestamp } = JSON.parse(savedLocation);
-                    // Use saved location if less than 1 day old
-                    if (Date.now() - timestamp < 24 * 60 * 60 * 1000) {
-                        state.detectedCity = city;
-                        state.isLocationDetected = true;
-                        updateLocationUI();
-                        filterProductsByLocation();
-                        return;
+
+        function initEventListeners() {
+            // Seller form submission
+            const sellerForm = document.getElementById('sellerForm');
+            if (sellerForm) {
+                sellerForm.addEventListener('submit', handleSellerRegistration);
+            }
+            
+            // Close modals when clicking outside
+            document.addEventListener('click', (e) => {
+                if (e.target.classList.contains('modal')) {
+                    closeModal(e.target.id);
+                }
+            });
+            
+            // Escape key to close modals
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (document.getElementById('chatbotContainer').classList.contains('active')) {
+                        toggleChatbot();
+                    } else {
+                        const modals = document.querySelectorAll('.modal.active');
+                        modals.forEach(modal => closeModal(modal.id));
                     }
                 }
-                
-                // Try IP-based geolocation first (no permission needed)
-                await getLocationFromIP();
-                
-            } catch (error) {
-                console.warn('Silent location detection failed:', error);
-                // Default to Nairobi but don't show to user
-                state.detectedCity = 'Nairobi';
-                state.isLocationDetected = true;
-                updateLocationUI();
-                filterProductsByLocation();
-            }
-        }
-        
-        async function getLocationFromIP() {
-            try {
-                // Use free IP geolocation service
-                const response = await fetch('https://ipapi.co/json/');
-                const data = await response.json();
-                
-                if (data && data.city) {
-                    state.detectedCity = data.city;
-                    state.userLocation = {
-                        city: data.city,
-                        country: data.country_name,
-                        region: data.region
-                    };
-                    
-                    // Save to localStorage
-                    localStorage.setItem('sokoinn_user_location', JSON.stringify({
-                        city: data.city,
-                        timestamp: Date.now()
-                    }));
-                } else {
-                    // Fallback to a random Kenyan city
-                    const randomIndex = Math.floor(Math.random() * CONFIG.KENYAN_CITIES.length);
-                    state.detectedCity = CONFIG.KENYAN_CITIES[randomIndex];
-                }
-            } catch (error) {
-                // Fallback to default
-                state.detectedCity = 'Nairobi';
-            }
-            
-            state.isLocationDetected = true;
-            updateLocationUI();
-            filterProductsByLocation();
-        }
-        
-        function updateLocationUI() {
-            const locationBadge = document.getElementById('locationBadge');
-            const locationText = document.getElementById('locationText');
-            const currentLocationText = document.getElementById('currentLocationText');
-            
-            if (state.detectedCity) {
-                // Show location badge only after detection
-                if (locationBadge && locationText) {
-                    locationBadge.classList.remove('hidden');
-                    const displayCity = state.detectedCity.length > 12 ? 
-                        state.detectedCity.substring(0, 10) + '...' : state.detectedCity;
-                    locationText.textContent = displayCity;
-                }
-                
-                // Update current location text
-                if (currentLocationText) {
-                    currentLocationText.textContent = state.detectedCity;
-                }
-            }
-        }
-        
-        function filterProductsByLocation() {
-            if (!state.detectedCity || !state.allProducts.length || !state.isLocationDetected) {
-                return;
-            }
-            
-            // Filter products by location
-            state.filteredProducts = state.allProducts.filter(product => {
-                if (!product.sellerLocation) return true;
-                
-                const productLocation = product.sellerLocation.toLowerCase();
-                const userCity = state.detectedCity.toLowerCase();
-                
-                // Check for location match
-                return productLocation.includes(userCity) || 
-                       userCity.includes(productLocation) ||
-                       productLocation.split(' ').some(word => userCity.includes(word)) ||
-                       userCity.split(' ').some(word => productLocation.includes(word));
             });
-            
-            // If no products found in user's location, show products from nearby cities
-            if (state.filteredProducts.length === 0) {
-                state.filteredProducts = state.allProducts.filter(product => {
-                    if (!product.sellerLocation) return true;
-                    
-                    // Check if product is from any major Kenyan city
-                    return CONFIG.KENYAN_CITIES.some(city => 
-                        product.sellerLocation.toLowerCase().includes(city.toLowerCase())
-                    );
-                }).slice(0, 8); // Limit to 8 products
-            }
-            
-            renderProducts();
         }
-        
-        // ==================== SEARCH FUNCTIONALITY ====================
-        function handleSearchInput() {
-            const searchInput = document.getElementById('searchInput');
-            const query = searchInput.value.trim();
-            
-            // Clear previous timeout
-            if (state.searchTimeout) {
-                clearTimeout(state.searchTimeout);
-            }
-            
-            if (query.length === 0) {
-                hideSearchSuggestions();
-                return;
-            }
-            
-            // Debounce search
-            state.searchTimeout = setTimeout(() => {
-                showSearchSuggestions(query);
-            }, 300);
-        }
-        
-        function showSearchSuggestions(query) {
-            const suggestionsContainer = document.getElementById('searchSuggestions');
-            
-            if (!query || query.length < 2) {
-                suggestionsContainer.classList.remove('active');
-                return;
-            }
-            
-            const searchResults = searchProducts(query, 5);
-            
-            if (searchResults.length === 0) {
-                suggestionsContainer.innerHTML = `
-                    <div class="no-suggestions">
-                        No products found for "${query}"
-                    </div>
-                `;
-            } else {
-                suggestionsContainer.innerHTML = searchResults.map(product => `
-                    <div class="suggestion-item" onclick="selectSearchSuggestion('${product.listingId}')">
-                        <img src="${product.images[0] || CONFIG.DEFAULT_IMAGE}" 
-                             alt="${product.title}"
-                             class="suggestion-image"
-                             onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
-                        <div class="suggestion-details">
-                            <div class="suggestion-title">${product.title}</div>
-                            <div class="suggestion-price">KSh ${product.price.toLocaleString()}</div>
-                            <div class="suggestion-location">📍 ${product.sellerLocation || 'Nairobi'}</div>
-                        </div>
-                    </div>
-                `).join('');
-            }
-            
-            suggestionsContainer.classList.add('active');
-        }
-        
-        function hideSearchSuggestions() {
-            const suggestionsContainer = document.getElementById('searchSuggestions');
-            suggestionsContainer.classList.remove('active');
-        }
-        
-        function selectSearchSuggestion(productId) {
-            hideSearchSuggestions();
-            viewProduct(productId);
-        }
-        
-        function performSearch() {
-            const searchInput = document.getElementById('searchInput');
-            const query = searchInput.value.trim();
-            
-            if (query.length === 0) {
-                // Reset to location-filtered products
-                state.searchQuery = '';
-                filterProductsByLocation();
-                
-                // Update section title
-                const sectionTitle = document.querySelector('.section-title');
-                const locationDisplay = document.querySelector('.location-display');
-                if (sectionTitle && locationDisplay) {
-                    sectionTitle.textContent = 'Featured Products';
-                    locationDisplay.innerHTML = `in <span id="currentLocationText">${state.detectedCity || 'Your Area'}</span>`;
+
+        // ==================== ENHANCED LOCATION FILTERING ====================
+        function initLocationFiltering() {
+            // Try to get saved location preference
+            const savedLocation = localStorage.getItem('sokoinn_selected_location');
+            if (savedLocation) {
+                state.selectedLocation = savedLocation;
+                // Update dropdown
+                const dropdown = document.getElementById('locationDropdown');
+                if (dropdown) {
+                    dropdown.value = savedLocation;
                 }
-                return;
+                // Update button filters
+                updateLocationFilterButtons(savedLocation);
+                // Update location display
+                updateLocationDisplay(savedLocation);
             }
+        }
+
+        function handleLocationChange() {
+            const dropdown = document.getElementById('locationDropdown');
+            const selectedCity = dropdown.value;
             
-            state.searchQuery = query;
-            const searchResults = searchProducts(query);
+            // Save preference
+            localStorage.setItem('sokoinn_selected_location', selectedCity);
             
-            // Update filtered products
-            state.filteredProducts = searchResults;
-            state.currentPage = 1;
+            // Update state
+            state.selectedLocation = selectedCity;
             
             // Update UI
-            const sectionTitle = document.querySelector('.section-title');
-            const locationDisplay = document.querySelector('.location-display');
-            if (sectionTitle && locationDisplay) {
-                sectionTitle.textContent = 'Search Results';
-                locationDisplay.textContent = `for "${query}"`;
-            }
+            updateLocationFilterButtons(selectedCity);
+            updateLocationDisplay(selectedCity);
             
-            renderProducts();
-            hideSearchSuggestions();
+            // Apply filter
+            applyLocationFilter();
             
-            // Scroll to products section
-            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+            // Show toast notification
+            const message = selectedCity ? `Showing products from ${selectedCity}` : 'Showing products from all Kenya';
+            showToast(message, 'success');
         }
-        
-        function searchProducts(query, limit = null) {
-            const searchTerms = query.toLowerCase().split(' ');
+
+        function selectLocationFilter(city) {
+            // Update dropdown
+            const dropdown = document.getElementById('locationDropdown');
+            dropdown.value = city;
             
-            const results = state.allProducts.filter(product => {
-                const searchableText = `
-                    ${product.title || ''}
-                    ${product.description || ''}
-                    ${product.category || ''}
-                    ${product.sellerName || ''}
-                `.toLowerCase();
-                
-                return searchTerms.every(term => searchableText.includes(term));
-            });
+            // Save preference
+            localStorage.setItem('sokoinn_selected_location', city);
             
-            // Sort by relevance
-            results.sort((a, b) => {
-                const aTitle = a.title.toLowerCase();
-                const bTitle = b.title.toLowerCase();
-                const queryLower = query.toLowerCase();
-                
-                if (aTitle === queryLower) return -1;
-                if (bTitle === queryLower) return 1;
-                
-                if (aTitle.startsWith(queryLower)) return -1;
-                if (bTitle.startsWith(queryLower)) return 1;
-                
-                return (b.rating || 0) - (a.rating || 0);
-            });
+            // Update state
+            state.selectedLocation = city;
             
-            return limit ? results.slice(0, limit) : results;
+            // Update UI
+            updateLocationFilterButtons(city);
+            updateLocationDisplay(city);
+            
+            // Apply filter
+            applyLocationFilter();
         }
-        
-        // ==================== ENHANCED HERO SLIDESHOW ====================
-        function initHeroSlideshow() {
-            const ads = [
-                {
-                    image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1200&h=600&fit=crop',
-                    title: 'Premium Ad Space',
-                    description: 'Reach thousands of active buyers daily',
-                    cta: 'Book Now',
-                    link: 'https://wa.me/254784599322?text=Hi,%20I want to book ad space on SokoInn',
-                    badge: 'Sponsored'
-                },
-                {
-                    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=600&fit=crop',
-                    title: 'Boost Your Sales',
-                    description: 'Get featured in our hero section',
-                    cta: 'Learn More',
-                    link: 'https://wa.me/254784599322?text=Hi,%20tell me more about advertising on SokoInn',
-                    badge: 'Featured'
-                },
-                {
-                    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=600&fit=crop',
-                    title: 'Limited Time Offer',
-                    description: 'Special rates for first-time advertisers',
-                    cta: 'Get Offer',
-                    link: 'https://wa.me/254784599322?text=Hi,%20I want the special advertising offer',
-                    badge: 'Limited Time'
-                }
-            ];
-            
-            const slideshow = document.getElementById('heroSlideshow');
-            const indicators = document.getElementById('heroIndicators');
-            
-            ads.forEach((ad, index) => {
-                // Create slide
-                const slide = document.createElement('div');
-                slide.className = `hero-slide ${index === 0 ? 'active' : ''}`;
-                slide.style.backgroundImage = `url('${ad.image}?w=1200&h=600&fit=crop')`;
-                slide.onclick = () => window.open(ad.link, '_blank');
-                slideshow.appendChild(slide);
-                
-                // Create indicator
-                const indicator = document.createElement('div');
-                indicator.className = `hero-indicator ${index === 0 ? 'active' : ''}`;
-                indicator.onclick = () => changeHeroSlide(index);
-                indicators.appendChild(indicator);
-            });
-            
-            // Update hero content for first ad
-            updateHeroContent(ads[0]);
-            
-            // Auto slide every 8 seconds
-            state.heroInterval = setInterval(() => {
-                const slides = document.querySelectorAll('.hero-slide');
-                const indicators = document.querySelectorAll('.hero-indicator');
-                
-                slides[state.currentSlide].classList.remove('active');
-                indicators[state.currentSlide].classList.remove('active');
-                
-                state.currentSlide = (state.currentSlide + 1) % slides.length;
-                
-                slides[state.currentSlide].classList.add('active');
-                indicators[state.currentSlide].classList.add('active');
-                
-                updateHeroContent(ads[state.currentSlide]);
-            }, 8000);
-        }
-        
-        function updateHeroContent(ad) {
-            const content = document.querySelector('.hero-content');
-            content.innerHTML = `
-                <div class="hero-badge">${ad.badge}</div>
-                <h1>${ad.title}</h1>
-                <p>${ad.description}</p>
-                <a href="${ad.link}" class="hero-cta" target="_blank">${ad.cta}</a>
-            `;
-        }
-        
-        function changeHeroSlide(index) {
-            clearInterval(state.heroInterval);
-            state.currentSlide = index;
-            
-            const slides = document.querySelectorAll('.hero-slide');
-            const indicators = document.querySelectorAll('.hero-indicator');
-            
-            slides.forEach(slide => slide.classList.remove('active'));
-            indicators.forEach(indicator => indicator.classList.remove('active'));
-            
-            slides[index].classList.add('active');
-            indicators[index].classList.add('active');
-            
-            // Restart interval
-            state.heroInterval = setInterval(() => {
-                const nextIndex = (state.currentSlide + 1) % slides.length;
-                changeHeroSlide(nextIndex);
-            }, 8000);
-        }
-        
-        // ==================== IMAGE VIEWER ====================
-        function openImageViewer(images, startIndex = 0) {
-            state.currentImages = images;
-            state.currentImageIndex = startIndex;
-            
-            const viewer = document.getElementById('imageViewer');
-            const viewerImage = document.getElementById('viewerImage');
-            const thumbnailsContainer = document.getElementById('viewerThumbnails');
-            const imageCounter = document.getElementById('imageCounter');
-            
-            viewerImage.src = images[startIndex];
-            
-            thumbnailsContainer.innerHTML = '';
-            images.forEach((img, index) => {
-                const thumbnail = document.createElement('div');
-                thumbnail.className = `image-viewer-thumbnail ${index === startIndex ? 'active' : ''}`;
-                thumbnail.onclick = () => changeImage(index);
-                thumbnail.innerHTML = `<img src="${img}" alt="Thumbnail ${index + 1}" onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">`;
-                thumbnailsContainer.appendChild(thumbnail);
-            });
-            
-            imageCounter.textContent = `${startIndex + 1} / ${images.length}`;
-            viewer.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function closeImageViewer() {
-            const viewer = document.getElementById('imageViewer');
-            viewer.classList.remove('active');
-            document.body.style.overflow = '';
-            state.currentImages = [];
-            state.currentImageIndex = 0;
-        }
-        
-        function changeImage(index) {
-            state.currentImageIndex = index;
-            const viewerImage = document.getElementById('viewerImage');
-            const thumbnails = document.querySelectorAll('.image-viewer-thumbnail');
-            const imageCounter = document.getElementById('imageCounter');
-            
-            viewerImage.src = state.currentImages[index];
-            
-            thumbnails.forEach((thumb, i) => {
-                thumb.classList.toggle('active', i === index);
-            });
-            
-            imageCounter.textContent = `${index + 1} / ${state.currentImages.length}`;
-        }
-        
-        function prevImage() {
-            const newIndex = (state.currentImageIndex - 1 + state.currentImages.length) % state.currentImages.length;
-            changeImage(newIndex);
-        }
-        
-        function nextImage() {
-            const newIndex = (state.currentImageIndex + 1) % state.currentImages.length;
-            changeImage(newIndex);
-        }
-        
-        // ==================== WHATSAPP CHATBOT ====================
-        function initChatbot() {
-            addBotMessage("Hello! I'm your SokoInn assistant. How can I help you today? You can ask me about buying products, becoming a seller, advertising, or any other questions about our platform.");
-            loadChatHistory();
-        }
-        
-        function toggleChatbot() {
-            const chatbot = document.getElementById('chatbotContainer');
-            const notification = document.getElementById('chatbotNotification');
-            
-            state.chatbotOpen = !state.chatbotOpen;
-            chatbot.classList.toggle('active', state.chatbotOpen);
-            
-            if (state.chatbotOpen) {
-                state.unreadMessages = 0;
-                notification.classList.add('hidden');
-                saveChatHistory();
-                
-                setTimeout(() => {
-                    const messages = document.getElementById('chatbotMessages');
-                    messages.scrollTop = messages.scrollHeight;
-                }, 100);
-            }
-        }
-        
-        function addBotMessage(text) {
-            const messages = document.getElementById('chatbotMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'chatbot-message bot';
-            messageDiv.textContent = text;
-            messages.appendChild(messageDiv);
-            
-            messages.scrollTop = messages.scrollHeight;
-            saveChatHistory();
-        }
-        
-        function addUserMessage(text) {
-            const messages = document.getElementById('chatbotMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'chatbot-message user';
-            messageDiv.textContent = text;
-            messages.appendChild(messageDiv);
-            
-            messages.scrollTop = messages.scrollHeight;
-            saveChatHistory();
-        }
-        
-        function handleChatbotKeyPress(event) {
-            if (event.key === 'Enter') {
-                sendChatbotMessage();
-            }
-        }
-        
-        function sendChatbotMessage() {
-            const input = document.getElementById('chatbotInput');
-            const message = input.value.trim();
-            
-            if (!message) return;
-            
-            addUserMessage(message);
-            input.value = '';
-            
-            setTimeout(() => processUserMessage(message), 500);
-        }
-        
-        function sendQuickMessage(message) {
-            const input = document.getElementById('chatbotInput');
-            input.value = message;
-            sendChatbotMessage();
-        }
-        
-        function processUserMessage(message) {
-            const lowerMessage = message.toLowerCase();
-            
-            const responses = {
-                'hello': "Hello! Welcome to SokoInn. How can I assist you today?",
-                'hi': "Hi there! 👋 I'm here to help you with anything about SokoInn.",
-                'help': "I can help you with:\n1. Buying products\n2. Becoming a seller\n3. Advertising\n4. Contacting support\n5. General inquiries\nWhat would you like to know?",
-                'buy': "To buy products:\n1. Browse products on the homepage\n2. Click 'View' on any product\n3. Use the 'Contact Seller' button\n4. Arrange payment and delivery directly with the seller",
-                'seller': "To become a seller:\n1. Click 'List Product' in the header\n2. Fill out the registration form\n3. We'll contact you within 24 hours\n4. Once verified, you can list your products",
-                'ad': "For advertising opportunities:\n1. Hero section ads (high visibility)\n2. Featured product listings\n3. Category sponsorships\n\nContact +254 784 599 322 for rates.",
-                'support': "Need support? Contact our admin at +254 784 599 322 via WhatsApp for immediate assistance.",
-                'price': "Prices vary by ad placement:\n• Hero section: Contact for pricing\n• Featured listings: Contact for pricing\n• Category sponsorship: Contact for pricing",
-                'contact': "You can contact us:\n• WhatsApp: +254 784 599 322\n• Email: info@sokoinn.com\n• Website: www.sokoinn.com",
-                'thank': "You're welcome! 😊 Let me know if you need anything else.",
-                'bye': "Goodbye! Feel free to come back anytime you need help.",
-                'how': "I can help you with:\n• How to buy products\n• How to become a seller\n• How to advertise\n• How to contact sellers\n• How to get support",
-                'what': "SokoInn is a marketplace connecting buyers with verified sellers in Kenya."
-            };
-            
-            let response = null;
-            for (const [keyword, reply] of Object.entries(responses)) {
-                if (lowerMessage.includes(keyword)) {
-                    response = reply;
-                    break;
-                }
-            }
-            
-            if (!response) {
-                response = `I'm not sure about that. Please contact +254 784 599 322 directly for this inquiry.`;
-                
-                setTimeout(() => {
-                    const quickActions = document.getElementById('quickActions');
-                    const adminBtn = document.createElement('button');
-                    adminBtn.className = 'chatbot-quick-btn';
-                    adminBtn.textContent = 'Contact Admin';
-                    adminBtn.onclick = () => {
-                        window.open(`https://wa.me/${CONFIG.ADMIN_WHATSAPP}?text=Hi,%20I%20need%20help%20with:%20${encodeURIComponent(message)}`, '_blank');
-                    };
-                    quickActions.appendChild(adminBtn);
-                }, 1000);
-            }
-            
-            addBotMessage(response);
-            
-            if (!state.chatbotOpen) {
-                state.unreadMessages++;
-                const notification = document.getElementById('chatbotNotification');
-                notification.textContent = state.unreadMessages;
-                notification.classList.remove('hidden');
-            }
-        }
-        
-        function saveChatHistory() {
-            const messages = document.getElementById('chatbotMessages');
-            try {
-                localStorage.setItem('sokoinn_chat_history', messages.innerHTML);
-            } catch (e) {
-                console.warn('Could not save chat history');
-            }
-        }
-        
-        function loadChatHistory() {
-            try {
-                const saved = localStorage.getItem('sokoinn_chat_history');
-                if (saved) {
-                    document.getElementById('chatbotMessages').innerHTML = saved;
-                }
-            } catch (e) {
-                console.warn('Could not load chat history');
-            }
-        }
-        
-        // ==================== BOTTOM NAVIGATION ====================
-        function initBottomNav() {
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            document.querySelectorAll('.nav-item').forEach(item => {
-                const href = item.getAttribute('href');
-                if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
-                    item.classList.add('active');
+
+        function updateLocationFilterButtons(selectedCity) {
+            const buttons = document.querySelectorAll('.location-filter-btn');
+            buttons.forEach(button => {
+                const city = button.getAttribute('onclick').match(/'([^']+)'/)?.[1] || '';
+                if (city === selectedCity || (city === '' && selectedCity === '')) {
+                    button.classList.add('active');
                 } else {
-                    item.classList.remove('active');
+                    button.classList.remove('active');
                 }
             });
         }
-        
-        // ==================== DATA LOADING ====================
+
+        function updateLocationDisplay(city) {
+            const locationDisplay = document.getElementById('currentLocationText');
+            const sectionTitle = document.getElementById('sectionTitle');
+            
+            if (locationDisplay) {
+                locationDisplay.textContent = city || 'All Kenya';
+            }
+            
+            if (sectionTitle) {
+                if (state.searchQuery) {
+                    sectionTitle.textContent = 'Search Results';
+                } else if (city) {
+                    sectionTitle.textContent = `Products in ${city}`;
+                } else {
+                    sectionTitle.textContent = 'Featured Products';
+                }
+            }
+        }
+
+        function applyLocationFilter() {
+            if (!state.selectedLocation) {
+                // Show all products
+                state.filteredProducts = [...state.allProducts];
+            } else {
+                // Filter by selected city
+                state.filteredProducts = state.allProducts.filter(product => {
+                    const productLocation = product.sellerLocation?.toLowerCase() || '';
+                    const selectedCity = state.selectedLocation.toLowerCase();
+                    
+                    // Check for location match
+                    return productLocation.includes(selectedCity) || 
+                        selectedCity.includes(productLocation) ||
+                        productLocation.split(' ').some(word => selectedCity.includes(word)) ||
+                        selectedCity.split(' ').some(word => productLocation.includes(word));
+                });
+            }
+            
+            // Reset pagination
+            state.currentPage = 1;
+            
+            // Render products
+            renderProducts();
+            
+            // Update load more button
+            updateLoadMoreButton();
+        }
+
+        // ==================== BACKEND PRODUCT LOADING ====================
         async function loadProductsFromBackend() {
             if (state.isLoading) return;
             
             state.isLoading = true;
+            showLoading(true);
             
             try {
                 const response = await fetch(
-                    `${CONFIG.BACKEND_URL}?action=getProducts&limit=${CONFIG.ITEMS_PER_PAGE}&page=1`,
-                    { method: 'GET', mode: 'cors' }
+                    `${CONFIG.BACKEND_URL}?action=getProducts&limit=${CONFIG.ITEMS_PER_PAGE}&page=${state.currentPage}`,
+                    { 
+                        method: 'GET',
+                        mode: 'cors',
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    }
                 );
                 
-                if (response.ok) {
-                    const data = await response.json();
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.success && data.data && Array.isArray(data.data) && data.data.length > 0) {
+                    // Process backend products
+                    const newProducts = data.data.map(product => ({
+                        listingId: product.id || product.listingId || `PROD${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+                        title: product.title || 'Untitled Product',
+                        price: parseFloat(product.price) || 0,
+                        sellerName: product.sellerName || 'Unknown Seller',
+                        sellerVerification: product.sellerVerification || 'unverified',
+                        sellerRating: parseFloat(product.sellerRating) || 4.0,
+                        sellerTotalReviews: parseInt(product.sellerTotalReviews) || 0,
+                        sellerLocation: product.sellerLocation || 'Nairobi',
+                        sellerPhone: product.sellerPhone || '254700000000',
+                        sellerWhatsapp: product.sellerWhatsapp || product.sellerPhone || '254700000000',
+                        images: Array.isArray(product.images) && product.images.length > 0 
+                            ? product.images 
+                            : [product.image || CONFIG.DEFAULT_IMAGE].filter(Boolean),
+                        rating: parseFloat(product.rating) || 4.0,
+                        reviewCount: parseInt(product.reviewCount) || 0,
+                        category: product.category || 'Uncategorized',
+                        description: product.description || 'No description available',
+                        stock: parseInt(product.stock) || 1,
+                        condition: product.condition || 'New'
+                    }));
                     
-                    if (data.success && data.data && Array.isArray(data.data) && data.data.length > 0) {
-                        const newProducts = data.data.map(product => ({
-                            ...product,
-                            images: Array.isArray(product.images) && product.images.length > 0 ? product.images : [CONFIG.DEFAULT_IMAGE],
-                            rating: product.rating || 4.0,
-                            reviewCount: product.reviewCount || 0,
-                            category: product.category || 'Uncategorized'
-                        }));
-                        
+                    // Add to products array
+                    if (state.currentPage === 1) {
                         state.products = newProducts;
                         state.allProducts = newProducts;
-                        state.filteredProducts = [...newProducts];
-                        state.hasMore = newProducts.length === CONFIG.ITEMS_PER_PAGE;
-                        
-                        filterProductsByLocation();
-                        renderProducts();
-                        showToast('Products loaded!', 'success');
+                    } else {
+                        state.products = [...state.products, ...newProducts];
+                        state.allProducts = [...state.allProducts, ...newProducts];
                     }
+                    
+                    state.hasMore = newProducts.length === CONFIG.ITEMS_PER_PAGE;
+                    
+                    // Apply location filter if set
+                    if (state.selectedLocation) {
+                        applyLocationFilter();
+                    } else {
+                        state.filteredProducts = [...state.allProducts];
+                        renderProducts();
+                    }
+                    
+                    updateLoadMoreButton();
+                    
+                    if (state.currentPage === 1) {
+                        showToast('Products loaded successfully!', 'success');
+                    }
+                    
+                } else {
+                    // Fallback to sample products if backend returns no data
+                    console.warn('Backend returned no products, using sample data');
+                    loadSampleProducts();
                 }
+                
             } catch (error) {
                 console.error('Error loading products from backend:', error);
+                showToast('Failed to load products. Using sample data.', 'error');
+                loadSampleProducts();
             } finally {
                 state.isLoading = false;
+                showLoading(false);
             }
         }
-        
+
         function loadSampleProducts() {
             const sampleProducts = [
                 {
@@ -2725,7 +2593,7 @@
                     sellerVerification: 'verified',
                     sellerRating: 4.2,
                     sellerTotalReviews: 36,
-                    sellerLocation: 'Nairobi',
+                    sellerLocation: 'Mombasa',
                     sellerPhone: '254723456789',
                     sellerWhatsapp: '254723456789',
                     images: [
@@ -2747,7 +2615,7 @@
                     sellerVerification: 'verified',
                     sellerRating: 4.7,
                     sellerTotalReviews: 42,
-                    sellerLocation: 'Mombasa',
+                    sellerLocation: 'Kisumu',
                     sellerPhone: '254734567890',
                     sellerWhatsapp: '254734567890',
                     images: [
@@ -2769,7 +2637,7 @@
                     sellerVerification: 'verified',
                     sellerRating: 4.4,
                     sellerTotalReviews: 31,
-                    sellerLocation: 'Mombasa',
+                    sellerLocation: 'Nakuru',
                     sellerPhone: '254745678901',
                     sellerWhatsapp: '254745678901',
                     images: [
@@ -2791,7 +2659,7 @@
                     sellerVerification: 'verified',
                     sellerRating: 4.1,
                     sellerTotalReviews: 18,
-                    sellerLocation: 'Nairobi',
+                    sellerLocation: 'Eldoret',
                     sellerPhone: '254756789012',
                     sellerWhatsapp: '254756789012',
                     images: [
@@ -2813,7 +2681,7 @@
                     sellerVerification: 'verified',
                     sellerRating: 4.6,
                     sellerTotalReviews: 29,
-                    sellerLocation: 'Nakuru',
+                    sellerLocation: 'Thika',
                     sellerPhone: '254767890123',
                     sellerWhatsapp: '254767890123',
                     images: [
@@ -2825,173 +2693,225 @@
                     description: 'Powerful kitchen blender with 1000W motor.',
                     stock: 10,
                     condition: 'New'
-                },
-                {
-                    listingId: 'PROD007',
-                    title: "Women's Handbag",
-                    price: 2800,
-                    sellerName: 'Fashion Hub KE',
-                    sellerVerification: 'verified',
-                    sellerRating: 4.3,
-                    sellerTotalReviews: 22,
-                    sellerLocation: 'Kisumu',
-                    sellerPhone: '254778901234',
-                    sellerWhatsapp: '254778901234',
-                    images: [
-                        'https://images.unsplash.com/photo-1594221708779-94832b432bbd?w=500&q=80',
-                        'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500&q=80'
-                    ],
-                    rating: 4.3,
-                    reviewCount: 22,
-                    category: 'Fashion',
-                    description: "Trendy women's handbag with multiple compartments.",
-                    stock: 7,
-                    condition: 'New'
-                },
-                {
-                    listingId: 'PROD008',
-                    title: 'Office Desk - Wooden',
-                    price: 8500,
-                    sellerName: 'Furniture Kenya',
-                    sellerVerification: 'verified',
-                    sellerRating: 4.5,
-                    sellerTotalReviews: 15,
-                    sellerLocation: 'Nairobi',
-                    sellerPhone: '254789012345',
-                    sellerWhatsapp: '254789012345',
-                    images: [
-                        'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=500&q=80',
-                        'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=500&q=80'
-                    ],
-                    rating: 4.5,
-                    reviewCount: 15,
-                    category: 'Furniture',
-                    description: 'Executive wooden office desk with drawers.',
-                    stock: 2,
-                    condition: 'New'
-                },
-                {
-                    listingId: 'PROD009',
-                    title: 'Samsung Galaxy S21',
-                    price: 45000,
-                    sellerName: 'Mobile World Kenya',
-                    sellerVerification: 'verified',
-                    sellerRating: 4.7,
-                    sellerTotalReviews: 58,
-                    sellerLocation: 'Eldoret',
-                    sellerPhone: '254790123456',
-                    sellerWhatsapp: '254790123456',
-                    images: [
-                        'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500&q=80',
-                        'https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=500&q=80'
-                    ],
-                    rating: 4.7,
-                    reviewCount: 58,
-                    category: 'Electronics',
-                    description: 'Samsung Galaxy S21 5G, 128GB storage.',
-                    stock: 4,
-                    condition: 'New'
-                },
-                {
-                    listingId: 'PROD010',
-                    title: "Men's Formal Suit",
-                    price: 6500,
-                    sellerName: 'Classic Tailors',
-                    sellerVerification: 'verified',
-                    sellerRating: 4.4,
-                    sellerTotalReviews: 27,
-                    sellerLocation: 'Nairobi',
-                    sellerPhone: '254701234567',
-                    sellerWhatsapp: '254701234567',
-                    images: [
-                        'https://images.unsplash.com/photo-1594938374187-7f7d7e8a1c8e?w=500&q=80',
-                        'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&q=80'
-                    ],
-                    rating: 4.4,
-                    reviewCount: 27,
-                    category: 'Fashion',
-                    description: 'Premium 3-piece men\'s formal suit.',
-                    stock: 6,
-                    condition: 'New'
-                },
-                {
-                    listingId: 'PROD011',
-                    title: 'Laptop Stand - Adjustable',
-                    price: 1800,
-                    sellerName: 'Office Solutions KE',
-                    sellerVerification: 'verified',
-                    sellerRating: 4.3,
-                    sellerTotalReviews: 19,
-                    sellerLocation: 'Thika',
-                    sellerPhone: '254712345679',
-                    sellerWhatsapp: '254712345679',
-                    images: [
-                        'https://images.unsplash.com/photo-1586950012036-b957f2c7cbfa?w=500&q=80',
-                        'https://images.unsplash.com/photo-1586953208448-b95a87b4e2e5?w=500&q=80'
-                    ],
-                    rating: 4.3,
-                    reviewCount: 19,
-                    category: 'Office Supplies',
-                    description: 'Aluminum laptop stand with adjustable height.',
-                    stock: 12,
-                    condition: 'New'
-                },
-                {
-                    listingId: 'PROD012',
-                    title: 'Yoga Mat - Non-Slip',
-                    price: 1500,
-                    sellerName: 'FitLife Kenya',
-                    sellerVerification: 'verified',
-                    sellerRating: 4.6,
-                    sellerTotalReviews: 33,
-                    sellerLocation: 'Nairobi',
-                    sellerPhone: '254723456780',
-                    sellerWhatsapp: '254723456780',
-                    images: [
-                        'https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=500&q=80',
-                        'https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?w=500&q=80'
-                    ],
-                    rating: 4.6,
-                    reviewCount: 33,
-                    category: 'Sports & Fitness',
-                    description: 'Premium non-slip yoga mat with carrying strap.',
-                    stock: 9,
-                    condition: 'New'
                 }
             ];
             
-            state.products = sampleProducts;
-            state.allProducts = sampleProducts;
-            state.filteredProducts = [...sampleProducts];
+            if (state.currentPage === 1) {
+                state.products = sampleProducts;
+                state.allProducts = sampleProducts;
+            } else {
+                state.products = [...state.products, ...sampleProducts];
+                state.allProducts = [...state.allProducts, ...sampleProducts];
+            }
+            
             state.hasMore = false;
             
-            // Apply location filtering if location is detected
-            if (state.isLocationDetected) {
-                filterProductsByLocation();
+            // Apply location filter if set
+            if (state.selectedLocation) {
+                applyLocationFilter();
             } else {
+                state.filteredProducts = [...state.allProducts];
                 renderProducts();
             }
             
-            const loadMoreBtn = document.getElementById('loadMoreBtn');
-            loadMoreBtn.textContent = 'No more products';
-            loadMoreBtn.disabled = true;
+            updateLoadMoreButton();
         }
-        
-        // ==================== RENDERING ====================
+
+        function loadMoreProducts() {
+            if (!state.isLoading && state.hasMore) {
+                state.currentPage++;
+                loadProductsFromBackend();
+            }
+        }
+
+        function showAllProducts(event) {
+            if (event) event.preventDefault();
+            
+            // Reset filters
+            state.selectedLocation = '';
+            state.searchQuery = '';
+            
+            // Update UI
+            const dropdown = document.getElementById('locationDropdown');
+            if (dropdown) dropdown.value = '';
+            
+            updateLocationFilterButtons('');
+            updateLocationDisplay('');
+            
+            // Reset search input
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) searchInput.value = '';
+            
+            // Show all products
+            state.filteredProducts = [...state.allProducts];
+            state.currentPage = 1;
+            
+            renderProducts();
+            updateLoadMoreButton();
+            
+            showToast('Showing all products from Kenya', 'success');
+        }
+
+        // ==================== SEARCH FUNCTIONALITY ====================
+        function handleSearchInput() {
+            const searchInput = document.getElementById('searchInput');
+            const query = searchInput.value.trim();
+            
+            // Clear previous timeout
+            if (state.searchTimeout) {
+                clearTimeout(state.searchTimeout);
+            }
+            
+            if (query.length === 0) {
+                hideSearchSuggestions();
+                return;
+            }
+            
+            // Debounce search
+            state.searchTimeout = setTimeout(() => {
+                showSearchSuggestions(query);
+            }, 300);
+        }
+
+        function showSearchSuggestions(query) {
+            const suggestionsContainer = document.getElementById('searchSuggestions');
+            
+            if (!query || query.length < 2) {
+                suggestionsContainer.classList.remove('active');
+                return;
+            }
+            
+            const searchResults = searchProducts(query, 5);
+            
+            if (searchResults.length === 0) {
+                suggestionsContainer.innerHTML = `
+                    <div class="no-suggestions">
+                        No products found for "${query}"
+                    </div>
+                `;
+            } else {
+                suggestionsContainer.innerHTML = searchResults.map(product => `
+                    <div class="suggestion-item" onclick="selectSearchSuggestion('${product.listingId}')">
+                        <img src="${product.images[0] || CONFIG.DEFAULT_IMAGE}" 
+                            alt="${product.title}"
+                            class="suggestion-image"
+                            onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
+                        <div class="suggestion-details">
+                            <div class="suggestion-title">${product.title}</div>
+                            <div class="suggestion-price">KSh ${product.price.toLocaleString()}</div>
+                            <div class="suggestion-location">📍 ${product.sellerLocation || 'Nairobi'}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            suggestionsContainer.classList.add('active');
+        }
+
+        function hideSearchSuggestions() {
+            const suggestionsContainer = document.getElementById('searchSuggestions');
+            suggestionsContainer.classList.remove('active');
+        }
+
+        function selectSearchSuggestion(productId) {
+            hideSearchSuggestions();
+            viewProduct(productId);
+        }
+
+        function performSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const query = searchInput.value.trim();
+            
+            if (query.length === 0) {
+                // Reset to location-filtered products
+                state.searchQuery = '';
+                applyLocationFilter();
+                updateLocationDisplay(state.selectedLocation);
+                return;
+            }
+            
+            state.searchQuery = query;
+            const searchResults = searchProducts(query);
+            
+            // Update filtered products
+            state.filteredProducts = searchResults;
+            state.currentPage = 1;
+            
+            // Update UI
+            updateLocationDisplay(state.selectedLocation);
+            
+            renderProducts();
+            hideSearchSuggestions();
+            
+            // Scroll to products section
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function searchProducts(query, limit = null) {
+            const searchTerms = query.toLowerCase().split(' ');
+            
+            // Start with all products or location-filtered ones
+            let sourceProducts = state.allProducts;
+            if (state.selectedLocation) {
+                sourceProducts = sourceProducts.filter(product => 
+                    product.sellerLocation?.toLowerCase().includes(state.selectedLocation.toLowerCase())
+                );
+            }
+            
+            const results = sourceProducts.filter(product => {
+                const searchableText = `
+                    ${product.title || ''}
+                    ${product.description || ''}
+                    ${product.category || ''}
+                    ${product.sellerName || ''}
+                `.toLowerCase();
+                
+                return searchTerms.every(term => searchableText.includes(term));
+            });
+            
+            // Sort by relevance
+            results.sort((a, b) => {
+                const aTitle = a.title.toLowerCase();
+                const bTitle = b.title.toLowerCase();
+                const queryLower = query.toLowerCase();
+                
+                if (aTitle === queryLower) return -1;
+                if (bTitle === queryLower) return 1;
+                
+                if (aTitle.startsWith(queryLower)) return -1;
+                if (bTitle.startsWith(queryLower)) return 1;
+                
+                return (b.rating || 0) - (a.rating || 0);
+            });
+            
+            return limit ? results.slice(0, limit) : results;
+        }
+
+        // ==================== PRODUCT RENDERING ====================
         function renderProducts() {
             const productGrid = document.getElementById('productGrid');
             const productsToShow = state.filteredProducts.slice(0, state.currentPage * CONFIG.ITEMS_PER_PAGE);
             
             if (productsToShow.length === 0) {
+                let message = '';
+                if (state.searchQuery) {
+                    message = `No products found for "${state.searchQuery}"`;
+                } else if (state.selectedLocation) {
+                    message = `No products found in ${state.selectedLocation}. Try selecting "All Kenya"`;
+                } else {
+                    message = 'No products available. Check back soon!';
+                }
+                
                 productGrid.innerHTML = `
                     <div class="empty-state">
                         <div class="empty-state-icon">🔍</div>
                         <h3 class="empty-state-title">No products found</h3>
-                        <p class="empty-state-message">
-                            ${state.searchQuery ? 
-                                `No products found for "${state.searchQuery}"` : 
-                                'Try changing your location or check back soon for new products'}
-                        </p>
+                        <p class="empty-state-message">${message}</p>
+                        ${state.selectedLocation ? `
+                        <button class="btn btn-primary mt-4" onclick="selectLocationFilter('')">
+                            Show All Kenya Products
+                        </button>
+                        ` : ''}
                     </div>
                 `;
                 return;
@@ -3017,28 +2937,28 @@
                 });
             }, 100);
         }
-        
+
         function createProductHTML(product) {
             const images = product.images || [CONFIG.DEFAULT_IMAGE];
             const imageCount = images.length;
             const firstImage = images[0];
             
             return `
-            <div class="product-card">
+            <div class="product-card" data-id="${product.listingId}">
                 ${product.stock === 0 ? '<span class="product-badge">Sold Out</span>' : ''}
                 ${product.stock > 0 && product.stock <= 3 ? '<span class="product-badge">Low Stock</span>' : ''}
                 
                 <div class="product-image">
                     <div class="image-placeholder"></div>
                     <img src="${firstImage}" 
-                         alt="${product.title}"
-                         onerror="this.src='${CONFIG.DEFAULT_IMAGE}'; this.classList.add('loaded')"
-                         class="loaded">
+                        alt="${product.title}"
+                        onerror="this.src='${CONFIG.DEFAULT_IMAGE}'; this.classList.add('loaded')"
+                        class="loaded">
                     ${imageCount > 1 ? `<div class="image-counter">+${imageCount - 1}</div>` : ''}
                 </div>
                 
                 <div class="product-content">
-                    <h3 class="product-title">${product.title}</h3>
+                    <h3 class="product-title" onclick="viewProduct('${product.listingId}')">${product.title}</h3>
                     <div class="product-price">KSh ${product.price.toLocaleString()}</div>
                     
                     <div class="product-seller">
@@ -3047,8 +2967,8 @@
                     </div>
                     
                     <div class="product-rating">
-                        <span style="color: #fbbf24;">${'★'.repeat(Math.floor(product.rating))}${'☆'.repeat(5 - Math.floor(product.rating))}</span>
-                        <span style="font-size: 0.75rem; color: var(--gray-500);">(${product.reviewCount})</span>
+                        <span style="color: #fbbf24;">${'★'.repeat(Math.floor(product.rating || 4))}${'☆'.repeat(5 - Math.floor(product.rating || 4))}</span>
+                        <span style="font-size: 0.75rem; color: var(--gray-500);">(${product.reviewCount || 0})</span>
                     </div>
                     
                     <div class="product-actions">
@@ -3061,11 +2981,11 @@
                             </button>
                             <div class="contact-options">
                                 <button class="contact-option whatsapp-option" 
-                                   onclick="contactSeller('${product.listingId}', 'whatsapp', event)">
+                                onclick="contactSeller('${product.listingId}', 'whatsapp', event)">
                                     💬 WhatsApp
                                 </button>
                                 <button class="contact-option call-option" 
-                                   onclick="contactSeller('${product.listingId}', 'call', event)">
+                                onclick="contactSeller('${product.listingId}', 'call', event)">
                                     📞 Call
                                 </button>
                             </div>
@@ -3075,102 +2995,8 @@
             </div>
             `;
         }
-        
-        // ==================== UTILITY FUNCTIONS ====================
-        function formatPhoneNumber(phone) {
-            if (!phone) return '';
-            const cleaned = phone.toString().replace(/\D/g, '');
-            const match = cleaned.match(/^(\d{3})(\d{3})(\d{3,4})$/);
-            if (match) {
-                return match[1] + ' ' + match[2] + ' ' + match[3];
-            }
-            return phone;
-        }
-        
-        function loadMoreProducts() {
-            if (!state.isLoading && state.hasMore) {
-                state.currentPage++;
-                loadProductsFromBackend();
-            }
-        }
-        
-        function showAllProducts(event) {
-            if (event) event.preventDefault();
-            state.currentPage = 1;
-            state.hasMore = true;
-            
-            // Reset search
-            state.searchQuery = '';
-            const searchInput = document.getElementById('searchInput');
-            if (searchInput) {
-                searchInput.value = '';
-            }
-            
-            // Show all products
-            state.filteredProducts = [...state.allProducts];
-            
-            // Update section title
-            const sectionTitle = document.querySelector('.section-title');
-            const locationDisplay = document.querySelector('.location-display');
-            if (sectionTitle && locationDisplay) {
-                sectionTitle.textContent = 'All Products';
-                locationDisplay.innerHTML = '';
-            }
-            
-            renderProducts();
-            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        function initScrollDetection() {
-            window.addEventListener('scroll', () => {
-                const scrollTop = document.getElementById('scrollTop');
-                if (window.scrollY > 300) {
-                    scrollTop.classList.add('visible');
-                } else {
-                    scrollTop.classList.remove('visible');
-                }
-            });
-        }
-        
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        
-        function showModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-        }
-        
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.remove('active');
-                document.body.style.overflow = '';
-                if (modalId === 'productModal') {
-                    document.getElementById('productModalBody').innerHTML = '';
-                }
-            }
-        }
-        
-        function showToast(message, type = 'info') {
-            const existingToast = document.querySelector('.toast');
-            if (existingToast) existingToast.remove();
-            
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            toast.textContent = message;
-            document.body.appendChild(toast);
-            
-            setTimeout(() => {
-                toast.style.animation = 'slideOutRight 0.3s ease';
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
-        
-        // ==================== FIXED PRODUCT DETAILS ====================
+
+        // ==================== PRODUCT DETAIL MODAL ====================
         async function viewProduct(productId) {
             try {
                 const product = state.allProducts.find(p => p.listingId === productId);
@@ -3188,18 +3014,18 @@
                     galleryHTML += `
                         <div class="gallery-slide ${index === 0 ? 'active' : ''}">
                             <img src="${img}" 
-                                 alt="Image ${index + 1}" 
-                                 onerror="this.src='${CONFIG.DEFAULT_IMAGE}'"
-                                 onclick="openImageViewer(${JSON.stringify(images)}, ${index})">
+                                alt="Image ${index + 1}" 
+                                onerror="this.src='${CONFIG.DEFAULT_IMAGE}'"
+                                onclick="openImageViewer(${JSON.stringify(images)}, ${index})">
                         </div>
                     `;
                     
                     thumbnailsHTML += `
                         <div class="thumbnail ${index === 0 ? 'active' : ''}" 
-                             onclick="changeGalleryImage(${index})">
+                            onclick="changeGalleryImage(${index})">
                             <img src="${img}" 
-                                 alt="Thumbnail ${index + 1}"
-                                 onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
+                                alt="Thumbnail ${index + 1}"
+                                onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
                         </div>
                     `;
                 });
@@ -3287,7 +3113,100 @@
                 showToast('Failed to load product details', 'error');
             }
         }
-        
+
+        // ==================== IMAGE VIEWER FUNCTIONS ====================
+        function openImageViewer(images, startIndex = 0) {
+            state.currentImages = images;
+            state.currentImageIndex = startIndex;
+            
+            const viewer = document.getElementById('imageViewer');
+            const viewerImage = document.getElementById('viewerImage');
+            const thumbnailsContainer = document.getElementById('viewerThumbnails');
+            const imageCounter = document.getElementById('imageCounter');
+            
+            if (!viewer || !viewerImage || !thumbnailsContainer || !imageCounter) return;
+            
+            viewerImage.src = images[startIndex];
+            
+            thumbnailsContainer.innerHTML = '';
+            images.forEach((img, index) => {
+                const thumbnail = document.createElement('div');
+                thumbnail.className = `image-viewer-thumbnail ${index === startIndex ? 'active' : ''}`;
+                thumbnail.onclick = () => changeImage(index);
+                thumbnail.innerHTML = `<img src="${img}" alt="Thumbnail ${index + 1}" onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">`;
+                thumbnailsContainer.appendChild(thumbnail);
+            });
+            
+            imageCounter.textContent = `${startIndex + 1} / ${images.length}`;
+            viewer.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageViewer() {
+            const viewer = document.getElementById('imageViewer');
+            viewer.classList.remove('active');
+            document.body.style.overflow = '';
+            state.currentImages = [];
+            state.currentImageIndex = 0;
+        }
+
+        function changeImage(index) {
+            state.currentImageIndex = index;
+            const viewerImage = document.getElementById('viewerImage');
+            const thumbnails = document.querySelectorAll('.image-viewer-thumbnail');
+            const imageCounter = document.getElementById('imageCounter');
+            
+            if (!viewerImage) return;
+            
+            viewerImage.src = state.currentImages[index];
+            
+            thumbnails.forEach((thumb, i) => {
+                thumb.classList.toggle('active', i === index);
+            });
+            
+            if (imageCounter) {
+                imageCounter.textContent = `${index + 1} / ${state.currentImages.length}`;
+            }
+        }
+
+        function prevImage() {
+            const newIndex = (state.currentImageIndex - 1 + state.currentImages.length) % state.currentImages.length;
+            changeImage(newIndex);
+        }
+
+        function nextImage() {
+            const newIndex = (state.currentImageIndex + 1) % state.currentImages.length;
+            changeImage(newIndex);
+        }
+
+        // ==================== GALLERY FUNCTIONS ====================
+        window.changeGalleryImage = function(index) {
+            const slides = document.querySelectorAll('#galleryMain .gallery-slide');
+            const thumbnails = document.querySelectorAll('#galleryThumbnails .thumbnail');
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+            
+            if (slides[index]) {
+                slides[index].classList.add('active');
+            }
+            if (thumbnails[index]) thumbnails[index].classList.add('active');
+            
+            window.currentGalleryIndex = index;
+        };
+
+        window.prevGalleryImage = function() {
+            if (!window.currentGalleryImages) return;
+            const newIndex = (window.currentGalleryIndex - 1 + window.currentGalleryImages.length) % window.currentGalleryImages.length;
+            window.changeGalleryImage(newIndex);
+        };
+
+        window.nextGalleryImage = function() {
+            if (!window.currentGalleryImages) return;
+            const newIndex = (window.currentGalleryIndex + 1) % window.currentGalleryImages.length;
+            window.changeGalleryImage(newIndex);
+        };
+
         // ==================== CONTACT FUNCTIONS ====================
         function toggleContactOptions(button, productId, event) {
             if (event) {
@@ -3314,14 +3233,17 @@
                 setTimeout(() => document.addEventListener('click', closeHandler), 10);
             }
         }
-        
-        async function showContactOptions(productId) {
+
+        function showContactOptions(productId) {
             const product = state.allProducts.find(p => p.listingId === productId);
             if (!product) return;
             
             const whatsappMessage = `Hi, I'm interested in your "${product.title}" for KSh ${product.price.toLocaleString()} on SokoInn`;
             
-            document.getElementById('contactModalBody').innerHTML = `
+            const modalBody = document.getElementById('contactModalBody');
+            if (!modalBody) return;
+            
+            modalBody.innerHTML = `
                 <div>
                     <div style="text-align: center; margin-bottom: 1.5rem;">
                         <div style="width: 60px; height: 60px; background: var(--maroon); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1.5rem; margin: 0 auto 1rem;">
@@ -3334,8 +3256,8 @@
                     <div style="display: grid; gap: 0.75rem;">
                         ${product.sellerWhatsapp ? `
                         <a href="https://wa.me/${product.sellerWhatsapp}?text=${encodeURIComponent(whatsappMessage)}" 
-                           target="_blank"
-                           style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: #25D366; color: white; border-radius: var(--radius-md); text-decoration: none; text-align: center; justify-content: center;">
+                        target="_blank"
+                        style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: #25D366; color: white; border-radius: var(--radius-md); text-decoration: none; text-align: center; justify-content: center;">
                             <span style="font-size: 1.25rem;">💬</span>
                             <div>
                                 <div style="font-weight: 600;">WhatsApp</div>
@@ -3346,7 +3268,7 @@
                         
                         ${product.sellerPhone ? `
                         <a href="tel:${product.sellerPhone}" 
-                           style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--maroon); color: white; border-radius: var(--radius-md); text-decoration: none; text-align: center; justify-content: center;">
+                        style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--maroon); color: white; border-radius: var(--radius-md); text-decoration: none; text-align: center; justify-content: center;">
                             <span style="font-size: 1.25rem;">📞</span>
                             <div>
                                 <div style="font-weight: 600;">Call</div>
@@ -3366,7 +3288,7 @@
             
             showModal('contactModal');
         }
-        
+
         function contactSeller(productId, method, event) {
             if (event) {
                 event.preventDefault();
@@ -3382,71 +3304,381 @@
                 showToast(`Opening WhatsApp...`, 'info');
             } else if (method === 'call' && product.sellerPhone) {
                 window.location.href = `tel:${product.sellerPhone}`;
+            } else {
+                showToast('Contact information not available', 'error');
             }
             
             const dropdown = event?.target?.closest('.contact-options');
             if (dropdown) dropdown.classList.remove('show');
         }
-        
-        // ==================== FIXED GALLERY FUNCTIONS ====================
-        window.changeGalleryImage = function(index) {
-            const slides = document.querySelectorAll('.gallery-slide');
-            const thumbnails = document.querySelectorAll('.thumbnail');
+
+        // ==================== UTILITY FUNCTIONS ====================
+        function formatPhoneNumber(phone) {
+            if (!phone) return '';
+            const cleaned = phone.toString().replace(/\D/g, '');
+            const match = cleaned.match(/^(\d{3})(\d{3})(\d{3,4})$/);
+            if (match) {
+                return match[1] + ' ' + match[2] + ' ' + match[3];
+            }
+            return phone;
+        }
+
+        function updateLoadMoreButton() {
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            if (!loadMoreBtn) return;
+            
+            if (!state.hasMore || state.filteredProducts.length <= state.currentPage * CONFIG.ITEMS_PER_PAGE) {
+                loadMoreBtn.textContent = 'No more products';
+                loadMoreBtn.disabled = true;
+                state.hasMore = false;
+            } else {
+                loadMoreBtn.textContent = 'Load More Products';
+                loadMoreBtn.disabled = false;
+                state.hasMore = true;
+            }
+        }
+
+        function showLoading(show) {
+            const overlay = document.getElementById('loadingOverlay');
+            if (overlay) {
+                overlay.classList.toggle('active', show);
+            }
+        }
+
+        function initScrollDetection() {
+            const scrollTopBtn = document.getElementById('scrollTop');
+            
+            window.addEventListener('scroll', () => {
+                // Show/hide scroll to top button
+                if (window.scrollY > 300) {
+                    scrollTopBtn.classList.add('visible');
+                } else {
+                    scrollTopBtn.classList.remove('visible');
+                }
+                
+                // Close search suggestions on scroll
+                hideSearchSuggestions();
+            });
+            
+            // Initialize button visibility
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('visible');
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        function initBottomNav() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.nav-item').forEach(item => {
+                const href = item.getAttribute('href');
+                if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        function initChatbot() {
+            // Initialize with welcome message
+            const messages = document.getElementById('chatbotMessages');
+            if (messages && messages.children.length === 0) {
+                addBotMessage("Hello! I'm your SokoInn assistant. How can I help you today? You can ask me about buying products, becoming a seller, advertising, or any other questions about our platform.");
+            }
+            
+            loadChatHistory();
+        }
+
+        function toggleChatbot() {
+            const chatbot = document.getElementById('chatbotContainer');
+            const notification = document.getElementById('chatbotNotification');
+            
+            state.chatbotOpen = !state.chatbotOpen;
+            chatbot.classList.toggle('active', state.chatbotOpen);
+            
+            if (state.chatbotOpen) {
+                state.unreadMessages = 0;
+                notification.classList.add('hidden');
+                saveChatHistory();
+                
+                setTimeout(() => {
+                    const messages = document.getElementById('chatbotMessages');
+                    messages.scrollTop = messages.scrollHeight;
+                }, 100);
+            }
+        }
+
+        function addBotMessage(text) {
+            const messages = document.getElementById('chatbotMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chatbot-message bot';
+            messageDiv.textContent = text;
+            messages.appendChild(messageDiv);
+            
+            messages.scrollTop = messages.scrollHeight;
+            saveChatHistory();
+        }
+
+        function handleChatbotKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendChatbotMessage();
+            }
+        }
+
+        function sendChatbotMessage() {
+            const input = document.getElementById('chatbotInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            addUserMessage(message);
+            input.value = '';
+            
+            setTimeout(() => processUserMessage(message), 500);
+        }
+
+        function sendQuickMessage(message) {
+            const input = document.getElementById('chatbotInput');
+            input.value = message;
+            sendChatbotMessage();
+        }
+
+        function addUserMessage(text) {
+            const messages = document.getElementById('chatbotMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chatbot-message user';
+            messageDiv.textContent = text;
+            messages.appendChild(messageDiv);
+            
+            messages.scrollTop = messages.scrollHeight;
+            saveChatHistory();
+        }
+
+        function processUserMessage(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            const responses = {
+                'hello': "Hello! Welcome to SokoInn. How can I assist you today?",
+                'hi': "Hi there! 👋 I'm here to help you with anything about SokoInn.",
+                'help': "I can help you with:\n1. Buying products\n2. Becoming a seller\n3. Advertising\n4. Contacting support\n5. General inquiries\nWhat would you like to know?",
+                'buy': "To buy products:\n1. Browse products on the homepage\n2. Click 'View' on any product\n3. Use the 'Contact Seller' button\n4. Arrange payment and delivery directly with the seller",
+                'seller': "To become a seller:\n1. Click 'List Product' in the header\n2. Fill out the registration form\n3. We'll contact you within 24 hours\n4. Once verified, you can list your products",
+                'ad': "For advertising opportunities:\n1. Hero section ads (high visibility)\n2. Featured product listings\n3. Category sponsorships\n\nContact +254 784 599 322 for rates.",
+                'support': "Need support? Contact our admin at +254 784 599 322 via WhatsApp for immediate assistance.",
+                'price': "Prices vary by ad placement:\n• Hero section: Contact for pricing\n• Featured listings: Contact for pricing\n• Category sponsorship: Contact for pricing",
+                'contact': "You can contact us:\n• WhatsApp: +254 784 599 322\n• Email: info@sokoinn.com\n• Website: www.sokoinn.com",
+                'thank': "You're welcome! 😊 Let me know if you need anything else.",
+                'bye': "Goodbye! Feel free to come back anytime you need help.",
+                'how': "I can help you with:\n• How to buy products\n• How to become a seller\n• How to advertise\n• How to contact sellers\n• How to get support",
+                'what': "SokoInn is a marketplace connecting buyers with verified sellers in Kenya."
+            };
+            
+            let response = null;
+            for (const [keyword, reply] of Object.entries(responses)) {
+                if (lowerMessage.includes(keyword)) {
+                    response = reply;
+                    break;
+                }
+            }
+            
+            if (!response) {
+                response = `I'm not sure about that. Please contact +254 784 599 322 directly for this inquiry.`;
+                
+                setTimeout(() => {
+                    const quickActions = document.getElementById('quickActions');
+                    const adminBtn = document.createElement('button');
+                    adminBtn.className = 'chatbot-quick-btn';
+                    adminBtn.textContent = 'Contact Admin';
+                    adminBtn.onclick = () => {
+                        window.open(`https://wa.me/${CONFIG.ADMIN_WHATSAPP}?text=Hi,%20I%20need%20help%20with:%20${encodeURIComponent(message)}`, '_blank');
+                    };
+                    quickActions.appendChild(adminBtn);
+                }, 1000);
+            }
+            
+            addBotMessage(response);
+            
+            if (!state.chatbotOpen) {
+                state.unreadMessages++;
+                const notification = document.getElementById('chatbotNotification');
+                notification.textContent = state.unreadMessages;
+                notification.classList.remove('hidden');
+            }
+        }
+
+        function saveChatHistory() {
+            const messages = document.getElementById('chatbotMessages');
+            try {
+                localStorage.setItem('sokoinn_chat_history', messages.innerHTML);
+            } catch (e) {
+                console.warn('Could not save chat history');
+            }
+        }
+
+        function loadChatHistory() {
+            try {
+                const saved = localStorage.getItem('sokoinn_chat_history');
+                if (saved) {
+                    document.getElementById('chatbotMessages').innerHTML = saved;
+                }
+            } catch (e) {
+                console.warn('Could not load chat history');
+            }
+        }
+
+        function showModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                if (modalId === 'productModal') {
+                    document.getElementById('productModalBody').innerHTML = '';
+                }
+            }
+        }
+
+        function showToast(message, type = 'info') {
+            const existingToast = document.querySelector('.toast');
+            if (existingToast) existingToast.remove();
+            
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        function saveProduct(productId) {
+            const saved = JSON.parse(localStorage.getItem('sokoinn_saved') || '[]');
+            if (!saved.includes(productId)) {
+                saved.push(productId);
+                localStorage.setItem('sokoinn_saved', JSON.stringify(saved));
+                showToast('Product saved for later!', 'success');
+            } else {
+                showToast('Product already saved', 'info');
+            }
+        }
+
+        function initHeroSlideshow() {
+            const ads = [
+                {
+                    image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1200&h=600&fit=crop',
+                    title: 'Premium Ad Space',
+                    description: 'Reach thousands of active buyers daily',
+                    cta: 'Book Now',
+                    link: 'https://wa.me/254784599322?text=Hi,%20I want to book ad space on SokoInn',
+                    badge: 'Sponsored'
+                },
+                {
+                    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=600&fit=crop',
+                    title: 'Boost Your Sales',
+                    description: 'Get featured in our hero section',
+                    cta: 'Learn More',
+                    link: 'https://wa.me/254784599322?text=Hi,%20tell me more about advertising on SokoInn',
+                    badge: 'Featured'
+                },
+                {
+                    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=600&fit=crop',
+                    title: 'Limited Time Offer',
+                    description: 'Special rates for first-time advertisers',
+                    cta: 'Get Offer',
+                    link: 'https://wa.me/254784599322?text=Hi,%20I want the special advertising offer',
+                    badge: 'Limited Time'
+                }
+            ];
+            
+            const slideshow = document.getElementById('heroSlideshow');
+            const indicators = document.getElementById('heroIndicators');
+            
+            if (!slideshow || !indicators) return;
+            
+            ads.forEach((ad, index) => {
+                // Create slide
+                const slide = document.createElement('div');
+                slide.className = `hero-slide ${index === 0 ? 'active' : ''}`;
+                slide.style.backgroundImage = `url('${ad.image}?w=1200&h=600&fit=crop')`;
+                slide.onclick = () => window.open(ad.link, '_blank');
+                slideshow.appendChild(slide);
+                
+                // Create indicator
+                const indicator = document.createElement('div');
+                indicator.className = `hero-indicator ${index === 0 ? 'active' : ''}`;
+                indicator.onclick = () => changeHeroSlide(index);
+                indicators.appendChild(indicator);
+            });
+            
+            // Update hero content for first ad
+            updateHeroContent(ads[0]);
+            
+            // Auto slide every 8 seconds
+            state.heroInterval = setInterval(() => {
+                const slides = document.querySelectorAll('.hero-slide');
+                const indicators = document.querySelectorAll('.hero-indicator');
+                
+                slides[state.currentSlide].classList.remove('active');
+                indicators[state.currentSlide].classList.remove('active');
+                
+                state.currentSlide = (state.currentSlide + 1) % slides.length;
+                
+                slides[state.currentSlide].classList.add('active');
+                indicators[state.currentSlide].classList.add('active');
+                
+                updateHeroContent(ads[state.currentSlide]);
+            }, 8000);
+        }
+
+        function updateHeroContent(ad) {
+            const content = document.querySelector('.hero-content');
+            if (!content) return;
+            
+            content.innerHTML = `
+                <div class="hero-badge">${ad.badge}</div>
+                <h1>${ad.title}</h1>
+                <p>${ad.description}</p>
+                <a href="${ad.link}" class="hero-cta" target="_blank">${ad.cta}</a>
+            `;
+        }
+
+        function changeHeroSlide(index) {
+            clearInterval(state.heroInterval);
+            state.currentSlide = index;
+            
+            const slides = document.querySelectorAll('.hero-slide');
+            const indicators = document.querySelectorAll('.hero-indicator');
             
             slides.forEach(slide => slide.classList.remove('active'));
-            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
             
-            if (slides[index]) {
-                slides[index].classList.add('active');
-                const img = slides[index].querySelector('img');
-                if (img && img.src) {
-                    img.src = img.src;
-                }
-            }
-            if (thumbnails[index]) thumbnails[index].classList.add('active');
+            slides[index].classList.add('active');
+            indicators[index].classList.add('active');
             
-            window.currentGalleryIndex = index;
-        };
-        
-        window.prevGalleryImage = function() {
-            if (!window.currentGalleryImages) return;
-            const newIndex = (window.currentGalleryIndex - 1 + window.currentGalleryImages.length) % window.currentGalleryImages.length;
-            window.changeGalleryImage(newIndex);
-        };
-        
-        window.nextGalleryImage = function() {
-            if (!window.currentGalleryImages) return;
-            const newIndex = (window.currentGalleryIndex + 1) % window.currentGalleryImages.length;
-            window.changeGalleryImage(newIndex);
-        };
-        
-        // ==================== MODAL HELPERS ====================
-        window.showSellerModal = function() {
-            showModal('sellerModal');
-        };
-        
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal')) {
-                closeModal(e.target.id);
-            }
-        });
-        
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                if (document.getElementById('imageViewer').classList.contains('active')) {
-                    closeImageViewer();
-                } else {
-                    const modals = document.querySelectorAll('.modal.active');
-                    modals.forEach(modal => closeModal(modal.id));
-                }
-                if (state.chatbotOpen) {
-                    toggleChatbot();
-                }
-            }
-        });
-        
-        // ==================== FORM SUBMISSION ====================
-        document.getElementById('sellerForm').addEventListener('submit', async function(e) {
+            // Restart interval
+            state.heroInterval = setInterval(() => {
+                const nextIndex = (state.currentSlide + 1) % slides.length;
+                changeHeroSlide(nextIndex);
+            }, 8000);
+        }
+
+        // Seller registration
+        async function handleSellerRegistration(e) {
             e.preventDefault();
             
             const formData = new FormData(this);
@@ -3491,22 +3723,16 @@
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Submit Application';
             }
-        });
-        
-        // ==================== SAVE PRODUCT ====================
-        function saveProduct(productId) {
-            const saved = JSON.parse(localStorage.getItem('sokoinn_saved') || '[]');
-            if (!saved.includes(productId)) {
-                saved.push(productId);
-                localStorage.setItem('sokoinn_saved', JSON.stringify(saved));
-                showToast('Product saved for later!', 'success');
-            } else {
-                showToast('Product already saved', 'info');
-            }
         }
-        
-        // Initialize on load
+
+        // Modal helpers
+        window.showSellerModal = function() {
+            showModal('sellerModal');
+        };
+
+        // Initialize on window load
         window.addEventListener('load', () => {
+            // Set up image loading
             document.querySelectorAll('.product-image img').forEach(img => {
                 if (img.complete) {
                     img.classList.add('loaded');
@@ -3515,6 +3741,7 @@
                 }
             });
             
+            // Show chatbot notification after delay
             setTimeout(() => {
                 if (!state.chatbotOpen && state.unreadMessages === 0) {
                     state.unreadMessages = 1;
