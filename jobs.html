@@ -2681,13 +2681,15 @@
 
     // ==================== ENHANCED RESPONSIVE CHATBOT ====================
     function initChatbot() {
-        // Initialize with welcome message
-        const messages = document.getElementById('chatbotMessages');
-        if (messages && messages.children.length === 0) {
-            addBotMessage("Hello! 👋 I'm your SokoInn career assistant. How can I help you with job searches, applications, or career advice today?");
-        }
-        
-        loadChatHistory();
+    // Initialize with welcome message
+    const messages = document.getElementById('chatbotMessages');
+    if (messages && messages.children.length === 0) {
+        addBotMessage("Hello! 👋 I'm your SokoInn career assistant. How can I help you with job searches, applications, or career advice today?");
+    }
+    
+    loadChatHistory();
+}  // ← ADD THIS CLOSING BRACE
+
     function toggleChatbot() {
         const chatbot = document.getElementById('chatbotContainer');
         const chatbotButton = document.querySelector('.chatbot-button');
