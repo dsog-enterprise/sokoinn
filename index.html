@@ -2874,9 +2874,6 @@
         
         state.retryCount++;
         
-        // Show error toast
-        showToast(`Something went wrong. Retrying... (${state.retryCount}/${state.maxRetries})`, 'error');
-        
         // Retry after delay
         setTimeout(() => {
             if (context.includes('loadProducts')) {
@@ -2890,9 +2887,7 @@
         if (emergencyBtn) {
             emergencyBtn.style.display = 'flex';
         }
-        
-        showToast('Critical error detected. Please reload the page.', 'error');
-        
+                
         // Force remove loading protection
         const loadingProtection = document.getElementById('loadingProtection');
         if (loadingProtection) {
