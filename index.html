@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=1.0, user-scalable=no">
     <title>SokoInn Marketplace | Trusted Products from Verified Sellers</title>
     
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#800000">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="manifest" href="manifest.json">
+    <!-- Inline PWA Manifest -->
+    <link rel="manifest" id="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIlNva29Jbm4gTWFya2V0cGxhY2UiLAogICJzaG9ydF9uYW1lIjogIlNva29Jbm4iLAogICJkZXNjcmlwdGlvbiI6ICJUcnVzdGVkIHByb2R1Y3RzIGZyb20gdmVyaWZpZWQgc2VsbGVycyBpbiBLZW55YSIsCiAgInN0YXJ0X3VybCI6ICIuLyIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZmZmZmZiIsCiAgInRoZW1lX2NvbG9yIjogIiM4MDAwMDAiLAogICJvcmllbnRhdGlvbiI6ICJhbnkiLAogICJzY29wZSI6ICIuLyIsCiAgImNhdGVnb3JpZXMiOiBbCiAgICAic2hvcHBpbmciLAogICAgIm1hcmtldHBsYWNlIiwKICAgICJlLWNvbW1lcmNlIgogIF0sCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImljb25zL2ljb24tNzJ4NzIucG5nIiwKICAgICAgInNpemVzIjogIjcyeDcyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJpY29ucy9pY29uLTk2eDk2LnBuZyIsCiAgICAgICJzaXplcyI6ICI5Nng5NiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiaWNvbnMvaWNvbi0xMjh4MTI4LnBuZyIsCiAgICAgICJzaXplcyI6ICIxMjh4MTI4IiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfSwKICAgIHsKICAgICAgInNyYCI6ICJpY29ucy9pY29uLTE0NHgxNDQucG5nIiwKICAgICAgInNpemVzIjogIjE0NHgxNDQiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9LAogICAgewogICAgICAic3JjIjogImljb25zL2ljb24tMTUyeDE1Mi5wbmciLAogICAgICAic2l6ZXMiOiAiMTUyeDE1MiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiaWNvbnMvaWNvbi0xOTJ4MTkyLnBuZyIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5wZSI6ICJpbWFnZS9wbmciCiAgICB9LAogICAgewogICAgICAic3JjIjogImljb25zL2ljb24tMzg0eDM4NC5wbmciLAogICAgICAic2l6ZXMiOiAiMzg0eDM4NCIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiaWNvbnMvaWNvbi01MTJ4NTEyLnBuZyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0KfQ==">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
     
@@ -48,6 +49,11 @@
             box-sizing: border-box;
         }
         
+        html {
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             line-height: 1.5;
@@ -55,6 +61,9 @@
             background: var(--gray-100);
             padding-bottom: 80px;
             transition: padding-bottom 0.3s ease;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
         }
         
         img {
@@ -71,6 +80,8 @@
         button {
             font-family: inherit;
             cursor: pointer;
+            background: none;
+            border: none;
         }
         
         /* ==================== ENHANCED PROFESSIONAL HEADER ==================== */
@@ -2361,9 +2372,98 @@
         .header {
             animation: fadeInDown 0.5s ease;
         }
+        
+        /* ==================== PWA INSTALL BUTTON ==================== */
+        .install-button {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1001;
+            background: linear-gradient(135deg, var(--maroon), var(--light-maroon));
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            box-shadow: var(--shadow-xl);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .install-button.show {
+            opacity: 1;
+            visibility: visible;
+            animation: slideUp 0.5s ease;
+        }
+        
+        .install-button:hover {
+            transform: translateX(-50%) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(128, 0, 0, 0.3);
+        }
+        
+        /* ==================== EMERGENCY RELOAD BUTTON ==================== */
+        .emergency-reload {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 9999;
+            background: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.25rem;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        
+        .emergency-reload:hover {
+            opacity: 1;
+        }
+        
+        /* ==================== LOADING PROTECTION ==================== */
+        .loading-protection {
+            display: none;
+        }
+        
+        .loading-protection.active {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            z-index: 9998;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--maroon);
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
+    <!-- Emergency Reload Button (Hidden by default, shown on error) -->
+    <button class="emergency-reload" onclick="window.location.reload()" title="Emergency Reload">
+        <i class="fas fa-redo"></i>
+    </button>
+    
+    <!-- Loading Protection Overlay -->
+    <div class="loading-protection" id="loadingProtection"></div>
+    
     <!-- Enhanced Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="sokoinn-loader">
@@ -2627,6 +2727,11 @@
             </div>
         </div>
     </div>
+    
+    <!-- PWA Install Button -->
+    <button class="install-button" id="installButton" style="display: none;">
+        <i class="fas fa-download"></i> Install App
+    </button>
 
     <script>
     // ==================== CONFIGURATION ====================
@@ -2686,63 +2791,138 @@
         isBottomNavVisible: true,
         scrollDirection: 'down',
         touchStartY: 0,
-        touchEndY: 0
+        touchEndY: 0,
+        isErrorState: false,
+        retryCount: 0,
+        maxRetries: 3
     };
+
+    // ==================== ERROR HANDLING AND HANG PREVENTION ====================
+    function handleError(error, context = 'Unknown') {
+        console.error(`Error in ${context}:`, error);
+        
+        if (state.retryCount >= state.maxRetries) {
+            state.isErrorState = true;
+            showEmergencyReload();
+            return;
+        }
+        
+        state.retryCount++;
+        
+        // Show error toast
+        showToast(`Something went wrong. Retrying... (${state.retryCount}/${state.maxRetries})`, 'error');
+        
+        // Retry after delay
+        setTimeout(() => {
+            if (context.includes('loadProducts')) {
+                loadProductsFromBackend();
+            }
+        }, 1000 * state.retryCount);
+    }
+
+    function showEmergencyReload() {
+        const emergencyBtn = document.querySelector('.emergency-reload');
+        if (emergencyBtn) {
+            emergencyBtn.style.display = 'flex';
+        }
+        
+        showToast('Critical error detected. Please reload the page.', 'error');
+        
+        // Force remove loading protection
+        const loadingProtection = document.getElementById('loadingProtection');
+        if (loadingProtection) {
+            loadingProtection.classList.remove('active');
+        }
+    }
+
+    function hideEmergencyReload() {
+        const emergencyBtn = document.querySelector('.emergency-reload');
+        if (emergencyBtn) {
+            emergencyBtn.style.display = 'none';
+        }
+    }
 
     // ==================== ENHANCED INITIALIZATION ====================
     document.addEventListener('DOMContentLoaded', () => {
-        // Hide loading overlay after 1.5 seconds
-        setTimeout(() => {
-            document.getElementById('loadingOverlay').classList.add('hidden');
-        }, 1500);
-        
-        initHeroSlideshow();
-        initScrollDetection();
-        initBottomNav();
-        initChatbot();
-        initLocationFiltering();
-        initEventListeners();
-        initTouchGestures();
-        
-        // Load products from backend
-        loadProductsFromBackend();
-        
-        // Close search suggestions when clicking outside
-        document.addEventListener('click', (e) => {
-            const searchContainer = document.querySelector('.search-container');
-            if (searchContainer && !searchContainer.contains(e.target)) {
-                hideSearchSuggestions();
-            }
-        });
+        try {
+            // Hide loading overlay after 1.5 seconds
+            setTimeout(() => {
+                const loadingOverlay = document.getElementById('loadingOverlay');
+                if (loadingOverlay) {
+                    loadingOverlay.classList.add('hidden');
+                }
+            }, 1500);
+            
+            initHeroSlideshow();
+            initScrollDetection();
+            initBottomNav();
+            initChatbot();
+            initLocationFiltering();
+            initEventListeners();
+            initTouchGestures();
+            initPWA();
+            
+            // Load products from backend
+            loadProductsFromBackend();
+            
+            // Close search suggestions when clicking outside
+            document.addEventListener('click', (e) => {
+                const searchContainer = document.querySelector('.search-container');
+                if (searchContainer && !searchContainer.contains(e.target)) {
+                    hideSearchSuggestions();
+                }
+            });
+            
+            // Initialize error boundary
+            window.addEventListener('error', (event) => {
+                handleError(event.error, 'Global Error Handler');
+                return true;
+            });
+            
+            window.addEventListener('unhandledrejection', (event) => {
+                handleError(event.reason, 'Unhandled Promise Rejection');
+            });
+            
+        } catch (error) {
+            handleError(error, 'Initialization');
+        }
     });
 
     function initEventListeners() {
-        // Escape key to close modals
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                if (document.getElementById('chatbotContainer').classList.contains('active')) {
-                    toggleChatbot();
-                } else if (state.mobileMenuOpen) {
-                    toggleMobileMenu();
-                } else {
-                    const modals = document.querySelectorAll('.modal.active');
-                    modals.forEach(modal => closeModal(modal.id));
+        try {
+            // Escape key to close modals
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (document.getElementById('chatbotContainer').classList.contains('active')) {
+                        toggleChatbot();
+                    } else if (state.mobileMenuOpen) {
+                        toggleMobileMenu();
+                    } else {
+                        const modals = document.querySelectorAll('.modal.active');
+                        modals.forEach(modal => closeModal(modal.id));
+                    }
                 }
-            }
-        });
-        
-        // Resize event for responsive adjustments
-        window.addEventListener('resize', () => {
-            adjustChatbotPosition();
-        });
-        
-        // Touch events for mobile gestures
-        document.addEventListener('touchstart', handleTouchStart, { passive: true });
-        document.addEventListener('touchend', handleTouchEnd, { passive: true });
+            });
+            
+            // Resize event for responsive adjustments
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    adjustChatbotPosition();
+                }, 250);
+            });
+            
+            // Touch events for mobile gestures
+            document.addEventListener('touchstart', handleTouchStart, { passive: true });
+            document.addEventListener('touchend', handleTouchEnd, { passive: true });
+            
+        } catch (error) {
+            handleError(error, 'Event Listeners');
+        }
     }
 
     function initTouchGestures() {
-        // Initialize touch variables
         state.touchStartY = 0;
         state.touchEndY = 0;
     }
@@ -2760,239 +2940,372 @@
         const swipeThreshold = 50;
         const swipeDistance = state.touchStartY - state.touchEndY;
         
-        // Vertical swipe detection for bottom nav
         if (Math.abs(swipeDistance) > swipeThreshold) {
             if (swipeDistance > 0) {
-                // Swipe up - hide bottom nav
                 hideBottomNav();
             } else {
-                // Swipe down - show bottom nav
                 showBottomNav();
             }
         }
     }
 
     function toggleMobileMenu() {
-        const mobileMenu = document.getElementById('mobileMenu');
-        state.mobileMenuOpen = !state.mobileMenuOpen;
-        mobileMenu.classList.toggle('hidden', !state.mobileMenuOpen);
+        try {
+            const mobileMenu = document.getElementById('mobileMenu');
+            state.mobileMenuOpen = !state.mobileMenuOpen;
+            mobileMenu.classList.toggle('hidden', !state.mobileMenuOpen);
+            
+            // Prevent body scroll when menu is open
+            document.body.style.overflow = state.mobileMenuOpen ? 'hidden' : '';
+        } catch (error) {
+            handleError(error, 'Toggle Mobile Menu');
+        }
+    }
+
+    // ==================== PWA FUNCTIONALITY ====================
+    function initPWA() {
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js').catch(error => {
+                console.log('Service Worker registration failed:', error);
+            });
+        }
         
-        // Prevent body scroll when menu is open
-        document.body.style.overflow = state.mobileMenuOpen ? 'hidden' : '';
+        // Handle beforeinstallprompt event
+        let deferredPrompt;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            const installButton = document.getElementById('installButton');
+            if (installButton) {
+                installButton.style.display = 'flex';
+                installButton.classList.add('show');
+                
+                installButton.addEventListener('click', async () => {
+                    if (!deferredPrompt) return;
+                    
+                    deferredPrompt.prompt();
+                    
+                    const { outcome } = await deferredPrompt.userChoice;
+                    
+                    if (outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    } else {
+                        console.log('User dismissed the install prompt');
+                    }
+                    
+                    deferredPrompt = null;
+                    
+                    installButton.style.display = 'none';
+                    installButton.classList.remove('show');
+                });
+                
+                // Auto-hide after 15 seconds
+                setTimeout(() => {
+                    installButton.classList.remove('show');
+                    setTimeout(() => {
+                        installButton.style.display = 'none';
+                    }, 300);
+                }, 15000);
+            }
+        });
+        
+        // Detect if app is running in standalone mode
+        if (window.matchMedia('(display-mode: standalone)').matches || 
+            window.navigator.standalone) {
+            document.documentElement.classList.add('standalone');
+        }
     }
 
     // ==================== ENHANCED HERO SLIDESHOW ====================
     function initHeroSlideshow() {
-        const slideshow = document.getElementById('heroSlideshow');
-        const indicators = document.getElementById('heroIndicators');
-        
-        if (!slideshow || !indicators) return;
-        
-        // Clear any existing content
-        slideshow.innerHTML = '';
-        indicators.innerHTML = '';
-        
-        CONFIG.HERO_IMAGES.forEach((ad, index) => {
-            // Create slide
-            const slide = document.createElement('div');
-            slide.className = `hero-slide ${index === 0 ? 'active' : ''}`;
+        try {
+            const slideshow = document.getElementById('heroSlideshow');
+            const indicators = document.getElementById('heroIndicators');
             
-            // Create image element with proper attributes
-            const img = document.createElement('img');
-            img.src = ad.image;
-            img.alt = ad.title;
-            img.loading = 'eager';
+            if (!slideshow || !indicators) return;
             
-            // Set up error handling
-            img.onerror = () => {
-                img.src = 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1920&h=600&fit=crop&auto=format&q=80';
-            };
+            // Clear any existing content
+            slideshow.innerHTML = '';
+            indicators.innerHTML = '';
             
-            slide.appendChild(img);
-            slide.onclick = () => window.open(ad.link, '_blank');
-            slideshow.appendChild(slide);
+            CONFIG.HERO_IMAGES.forEach((ad, index) => {
+                // Create slide
+                const slide = document.createElement('div');
+                slide.className = `hero-slide ${index === 0 ? 'active' : ''}`;
+                
+                // Create image element with proper attributes
+                const img = document.createElement('img');
+                img.src = ad.image;
+                img.alt = ad.title;
+                img.loading = 'eager';
+                img.onerror = () => {
+                    img.src = 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1920&h=600&fit=crop&auto=format&q=80';
+                };
+                
+                slide.appendChild(img);
+                slide.onclick = () => window.open(ad.link, '_blank');
+                slideshow.appendChild(slide);
+                
+                // Create indicator
+                const indicator = document.createElement('div');
+                indicator.className = `hero-indicator ${index === 0 ? 'active' : ''}`;
+                indicator.onclick = () => changeHeroSlide(index);
+                indicators.appendChild(indicator);
+            });
             
-            // Create indicator
-            const indicator = document.createElement('div');
-            indicator.className = `hero-indicator ${index === 0 ? 'active' : ''}`;
-            indicator.onclick = () => changeHeroSlide(index);
-            indicators.appendChild(indicator);
-        });
-        
-        // Update hero content for first ad
-        updateHeroContent(CONFIG.HERO_IMAGES[0]);
-        
-        // Auto slide every 8 seconds
-        state.heroInterval = setInterval(() => {
-            const slides = document.querySelectorAll('.hero-slide');
-            const indicators = document.querySelectorAll('.hero-indicator');
+            // Update hero content for first ad
+            updateHeroContent(CONFIG.HERO_IMAGES[0]);
             
-            slides[state.currentSlide].classList.remove('active');
-            indicators[state.currentSlide].classList.remove('active');
+            // Clear any existing interval
+            if (state.heroInterval) {
+                clearInterval(state.heroInterval);
+            }
             
-            state.currentSlide = (state.currentSlide + 1) % slides.length;
-            
-            slides[state.currentSlide].classList.add('active');
-            indicators[state.currentSlide].classList.add('active');
-            
-            updateHeroContent(CONFIG.HERO_IMAGES[state.currentSlide]);
-        }, 8000);
+            // Auto slide every 8 seconds
+            state.heroInterval = setInterval(() => {
+                const slides = document.querySelectorAll('.hero-slide');
+                if (slides.length === 0) return;
+                
+                const indicators = document.querySelectorAll('.hero-indicator');
+                
+                slides[state.currentSlide].classList.remove('active');
+                if (indicators[state.currentSlide]) {
+                    indicators[state.currentSlide].classList.remove('active');
+                }
+                
+                state.currentSlide = (state.currentSlide + 1) % slides.length;
+                
+                slides[state.currentSlide].classList.add('active');
+                if (indicators[state.currentSlide]) {
+                    indicators[state.currentSlide].classList.add('active');
+                }
+                
+                updateHeroContent(CONFIG.HERO_IMAGES[state.currentSlide]);
+            }, 8000);
+        } catch (error) {
+            handleError(error, 'Hero Slideshow');
+        }
     }
 
     function updateHeroContent(ad) {
-        const content = document.querySelector('.hero-content');
-        if (!content) return;
-        
-        content.innerHTML = `
-            <div class="hero-badge">${ad.badge}</div>
-            <h1>${ad.title}</h1>
-            <p>${ad.description}</p>
-            <a href="${ad.link}" class="hero-cta" target="_blank" rel="noopener">${ad.cta}</a>
-        `;
+        try {
+            const content = document.querySelector('.hero-content');
+            if (!content) return;
+            
+            content.innerHTML = `
+                <div class="hero-badge">${ad.badge}</div>
+                <h1>${ad.title}</h1>
+                <p>${ad.description}</p>
+                <a href="${ad.link}" class="hero-cta" target="_blank" rel="noopener">${ad.cta}</a>
+            `;
+        } catch (error) {
+            handleError(error, 'Update Hero Content');
+        }
     }
 
     function changeHeroSlide(index) {
-        clearInterval(state.heroInterval);
-        state.currentSlide = index;
-        
-        const slides = document.querySelectorAll('.hero-slide');
-        const indicators = document.querySelectorAll('.hero-indicator');
-        
-        slides.forEach(slide => slide.classList.remove('active'));
-        indicators.forEach(indicator => indicator.classList.remove('active'));
-        
-        slides[index].classList.add('active');
-        indicators[index].classList.add('active');
-        
-        updateHeroContent(CONFIG.HERO_IMAGES[index]);
-        
-        // Restart interval
-        state.heroInterval = setInterval(() => {
-            const nextIndex = (state.currentSlide + 1) % slides.length;
-            changeHeroSlide(nextIndex);
-        }, 8000);
+        try {
+            if (state.heroInterval) {
+                clearInterval(state.heroInterval);
+            }
+            
+            state.currentSlide = index;
+            
+            const slides = document.querySelectorAll('.hero-slide');
+            const indicators = document.querySelectorAll('.hero-indicator');
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            if (slides[index]) {
+                slides[index].classList.add('active');
+            }
+            if (indicators[index]) {
+                indicators[index].classList.add('active');
+            }
+            
+            if (CONFIG.HERO_IMAGES[index]) {
+                updateHeroContent(CONFIG.HERO_IMAGES[index]);
+            }
+            
+            // Restart interval
+            state.heroInterval = setInterval(() => {
+                const nextIndex = (state.currentSlide + 1) % slides.length;
+                changeHeroSlide(nextIndex);
+            }, 8000);
+        } catch (error) {
+            handleError(error, 'Change Hero Slide');
+        }
     }
 
     function prevHeroSlide() {
-        const slides = document.querySelectorAll('.hero-slide');
-        const newIndex = (state.currentSlide - 1 + slides.length) % slides.length;
-        changeHeroSlide(newIndex);
+        try {
+            const slides = document.querySelectorAll('.hero-slide');
+            const newIndex = (state.currentSlide - 1 + slides.length) % slides.length;
+            changeHeroSlide(newIndex);
+        } catch (error) {
+            handleError(error, 'Previous Hero Slide');
+        }
     }
 
     function nextHeroSlide() {
-        const slides = document.querySelectorAll('.hero-slide');
-        const newIndex = (state.currentSlide + 1) % slides.length;
-        changeHeroSlide(newIndex);
+        try {
+            const slides = document.querySelectorAll('.hero-slide');
+            const newIndex = (state.currentSlide + 1) % slides.length;
+            changeHeroSlide(newIndex);
+        } catch (error) {
+            handleError(error, 'Next Hero Slide');
+        }
     }
 
     // ==================== ENHANCED RESPONSIVE CHATBOT ====================
     function initChatbot() {
-        // Initialize with welcome message
-        const messages = document.getElementById('chatbotMessages');
-        if (messages && messages.children.length === 0) {
-            addBotMessage("Hello! 👋 I'm your SokoInn assistant. How can I help you today? You can ask me about buying products, becoming a seller, advertising, or any other questions about our platform.");
-        }
-        
-        loadChatHistory();
-        
-        // Initialize mobile fullscreen mode if on mobile
-        if (window.innerWidth <= 768) {
-            const chatbot = document.getElementById('chatbotContainer');
-            chatbot.classList.add('mobile-fullscreen');
+        try {
+            // Initialize with welcome message
+            const messages = document.getElementById('chatbotMessages');
+            if (messages && messages.children.length === 0) {
+                addBotMessage("Hello! 👋 I'm your SokoInn assistant. How can I help you today?");
+            }
+            
+            loadChatHistory();
+            
+            // Initialize mobile fullscreen mode if on mobile
+            if (window.innerWidth <= 768) {
+                const chatbot = document.getElementById('chatbotContainer');
+                if (chatbot) {
+                    chatbot.classList.add('mobile-fullscreen');
+                }
+            }
+        } catch (error) {
+            handleError(error, 'Chatbot Initialization');
         }
     }
 
     function toggleChatbot() {
-        const chatbot = document.getElementById('chatbotContainer');
-        const chatbotButton = document.querySelector('.chatbot-button');
-        const notification = document.getElementById('chatbotNotification');
-        
-        state.chatbotOpen = !state.chatbotOpen;
-        chatbot.classList.toggle('active', state.chatbotOpen);
-        
-        if (state.chatbotOpen) {
-            // On mobile, ensure chatbot is in fullscreen mode
-            if (window.innerWidth <= 768) {
-                chatbot.classList.add('mobile-fullscreen');
+        try {
+            const chatbot = document.getElementById('chatbotContainer');
+            const chatbotButton = document.querySelector('.chatbot-button');
+            const notification = document.getElementById('chatbotNotification');
+            
+            if (!chatbot) return;
+            
+            state.chatbotOpen = !state.chatbotOpen;
+            chatbot.classList.toggle('active', state.chatbotOpen);
+            
+            if (state.chatbotOpen) {
+                // On mobile, ensure chatbot is in fullscreen mode
+                if (window.innerWidth <= 768) {
+                    chatbot.classList.add('mobile-fullscreen');
+                }
+                
+                state.unreadMessages = 0;
+                if (notification) {
+                    notification.classList.add('hidden');
+                }
+                saveChatHistory();
+                
+                // Hide bottom nav when chatbot is open on mobile
+                if (window.innerWidth <= 768) {
+                    hideBottomNav();
+                }
+                
+                // Focus on input
+                setTimeout(() => {
+                    const input = document.getElementById('chatbotInput');
+                    if (input) input.focus();
+                    const messages = document.getElementById('chatbotMessages');
+                    if (messages) messages.scrollTop = messages.scrollHeight;
+                }, 100);
+            } else {
+                chatbot.classList.remove('mobile-fullscreen');
+                
+                // Show bottom nav when chatbot is closed on mobile
+                if (window.innerWidth <= 768) {
+                    showBottomNav();
+                }
             }
             
-            state.unreadMessages = 0;
-            notification.classList.add('hidden');
-            saveChatHistory();
-            
-            // Hide bottom nav when chatbot is open on mobile
-            if (window.innerWidth <= 768) {
-                hideBottomNav();
+            // Add animation to button
+            if (state.chatbotOpen && chatbotButton) {
+                chatbotButton.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    if (chatbotButton) chatbotButton.style.transform = '';
+                }, 300);
             }
-            
-            // Focus on input
-            setTimeout(() => {
-                document.getElementById('chatbotInput').focus();
-                const messages = document.getElementById('chatbotMessages');
-                messages.scrollTop = messages.scrollHeight;
-            }, 100);
-        } else {
-            chatbot.classList.remove('mobile-fullscreen');
-            
-            // Show bottom nav when chatbot is closed on mobile
-            if (window.innerWidth <= 768) {
-                showBottomNav();
-            }
-        }
-        
-        // Add animation to button
-        if (state.chatbotOpen) {
-            chatbotButton.style.transform = 'scale(1.1)';
-            setTimeout(() => {
-                chatbotButton.style.transform = '';
-            }, 300);
+        } catch (error) {
+            handleError(error, 'Toggle Chatbot');
         }
     }
 
     function addBotMessage(text) {
-        const messages = document.getElementById('chatbotMessages');
-        const messageDiv = document.createElement('div');
-        messageDiv.className = 'chatbot-message bot';
-        
-        // Preserve line breaks in bot messages
-        const formattedText = text.replace(/\n/g, '<br>');
-        messageDiv.innerHTML = formattedText;
-        
-        messages.appendChild(messageDiv);
-        
-        messages.scrollTop = messages.scrollHeight;
-        saveChatHistory();
+        try {
+            const messages = document.getElementById('chatbotMessages');
+            if (!messages) return;
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chatbot-message bot';
+            
+            // Preserve line breaks in bot messages
+            const formattedText = text.replace(/\n/g, '<br>');
+            messageDiv.innerHTML = formattedText;
+            
+            messages.appendChild(messageDiv);
+            
+            messages.scrollTop = messages.scrollHeight;
+            saveChatHistory();
+        } catch (error) {
+            handleError(error, 'Add Bot Message');
+        }
     }
 
     function addUserMessage(text) {
-        const messages = document.getElementById('chatbotMessages');
-        const messageDiv = document.createElement('div');
-        messageDiv.className = 'chatbot-message user';
-        messageDiv.textContent = text;
-        messages.appendChild(messageDiv);
-        
-        messages.scrollTop = messages.scrollHeight;
-        saveChatHistory();
+        try {
+            const messages = document.getElementById('chatbotMessages');
+            if (!messages) return;
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chatbot-message user';
+            messageDiv.textContent = text;
+            messages.appendChild(messageDiv);
+            
+            messages.scrollTop = messages.scrollHeight;
+            saveChatHistory();
+        } catch (error) {
+            handleError(error, 'Add User Message');
+        }
     }
 
     function showTypingIndicator() {
         if (state.isTyping) return;
         
-        state.isTyping = true;
-        const messages = document.getElementById('chatbotMessages');
-        const typingDiv = document.createElement('div');
-        typingDiv.className = 'typing-indicator';
-        typingDiv.id = 'typingIndicator';
-        typingDiv.innerHTML = '<span></span><span></span><span></span>';
-        messages.appendChild(typingDiv);
-        messages.scrollTop = messages.scrollHeight;
+        try {
+            state.isTyping = true;
+            const messages = document.getElementById('chatbotMessages');
+            if (!messages) return;
+            
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'typing-indicator';
+            typingDiv.id = 'typingIndicator';
+            typingDiv.innerHTML = '<span></span><span></span><span></span>';
+            messages.appendChild(typingDiv);
+            messages.scrollTop = messages.scrollHeight;
+        } catch (error) {
+            handleError(error, 'Show Typing Indicator');
+        }
     }
 
     function hideTypingIndicator() {
         state.isTyping = false;
-        const typingIndicator = document.getElementById('typingIndicator');
-        if (typingIndicator) {
-            typingIndicator.remove();
+        try {
+            const typingIndicator = document.getElementById('typingIndicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        } catch (error) {
+            handleError(error, 'Hide Typing Indicator');
         }
     }
 
@@ -3004,88 +3317,89 @@
     }
 
     function sendChatbotMessage() {
-        const input = document.getElementById('chatbotInput');
-        const message = input.value.trim();
-        
-        if (!message) return;
-        
-        addUserMessage(message);
-        input.value = '';
-        
-        showTypingIndicator();
-        
-        setTimeout(() => {
-            hideTypingIndicator();
-            processUserMessage(message);
-        }, 1000 + Math.random() * 1000);
+        try {
+            const input = document.getElementById('chatbotInput');
+            if (!input) return;
+            
+            const message = input.value.trim();
+            if (!message) return;
+            
+            addUserMessage(message);
+            input.value = '';
+            
+            showTypingIndicator();
+            
+            setTimeout(() => {
+                hideTypingIndicator();
+                processUserMessage(message);
+            }, 1000 + Math.random() * 1000);
+        } catch (error) {
+            handleError(error, 'Send Chatbot Message');
+        }
     }
 
     function sendQuickMessage(message) {
-        const input = document.getElementById('chatbotInput');
-        input.value = message;
-        sendChatbotMessage();
+        try {
+            const input = document.getElementById('chatbotInput');
+            if (!input) return;
+            
+            input.value = message;
+            sendChatbotMessage();
+        } catch (error) {
+            handleError(error, 'Send Quick Message');
+        }
     }
 
     function processUserMessage(message) {
-        const lowerMessage = message.toLowerCase();
-        
-        const responses = {
-            'hello': "Hello! Welcome to SokoInn. How can I assist you today?",
-            'hi': "Hi there! 👋 I'm here to help you with anything about SokoInn.",
-            'help': "I can help you with:<br><br>1. 📦 Buying products<br>2. 🛍️ Becoming a seller<br>3. 📢 Advertising<br>4. 📞 Contacting support<br>5. ❓ General inquiries<br><br>What would you like to know?",
-            'buy': "To buy products:<br><br>1. Browse products on the homepage<br>2. Click 'View' on any product<br>3. Use the 'Contact Seller' button<br>4. Arrange payment and delivery directly with the seller<br><br>Need help with a specific purchase?",
-            'seller': "To become a seller:<br><br>1. Contact our admin directly at +254 784 599 322<br>2. We'll guide you through the verification process<br>3. Once verified, you can list your products<br><br>Want to start the registration process?",
-            'ad': "For advertising opportunities:<br><br>📢 Hero section ads (high visibility)<br>⭐ Featured product listings<br>🏷️ Category sponsorships<br><br>Contact +254 784 599 322 for rates and availability.",
-            'support': "Need support? Contact our admin at +254 784 599 322 via WhatsApp for immediate assistance.",
-            'price': "Advertising prices vary by placement:<br><br>• Hero section: Contact for pricing<br>• Featured listings: Contact for pricing<br>• Category sponsorship: Contact for pricing<br><br>All prices are competitive and based on duration.",
-            'contact': "You can contact us:<br><br>• WhatsApp: +254 784 599 322<br>• Email: info@sokoinn.com<br>• Website: www.sokoinn.com",
-            'thank': "You're welcome! 😊 Let me know if you need anything else.",
-            'bye': "Goodbye! Feel free to come back anytime you need help.",
-            'how': "I can help you with:<br><br>• How to buy products<br>• How to become a seller<br>• How to advertise<br>• How to contact sellers<br>• How to get support<br><br>Which one are you interested in?",
-            'what': "SokoInn is a trusted marketplace connecting buyers with verified sellers across Kenya. We ensure safe transactions and quality products.",
-            'shipping': "Shipping arrangements are made directly between buyers and sellers. Most sellers offer delivery options within their location.",
-            'payment': "Payment methods vary by seller. Common options include M-Pesa, bank transfer, and cash on delivery. Always verify with the seller before paying.",
-            'safe': "SokoInn verifies all sellers to ensure safety. However, always:<br><br>1. Verify seller details<br>2. Use secure payment methods<br>3. Meet in public places for transactions<br>4. Report any issues to us immediately"
-        };
-        
-        let response = null;
-        for (const [keyword, reply] of Object.entries(responses)) {
-            if (lowerMessage.includes(keyword)) {
-                response = reply;
-                break;
-            }
-        }
-        
-        if (!response) {
-            response = `I'm not sure about that. For specific inquiries, please contact our support team directly at +254 784 599 322.`;
+        try {
+            const lowerMessage = message.toLowerCase();
             
-            // Add quick action button
-            setTimeout(() => {
-                const quickActions = document.getElementById('quickActions');
-                const adminBtn = document.createElement('button');
-                adminBtn.className = 'chatbot-quick-btn';
-                adminBtn.innerHTML = '<i class="fas fa-headset"></i> Contact Support';
-                adminBtn.onclick = () => {
-                    window.open(`https://wa.me/${CONFIG.ADMIN_WHATSAPP}?text=Hi,%20I%20need%20help%20with:%20${encodeURIComponent(message)}`, '_blank');
-                    toggleChatbot();
-                };
-                quickActions.appendChild(adminBtn);
-            }, 500);
-        }
-        
-        addBotMessage(response);
-        
-        if (!state.chatbotOpen) {
-            state.unreadMessages++;
-            const notification = document.getElementById('chatbotNotification');
-            notification.textContent = state.unreadMessages > 9 ? '9+' : state.unreadMessages;
-            notification.classList.remove('hidden');
+            const responses = {
+                'hello': "Hello! Welcome to SokoInn. How can I assist you today?",
+                'hi': "Hi there! 👋 I'm here to help you with anything about SokoInn.",
+                'help': "I can help you with:<br><br>1. 📦 Buying products<br>2. 🛍️ Becoming a seller<br>3. 📢 Advertising<br>4. 📞 Contacting support<br>5. ❓ General inquiries<br><br>What would you like to know?",
+                'buy': "To buy products:<br><br>1. Browse products on the homepage<br>2. Click 'View' on any product<br>3. Use the 'Contact Seller' button<br>4. Arrange payment and delivery directly with the seller<br><br>Need help with a specific purchase?",
+                'seller': "To become a seller:<br><br>1. Contact our admin directly at +254 784 599 322<br>2. We'll guide you through the verification process<br>3. Once verified, you can list your products<br><br>Want to start the registration process?",
+                'ad': "For advertising opportunities:<br><br>📢 Hero section ads (high visibility)<br>⭐ Featured product listings<br>🏷️ Category sponsorships<br><br>Contact +254 784 599 322 for rates and availability.",
+                'support': "Need support? Contact our admin at +254 784 599 322 via WhatsApp for immediate assistance.",
+                'price': "Advertising prices vary by placement:<br><br>• Hero section: Contact for pricing<br>• Featured listings: Contact for pricing<br>• Category sponsorship: Contact for pricing<br><br>All prices are competitive and based on duration.",
+                'contact': "You can contact us:<br><br>• WhatsApp: +254 784 599 322<br>• Email: info@sokoinn.com<br>• Website: www.sokoinn.com",
+                'thank': "You're welcome! 😊 Let me know if you need anything else.",
+                'bye': "Goodbye! Feel free to come back anytime you need help."
+            };
+            
+            let response = null;
+            for (const [keyword, reply] of Object.entries(responses)) {
+                if (lowerMessage.includes(keyword)) {
+                    response = reply;
+                    break;
+                }
+            }
+            
+            if (!response) {
+                response = `I'm not sure about that. For specific inquiries, please contact our support team directly at +254 784 599 322.`;
+            }
+            
+            addBotMessage(response);
+            
+            if (!state.chatbotOpen) {
+                state.unreadMessages++;
+                const notification = document.getElementById('chatbotNotification');
+                if (notification) {
+                    notification.textContent = state.unreadMessages > 9 ? '9+' : state.unreadMessages;
+                    notification.classList.remove('hidden');
+                }
+            }
+        } catch (error) {
+            handleError(error, 'Process User Message');
         }
     }
 
     function saveChatHistory() {
-        const messages = document.getElementById('chatbotMessages');
         try {
+            const messages = document.getElementById('chatbotMessages');
+            if (!messages) return;
+            
             localStorage.setItem('sokoinn_chat_history', messages.innerHTML);
         } catch (e) {
             console.warn('Could not save chat history');
@@ -3096,7 +3410,10 @@
         try {
             const saved = localStorage.getItem('sokoinn_chat_history');
             if (saved) {
-                document.getElementById('chatbotMessages').innerHTML = saved;
+                const messages = document.getElementById('chatbotMessages');
+                if (messages) {
+                    messages.innerHTML = saved;
+                }
             }
         } catch (e) {
             console.warn('Could not load chat history');
@@ -3118,201 +3435,232 @@
 
     // ==================== SCROLL AND NAVIGATION ====================
     function initScrollDetection() {
-        const scrollTopBtn = document.getElementById('scrollTop');
-        
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        try {
+            const scrollTopBtn = document.getElementById('scrollTop');
             
-            // Show/hide scroll to top button
-            if (scrollTop > 300) {
+            let scrollTimeout;
+            window.addEventListener('scroll', () => {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    
+                    // Show/hide scroll to top button
+                    if (scrollTop > 300) {
+                        if (scrollTopBtn) scrollTopBtn.classList.add('visible');
+                    } else {
+                        if (scrollTopBtn) scrollTopBtn.classList.remove('visible');
+                    }
+                    
+                    // Detect scroll direction for bottom nav
+                    if (scrollTop > state.lastScrollTop) {
+                        state.scrollDirection = 'down';
+                        if (scrollTop > 100 && !state.chatbotOpen) {
+                            hideBottomNav();
+                        }
+                    } else {
+                        state.scrollDirection = 'up';
+                        if (scrollTop < state.lastScrollTop - 10) {
+                            showBottomNav();
+                        }
+                    }
+                    
+                    state.lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+                    hideSearchSuggestions();
+                }, 50);
+            });
+            
+            if (window.scrollY > 300 && scrollTopBtn) {
                 scrollTopBtn.classList.add('visible');
-            } else {
-                scrollTopBtn.classList.remove('visible');
             }
-            
-            // Detect scroll direction for bottom nav
-            if (scrollTop > state.lastScrollTop) {
-                // Scrolling down
-                state.scrollDirection = 'down';
-                if (scrollTop > 100 && !state.chatbotOpen) {
-                    hideBottomNav();
-                }
-            } else {
-                // Scrolling up
-                state.scrollDirection = 'up';
-                if (scrollTop < state.lastScrollTop - 10) {
-                    showBottomNav();
-                }
-            }
-            
-            // Update last scroll position
-            state.lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-            
-            hideSearchSuggestions();
-        });
-        
-        if (window.scrollY > 300) {
-            scrollTopBtn.classList.add('visible');
+        } catch (error) {
+            handleError(error, 'Scroll Detection');
         }
     }
 
     function initBottomNav() {
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        document.querySelectorAll('.nav-item').forEach(item => {
-            const href = item.getAttribute('href');
-            if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
-                item.classList.add('active');
-            } else {
-                item.classList.remove('active');
-            }
-        });
-        
-        // Ensure bottom nav is visible on initial load
-        showBottomNav();
+        try {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.nav-item').forEach(item => {
+                const href = item.getAttribute('href');
+                if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+            
+            showBottomNav();
+        } catch (error) {
+            handleError(error, 'Bottom Navigation');
+        }
     }
 
     function showBottomNav() {
         if (state.chatbotOpen && window.innerWidth <= 768) return;
         
-        const bottomNav = document.getElementById('bottomNav');
-        if (bottomNav) {
-            bottomNav.classList.remove('hidden');
-            bottomNav.classList.add('visible');
-            state.isBottomNavVisible = true;
-            
-            // Adjust body padding
-            document.body.style.paddingBottom = '80px';
+        try {
+            const bottomNav = document.getElementById('bottomNav');
+            if (bottomNav) {
+                bottomNav.classList.remove('hidden');
+                bottomNav.classList.add('visible');
+                state.isBottomNavVisible = true;
+                
+                document.body.style.paddingBottom = '80px';
+            }
+        } catch (error) {
+            handleError(error, 'Show Bottom Nav');
         }
     }
 
     function hideBottomNav() {
-        const bottomNav = document.getElementById('bottomNav');
-        if (bottomNav) {
-            bottomNav.classList.add('hidden');
-            bottomNav.classList.remove('visible');
-            state.isBottomNavVisible = false;
-            
-            // Adjust body padding
-            document.body.style.paddingBottom = '20px';
-        }
-    }
-
-    function toggleBottomNav() {
-        if (state.isBottomNavVisible) {
-            hideBottomNav();
-        } else {
-            showBottomNav();
+        try {
+            const bottomNav = document.getElementById('bottomNav');
+            if (bottomNav) {
+                bottomNav.classList.add('hidden');
+                bottomNav.classList.remove('visible');
+                state.isBottomNavVisible = false;
+                
+                document.body.style.paddingBottom = '20px';
+            }
+        } catch (error) {
+            handleError(error, 'Hide Bottom Nav');
         }
     }
 
     function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-        
-        // Show bottom nav when scrolling to top
-        setTimeout(showBottomNav, 300);
+        try {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            
+            setTimeout(showBottomNav, 300);
+        } catch (error) {
+            handleError(error, 'Scroll to Top');
+        }
     }
 
     // ==================== LOCATION FILTERING ====================
     function initLocationFiltering() {
-        const savedLocation = localStorage.getItem('sokoinn_selected_location');
-        if (savedLocation) {
-            state.selectedLocation = savedLocation;
-            const dropdown = document.getElementById('locationDropdown');
-            if (dropdown) {
-                dropdown.value = savedLocation;
+        try {
+            const savedLocation = localStorage.getItem('sokoinn_selected_location');
+            if (savedLocation) {
+                state.selectedLocation = savedLocation;
+                const dropdown = document.getElementById('locationDropdown');
+                if (dropdown) {
+                    dropdown.value = savedLocation;
+                }
+                updateLocationFilterButtons(savedLocation);
+                updateLocationDisplay(savedLocation);
             }
-            updateLocationFilterButtons(savedLocation);
-            updateLocationDisplay(savedLocation);
+        } catch (error) {
+            handleError(error, 'Location Filtering');
         }
     }
 
     function handleLocationChange() {
-        const dropdown = document.getElementById('locationDropdown');
-        const selectedCity = dropdown.value;
-        
-        localStorage.setItem('sokoinn_selected_location', selectedCity);
-        state.selectedLocation = selectedCity;
-        
-        updateLocationFilterButtons(selectedCity);
-        updateLocationDisplay(selectedCity);
-        applyLocationFilter();
-        
-        const message = selectedCity ? `Showing products from ${selectedCity}` : 'Showing products from all Kenya';
-        showToast(message, 'success');
+        try {
+            const dropdown = document.getElementById('locationDropdown');
+            if (!dropdown) return;
+            
+            const selectedCity = dropdown.value;
+            
+            localStorage.setItem('sokoinn_selected_location', selectedCity);
+            state.selectedLocation = selectedCity;
+            
+            updateLocationFilterButtons(selectedCity);
+            updateLocationDisplay(selectedCity);
+            applyLocationFilter();
+            
+            const message = selectedCity ? `Showing products from ${selectedCity}` : 'Showing products from all Kenya';
+            showToast(message, 'success');
+        } catch (error) {
+            handleError(error, 'Handle Location Change');
+        }
     }
 
     function selectLocationFilter(city) {
-        const dropdown = document.getElementById('locationDropdown');
-        dropdown.value = city;
-        
-        localStorage.setItem('sokoinn_selected_location', city);
-        state.selectedLocation = city;
-        
-        updateLocationFilterButtons(city);
-        updateLocationDisplay(city);
-        applyLocationFilter();
+        try {
+            const dropdown = document.getElementById('locationDropdown');
+            if (dropdown) {
+                dropdown.value = city;
+            }
+            
+            localStorage.setItem('sokoinn_selected_location', city);
+            state.selectedLocation = city;
+            
+            updateLocationFilterButtons(city);
+            updateLocationDisplay(city);
+            applyLocationFilter();
+        } catch (error) {
+            handleError(error, 'Select Location Filter');
+        }
     }
 
     function updateLocationFilterButtons(selectedCity) {
-        const buttons = document.querySelectorAll('.location-filter-btn');
-        buttons.forEach(button => {
-            const city = button.getAttribute('onclick').match(/'([^']+)'/)?.[1] || '';
-            if (city === selectedCity || (city === '' && selectedCity === '')) {
-                button.classList.add('active');
-            } else {
-                button.classList.remove('active');
-            }
-        });
+        try {
+            const buttons = document.querySelectorAll('.location-filter-btn');
+            buttons.forEach(button => {
+                const onclick = button.getAttribute('onclick');
+                if (!onclick) return;
+                
+                const match = onclick.match(/'([^']+)'/);
+                const city = match ? match[1] : '';
+                
+                if (city === selectedCity || (city === '' && selectedCity === '')) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+        } catch (error) {
+            handleError(error, 'Update Location Filter Buttons');
+        }
     }
 
     function updateLocationDisplay(city) {
-        const locationDisplay = document.getElementById('currentLocationText');
-        const sectionTitle = document.getElementById('sectionTitle');
-        
-        if (locationDisplay) {
-            locationDisplay.textContent = city || 'All Kenya';
-        }
-        
-        if (sectionTitle) {
-            if (state.searchQuery) {
-                sectionTitle.textContent = 'Search Results';
-            } else if (city) {
-                sectionTitle.textContent = `Products in ${city}`;
-            } else {
-                sectionTitle.textContent = 'Featured Products';
+        try {
+            const locationDisplay = document.getElementById('currentLocationText');
+            const sectionTitle = document.getElementById('sectionTitle');
+            
+            if (locationDisplay) {
+                locationDisplay.textContent = city || 'All Kenya';
             }
+            
+            if (sectionTitle) {
+                if (state.searchQuery) {
+                    sectionTitle.textContent = 'Search Results';
+                } else if (city) {
+                    sectionTitle.textContent = `Products in ${city}`;
+                } else {
+                    sectionTitle.textContent = 'Featured Products';
+                }
+            }
+        } catch (error) {
+            handleError(error, 'Update Location Display');
         }
     }
 
     function applyLocationFilter() {
-        if (!state.selectedLocation) {
-            // Show all products
-            state.filteredProducts = [...state.allProducts];
-        } else {
-            // Filter by selected city
-            state.filteredProducts = state.allProducts.filter(product => {
-                const productLocation = product.sellerLocation?.toLowerCase() || '';
-                const selectedCity = state.selectedLocation.toLowerCase();
-                
-                // Check for location match
-                return productLocation.includes(selectedCity) || 
-                    selectedCity.includes(productLocation) ||
-                    productLocation.split(' ').some(word => selectedCity.includes(word)) ||
-                    selectedCity.split(' ').some(word => productLocation.includes(word));
-            });
+        try {
+            if (!state.selectedLocation) {
+                state.filteredProducts = [...state.allProducts];
+            } else {
+                state.filteredProducts = state.allProducts.filter(product => {
+                    const productLocation = (product.sellerLocation || '').toLowerCase();
+                    const selectedCity = state.selectedLocation.toLowerCase();
+                    
+                    return productLocation.includes(selectedCity) || 
+                        selectedCity.includes(productLocation);
+                });
+            }
+            
+            state.currentPage = 1;
+            renderProducts();
+            updateLoadMoreButton();
+        } catch (error) {
+            handleError(error, 'Apply Location Filter');
         }
-        
-        // Reset pagination
-        state.currentPage = 1;
-        
-        // Render products
-        renderProducts();
-        
-        // Update load more button
-        updateLoadMoreButton();
     }
 
     // ==================== PRODUCT LOADING AND MANAGEMENT ====================
@@ -3323,6 +3671,13 @@
         showLoading(true);
         
         try {
+            // Show loading protection
+            const loadingProtection = document.getElementById('loadingProtection');
+            if (loadingProtection) {
+                loadingProtection.classList.add('active');
+                loadingProtection.textContent = 'Loading products...';
+            }
+            
             const response = await fetch(
                 `${CONFIG.BACKEND_URL}?action=getProducts&limit=${CONFIG.ITEMS_PER_PAGE}&page=${state.currentPage}`,
                 { 
@@ -3341,7 +3696,6 @@
             const data = await response.json();
             
             if (data.success && data.data && Array.isArray(data.data) && data.data.length > 0) {
-                // Process backend products
                 const newProducts = data.data.map(product => ({
                     listingId: product.id || product.listingId || `PROD${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
                     title: product.title || 'Untitled Product',
@@ -3364,7 +3718,6 @@
                     condition: product.condition || 'New'
                 }));
                 
-                // Add to products array
                 if (state.currentPage === 1) {
                     state.products = newProducts;
                     state.allProducts = newProducts;
@@ -3375,7 +3728,6 @@
                 
                 state.hasMore = newProducts.length === CONFIG.ITEMS_PER_PAGE;
                 
-                // Apply location filter if set
                 if (state.selectedLocation) {
                     applyLocationFilter();
                 } else {
@@ -3389,176 +3741,80 @@
                     showToast('Products loaded successfully!', 'success');
                 }
                 
+                // Reset retry count on success
+                state.retryCount = 0;
+                hideEmergencyReload();
+                
             } else {
-                // Fallback to sample products if backend returns no data
                 console.warn('Backend returned no products, using sample data');
                 loadSampleProducts();
             }
             
         } catch (error) {
-            console.error('Error loading products from backend:', error);
-            showToast('Failed to load products. Using sample data.', 'error');
+            handleError(error, 'Load Products from Backend');
             loadSampleProducts();
+            
         } finally {
             state.isLoading = false;
             showLoading(false);
+            
+            // Hide loading protection
+            const loadingProtection = document.getElementById('loadingProtection');
+            if (loadingProtection) {
+                loadingProtection.classList.remove('active');
+            }
         }
     }
 
     function loadSampleProducts() {
-        const sampleProducts = [
-            {
-                listingId: 'PROD001',
-                title: 'Genuine Leather Handbag',
-                price: 4500,
-                sellerName: 'Luxury Bags Kenya',
-                sellerVerification: 'verified',
-                sellerRating: 4.8,
-                sellerTotalReviews: 24,
-                sellerLocation: 'Nairobi',
-                sellerPhone: '254712345678',
-                sellerWhatsapp: '254712345678',
-                images: [
-                    'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500&q=80',
-                    'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=500&q=80'
-                ],
-                rating: 4.5,
-                reviewCount: 24,
-                category: 'Fashion',
-                description: 'Premium genuine leather handbag with multiple compartments.',
-                stock: 5,
-                condition: 'New'
-            },
-            {
-                listingId: 'PROD002',
-                title: 'Wireless Bluetooth Headphones',
-                price: 2800,
-                sellerName: 'Tech Gadgets KE',
-                sellerVerification: 'verified',
-                sellerRating: 4.2,
-                sellerTotalReviews: 36,
-                sellerLocation: 'Mombasa',
-                sellerPhone: '254723456789',
-                sellerWhatsapp: '254723456789',
-                images: [
-                    'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80',
-                    'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=500&q=80'
-                ],
-                rating: 4.2,
-                reviewCount: 36,
-                category: 'Electronics',
-                description: 'High-quality wireless headphones with active noise cancellation.',
-                stock: 8,
-                condition: 'New'
-            },
-            {
-                listingId: 'PROD003',
-                title: 'Organic Coffee Beans',
-                price: 1200,
-                sellerName: 'Kenya Coffee Co.',
-                sellerVerification: 'verified',
-                sellerRating: 4.7,
-                sellerTotalReviews: 42,
-                sellerLocation: 'Kisumu',
-                sellerPhone: '254734567890',
-                sellerWhatsapp: '254734567890',
-                images: [
-                    'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500&q=80',
-                    'https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?w=500&q=80'
-                ],
-                rating: 4.7,
-                reviewCount: 42,
-                category: 'Food & Beverages',
-                description: 'Fresh organic coffee beans from Kenyan highlands.',
-                stock: 15,
-                condition: 'New'
-            },
-            {
-                listingId: 'PROD004',
-                title: "Men's Running Shoes",
-                price: 3500,
-                sellerName: 'Sports Gear Kenya',
-                sellerVerification: 'verified',
-                sellerRating: 4.4,
-                sellerTotalReviews: 31,
-                sellerLocation: 'Nakuru',
-                sellerPhone: '254745678901',
-                sellerWhatsapp: '254745678901',
-                images: [
-                    'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80',
-                    'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500&q=80'
-                ],
-                rating: 4.4,
-                reviewCount: 31,
-                category: 'Sports & Fitness',
-                description: 'Comfortable running shoes for men with excellent cushioning.',
-                stock: 3,
-                condition: 'New'
-            },
-            {
-                listingId: 'PROD005',
-                title: 'Smart Watch - Fitness Tracker',
-                price: 3200,
-                sellerName: 'Gadget World',
-                sellerVerification: 'verified',
-                sellerRating: 4.1,
-                sellerTotalReviews: 18,
-                sellerLocation: 'Eldoret',
-                sellerPhone: '254756789012',
-                sellerWhatsapp: '254756789012',
-                images: [
-                    'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80',
-                    'https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&q=80'
-                ],
-                rating: 4.1,
-                reviewCount: 18,
-                category: 'Electronics',
-                description: 'Smart watch with heart rate monitor and sleep tracking.',
-                stock: 6,
-                condition: 'New'
-            },
-            {
-                listingId: 'PROD006',
-                title: 'Kitchen Blender - 1000W Power',
-                price: 2200,
-                sellerName: 'Home Appliances Ltd',
-                sellerVerification: 'verified',
-                sellerRating: 4.6,
-                sellerTotalReviews: 29,
-                sellerLocation: 'Thika',
-                sellerPhone: '254767890123',
-                sellerWhatsapp: '254767890123',
-                images: [
-                    'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=500&q=80'
-                ],
-                rating: 4.6,
-                reviewCount: 29,
-                category: 'Home & Kitchen',
-                description: 'Powerful kitchen blender with 1000W motor.',
-                stock: 10,
-                condition: 'New'
+        try {
+            const sampleProducts = [
+                {
+                    listingId: 'PROD001',
+                    title: 'Genuine Leather Handbag',
+                    price: 4500,
+                    sellerName: 'Luxury Bags Kenya',
+                    sellerVerification: 'verified',
+                    sellerRating: 4.8,
+                    sellerTotalReviews: 24,
+                    sellerLocation: 'Nairobi',
+                    sellerPhone: '254712345678',
+                    sellerWhatsapp: '254712345678',
+                    images: [
+                        'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500&q=80',
+                        'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=500&q=80'
+                    ],
+                    rating: 4.5,
+                    reviewCount: 24,
+                    category: 'Fashion',
+                    description: 'Premium genuine leather handbag with multiple compartments.',
+                    stock: 5,
+                    condition: 'New'
+                }
+            ];
+            
+            if (state.currentPage === 1) {
+                state.products = sampleProducts;
+                state.allProducts = sampleProducts;
+            } else {
+                state.products = [...state.products, ...sampleProducts];
+                state.allProducts = [...state.allProducts, ...sampleProducts];
             }
-        ];
-        
-        if (state.currentPage === 1) {
-            state.products = sampleProducts;
-            state.allProducts = sampleProducts;
-        } else {
-            state.products = [...state.products, ...sampleProducts];
-            state.allProducts = [...state.allProducts, ...sampleProducts];
+            
+            state.hasMore = false;
+            
+            if (state.selectedLocation) {
+                applyLocationFilter();
+            } else {
+                state.filteredProducts = [...state.allProducts];
+                renderProducts();
+            }
+            
+            updateLoadMoreButton();
+            
+        } catch (error) {
+            handleError(error, 'Load Sample Products');
         }
-        
-        state.hasMore = false;
-        
-        // Apply location filter if set
-        if (state.selectedLocation) {
-            applyLocationFilter();
-        } else {
-            state.filteredProducts = [...state.allProducts];
-            renderProducts();
-        }
-        
-        updateLoadMoreButton();
     }
 
     function loadMoreProducts() {
@@ -3571,199 +3827,225 @@
     function showAllProducts(event) {
         if (event) event.preventDefault();
         
-        // Reset filters
-        state.selectedLocation = '';
-        state.searchQuery = '';
-        
-        // Update UI
-        const dropdown = document.getElementById('locationDropdown');
-        if (dropdown) dropdown.value = '';
-        
-        updateLocationFilterButtons('');
-        updateLocationDisplay('');
-        
-        // Reset search input
-        const searchInput = document.getElementById('searchInput');
-        if (searchInput) searchInput.value = '';
-        
-        // Show all products
-        state.filteredProducts = [...state.allProducts];
-        state.currentPage = 1;
-        
-        renderProducts();
-        updateLoadMoreButton();
-        
-        showToast('Showing all products from Kenya', 'success');
+        try {
+            state.selectedLocation = '';
+            state.searchQuery = '';
+            
+            const dropdown = document.getElementById('locationDropdown');
+            if (dropdown) dropdown.value = '';
+            
+            updateLocationFilterButtons('');
+            updateLocationDisplay('');
+            
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) searchInput.value = '';
+            
+            state.filteredProducts = [...state.allProducts];
+            state.currentPage = 1;
+            
+            renderProducts();
+            updateLoadMoreButton();
+            
+            showToast('Showing all products from Kenya', 'success');
+        } catch (error) {
+            handleError(error, 'Show All Products');
+        }
     }
 
     // ==================== PRODUCT RENDERING ====================
     function renderProducts() {
-        const productGrid = document.getElementById('productGrid');
-        const productsToShow = state.filteredProducts.slice(0, state.currentPage * CONFIG.ITEMS_PER_PAGE);
-        
-        if (productsToShow.length === 0) {
-            let message = '';
-            if (state.searchQuery) {
-                message = `No products found for "${state.searchQuery}"`;
-            } else if (state.selectedLocation) {
-                message = `No products found in ${state.selectedLocation}. Try selecting "All Kenya"`;
-            } else {
-                message = 'No products available. Check back soon!';
+        try {
+            const productGrid = document.getElementById('productGrid');
+            if (!productGrid) return;
+            
+            const productsToShow = state.filteredProducts.slice(0, state.currentPage * CONFIG.ITEMS_PER_PAGE);
+            
+            if (productsToShow.length === 0) {
+                let message = '';
+                if (state.searchQuery) {
+                    message = `No products found for "${state.searchQuery}"`;
+                } else if (state.selectedLocation) {
+                    message = `No products found in ${state.selectedLocation}. Try selecting "All Kenya"`;
+                } else {
+                    message = 'No products available. Check back soon!';
+                }
+                
+                productGrid.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🔍</div>
+                        <h3 class="empty-state-title">No products found</h3>
+                        <p class="empty-state-message">${message}</p>
+                        ${state.selectedLocation ? `
+                        <button class="btn btn-primary mt-4" onclick="selectLocationFilter('')">
+                            Show All Kenya Products
+                        </button>
+                        ` : ''}
+                    </div>
+                `;
+                return;
             }
             
-            productGrid.innerHTML = `
-                <div class="empty-state" style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem;">
-                    <div class="empty-state-icon" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;">🔍</div>
-                    <h3 class="empty-state-title" style="font-size: 1.125rem; font-weight: 600; color: var(--gray-600); margin-bottom: 0.5rem;">No products found</h3>
-                    <p class="empty-state-message" style="color: var(--gray-500); font-size: 0.875rem; max-width: 300px; margin: 0 auto;">${message}</p>
-                    ${state.selectedLocation ? `
-                    <button class="btn btn-primary mt-4" onclick="selectLocationFilter('')" style="margin-top: 1.5rem;">
-                        Show All Kenya Products
-                    </button>
-                    ` : ''}
-                </div>
-            `;
-            return;
-        }
-        
-        productGrid.innerHTML = '';
-        
-        productsToShow.forEach(product => {
-            productGrid.innerHTML += createProductHTML(product);
-        });
-        
-        // Initialize image click events
-        setTimeout(() => {
-            document.querySelectorAll('.product-image').forEach((imageDiv, index) => {
-                const product = state.filteredProducts[index];
-                if (product) {
-                    imageDiv.onclick = (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        openImageViewer(product.images, 0);
-                    };
-                }
+            productGrid.innerHTML = '';
+            
+            productsToShow.forEach(product => {
+                productGrid.innerHTML += createProductHTML(product);
             });
-        }, 100);
+            
+            // Initialize image click events
+            setTimeout(() => {
+                document.querySelectorAll('.product-image').forEach((imageDiv, index) => {
+                    const product = state.filteredProducts[index];
+                    if (product) {
+                        imageDiv.onclick = (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            openImageViewer(product.images, 0);
+                        };
+                    }
+                });
+            }, 100);
+        } catch (error) {
+            handleError(error, 'Render Products');
+        }
     }
 
     function createProductHTML(product) {
-        const images = product.images || [CONFIG.DEFAULT_IMAGE];
-        const imageCount = images.length;
-        const firstImage = images[0];
-        
-        return `
-        <div class="product-card" data-id="${product.listingId}">
-            ${product.stock === 0 ? '<span class="product-badge">Sold Out</span>' : ''}
-            ${product.stock > 0 && product.stock <= 3 ? '<span class="product-badge">Low Stock</span>' : ''}
+        try {
+            const images = product.images || [CONFIG.DEFAULT_IMAGE];
+            const imageCount = images.length;
+            const firstImage = images[0];
             
-            <div class="product-image">
-                <div class="image-placeholder"></div>
-                <img src="${firstImage}" 
-                    alt="${product.title}"
-                    onerror="this.src='${CONFIG.DEFAULT_IMAGE}'; this.classList.add('loaded')"
-                    class="loaded">
-                ${imageCount > 1 ? `<div class="image-counter">+${imageCount - 1}</div>` : ''}
-            </div>
-            
-            <div class="product-content">
-                <h3 class="product-title" onclick="viewProduct('${product.listingId}')">${product.title}</h3>
-                <div class="product-price">KSh ${product.price.toLocaleString()}</div>
+            return `
+            <div class="product-card" data-id="${product.listingId}">
+                ${product.stock === 0 ? '<span class="product-badge">Sold Out</span>' : ''}
+                ${product.stock > 0 && product.stock <= 3 ? '<span class="product-badge">Low Stock</span>' : ''}
                 
-                <div class="product-seller">
-                    <span class="seller-location">📍 ${product.sellerLocation || 'Nairobi'}</span>
-                    ${product.sellerVerification === 'verified' ? '<span class="seller-verified">✓</span>' : ''}
+                <div class="product-image">
+                    <div class="image-placeholder"></div>
+                    <img src="${firstImage}" 
+                        alt="${product.title}"
+                        onerror="this.src='${CONFIG.DEFAULT_IMAGE}'; this.classList.add('loaded')"
+                        class="loaded">
+                    ${imageCount > 1 ? `<div class="image-counter">+${imageCount - 1}</div>` : ''}
                 </div>
                 
-                <div class="product-rating">
-                    <span style="color: #fbbf24;">${'★'.repeat(Math.floor(product.rating || 4))}${'☆'.repeat(5 - Math.floor(product.rating || 4))}</span>
-                    <span style="font-size: 0.75rem; color: var(--gray-500);">(${product.reviewCount || 0})</span>
-                </div>
-                
-                <div class="product-actions">
-                    <button class="btn btn-primary" onclick="viewProduct('${product.listingId}')">
-                        <i class="fas fa-eye"></i> View
-                    </button>
-                    <div class="contact-toggle">
-                        <button class="btn btn-secondary" onclick="toggleContactOptions(this, '${product.listingId}', event)">
-                            <i class="fas fa-phone-alt"></i> Contact
+                <div class="product-content">
+                    <h3 class="product-title" onclick="viewProduct('${product.listingId}')">${product.title}</h3>
+                    <div class="product-price">KSh ${product.price.toLocaleString()}</div>
+                    
+                    <div class="product-seller">
+                        <span class="seller-location">📍 ${product.sellerLocation || 'Nairobi'}</span>
+                        ${product.sellerVerification === 'verified' ? '<span class="seller-verified">✓</span>' : ''}
+                    </div>
+                    
+                    <div class="product-rating">
+                        <span style="color: #fbbf24;">${'★'.repeat(Math.floor(product.rating || 4))}${'☆'.repeat(5 - Math.floor(product.rating || 4))}</span>
+                        <span style="font-size: 0.75rem; color: var(--gray-500);">(${product.reviewCount || 0})</span>
+                    </div>
+                    
+                    <div class="product-actions">
+                        <button class="btn btn-primary" onclick="viewProduct('${product.listingId}')">
+                            <i class="fas fa-eye"></i> View
                         </button>
-                        <div class="contact-options">
-                            <button class="contact-option whatsapp-option" 
-                            onclick="contactSeller('${product.listingId}', 'whatsapp', event)">
-                                <i class="fab fa-whatsapp"></i> WhatsApp
+                        <div class="contact-toggle">
+                            <button class="btn btn-secondary" onclick="toggleContactOptions(this, '${product.listingId}', event)">
+                                <i class="fas fa-phone-alt"></i> Contact
                             </button>
-                            <button class="contact-option call-option" 
-                            onclick="contactSeller('${product.listingId}', 'call', event)">
-                                <i class="fas fa-phone"></i> Call
-                            </button>
+                            <div class="contact-options">
+                                <button class="contact-option whatsapp-option" 
+                                onclick="contactSeller('${product.listingId}', 'whatsapp', event)">
+                                    <i class="fab fa-whatsapp"></i> WhatsApp
+                                </button>
+                                <button class="contact-option call-option" 
+                                onclick="contactSeller('${product.listingId}', 'call', event)">
+                                    <i class="fas fa-phone"></i> Call
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        `;
+            `;
+        } catch (error) {
+            handleError(error, 'Create Product HTML');
+            return '<div class="product-card">Error loading product</div>';
+        }
     }
 
     // ==================== SEARCH FUNCTIONALITY ====================
     function handleSearchInput() {
-        const searchInput = document.getElementById('searchInput');
-        const query = searchInput.value.trim();
-        
-        // Clear previous timeout
-        if (state.searchTimeout) {
-            clearTimeout(state.searchTimeout);
+        try {
+            const searchInput = document.getElementById('searchInput');
+            if (!searchInput) return;
+            
+            const query = searchInput.value.trim();
+            
+            if (state.searchTimeout) {
+                clearTimeout(state.searchTimeout);
+            }
+            
+            if (query.length === 0) {
+                hideSearchSuggestions();
+                return;
+            }
+            
+            state.searchTimeout = setTimeout(() => {
+                showSearchSuggestions(query);
+            }, 300);
+        } catch (error) {
+            handleError(error, 'Handle Search Input');
         }
-        
-        if (query.length === 0) {
-            hideSearchSuggestions();
-            return;
-        }
-        
-        // Debounce search
-        state.searchTimeout = setTimeout(() => {
-            showSearchSuggestions(query);
-        }, 300);
     }
 
     function showSearchSuggestions(query) {
-        const suggestionsContainer = document.getElementById('searchSuggestions');
-        
-        if (!query || query.length < 2) {
-            suggestionsContainer.classList.remove('active');
-            return;
-        }
-        
-        const searchResults = searchProducts(query, 5);
-        
-        if (searchResults.length === 0) {
-            suggestionsContainer.innerHTML = `
-                <div class="no-suggestions">
-                    No products found for "${query}"
-                </div>
-            `;
-        } else {
-            suggestionsContainer.innerHTML = searchResults.map(product => `
-                <div class="suggestion-item" onclick="selectSearchSuggestion('${product.listingId}')">
-                    <img src="${product.images[0] || CONFIG.DEFAULT_IMAGE}" 
-                        alt="${product.title}"
-                        class="suggestion-image"
-                        onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
-                    <div class="suggestion-details">
-                        <div class="suggestion-title">${product.title}</div>
-                        <div class="suggestion-price">KSh ${product.price.toLocaleString()}</div>
-                        <div class="suggestion-location">📍 ${product.sellerLocation || 'Nairobi'}</div>
+        try {
+            const suggestionsContainer = document.getElementById('searchSuggestions');
+            if (!suggestionsContainer) return;
+            
+            if (!query || query.length < 2) {
+                suggestionsContainer.classList.remove('active');
+                return;
+            }
+            
+            const searchResults = searchProducts(query, 5);
+            
+            if (searchResults.length === 0) {
+                suggestionsContainer.innerHTML = `
+                    <div class="no-suggestions">
+                        No products found for "${query}"
                     </div>
-                </div>
-            `).join('');
+                `;
+            } else {
+                suggestionsContainer.innerHTML = searchResults.map(product => `
+                    <div class="suggestion-item" onclick="selectSearchSuggestion('${product.listingId}')">
+                        <img src="${product.images[0] || CONFIG.DEFAULT_IMAGE}" 
+                            alt="${product.title}"
+                            class="suggestion-image"
+                            onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
+                        <div class="suggestion-details">
+                            <div class="suggestion-title">${product.title}</div>
+                            <div class="suggestion-price">KSh ${product.price.toLocaleString()}</div>
+                            <div class="suggestion-location">📍 ${product.sellerLocation || 'Nairobi'}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            suggestionsContainer.classList.add('active');
+        } catch (error) {
+            handleError(error, 'Show Search Suggestions');
         }
-        
-        suggestionsContainer.classList.add('active');
     }
 
     function hideSearchSuggestions() {
-        const suggestionsContainer = document.getElementById('searchSuggestions');
-        suggestionsContainer.classList.remove('active');
+        try {
+            const suggestionsContainer = document.getElementById('searchSuggestions');
+            if (suggestionsContainer) {
+                suggestionsContainer.classList.remove('active');
+            }
+        } catch (error) {
+            handleError(error, 'Hide Search Suggestions');
+        }
     }
 
     function selectSearchSuggestion(productId) {
@@ -3772,354 +4054,330 @@
     }
 
     function performSearch() {
-        const searchInput = document.getElementById('searchInput');
-        const query = searchInput.value.trim();
-        
-        if (query.length === 0) {
-            // Reset to location-filtered products
-            state.searchQuery = '';
-            applyLocationFilter();
+        try {
+            const searchInput = document.getElementById('searchInput');
+            if (!searchInput) return;
+            
+            const query = searchInput.value.trim();
+            
+            if (query.length === 0) {
+                state.searchQuery = '';
+                applyLocationFilter();
+                updateLocationDisplay(state.selectedLocation);
+                return;
+            }
+            
+            state.searchQuery = query;
+            const searchResults = searchProducts(query);
+            
+            state.filteredProducts = searchResults;
+            state.currentPage = 1;
+            
             updateLocationDisplay(state.selectedLocation);
-            return;
+            
+            renderProducts();
+            hideSearchSuggestions();
+            
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+        } catch (error) {
+            handleError(error, 'Perform Search');
         }
-        
-        state.searchQuery = query;
-        const searchResults = searchProducts(query);
-        
-        // Update filtered products
-        state.filteredProducts = searchResults;
-        state.currentPage = 1;
-        
-        // Update UI
-        updateLocationDisplay(state.selectedLocation);
-        
-        renderProducts();
-        hideSearchSuggestions();
-        
-        // Scroll to products section
-        document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
     }
 
     function searchProducts(query, limit = null) {
-        const searchTerms = query.toLowerCase().split(' ');
-        
-        // Start with all products or location-filtered ones
-        let sourceProducts = state.allProducts;
-        if (state.selectedLocation) {
-            sourceProducts = sourceProducts.filter(product => 
-                product.sellerLocation?.toLowerCase().includes(state.selectedLocation.toLowerCase())
-            );
+        try {
+            const searchTerms = query.toLowerCase().split(' ');
+            
+            let sourceProducts = state.allProducts;
+            if (state.selectedLocation) {
+                sourceProducts = sourceProducts.filter(product => 
+                    (product.sellerLocation || '').toLowerCase().includes(state.selectedLocation.toLowerCase())
+                );
+            }
+            
+            const results = sourceProducts.filter(product => {
+                const searchableText = `
+                    ${product.title || ''}
+                    ${product.description || ''}
+                    ${product.category || ''}
+                    ${product.sellerName || ''}
+                `.toLowerCase();
+                
+                return searchTerms.every(term => searchableText.includes(term));
+            });
+            
+            results.sort((a, b) => {
+                const aTitle = (a.title || '').toLowerCase();
+                const bTitle = (b.title || '').toLowerCase();
+                const queryLower = query.toLowerCase();
+                
+                if (aTitle === queryLower) return -1;
+                if (bTitle === queryLower) return 1;
+                
+                if (aTitle.startsWith(queryLower)) return -1;
+                if (bTitle.startsWith(queryLower)) return 1;
+                
+                return (b.rating || 0) - (a.rating || 0);
+            });
+            
+            return limit ? results.slice(0, limit) : results;
+        } catch (error) {
+            handleError(error, 'Search Products');
+            return [];
         }
-        
-        const results = sourceProducts.filter(product => {
-            const searchableText = `
-                ${product.title || ''}
-                ${product.description || ''}
-                ${product.category || ''}
-                ${product.sellerName || ''}
-            `.toLowerCase();
-            
-            return searchTerms.every(term => searchableText.includes(term));
-        });
-        
-        // Sort by relevance
-        results.sort((a, b) => {
-            const aTitle = a.title.toLowerCase();
-            const bTitle = b.title.toLowerCase();
-            const queryLower = query.toLowerCase();
-            
-            if (aTitle === queryLower) return -1;
-            if (bTitle === queryLower) return 1;
-            
-            if (aTitle.startsWith(queryLower)) return -1;
-            if (bTitle.startsWith(queryLower)) return 1;
-            
-            return (b.rating || 0) - (a.rating || 0);
-        });
-        
-        return limit ? results.slice(0, limit) : results;
     }
 
     // ==================== PRODUCT DETAIL MODAL ====================
     async function viewProduct(productId) {
-    try {
-        const product = state.allProducts.find(p => p.listingId === productId);
-        if (!product) {
-            showToast('Product not found', 'error');
-            return;
-        }
-        
-        const images = product.images || [CONFIG.DEFAULT_IMAGE];
-        const whatsappMessage = `Hi, I'm interested in your "${product.title}" for KSh ${product.price.toLocaleString()} on SokoInn`;
-        
-        document.getElementById('productModalBody').innerHTML = `
-            <div>
-                <!-- Product Gallery -->
-                <div class="product-gallery">
-                    <div class="gallery-main" id="galleryMain">
+        try {
+            const product = state.allProducts.find(p => p.listingId === productId);
+            if (!product) {
+                showToast('Product not found', 'error');
+                return;
+            }
+            
+            const images = product.images || [CONFIG.DEFAULT_IMAGE];
+            const whatsappMessage = `Hi, I'm interested in your "${product.title}" for KSh ${product.price.toLocaleString()} on SokoInn`;
+            
+            document.getElementById('productModalBody').innerHTML = `
+                <div>
+                    <!-- Product Gallery -->
+                    <div class="product-gallery">
+                        <div class="gallery-main" id="galleryMain">
+                            ${images.map((img, index) => `
+                                <div class="gallery-slide ${index === 0 ? 'active' : ''}">
+                                    <img src="${img}" 
+                                        alt="Image ${index + 1}" 
+                                        onerror="this.src='${CONFIG.DEFAULT_IMAGE}'"
+                                        onclick="openImageViewer(${JSON.stringify(images)}, ${index})">
+                                </div>
+                            `).join('')}
+                        </div>
+                        ${images.length > 1 ? `
+                            <button class="gallery-nav gallery-prev" onclick="prevGalleryImage()">‹</button>
+                            <button class="gallery-nav gallery-next" onclick="nextGalleryImage()">›</button>
+                        ` : ''}
+                    </div>
+                    
+                    <!-- Thumbnails -->
+                    ${images.length > 1 ? `
+                    <div class="gallery-thumbnails">
                         ${images.map((img, index) => `
-                            <div class="gallery-slide ${index === 0 ? 'active' : ''}">
-                                <img src="${img}" 
-                                    alt="Image ${index + 1}" 
-                                    onerror="this.src='${CONFIG.DEFAULT_IMAGE}'"
-                                    onclick="openImageViewer(${JSON.stringify(images)}, ${index})">
+                            <div class="thumbnail ${index === 0 ? 'active' : ''}" onclick="changeGalleryImage(${index})">
+                                <img src="${img}" alt="Thumbnail ${index + 1}" onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
                             </div>
                         `).join('')}
                     </div>
-                    ${images.length > 1 ? `
-                        <button class="gallery-nav gallery-prev" onclick="prevGalleryImage()">‹</button>
-                        <button class="gallery-nav gallery-next" onclick="nextGalleryImage()">›</button>
                     ` : ''}
-                </div>
-                
-                <!-- Thumbnails -->
-                ${images.length > 1 ? `
-                <div class="gallery-thumbnails">
-                    ${images.map((img, index) => `
-                        <div class="thumbnail ${index === 0 ? 'active' : ''}" onclick="changeGalleryImage(${index})">
-                            <img src="${img}" alt="Thumbnail ${index + 1}" onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
-                        </div>
-                    `).join('')}
-                </div>
-                ` : ''}
-                
-                <!-- Product Info -->
-                <div style="margin-top: 1.5rem;">
-                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: #333;">${product.title}</h3>
-                    <div style="font-size: 1.75rem; font-weight: 800; color: var(--maroon); margin-bottom: 1rem;">
-                        KSh ${product.price.toLocaleString()}
-                    </div>
                     
-                    <!-- Seller Info -->
-                    <div style="background: var(--gray-100); padding: 1.25rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
-                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--maroon), var(--light-maroon)); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1.25rem;">
-                                ${product.sellerName.charAt(0)}
-                            </div>
-                            <div style="flex: 1;">
-                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
-                                    <span style="font-weight: 700; font-size: 1.125rem; color: #333;">${product.sellerName}</span>
-                                    ${product.sellerVerification === 'verified' ? '<span style="color: #10b981; font-size: 1rem;">✓</span>' : ''}
-                                </div>
-                                <div style="display: flex; flex-direction: column; gap: 0.25rem;">
-                                    <div style="display: flex; align-items: center; gap: 0.25rem; font-size: 0.875rem; color: var(--gray-600);">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <span>${product.sellerLocation || 'Nairobi'}</span>
-                                    </div>
-                                    <div style="display: flex; align-items: center; gap: 0.25rem; font-size: 0.875rem; color: var(--gray-600);">
-                                        <i class="fas fa-star" style="color: #fbbf24;"></i>
-                                        <span>${product.sellerRating || 4.0} (${product.sellerTotalReviews || 0} reviews)</span>
-                                    </div>
-                                </div>
-                            </div>
+                    <!-- Product Info -->
+                    <div style="margin-top: 1.5rem;">
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: #333;">${product.title}</h3>
+                        <div style="font-size: 1.75rem; font-weight: 800; color: var(--maroon); margin-bottom: 1rem;">
+                            KSh ${product.price.toLocaleString()}
                         </div>
                         
-                        <!-- Contact Buttons -->
-                        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                            <div style="font-weight: 600; color: #333; margin-bottom: 0.5rem;">Contact Seller:</div>
-                            <div style="display: flex; gap: 0.75rem;">
-                                ${product.sellerWhatsapp ? `
-                                <a href="https://wa.me/${product.sellerWhatsapp}?text=${encodeURIComponent(whatsappMessage)}" 
-                                   target="_blank"
-                                   style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.875rem; background: linear-gradient(135deg, #25D366, #128C7E); color: white; border-radius: var(--radius-md); text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
-                                    <i class="fab fa-whatsapp" style="font-size: 1.125rem;"></i>
-                                    <span>WhatsApp</span>
-                                </a>
-                                ` : ''}
-                                
-                                ${product.sellerPhone ? `
-                                <a href="tel:${product.sellerPhone}" 
-                                   style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.875rem; background: linear-gradient(135deg, var(--maroon), var(--light-maroon)); color: white; border-radius: var(--radius-md); text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
-                                    <i class="fas fa-phone" style="font-size: 1.125rem;"></i>
-                                    <span>Call Now</span>
-                                </a>
-                                ` : ''}
+                        <!-- Seller Info -->
+                        <div style="background: var(--gray-100); padding: 1.25rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--maroon), var(--light-maroon)); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1.25rem;">
+                                    ${(product.sellerName || '').charAt(0)}
+                                </div>
+                                <div style="flex: 1;">
+                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                                        <span style="font-weight: 700; font-size: 1.125rem; color: #333;">${product.sellerName}</span>
+                                        ${product.sellerVerification === 'verified' ? '<span style="color: #10b981; font-size: 1rem;">✓</span>' : ''}
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+                                        <div style="display: flex; align-items: center; gap: 0.25rem; font-size: 0.875rem; color: var(--gray-600);">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span>${product.sellerLocation || 'Nairobi'}</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 0.25rem; font-size: 0.875rem; color: var(--gray-600);">
+                                            <i class="fas fa-star" style="color: #fbbf24;"></i>
+                                            <span>${product.sellerRating || 4.0} (${product.sellerTotalReviews || 0} reviews)</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             
-                            <!-- Phone Numbers Display -->
-                            <div style="background: white; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--gray-200); margin-top: 0.5rem;">
-                                <div style="font-size: 0.8125rem; color: var(--gray-600); margin-bottom: 0.5rem; font-weight: 600;">Phone Numbers:</div>
-                                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <!-- Contact Buttons -->
+                            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                                <div style="font-weight: 600; color: #333; margin-bottom: 0.5rem;">Contact Seller:</div>
+                                <div style="display: flex; gap: 0.75rem;">
                                     ${product.sellerWhatsapp ? `
-                                    <div style="display: flex; align-items: center; justify-content: space-between;">
-                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                            <i class="fab fa-whatsapp" style="color: #25D366;"></i>
-                                            <span style="font-size: 0.875rem; font-weight: 500;">WhatsApp:</span>
-                                        </div>
-                                        <span style="font-family: monospace; font-weight: 600;">${formatPhoneNumber(product.sellerWhatsapp)}</span>
-                                    </div>
+                                    <a href="https://wa.me/${product.sellerWhatsapp}?text=${encodeURIComponent(whatsappMessage)}" 
+                                       target="_blank"
+                                       style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.875rem; background: linear-gradient(135deg, #25D366, #128C7E); color: white; border-radius: var(--radius-md); text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
+                                        <i class="fab fa-whatsapp" style="font-size: 1.125rem;"></i>
+                                        <span>WhatsApp</span>
+                                    </a>
                                     ` : ''}
                                     
                                     ${product.sellerPhone ? `
-                                    <div style="display: flex; align-items: center; justify-content: space-between;">
-                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                            <i class="fas fa-phone" style="color: var(--maroon);"></i>
-                                            <span style="font-size: 0.875rem; font-weight: 500;">Phone:</span>
-                                        </div>
-                                        <span style="font-family: monospace; font-weight: 600;">${formatPhoneNumber(product.sellerPhone)}</span>
-                                    </div>
+                                    <a href="tel:${product.sellerPhone}" 
+                                       style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.875rem; background: linear-gradient(135deg, var(--maroon), var(--light-maroon)); color: white; border-radius: var(--radius-md); text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
+                                        <i class="fas fa-phone" style="font-size: 1.125rem;"></i>
+                                        <span>Call Now</span>
+                                    </a>
                                     ` : ''}
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Product Description -->
-                    ${product.description ? `
-                    <div style="margin-bottom: 1.5rem;">
-                        <h4 style="font-weight: 600; margin-bottom: 0.75rem; color: #333; font-size: 1.125rem;">Description</h4>
-                        <div style="background: var(--gray-100); padding: 1.25rem; border-radius: var(--radius-md);">
-                            <p style="color: var(--gray-600); line-height: 1.6; white-space: pre-line;">${product.description}</p>
-                        </div>
-                    </div>
-                    ` : ''}
-                    
-                    <!-- Product Details -->
-                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
-                        ${product.category ? `
-                        <div style="display: flex; align-items: center; gap: 0.5rem; background: var(--gray-100); padding: 0.5rem 0.875rem; border-radius: var(--radius-sm);">
-                            <i class="fas fa-tag" style="color: var(--gray-500);"></i>
-                            <span style="font-size: 0.875rem; font-weight: 500;">${product.category}</span>
-                        </div>
-                        ` : ''}
                         
-                        ${product.condition ? `
-                        <div style="display: flex; align-items: center; gap: 0.5rem; background: var(--gray-100); padding: 0.5rem 0.875rem; border-radius: var(--radius-sm);">
-                            <i class="fas fa-certificate" style="color: var(--gray-500);"></i>
-                            <span style="font-size: 0.875rem; font-weight: 500;">${product.condition}</span>
+                        <!-- Product Description -->
+                        ${product.description ? `
+                        <div style="margin-bottom: 1.5rem;">
+                            <h4 style="font-weight: 600; margin-bottom: 0.75rem; color: #333; font-size: 1.125rem;">Description</h4>
+                            <div style="background: var(--gray-100); padding: 1.25rem; border-radius: var(--radius-md);">
+                                <p style="color: var(--gray-600); line-height: 1.6; white-space: pre-line;">${product.description}</p>
+                            </div>
                         </div>
                         ` : ''}
-                        
-                        ${product.stock ? `
-                        <div style="display: flex; align-items: center; gap: 0.5rem; background: var(--gray-100); padding: 0.5rem 0.875rem; border-radius: var(--radius-sm);">
-                            <i class="fas fa-box" style="color: var(--gray-500);"></i>
-                            <span style="font-size: 0.875rem; font-weight: 500;">Stock: ${product.stock}</span>
-                        </div>
-                        ` : ''}
-                    </div>
-                    
-                    <!-- Action Buttons -->
-                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2rem;">
-                        <button class="btn btn-secondary" onclick="saveProduct('${product.listingId}')" style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-                            <i class="fas fa-star"></i>
-                            <span>Save Product</span>
-                        </button>
-                        <button class="btn btn-primary" onclick="showContactOptions('${product.listingId}')" style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-                            <i class="fas fa-share-alt"></i>
-                            <span>Share</span>
-                        </button>
                     </div>
                 </div>
-            </div>
-        `;
-        
-        window.currentGalleryImages = images;
-        window.currentGalleryIndex = 0;
-        showModal('productModal');
-        
-    } catch (error) {
-        console.error('Error viewing product:', error);
-        showToast('Failed to load product details', 'error');
+            `;
+            
+            window.currentGalleryImages = images;
+            window.currentGalleryIndex = 0;
+            showModal('productModal');
+            
+        } catch (error) {
+            handleError(error, 'View Product');
+        }
     }
-}
 
     // ==================== IMAGE VIEWER FUNCTIONS ====================
     function openImageViewer(images, startIndex = 0) {
-        state.currentImages = images;
-        state.currentImageIndex = startIndex;
-        
-        const viewer = document.getElementById('imageViewer');
-        const viewerImage = document.getElementById('viewerImage');
-        const thumbnailsContainer = document.getElementById('viewerThumbnails');
-        const imageCounter = document.getElementById('imageCounter');
-        
-        if (!viewer || !viewerImage || !thumbnailsContainer || !imageCounter) return;
-        
-        viewerImage.src = images[startIndex];
-        
-        thumbnailsContainer.innerHTML = '';
-        images.forEach((img, index) => {
-            const thumbnail = document.createElement('div');
-            thumbnail.className = `image-viewer-thumbnail ${index === startIndex ? 'active' : ''}`;
-            thumbnail.onclick = () => changeImage(index);
-            thumbnail.innerHTML = `<img src="${img}" alt="Thumbnail ${index + 1}" onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">`;
-            thumbnailsContainer.appendChild(thumbnail);
-        });
-        
-        imageCounter.textContent = `${startIndex + 1} / ${images.length}`;
-        viewer.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        
-        // Hide bottom nav when image viewer is open
-        hideBottomNav();
+        try {
+            state.currentImages = images;
+            state.currentImageIndex = startIndex;
+            
+            const viewer = document.getElementById('imageViewer');
+            const viewerImage = document.getElementById('viewerImage');
+            const thumbnailsContainer = document.getElementById('viewerThumbnails');
+            const imageCounter = document.getElementById('imageCounter');
+            
+            if (!viewer || !viewerImage || !thumbnailsContainer || !imageCounter) return;
+            
+            viewerImage.src = images[startIndex];
+            
+            thumbnailsContainer.innerHTML = '';
+            images.forEach((img, index) => {
+                const thumbnail = document.createElement('div');
+                thumbnail.className = `image-viewer-thumbnail ${index === startIndex ? 'active' : ''}`;
+                thumbnail.onclick = () => changeImage(index);
+                thumbnail.innerHTML = `<img src="${img}" alt="Thumbnail ${index + 1}" onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">`;
+                thumbnailsContainer.appendChild(thumbnail);
+            });
+            
+            imageCounter.textContent = `${startIndex + 1} / ${images.length}`;
+            viewer.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            hideBottomNav();
+        } catch (error) {
+            handleError(error, 'Open Image Viewer');
+        }
     }
 
     function closeImageViewer() {
-        const viewer = document.getElementById('imageViewer');
-        viewer.classList.remove('active');
-        document.body.style.overflow = '';
-        state.currentImages = [];
-        state.currentImageIndex = 0;
-        
-        // Show bottom nav when image viewer is closed
-        showBottomNav();
+        try {
+            const viewer = document.getElementById('imageViewer');
+            if (viewer) {
+                viewer.classList.remove('active');
+            }
+            document.body.style.overflow = '';
+            state.currentImages = [];
+            state.currentImageIndex = 0;
+            
+            showBottomNav();
+        } catch (error) {
+            handleError(error, 'Close Image Viewer');
+        }
     }
 
     function changeImage(index) {
-        state.currentImageIndex = index;
-        const viewerImage = document.getElementById('viewerImage');
-        const thumbnails = document.querySelectorAll('.image-viewer-thumbnail');
-        const imageCounter = document.getElementById('imageCounter');
-        
-        if (!viewerImage) return;
-        
-        viewerImage.src = state.currentImages[index];
-        
-        thumbnails.forEach((thumb, i) => {
-            thumb.classList.toggle('active', i === index);
-        });
-        
-        if (imageCounter) {
-            imageCounter.textContent = `${index + 1} / ${state.currentImages.length}`;
+        try {
+            state.currentImageIndex = index;
+            const viewerImage = document.getElementById('viewerImage');
+            const thumbnails = document.querySelectorAll('.image-viewer-thumbnail');
+            const imageCounter = document.getElementById('imageCounter');
+            
+            if (!viewerImage) return;
+            
+            viewerImage.src = state.currentImages[index];
+            
+            thumbnails.forEach((thumb, i) => {
+                thumb.classList.toggle('active', i === index);
+            });
+            
+            if (imageCounter) {
+                imageCounter.textContent = `${index + 1} / ${state.currentImages.length}`;
+            }
+        } catch (error) {
+            handleError(error, 'Change Image');
         }
     }
 
     function prevImage() {
-        const newIndex = (state.currentImageIndex - 1 + state.currentImages.length) % state.currentImages.length;
-        changeImage(newIndex);
+        try {
+            const newIndex = (state.currentImageIndex - 1 + state.currentImages.length) % state.currentImages.length;
+            changeImage(newIndex);
+        } catch (error) {
+            handleError(error, 'Previous Image');
+        }
     }
 
     function nextImage() {
-        const newIndex = (state.currentImageIndex + 1) % state.currentImages.length;
-        changeImage(newIndex);
+        try {
+            const newIndex = (state.currentImageIndex + 1) % state.currentImages.length;
+            changeImage(newIndex);
+        } catch (error) {
+            handleError(error, 'Next Image');
+        }
     }
 
     // ==================== GALLERY FUNCTIONS ====================
     window.changeGalleryImage = function(index) {
-        const slides = document.querySelectorAll('#galleryMain .gallery-slide');
-        const thumbnails = document.querySelectorAll('#galleryThumbnails .thumbnail');
-        
-        slides.forEach(slide => slide.classList.remove('active'));
-        thumbnails.forEach(thumb => thumb.classList.remove('active'));
-        
-        if (slides[index]) {
-            slides[index].classList.add('active');
+        try {
+            const slides = document.querySelectorAll('#galleryMain .gallery-slide');
+            const thumbnails = document.querySelectorAll('.gallery-thumbnails .thumbnail');
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+            
+            if (slides[index]) {
+                slides[index].classList.add('active');
+            }
+            if (thumbnails[index]) {
+                thumbnails[index].classList.add('active');
+            }
+            
+            window.currentGalleryIndex = index;
+        } catch (error) {
+            handleError(error, 'Change Gallery Image');
         }
-        if (thumbnails[index]) thumbnails[index].classList.add('active');
-        
-        window.currentGalleryIndex = index;
     };
 
     window.prevGalleryImage = function() {
-        if (!window.currentGalleryImages) return;
-        const newIndex = (window.currentGalleryIndex - 1 + window.currentGalleryImages.length) % window.currentGalleryImages.length;
-        window.changeGalleryImage(newIndex);
+        try {
+            if (!window.currentGalleryImages) return;
+            const newIndex = (window.currentGalleryIndex - 1 + window.currentGalleryImages.length) % window.currentGalleryImages.length;
+            window.changeGalleryImage(newIndex);
+        } catch (error) {
+            handleError(error, 'Previous Gallery Image');
+        }
     };
 
     window.nextGalleryImage = function() {
-        if (!window.currentGalleryImages) return;
-        const newIndex = (window.currentGalleryIndex + 1) % window.currentGalleryImages.length;
-        window.changeGalleryImage(newIndex);
+        try {
+            if (!window.currentGalleryImages) return;
+            const newIndex = (window.currentGalleryIndex + 1) % window.currentGalleryImages.length;
+            window.changeGalleryImage(newIndex);
+        } catch (error) {
+            handleError(error, 'Next Gallery Image');
+        }
     };
 
     // ==================== CONTACT FUNCTIONS ====================
@@ -4129,79 +4387,30 @@
             event.stopPropagation();
         }
         
-        const options = button.nextElementSibling;
-        const isVisible = options.classList.contains('show');
-        
-        document.querySelectorAll('.contact-options').forEach(el => {
-            if (el !== options) el.classList.remove('show');
-        });
-        
-        options.classList.toggle('show', !isVisible);
-        
-        if (!isVisible) {
-            const closeHandler = (e) => {
-                if (!options.contains(e.target) && e.target !== button) {
-                    options.classList.remove('show');
-                    document.removeEventListener('click', closeHandler);
-                }
-            };
-            setTimeout(() => document.addEventListener('click', closeHandler), 10);
+        try {
+            const options = button.nextElementSibling;
+            if (!options) return;
+            
+            const isVisible = options.classList.contains('show');
+            
+            document.querySelectorAll('.contact-options').forEach(el => {
+                if (el !== options) el.classList.remove('show');
+            });
+            
+            options.classList.toggle('show', !isVisible);
+            
+            if (!isVisible) {
+                const closeHandler = (e) => {
+                    if (!options.contains(e.target) && e.target !== button) {
+                        options.classList.remove('show');
+                        document.removeEventListener('click', closeHandler);
+                    }
+                };
+                setTimeout(() => document.addEventListener('click', closeHandler), 10);
+            }
+        } catch (error) {
+            handleError(error, 'Toggle Contact Options');
         }
-    }
-
-    function showContactOptions(productId) {
-        const product = state.allProducts.find(p => p.listingId === productId);
-        if (!product) return;
-        
-        const whatsappMessage = `Hi, I'm interested in your "${product.title}" for KSh ${product.price.toLocaleString()} on SokoInn`;
-        
-        const modalBody = document.getElementById('contactModalBody');
-        if (!modalBody) return;
-        
-        modalBody.innerHTML = `
-            <div>
-                <div style="text-align: center; margin-bottom: 1.5rem;">
-                    <div style="width: 60px; height: 60px; background: var(--maroon); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1.5rem; margin: 0 auto 1rem;">
-                        ${product.sellerName.charAt(0)}
-                    </div>
-                    <h4 style="font-weight: 600; margin-bottom: 0.25rem;">${product.sellerName}</h4>
-                    <p style="color: var(--gray-500); font-size: 0.875rem;">Seller of "${product.title}"</p>
-                </div>
-                
-                <div style="display: grid; gap: 0.75rem;">
-                    ${product.sellerWhatsapp ? `
-                    <a href="https://wa.me/${product.sellerWhatsapp}?text=${encodeURIComponent(whatsappMessage)}" 
-                    target="_blank"
-                    style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: #25D366; color: white; border-radius: var(--radius-md); text-decoration: none; text-align: center; justify-content: center;">
-                        <span style="font-size: 1.25rem;"><i class="fab fa-whatsapp"></i></span>
-                        <div>
-                            <div style="font-weight: 600;">WhatsApp</div>
-                            <div style="font-size: 0.875rem; opacity: 0.9;">${formatPhoneNumber(product.sellerWhatsapp)}</div>
-                        </div>
-                    </a>
-                    ` : ''}
-                    
-                    ${product.sellerPhone ? `
-                    <a href="tel:${product.sellerPhone}" 
-                    style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--maroon); color: white; border-radius: var(--radius-md); text-decoration: none; text-align: center; justify-content: center;">
-                        <span style="font-size: 1.25rem;"><i class="fas fa-phone"></i></span>
-                        <div>
-                            <div style="font-weight: 600;">Call</div>
-                            <div style="font-size: 0.875rem; opacity: 0.9;">${formatPhoneNumber(product.sellerPhone)}</div>
-                        </div>
-                    </a>
-                    ` : ''}
-                </div>
-                
-                <div style="margin-top: 1.5rem; padding: 1rem; background: var(--gray-100); border-radius: var(--radius-md);">
-                    <p style="font-size: 0.875rem; color: var(--gray-600); text-align: center;">
-                        When contacting, mention you found them on SokoInn
-                    </p>
-                </div>
-            </div>
-        `;
-        
-        showModal('contactModal');
     }
 
     function contactSeller(productId, method, event) {
@@ -4210,21 +4419,25 @@
             event.stopPropagation();
         }
         
-        const product = state.allProducts.find(p => p.listingId === productId);
-        if (!product) return;
-        
-        if (method === 'whatsapp' && product.sellerWhatsapp) {
-            const message = `Hi, I'm interested in your "${product.title}" for KSh ${product.price.toLocaleString()} on SokoInn`;
-            window.open(`https://wa.me/${product.sellerWhatsapp}?text=${encodeURIComponent(message)}`, '_blank');
-            showToast(`Opening WhatsApp...`, 'info');
-        } else if (method === 'call' && product.sellerPhone) {
-            window.location.href = `tel:${product.sellerPhone}`;
-        } else {
-            showToast('Contact information not available', 'error');
+        try {
+            const product = state.allProducts.find(p => p.listingId === productId);
+            if (!product) return;
+            
+            if (method === 'whatsapp' && product.sellerWhatsapp) {
+                const message = `Hi, I'm interested in your "${product.title}" for KSh ${product.price.toLocaleString()} on SokoInn`;
+                window.open(`https://wa.me/${product.sellerWhatsapp}?text=${encodeURIComponent(message)}`, '_blank');
+                showToast(`Opening WhatsApp...`, 'info');
+            } else if (method === 'call' && product.sellerPhone) {
+                window.location.href = `tel:${product.sellerPhone}`;
+            } else {
+                showToast('Contact information not available', 'error');
+            }
+            
+            const dropdown = event?.target?.closest('.contact-options');
+            if (dropdown) dropdown.classList.remove('show');
+        } catch (error) {
+            handleError(error, 'Contact Seller');
         }
-        
-        const dropdown = event?.target?.closest('.contact-options');
-        if (dropdown) dropdown.classList.remove('show');
     }
 
     // ==================== UTILITY FUNCTIONS ====================
@@ -4239,219 +4452,146 @@
     }
 
     function updateLoadMoreButton() {
-        const loadMoreBtn = document.getElementById('loadMoreBtn');
-        if (!loadMoreBtn) return;
-        
-        if (!state.hasMore || state.filteredProducts.length <= state.currentPage * CONFIG.ITEMS_PER_PAGE) {
-            loadMoreBtn.textContent = 'No more products';
-            loadMoreBtn.disabled = true;
-            state.hasMore = false;
-        } else {
-            loadMoreBtn.textContent = 'Load More Products';
-            loadMoreBtn.disabled = false;
-            state.hasMore = true;
+        try {
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            if (!loadMoreBtn) return;
+            
+            if (!state.hasMore || state.filteredProducts.length <= state.currentPage * CONFIG.ITEMS_PER_PAGE) {
+                loadMoreBtn.textContent = 'No more products';
+                loadMoreBtn.disabled = true;
+                state.hasMore = false;
+            } else {
+                loadMoreBtn.textContent = 'Load More Products';
+                loadMoreBtn.disabled = false;
+                state.hasMore = true;
+            }
+        } catch (error) {
+            handleError(error, 'Update Load More Button');
         }
     }
 
     function showLoading(show) {
-        const loadMoreBtn = document.getElementById('loadMoreBtn');
-        if (loadMoreBtn) {
-            if (show) {
-                loadMoreBtn.disabled = true;
-                loadMoreBtn.innerHTML = '<div class="loading"></div> Loading...';
-            } else {
-                loadMoreBtn.disabled = false;
-                loadMoreBtn.textContent = 'Load More Products';
+        try {
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            if (loadMoreBtn) {
+                if (show) {
+                    loadMoreBtn.disabled = true;
+                    loadMoreBtn.innerHTML = '<div class="loading"></div> Loading...';
+                } else {
+                    loadMoreBtn.disabled = false;
+                    loadMoreBtn.textContent = 'Load More Products';
+                }
             }
+        } catch (error) {
+            handleError(error, 'Show Loading');
         }
     }
 
     function showModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            
-            // Hide bottom nav when modal is open
-            hideBottomNav();
+        try {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                hideBottomNav();
+            }
+        } catch (error) {
+            handleError(error, 'Show Modal');
         }
     }
 
     function closeModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-            if (modalId === 'productModal') {
-                document.getElementById('productModalBody').innerHTML = '';
+        try {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                if (modalId === 'productModal') {
+                    const modalBody = document.getElementById('productModalBody');
+                    if (modalBody) modalBody.innerHTML = '';
+                }
+                showBottomNav();
             }
-            
-            // Show bottom nav when modal is closed
-            showBottomNav();
+        } catch (error) {
+            handleError(error, 'Close Modal');
         }
     }
 
     function showToast(message, type = 'info') {
-        const existingToast = document.querySelector('.toast');
-        if (existingToast) existingToast.remove();
-        
-        const toast = document.createElement('div');
-        toast.className = `toast ${type}`;
-        toast.innerHTML = `
-            <div style="display: flex; align-items: center; gap: 0.75rem;">
-                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
-                <span>${message}</span>
-            </div>
-        `;
-        document.body.appendChild(toast);
-        
-        setTimeout(() => {
-            toast.style.opacity = '0';
-            toast.style.transform = 'translateY(-10px)';
-            setTimeout(() => toast.remove(), 300);
-        }, 3000);
-    }
-
-    function saveProduct(productId) {
-        const saved = JSON.parse(localStorage.getItem('sokoinn_saved') || '[]');
-        if (!saved.includes(productId)) {
-            saved.push(productId);
-            localStorage.setItem('sokoinn_saved', JSON.stringify(saved));
-            showToast('Product saved for later!', 'success');
-        } else {
-            showToast('Product already saved', 'info');
+        try {
+            const existingToast = document.querySelector('.toast');
+            if (existingToast) existingToast.remove();
+            
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(-10px)';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        } catch (error) {
+            console.error('Error showing toast:', error);
         }
     }
 
     // ==================== INITIALIZE ON WINDOW LOAD ====================
     window.addEventListener('load', () => {
-        // Set up image loading
-        document.querySelectorAll('.product-image img').forEach(img => {
-            if (img.complete) {
-                img.classList.add('loaded');
-            } else {
-                img.onload = () => img.classList.add('loaded');
-            }
-        });
-        
-        // Show chatbot notification after delay
-        setTimeout(() => {
-            if (!state.chatbotOpen && state.unreadMessages === 0) {
-                state.unreadMessages = 1;
-                const notification = document.getElementById('chatbotNotification');
-                notification.textContent = '1';
-                notification.classList.remove('hidden');
-            }
-        }, 3000);
-        
-        adjustChatbotPosition();
-    });
-        // PWA Service Worker Registration
-        if ('serviceWorker' in navigator) {
-          window.addEventListener('load', function() {
-            navigator.serviceWorker.register('/service-worker.js')
-              .then(registration => {
-                console.log('ServiceWorker registration successful with scope:', registration.scope);
-                
-                // Check for updates every hour
-                setInterval(() => {
-                  registration.update();
-                }, 60 * 60 * 1000);
-                
-                // Listen for controller change
-                navigator.serviceWorker.addEventListener('controllerchange', () => {
-                  console.log('Service Worker updated. Reloading page...');
-                  window.location.reload();
-                });
-              })
-              .catch(error => {
-                console.log('ServiceWorker registration failed:', error);
-              });
-          });
-        }
-        
-        // PWA Install Prompt
-        let deferredPrompt;
-        const installButton = document.createElement('button');
-        
-        window.addEventListener('beforeinstallprompt', (e) => {
-          // Prevent Chrome 67 and earlier from automatically showing the prompt
-          e.preventDefault();
-          // Stash the event so it can be triggered later
-          deferredPrompt = e;
-          
-          // Show custom install button
-          installButton.style.position = 'fixed';
-          installButton.style.bottom = '100px';
-          installButton.style.left = '50%';
-          installButton.style.transform = 'translateX(-50%)';
-          installButton.style.zIndex = '1001';
-          installButton.style.padding = '0.75rem 1.5rem';
-          installButton.style.background = 'linear-gradient(135deg, #800000, #a62a2a)';
-          installButton.style.color = 'white';
-          installButton.style.border = 'none';
-          installButton.style.borderRadius = '25px';
-          installButton.style.fontWeight = '600';
-          installButton.style.boxShadow = '0 6px 20px rgba(0,0,0,0.3)';
-          installButton.style.cursor = 'pointer';
-          installButton.style.display = 'flex';
-          installButton.style.alignItems = 'center';
-          installButton.style.gap = '0.5rem';
-          installButton.style.fontFamily = 'inherit';
-          installButton.innerHTML = '<i class="fas fa-download"></i> Install SokoInn App';
-          installButton.onclick = installApp;
-          
-          document.body.appendChild(installButton);
-          
-          // Auto-hide after 10 seconds
-          setTimeout(() => {
-            if (installButton.parentNode) {
-              installButton.style.opacity = '0';
-              installButton.style.transform = 'translateX(-50%) translateY(20px)';
-              setTimeout(() => {
-                if (installButton.parentNode) {
-                  installButton.remove();
+        try {
+            document.querySelectorAll('.product-image img').forEach(img => {
+                if (img.complete) {
+                    img.classList.add('loaded');
+                } else {
+                    img.onload = () => img.classList.add('loaded');
                 }
-              }, 300);
-            }
-          }, 10000);
-        });
-        
-        function installApp() {
-          if (!deferredPrompt) return;
-          
-          // Show the install prompt
-          deferredPrompt.prompt();
-          
-          // Wait for the user to respond to the prompt
-          deferredPrompt.userChoice.then(choiceResult => {
-            if (choiceResult.outcome === 'accepted') {
-              console.log('User accepted the install prompt');
-            } else {
-              console.log('User dismissed the install prompt');
-            }
+            });
             
-            // Remove the install button
-            if (installButton.parentNode) {
-              installButton.remove();
-            }
+            setTimeout(() => {
+                if (!state.chatbotOpen && state.unreadMessages === 0) {
+                    state.unreadMessages = 1;
+                    const notification = document.getElementById('chatbotNotification');
+                    if (notification) {
+                        notification.textContent = '1';
+                        notification.classList.remove('hidden');
+                    }
+                }
+            }, 3000);
             
-            deferredPrompt = null;
-          });
+            adjustChatbotPosition();
+        } catch (error) {
+            handleError(error, 'Window Load');
+        }
+    });
+    
+    // ==================== PREVENT MEMORY LEAKS ====================
+    window.addEventListener('beforeunload', () => {
+        // Clean up intervals
+        if (state.heroInterval) {
+            clearInterval(state.heroInterval);
+            state.heroInterval = null;
         }
         
-        // Detect if app is running in standalone mode
-        function isRunningStandalone() {
-          return (window.matchMedia('(display-mode: standalone)').matches) || 
-                 (window.navigator.standalone) || 
-                 (document.referrer.includes('android-app://'));
+        // Clean up timeouts
+        if (state.searchTimeout) {
+            clearTimeout(state.searchTimeout);
+            state.searchTimeout = null;
         }
         
-        // Adjust UI for standalone mode
-        if (isRunningStandalone()) {
-          document.documentElement.style.setProperty('--safe-area-top', 'env(safe-area-inset-top)');
-          document.documentElement.style.setProperty('--safe-area-bottom', 'env(safe-area-inset-bottom)');
+        // Save important state
+        try {
+            localStorage.setItem('sokoinn_selected_location', state.selectedLocation || '');
+            saveChatHistory();
+        } catch (e) {
+            console.warn('Could not save state before unload');
         }
+    });
     </script>
     
 </body>
