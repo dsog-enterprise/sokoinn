@@ -9,10 +9,19 @@
     <meta name="theme-color" content="#800000">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SokoInn">
+    <meta name="description" content="Trusted products from verified sellers in Kenya">
+    <meta name="application-name" content="SokoInn">
+    
     <!-- Inline PWA Manifest -->
-    <link rel="manifest" id="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIlNva29Jbm4gTWFya2V0cGxhY2UiLAogICJzaG9ydF9uYW1lIjogIlNva29Jbm4iLAogICJkZXNjcmlwdGlvbiI6ICJUcnVzdGVkIHByb2R1Y3RzIGZyb20gdmVyaWZpZWQgc2VsbGVycyBpbiBLZW55YSIsCiAgInN0YXJ0X3VybCI6ICIuLyIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZmZmZmZiIsCiAgInRoZW1lX2NvbG9yIjogIiM4MDAwMDAiLAogICJvcmllbnRhdGlvbiI6ICJhbnkiLAogICJzY29wZSI6ICIuLyIsCiAgImNhdGVnb3JpZXMiOiBbCiAgICAic2hvcHBpbmciLAogICAgIm1hcmtldHBsYWNlIiwKICAgICJlLWNvbW1lcmNlIgogIF0sCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImljb25zL2ljb24tNzJ4NzIucG5nIiwKICAgICAgInNpemVzIjogIjcyeDcyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJpY29ucy9pY29uLTk2eDk2LnBuZyIsCiAgICAgICJzaXplcyI6ICI5Nng5NiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiaWNvbnMvaWNvbi0xMjh4MTI4LnBuZyIsCiAgICAgICJzaXplcyI6ICIxMjh4MTI4IiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfSwKICAgIHsKICAgICAgInNyYCI6ICJpY29ucy9pY29uLTE0NHgxNDQucG5nIiwKICAgICAgInNpemVzIjogIjE0NHgxNDQiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9LAogICAgewogICAgICAic3JjIjogImljb25zL2ljb24tMTUyeDE1Mi5wbmciLAogICAgICAic2l6ZXMiOiAiMTUyeDE1MiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiaWNvbnMvaWNvbi0xOTJ4MTkyLnBuZyIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5wZSI6ICJpbWFnZS9wbmciCiAgICB9LAogICAgewogICAgICAic3JjIjogImljb25zL2ljb24tMzg0eDM4NC5wbmciLAogICAgICAic2l6ZXMiOiAiMzg0eDM4NCIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiaWNvbnMvaWNvbi01MTJ4NTEyLnBuZyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0KfQ==">
+    <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIlNva29Jbm4gTWFya2V0cGxhY2UiLAogICJzaG9ydF9uYW1lIjogIlNva29Jbm4iLAogICJkZXNjcmlwdGlvbiI6ICJUcnVzdGVkIHByb2R1Y3RzIGZyb20gdmVyaWZpZWQgc2VsbGVycyBpbiBLZW55YSIsCiAgInN0YXJ0X3VybCI6ICIuLyIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZmZmZmZiIsCiAgInRoZW1lX2NvbG9yIjogIiM4MDAwMDAiLAogICJvcmllbnRhdGlvbiI6ICJhbnkiLAogICJzY29wZSI6ICIuLyIsCiAgImNhdGVnb3JpZXMiOiBbCiAgICAic2hvcHBpbmciLAogICAgIm1hcmtldHBsYWNlIiwKICAgICJlLWNvbW1lcmNlIgogIF0sCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImljb25zL2ljb24tNzJ4NzIucG5nIiwKICAgICAgInNpemVzIjogIjcyeDcyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJpY29ucy9pY29uLTk2eDk2LnBuZyIsCiAgICAgICJzaXplcyI6ICI5Nng5NiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiaWNvbnMvaWNvbi0xMjh4MTI4LnBuZyIsCiAgICAgICJzaXplcyI6ICIxMjh4MTI4IiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJpY29ucy9pY29uLTE0NHgxNDQucG5nIiwKICAgICAgInNpemVzIjogIjE0NHgxNDQiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9LAogICAgewogICAgICAic3JjIjogImljb25zL2ljb24tMTUyeDE1Mi5wbmciLAogICAgICAic2l6ZXMiOiAiMTUyeDE1MiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiaWNvbnMvaWNvbi0xOTJ4MTkyLnBuZyIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJpY29ucy9pY29uLTM4NHgzODQucG5nIiwKICAgICAgInNpemVzIjogIjM4NHgzODQiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9LAogICAgewogICAgICAic3JjIjogImljb25zL2ljb24tNTEyeDUxMi5wbmciLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgIH0KICBdCn0=">
+    
+    <!-- Apple Touch Icons -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="icons/icon-192x192.png">
     
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -2729,8 +2738,8 @@
     </div>
     
     <!-- PWA Install Button -->
-    <button class="install-button" id="installButton" style="display: none;">
-        <i class="fas fa-download"></i> Install App
+    <button class="install-button" id="installButton">
+        <i class="fas fa-download"></i> Install SokoInn App
     </button>
 
     <script>
@@ -2797,6 +2806,108 @@
         maxRetries: 3
     };
 
+    // ==================== PWA INSTALLATION ====================
+    let deferredPrompt;
+    const installButton = document.getElementById('installButton');
+
+    // Initialize PWA functionality
+    function initPWA() {
+        // Listen for beforeinstallprompt event
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('beforeinstallprompt event fired');
+            // Prevent Chrome 67 and earlier from automatically showing the prompt
+            e.preventDefault();
+            // Stash the event so it can be triggered later
+            deferredPrompt = e;
+            
+            // Update UI to notify the user they can install the PWA
+            showInstallPromotion();
+            
+            // Log the platforms for debugging
+            console.log('Installable PWA detected');
+        });
+        
+        // Listen for app installed event
+        window.addEventListener('appinstalled', (evt) => {
+            console.log('PWA was installed');
+            // Hide the install button
+            hideInstallButton();
+            // Clear the deferredPrompt so it can be garbage collected
+            deferredPrompt = null;
+        });
+        
+        // Check if app is already installed
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            console.log('Running in standalone mode');
+            hideInstallButton();
+        }
+        
+        // Check if on iOS (which handles PWA differently)
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        if (isIOS) {
+            console.log('iOS device detected - showing iOS install instructions');
+        }
+    }
+    
+    function showInstallPromotion() {
+        if (installButton) {
+            installButton.style.display = 'flex';
+            installButton.classList.add('show');
+            
+            // Add click event listener for install button
+            installButton.addEventListener('click', installPWA);
+            
+            // Auto-hide after 30 seconds
+            setTimeout(() => {
+                hideInstallButton();
+            }, 30000);
+        }
+    }
+    
+    function hideInstallButton() {
+        if (installButton) {
+            installButton.classList.remove('show');
+            setTimeout(() => {
+                installButton.style.display = 'none';
+            }, 300);
+        }
+    }
+    
+    async function installPWA() {
+        if (!deferredPrompt) {
+            // Show iOS instructions
+            if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+                showToast('Tap the Share button and then "Add to Home Screen"', 'info');
+            } else {
+                showToast('Installation not available in your browser', 'info');
+            }
+            return;
+        }
+        
+        try {
+            // Show the install prompt
+            deferredPrompt.prompt();
+            
+            // Wait for the user to respond to the prompt
+            const { outcome } = await deferredPrompt.userChoice;
+            
+            if (outcome === 'accepted') {
+                console.log('User accepted the install prompt');
+                showToast('SokoInn is being installed...', 'success');
+                hideInstallButton();
+            } else {
+                console.log('User dismissed the install prompt');
+                showToast('Installation cancelled', 'info');
+            }
+            
+            // Clear the deferredPrompt variable
+            deferredPrompt = null;
+        } catch (error) {
+            console.error('Error during installation:', error);
+            showToast('Installation failed. Please try again.', 'error');
+        }
+    }
+
     // ==================== ERROR HANDLING AND HANG PREVENTION ====================
     function handleError(error, context = 'Unknown') {
         console.error(`Error in ${context}:`, error);
@@ -2845,6 +2956,9 @@
     // ==================== ENHANCED INITIALIZATION ====================
     document.addEventListener('DOMContentLoaded', () => {
         try {
+            // Initialize PWA first
+            initPWA();
+            
             // Hide loading overlay after 1.5 seconds
             setTimeout(() => {
                 const loadingOverlay = document.getElementById('loadingOverlay');
@@ -2860,7 +2974,6 @@
             initLocationFiltering();
             initEventListeners();
             initTouchGestures();
-            initPWA();
             
             // Load products from backend
             loadProductsFromBackend();
@@ -2959,63 +3072,6 @@
             document.body.style.overflow = state.mobileMenuOpen ? 'hidden' : '';
         } catch (error) {
             handleError(error, 'Toggle Mobile Menu');
-        }
-    }
-
-    // ==================== PWA FUNCTIONALITY ====================
-    function initPWA() {
-        // Register Service Worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js').catch(error => {
-                console.log('Service Worker registration failed:', error);
-            });
-        }
-        
-        // Handle beforeinstallprompt event
-        let deferredPrompt;
-        
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            
-            const installButton = document.getElementById('installButton');
-            if (installButton) {
-                installButton.style.display = 'flex';
-                installButton.classList.add('show');
-                
-                installButton.addEventListener('click', async () => {
-                    if (!deferredPrompt) return;
-                    
-                    deferredPrompt.prompt();
-                    
-                    const { outcome } = await deferredPrompt.userChoice;
-                    
-                    if (outcome === 'accepted') {
-                        console.log('User accepted the install prompt');
-                    } else {
-                        console.log('User dismissed the install prompt');
-                    }
-                    
-                    deferredPrompt = null;
-                    
-                    installButton.style.display = 'none';
-                    installButton.classList.remove('show');
-                });
-                
-                // Auto-hide after 15 seconds
-                setTimeout(() => {
-                    installButton.classList.remove('show');
-                    setTimeout(() => {
-                        installButton.style.display = 'none';
-                    }, 300);
-                }, 15000);
-            }
-        });
-        
-        // Detect if app is running in standalone mode
-        if (window.matchMedia('(display-mode: standalone)').matches || 
-            window.navigator.standalone) {
-            document.documentElement.classList.add('standalone');
         }
     }
 
