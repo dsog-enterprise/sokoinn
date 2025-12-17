@@ -2370,30 +2370,6 @@
             box-shadow: 0 8px 25px rgba(128, 0, 0, 0.3);
         }
         
-        /* ==================== EMERGENCY RELOAD BUTTON ==================== */
-        .emergency-reload {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            z-index: 9999;
-            background: #ff4757;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 1.25rem;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
-        }
-        
-        .emergency-reload:hover {
-            opacity: 1;
-        }
         
         /* ==================== LOADING PROTECTION ==================== */
         .loading-protection {
@@ -2419,10 +2395,6 @@
     </style>
 </head>
 <body>
-    <!-- Emergency Reload Button (Hidden by default, shown on error) -->
-    <button class="emergency-reload" onclick="window.location.reload()" title="Emergency Reload">
-        <i class="fas fa-redo"></i>
-    </button>
     
     <!-- Loading Protection Overlay -->
     <div class="loading-protection" id="loadingProtection"></div>
