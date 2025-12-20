@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SokoInn Marketplace | Trusted Platform for Products, Jobs, Skills & Homes in Kenya</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ==================== CSS VARIABLES ==================== */
+        :root {
+            --maroon: #800000;
+            --light-maroon: #a62a2a;
+            --dark-maroon: #660000;
+            --black: #000000;
+            --white: #FFFFFF;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --transition: all 0.3s ease;
+        }
+        
+        /* ==================== RESET AND BASE STYLES ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--black);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+        }
+        
+        .section {
+            padding: 5rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .section {
+                padding: 3rem 0;
+            }
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 2rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--maroon), var(--light-maroon));
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .btn-secondary {
+            background: var(--white);
+            color: var(--maroon);
+            border: 2px solid var(--maroon);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--maroon);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+        
+        .btn-large {
+            padding: 1rem 2.5rem;
+            font-size: 1.125rem;
+        }
+        
+        /* ==================== HEADER ==================== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--white);
+            box-shadow: var(--shadow-md);
+            padding: 1rem 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--maroon);
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--maroon), var(--light-maroon));
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+            font-weight: 800;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+        }
+        
+        .nav-link {
+            color: var(--black);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--maroon);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--maroon);
+            transition: var(--transition);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--maroon);
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+        
+        /* ==================== HERO SECTION ==================== */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+                        url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 8rem 0;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 5rem 0;
+            }
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .hero .btn {
+            min-width: 180px;
+        }
+        
+        /* ==================== PLATFORM INFO ==================== */
+        .platform-info {
+            background: var(--gray-100);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--black);
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        .section-title p {
+            font-size: 1.125rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .info-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+        }
+        
+        .info-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--maroon);
+        }
+        
+        .info-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--maroon), var(--light-maroon));
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+        
+        .info-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--black);
+        }
+        
+        .info-card p {
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+        }
+        
+        /* ==================== DEPARTMENTS SECTION ==================== */
+        .departments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .department-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+        }
+        
+        .department-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--maroon);
+        }
+        
+        .department-header {
+            background: linear-gradient(135deg, var(--maroon), var(--light-maroon));
+            color: var(--white);
+            padding: 1.5rem 2rem;
+        }
+        
+        .department-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .department-body {
+            padding: 2rem;
+        }
+        
+        .department-body ul {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .department-body li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        
+        .department-body li i {
+            color: var(--maroon);
+            margin-top: 0.25rem;
+        }
+        
+        .department-note {
+            background: var(--gray-100);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            margin-top: 1.5rem;
+            font-size: 0.875rem;
+            border-left: 4px solid var(--maroon);
+        }
+        
+        /* ==================== CTA SECTIONS ==================== */
+        .cta-section {
+            background: var(--gray-100);
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .cta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .cta-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        
+        .cta-card:hover {
+            border-color: var(--maroon);
+            transform: translateY(-5px);
+        }
+        
+        .cta-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--black);
+        }
+        
+        .cta-card p {
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+        }
+        
+        /* ==================== SAFETY SECTION ==================== */
+        .safety-section {
+            background: linear-gradient(135deg, rgba(128, 0, 0, 0.05), rgba(166, 42, 42, 0.05));
+        }
+        
+        .safety-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .safety-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .safety-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--maroon), var(--light-maroon));
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .safety-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--black);
+        }
+        
+        .safety-content p {
+            color: var(--gray-600);
+        }
+        
+        /* ==================== CONTACT SECTION ==================== */
+        .contact-section {
+            background: linear-gradient(135deg, var(--maroon), var(--light-maroon));
+            color: var(--white);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+        
+        .contact-item a {
+            color: var(--white);
+            transition: var(--transition);
+        }
+        
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+        
+        .contact-form {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--black);
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--maroon);
+            box-shadow: 0 0 0 3px rgba(128, 0, 0, 0.1);
+        }
+        
+        /* ==================== FOOTER ==================== */
+        .footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links h4 {
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: var(--gray-400);
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--white);
+            padding-left: 0.5rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--gray-700);
+            color: var(--gray-400);
+            font-size: 0.875rem;
+        }
+        
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .info-grid,
+            .departments-grid,
+            .cta-grid,
+            .safety-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form {
+                padding: 2rem 1.5rem;
+            }
+        }
+        
+        /* ==================== UTILITY CLASSES ==================== */
+        .text-center {
+            text-align: center;
+        }
+        
+        .mt-2 { margin-top: 0.5rem; }
+        .mt-4 { margin-top: 1.5rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-4 { margin-bottom: 1.5rem; }
+        
+        .platform-link {
+            color: var(--maroon);
+            font-weight: 600;
+            text-decoration: underline;
+            transition: var(--transition);
+        }
+        
+        .platform-link:hover {
+            color: var(--light-maroon);
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, var(--maroon), var(--light-maroon));
+            color: var(--white);
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            display: inline-block;
+            margin: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <div class="logo-icon">S</div>
+                    <span>SokoInn</span>
+                </a>
+                
+                <nav class="nav-links">
+                    <a href="#platform" class="nav-link">Platform</a>
+                    <a href="#departments" class="nav-link">Departments</a>
+                    <a href="#services" class="nav-link">Services</a>
+                    <a href="#safety" class="nav-link">Safety</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </nav>
+                
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Your Trusted Marketplace for Everything in Kenya</h1>
+                <p>Find products, jobs, skills, and homes all in one secure platform. Verified sellers, protected transactions, and trusted services.</p>
+                <div class="hero-buttons">
+                    <a href="https://sokoinn.vercel.app" class="btn btn-primary btn-large" target="_blank">
+                        <i class="fas fa-shopping-cart"></i> Explore Marketplace
+                    </a>
+                    <a href="#services" class="btn btn-secondary btn-large">
+                        <i class="fas fa-info-circle"></i> Learn More
+                    </a>
+                </div>
+                <p class="mt-4" style="opacity: 0.8; font-size: 0.9rem;">
+                    First time on SokoInn? <a href="https://sokoinn.vercel.app" class="platform-link" target="_blank">Visit our main platform</a> to get started
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Info -->
+    <section id="platform" class="section platform-info">
+        <div class="container">
+            <div class="section-title">
+                <h2>The SokoInn Platform</h2>
+                <p>A comprehensive marketplace connecting buyers, sellers, job seekers, employers, and homeowners across Kenya</p>
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Trust & Safety First</h3>
+                    <p>We prioritize your security with verified sellers, in-person meetings for transactions, and strict protection policies.</p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Integrated Departments</h3>
+                    <p>One platform for multiple needs: Products, Jobs, Skills, and Homes - all seamlessly connected.</p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Direct Connections</h3>
+                    <p>Connect directly with service providers, employers, and our own housing agents for personalized assistance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Departments Section -->
+    <section id="departments" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Departments</h2>
+                <p>Four specialized areas serving different needs within our community</p>
+            </div>
+            
+            <div class="departments-grid">
+                <!-- Products Department -->
+                <div class="department-card">
+                    <div class="department-header">
+                        <h3>🛍️ Products</h3>
+                        <p>Verified Sellers Marketplace</p>
+                    </div>
+                    <div class="department-body">
+                        <p>Buy and sell products with confidence from verified sellers across Kenya.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> All sellers undergo verification process</li>
+                            <li><i class="fas fa-check-circle"></i> Product quality assurance</li>
+                            <li><i class="fas fa-check-circle"></i> Location-based product searches</li>
+                            <li><i class="fas fa-check-circle"></i> Secure communication channels</li>
+                        </ul>
+                        <div class="department-note">
+                            <strong>Important:</strong> Always meet sellers in person before payment. We verify sellers but recommend safe transaction practices.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Jobs Department -->
+                <div class="department-card">
+                    <div class="department-header">
+                        <h3>💼 Jobs</h3>
+                        <p>Employment & Career Opportunities</p>
+                    </div>
+                    <div class="department-body">
+                        <p>Find employment opportunities and connect with potential employers.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Direct referrals to employers</li>
+                            <li><i class="fas fa-check-circle"></i> Various industries and roles</li>
+                            <li><i class="fas fa-check-circle"></i> Verified job listings</li>
+                            <li><i class="fas fa-check-circle"></i> Application tracking</li>
+                        </ul>
+                        <div class="department-note">
+                            <strong>Note:</strong> Job listings are provided by third-party employers. We facilitate connections but don't handle employment contracts.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Skills Department -->
+                <div class="department-card">
+                    <div class="department-header">
+                        <h3>🔧 Skills</h3>
+                        <p>Service Providers & Freelancers</p>
+                    </div>
+                    <div class="department-body">
+                        <p>Find skilled professionals or offer your services to the community.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Various skill categories</li>
+                            <li><i class="fas fa-check-circle"></i> Service provider ratings</li>
+                            <li><i class="fas fa-check-circle"></i> Direct client connections</li>
+                            <li><i class="fas fa-check-circle"></i> Project-based or hourly work</li>
+                        </ul>
+                        <div class="department-note">
+                            <strong>Note:</strong> Service providers are independent professionals. We recommend verifying credentials before hiring.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Homes Department -->
+                <div class="department-card">
+                    <div class="department-header">
+                        <h3>🏠 Homes</h3>
+                        <p>Housing & Real Estate</p>
+                    </div>
+                    <div class="department-body">
+                        <p>Find your perfect home or list properties with our dedicated agents.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Direct contact with our agents</li>
+                            <li><i class="fas fa-check-circle"></i> Verified property listings</li>
+                            <li><i class="fas fa-check-circle"></i> Various property types</li>
+                            <li><i class="fas fa-check-circle"></i> Location-based searches</li>
+                        </ul>
+                        <div class="department-note">
+                            <strong>Unique Feature:</strong> Unlike other departments, Homes has our own dedicated agents. Contact us directly for housing needs.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services/CTA Section -->
+    <section id="services" class="section cta-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Join the SokoInn Community</h2>
+                <p>Choose how you want to engage with our platform</p>
+            </div>
+            
+            <div class="cta-grid">
+                <!-- Buy with Us -->
+                <div class="cta-card">
+                    <h3>🛒 Buy with Us</h3>
+                    <p>Access thousands of verified products from trusted sellers across Kenya.</p>
+                    <a href="https://sokoinn.vercel.app" class="btn btn-primary" target="_blank">
+                        <i class="fas fa-shopping-cart"></i> Start Shopping
+                    </a>
+                </div>
+                
+                <!-- Sell with Us -->
+                <div class="cta-card">
+                    <h3>💰 Sell with Us</h3>
+                    <p>Become a verified seller and reach thousands of potential customers.</p>
+                    <a href="https://forms.gle/jstKYhYsMSwSfG7e8" class="btn btn-primary" target="_blank">
+                        <i class="fas fa-user-tie"></i> Register as Seller
+                    </a>
+                    <p class="mt-2" style="font-size: 0.875rem; color: var(--gray-500);">
+                        Use our Google Form to register as a seller
+                    </p>
+                </div>
+                
+                <!-- Delivery Services -->
+                <div class="cta-card">
+                    <h3>🚚 Delivery Services</h3>
+                    <p>Offer delivery services to our community and earn income.</p>
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fas fa-truck"></i> Apply for Delivery
+                    </a>
+                </div>
+                
+                <!-- Careers -->
+                <div class="cta-card">
+                    <h3>👨‍💼 Careers with Us</h3>
+                    <p>Explore career opportunities within the SokoInn platform.</p>
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fas fa-briefcase"></i> View Careers
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safety Section -->
+    <section id="safety" class="section safety-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Safety Commitment</h2>
+                <p>Your security is our top priority in every transaction</p>
+            </div>
+            
+            <div class="safety-grid">
+                <div class="safety-item">
+                    <div class="safety-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <div class="safety-content">
+                        <h3>Verified Users</h3>
+                        <p>All sellers undergo verification to ensure legitimacy and build trust within our community.</p>
+                    </div>
+                </div>
+                
+                <div class="safety-item">
+                    <div class="safety-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="safety-content">
+                        <h3>In-Person Meetings</h3>
+                        <p><span class="highlight">We strictly advise against paying for products without meeting the seller in person.</span> This ensures transparency and security for all transactions.</p>
+                    </div>
+                </div>
+                
+                <div class="safety-item">
+                    <div class="safety-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <div class="safety-content">
+                        <h3>Customer Protection</h3>
+                        <p>Our team actively monitors the platform and provides support to ensure fair transactions and resolve disputes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <p>Have questions or need assistance? Contact us through any of these channels:</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email</h4>
+                                <a href="mailto:info.sokoinn@gmail.com">info.sokoinn@gmail.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4>Phone</h4>
+                                <a href="tel:+254727211191">0727 211 191</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div>
+                                <h4>Platform</h4>
+                                <a href="https://sokoinn.vercel.app" target="_blank">sokoinn.vercel.app</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3 style="color: var(--black); margin-bottom: 1.5rem;">Quick Inquiry</h3>
+                    <form id="inquiryForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="service">Service Interest</label>
+                            <select id="service" required>
+                                <option value="">Select an option</option>
+                                <option value="buying">Buying Products</option>
+                                <option value="selling">Selling Products</option>
+                                <option value="delivery">Delivery Services</option>
+                                <option value="careers">Careers/Jobs</option>
+                                <option value="homes">Housing/Real Estate</option>
+                                <option value="skills">Skills/Services</option>
+                                <option value="other">Other Inquiry</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="4" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <i class="fas fa-paper-plane"></i> Send Inquiry
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div style="width: 40px; height: 40px; background: var(--white); color: var(--maroon); display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md); font-weight: 800;">S</div>
+                    <span>SokoInn</span>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="https://sokoinn.vercel.app" target="_blank">Main Platform</a></li>
+                        <li><a href="#platform">About Platform</a></li>
+                        <li><a href="#departments">Departments</a></li>
+                        <li><a href="#safety">Safety Guidelines</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#services">Buy Products</a></li>
+                        <li><a href="https://forms.gle/jstKYhYsMSwSfG7e8" target="_blank">Sell Products</a></li>
+                        <li><a href="#services">Delivery Services</a></li>
+                        <li><a href="#services">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:info.sokoinn@gmail.com">info.sokoinn@gmail.com</a></li>
+                        <li><a href="tel:+254727211191">0727 211 191</a></li>
+                        <li><a href="#contact">Send Inquiry</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 SokoInn Marketplace. All rights reserved. | Trusted Platform for Products, Jobs, Skills & Homes in Kenya</p>
+                <p class="mt-2" style="font-size: 0.75rem;">Remember: Always meet sellers in person before payment for your safety.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.background = 'var(--white)';
+                navLinks.style.padding = '2rem';
+                navLinks.style.boxShadow = 'var(--shadow-lg)';
+                navLinks.style.gap = '1rem';
+            }
+        });
+        
+        // Form submission
+        document.getElementById('inquiryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const service = document.getElementById('service').value;
+            
+            // In a real implementation, you would send this data to your backend
+            // For now, we'll just show an alert and clear the form
+            alert(`Thank you ${name}! Your inquiry about ${service} has been received. We'll contact you soon.`);
+            
+            // Clear form
+            document.getElementById('inquiryForm').reset();
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Update year in copyright
+        document.addEventListener('DOMContentLoaded', function() {
+            const yearSpan = document.querySelector('.copyright p');
+            if (yearSpan) {
+                yearSpan.innerHTML = yearSpan.innerHTML.replace('2023', new Date().getFullYear());
+            }
+        });
+    </script>
+</body>
+</html>
