@@ -2392,6 +2392,328 @@
             color: var(--maroon);
             font-weight: 600;
         }
+        .delivery-option {
+        border: 2px solid var(--gray-300);
+        border-radius: var(--radius-md);
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        position: relative;
+    }
+    
+    .delivery-option:hover {
+        border-color: var(--maroon);
+        background: rgba(128, 0, 0, 0.05);
+    }
+    
+    .delivery-option.selected {
+        border-color: var(--maroon);
+        background: rgba(128, 0, 0, 0.1);
+    }
+    
+    .delivery-option-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        flex-shrink: 0;
+    }
+    
+    .delivery-option.pickup .delivery-option-icon {
+        background: rgba(37, 211, 102, 0.1);
+        color: #25D366;
+    }
+    
+    .delivery-option.delivery .delivery-option-icon {
+        background: rgba(128, 0, 0, 0.1);
+        color: var(--maroon);
+    }
+    
+    .delivery-option-content {
+        flex: 1;
+    }
+    
+    .delivery-option-title {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        font-size: 1.125rem;
+        color: var(--black);
+    }
+    
+    .delivery-option-description {
+        color: var(--gray-600);
+        font-size: 0.875rem;
+        margin-bottom: 0.5rem;
+        line-height: 1.4;
+    }
+    
+    .delivery-option-price {
+        font-weight: 700;
+        color: var(--maroon);
+        font-size: 1.25rem;
+    }
+    
+    .delivery-option-badge {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: var(--maroon);
+        color: white;
+        padding: 0.25rem 0.5rem;
+        border-radius: var(--radius-sm);
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+    
+    /* Delivery Form Styles */
+    .delivery-form-section {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--gray-200);
+    }
+    
+    .delivery-form-section:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+    }
+    
+    .section-title {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--black);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1rem;
+    }
+    
+    .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: var(--gray-700);
+        font-size: 0.875rem;
+    }
+    
+    .form-control {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--gray-300);
+        border-radius: var(--radius-md);
+        font-family: inherit;
+        font-size: 0.9375rem;
+        transition: var(--transition);
+        background: var(--white);
+    }
+    
+    .form-control:focus {
+        outline: none;
+        border-color: var(--maroon);
+        box-shadow: 0 0 0 3px rgba(128, 0, 0, 0.1);
+    }
+    
+    .form-select {
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23800000' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 16px;
+        padding-right: 2.5rem;
+    }
+    
+    .form-textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+    
+    .form-check {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+        cursor: pointer;
+    }
+    
+    .form-check-input {
+        width: 18px;
+        height: 18px;
+        border: 2px solid var(--gray-400);
+        border-radius: 4px;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+    
+    .form-check-input:checked {
+        background-color: var(--maroon);
+        border-color: var(--maroon);
+    }
+    
+    .form-check-label {
+        font-size: 0.875rem;
+        color: var(--gray-700);
+        cursor: pointer;
+    }
+    
+    /* Package Size Selector */
+    .package-size-selector {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .package-size-option {
+        border: 2px solid var(--gray-300);
+        border-radius: var(--radius-md);
+        padding: 1rem;
+        text-align: center;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+    
+    .package-size-option:hover {
+        border-color: var(--gray-400);
+    }
+    
+    .package-size-option.selected {
+        border-color: var(--maroon);
+        background: rgba(128, 0, 0, 0.05);
+    }
+    
+    .package-size-icon {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--maroon);
+    }
+    
+    .package-size-name {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        color: var(--black);
+    }
+    
+    .package-size-desc {
+        font-size: 0.75rem;
+        color: var(--gray-600);
+        margin-bottom: 0.5rem;
+    }
+    
+    .package-size-price {
+        font-weight: 700;
+        color: var(--maroon);
+        font-size: 1rem;
+    }
+    
+    /* Delivery Summary */
+    .delivery-summary {
+        background: var(--gray-100);
+        border-radius: var(--radius-md);
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .summary-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        font-size: 0.9375rem;
+    }
+    
+    .summary-row.total {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--maroon);
+        border-top: 2px solid var(--gray-300);
+        padding-top: 0.75rem;
+        margin-top: 0.75rem;
+    }
+    
+    /* Order Summary */
+    .order-summary {
+        background: linear-gradient(135deg, var(--maroon), var(--light-maroon));
+        color: white;
+        border-radius: var(--radius-lg);
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .order-summary-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .order-summary-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.75rem;
+        font-size: 0.9375rem;
+    }
+    
+    .order-summary-total {
+        font-size: 1.5rem;
+        font-weight: 800;
+        display: flex;
+        justify-content: space-between;
+        border-top: 2px solid rgba(255, 255, 255, 0.3);
+        padding-top: 1rem;
+        margin-top: 1rem;
+    }
+    
+    /* Loading Animation */
+    .loading-delivery {
+        text-align: center;
+        padding: 2rem;
+    }
+    
+    .loading-delivery .loading {
+        width: 40px;
+        height: 40px;
+        border-width: 3px;
+        margin: 0 auto 1rem;
+    }
+    
+    /* Error/Success Messages */
+    .delivery-message {
+        padding: 1rem;
+        border-radius: var(--radius-md);
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    
+    .delivery-message.success {
+        background: rgba(16, 185, 129, 0.1);
+        color: #10b981;
+        border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+    
+    .delivery-message.error {
+        background: rgba(239, 68, 68, 0.1);
+        color: #ef4444;
+        border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+    
+    .delivery-message.info {
+        background: rgba(59, 130, 246, 0.1);
+        color: #3b82f6;
+        border: 1px solid rgba(59, 130, 246, 0.2);
+    }
+        
+            
     </style>
 </head>
 <body>
@@ -2662,6 +2984,38 @@
             </div>
         </div>
     </div>
+    <div class="modal" id="deliveryModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title">Delivery Options</h3>
+            <button class="modal-close" onclick="closeModal('deliveryModal')" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="delivery-options" id="deliveryOptions">
+                <!-- Delivery options will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Order Confirmation Modal -->
+<div class="modal" id="orderModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title">Complete Your Order</h3>
+            <button class="modal-close" onclick="closeModal('orderModal')" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div id="orderFormContent">
+                <!-- Order form will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+</div>
     
     <!-- PWA Install Button -->
     <button class="install-button" id="installButton">
@@ -2670,1084 +3024,1197 @@
 
     <script>
     // ==================== CONFIGURATION ====================
-    const CONFIG = {
-        BACKEND_URL: 'https://script.google.com/macros/s/AKfycbzrOY9Lqu1feQJmqgZXn368Lo-HQ14-1LVRsY5pob7hNlo7uo2YlwlseeiI6GHTAanWnw/exec',
-        ITEMS_PER_PAGE: 12,
-        DEFAULT_IMAGE: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80',
-        ADMIN_WHATSAPP: '254784599322',
-        HERO_IMAGES: [
-            {
-                image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1920&h=600&fit=crop&auto=format&q=80',
-                title: 'Boost Your Sales Today',
-                description: 'Get featured in our hero section and increase your product visibility',
-                cta: 'Learn More',
-                link: 'https://wa.me/254784599322?text=Hi,%20tell me more about advertising on SokoInn',
-                badge: 'Featured'
-            },
-            {
-                image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1920&h=600&fit=crop&auto=format&q=80',
-                title: 'Limited Time Offer',
-                description: 'Special rates for first-time advertisers - Don\'t miss out!',
-                cta: 'Get Special Offer',
-                link: 'https://wa.me/254784599322?text=Hi,%20I want the special advertising offer',
-                badge: 'Limited Time'
-            }
-        ]
-    };
-
-    // ==================== STATE MANAGEMENT ====================
-    let state = {
-        products: [],
-        filteredProducts: [],
-        allProducts: [],
-        currentPage: 1,
-        isLoading: false,
-        hasMore: true,
-        selectedLocation: '',
-        searchQuery: '',
-        currentSlide: 0,
-        heroInterval: null,
-        currentImages: [],
-        currentImageIndex: 0,
-        chatbotOpen: false,
-        unreadMessages: 0,
-        searchTimeout: null,
-        mobileMenuOpen: false,
-        isTyping: false,
-        lastScrollTop: 0,
-        isBottomNavVisible: true,
-        scrollDirection: 'down',
-        touchStartY: 0,
-        touchEndY: 0,
-        isErrorState: false,
-        retryCount: 0,
-        maxRetries: 3
-    };
-
-    // ==================== PWA INSTALLATION ====================
-    let deferredPrompt;
-    const installButton = document.getElementById('installButton');
-
-    // Initialize PWA functionality
-    function initPWA() {
-        // Listen for beforeinstallprompt event
-        window.addEventListener('beforeinstallprompt', (e) => {
-            console.log('beforeinstallprompt event fired');
-            // Prevent Chrome 67 and earlier from automatically showing the prompt
-            e.preventDefault();
-            // Stash the event so it can be triggered later
-            deferredPrompt = e;
-            
-            // Update UI to notify the user they can install the PWA
-            showInstallPromotion();
-            
-            // Log the platforms for debugging
-            console.log('Installable PWA detected');
-        });
-        
-        // Listen for app installed event
-        window.addEventListener('appinstalled', (evt) => {
-            console.log('PWA was installed');
-            // Hide the install button
-            hideInstallButton();
-            // Clear the deferredPrompt so it can be garbage collected
-            deferredPrompt = null;
-        });
-        
-        // Check if app is already installed
-        if (window.matchMedia('(display-mode: standalone)').matches) {
-            console.log('Running in standalone mode');
-            hideInstallButton();
+const CONFIG = {
+    BACKEND_URL: 'https://script.google.com/macros/s/AKfycbzrOY9Lqu1feQJmqgZXn368Lo-HQ14-1LVRsY5pob7hNlo7uo2YlwlseeiI6GHTAanWnw/exec',
+    ITEMS_PER_PAGE: 12,
+    DEFAULT_IMAGE: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80',
+    ADMIN_WHATSAPP: '254784599322',
+    HERO_IMAGES: [
+        {
+            image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1920&h=600&fit=crop&auto=format&q=80',
+            title: 'Boost Your Sales Today',
+            description: 'Get featured in our hero section and increase your product visibility',
+            cta: 'Learn More',
+            link: 'https://wa.me/254784599322?text=Hi,%20tell me more about advertising on SokoInn',
+            badge: 'Featured'
+        },
+        {
+            image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1920&h=600&fit=crop&auto=format&q=80',
+            title: 'Limited Time Offer',
+            description: 'Special rates for first-time advertisers - Don\'t miss out!',
+            cta: 'Get Special Offer',
+            link: 'https://wa.me/254784599322?text=Hi,%20I want the special advertising offer',
+            badge: 'Limited Time'
         }
-        
-        // Check if on iOS (which handles PWA differently)
-        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-        if (isIOS) {
-            console.log('iOS device detected - showing iOS install instructions');
-        }
+    ]
+};
+
+// ==================== STATE MANAGEMENT ====================
+let state = {
+    products: [],
+    filteredProducts: [],
+    allProducts: [],
+    currentPage: 1,
+    isLoading: false,
+    hasMore: true,
+    selectedLocation: '',
+    searchQuery: '',
+    currentSlide: 0,
+    heroInterval: null,
+    currentImages: [],
+    currentImageIndex: 0,
+    chatbotOpen: false,
+    unreadMessages: 0,
+    searchTimeout: null,
+    mobileMenuOpen: false,
+    isTyping: false,
+    lastScrollTop: 0,
+    isBottomNavVisible: true,
+    scrollDirection: 'down',
+    touchStartY: 0,
+    touchEndY: 0,
+    isErrorState: false,
+    retryCount: 0,
+    maxRetries: 3,
+    delivery: {
+        selectedOption: null,
+        packageSize: null,
+        deliveryData: null,
+        deliveryCost: 0,
+        calculating: false,
+        currentProduct: null,
+        currentQuantity: 1
     }
+};
+
+// ==================== PWA INSTALLATION ====================
+let deferredPrompt;
+const installButton = document.getElementById('installButton');
+
+function initPWA() {
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        showInstallPromotion();
+    });
     
-    function showInstallPromotion() {
-        if (installButton) {
-            installButton.style.display = 'flex';
-            installButton.classList.add('show');
-            
-            // Add click event listener for install button
-            installButton.addEventListener('click', installPWA);
-            
-            // Auto-hide after 30 seconds
-            setTimeout(() => {
-                hideInstallButton();
-            }, 30000);
-        }
-    }
+    window.addEventListener('appinstalled', (evt) => {
+        hideInstallButton();
+        deferredPrompt = null;
+    });
     
-    function hideInstallButton() {
-        if (installButton) {
-            installButton.classList.remove('show');
-            setTimeout(() => {
-                installButton.style.display = 'none';
-            }, 300);
-        }
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+        hideInstallButton();
     }
-    
-    async function installPWA() {
-        if (!deferredPrompt) {
-            // Show iOS instructions
-            if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-                showToast('Tap the Share button and then "Add to Home Screen"', 'info');
-            } else {
-                showToast('Installation not available in your browser', 'info');
-            }
-            return;
-        }
-        
-        try {
-            // Show the install prompt
-            deferredPrompt.prompt();
-            
-            // Wait for the user to respond to the prompt
-            const { outcome } = await deferredPrompt.userChoice;
-            
-            if (outcome === 'accepted') {
-                console.log('User accepted the install prompt');
-                showToast('SokoInn is being installed...', 'success');
-                hideInstallButton();
-            } else {
-                console.log('User dismissed the install prompt');
-                showToast('Installation cancelled', 'info');
-            }
-            
-            // Clear the deferredPrompt variable
-            deferredPrompt = null;
-        } catch (error) {
-            console.error('Error during installation:', error);
-            showToast('Installation failed. Please try again.', 'error');
-        }
-    }
+}
 
-    // ==================== ERROR HANDLING AND HANG PREVENTION ====================
-    function handleError(error, context = 'Unknown') {
-        console.error(`Error in ${context}:`, error);
+function showInstallPromotion() {
+    if (installButton) {
+        installButton.style.display = 'flex';
+        installButton.classList.add('show');
         
-        if (state.retryCount >= state.maxRetries) {
-            state.isErrorState = true;
-            showEmergencyReload();
-            return;
-        }
+        installButton.addEventListener('click', installPWA);
         
-        state.retryCount++;
-        
-        // Retry after delay
         setTimeout(() => {
-            if (context.includes('loadProducts')) {
-                loadProductsFromBackend();
-            }
-        }, 1000 * state.retryCount);
+            hideInstallButton();
+        }, 30000);
     }
+}
 
-    function showEmergencyReload() {
-        const emergencyBtn = document.querySelector('.emergency-reload');
-        if (emergencyBtn) {
-            emergencyBtn.style.display = 'flex';
+function hideInstallButton() {
+    if (installButton) {
+        installButton.classList.remove('show');
+        setTimeout(() => {
+            installButton.style.display = 'none';
+        }, 300);
+    }
+}
+
+async function installPWA() {
+    if (!deferredPrompt) {
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+            showToast('Tap the Share button and then "Add to Home Screen"', 'info');
+        } else {
+            showToast('Installation not available in your browser', 'info');
         }
+        return;
+    }
+    
+    try {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        
+        if (outcome === 'accepted') {
+            showToast('SokoInn is being installed...', 'success');
+            hideInstallButton();
+        } else {
+            showToast('Installation cancelled', 'info');
+        }
+        
+        deferredPrompt = null;
+    } catch (error) {
+        showToast('Installation failed. Please try again.', 'error');
+    }
+}
+
+// ==================== INITIALIZATION ====================
+document.addEventListener('DOMContentLoaded', () => {
+    try {
+        initPWA();
+        
+        setTimeout(() => {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            if (loadingOverlay) {
+                loadingOverlay.classList.add('hidden');
+            }
+        }, 1500);
+        
+        initHeroSlideshow();
+        initScrollDetection();
+        initBottomNav();
+        initChatbot();
+        initLocationFiltering();
+        initEventListeners();
+        initTouchGestures();
+        
+        loadProductsFromBackend();
+        
+        document.addEventListener('click', (e) => {
+            const searchContainer = document.querySelector('.search-container');
+            if (searchContainer && !searchContainer.contains(e.target)) {
+                hideSearchSuggestions();
+            }
+        });
+        
+        window.addEventListener('error', (event) => {
+            handleError(event.error, 'Global Error Handler');
+            return true;
+        });
+        
+        window.addEventListener('unhandledrejection', (event) => {
+            handleError(event.reason, 'Unhandled Promise Rejection');
+        });
+        
+    } catch (error) {
+        handleError(error, 'Initialization');
+    }
+});
+
+// ==================== DELIVERY SYSTEM FUNCTIONS ====================
+function showDeliveryOptions(productId, quantity = 1) {
+    try {
+        const product = state.allProducts.find(p => p.listingId === productId);
+        if (!product) {
+            showToast('Product not found', 'error');
+            return;
+        }
+        
+        state.delivery.currentProduct = product;
+        state.delivery.currentQuantity = quantity;
+        
+        const modal = document.getElementById('deliveryModal');
+        const content = document.getElementById('deliveryOptions');
+        
+        content.innerHTML = `
+            <div class="delivery-message info">
+                <i class="fas fa-info-circle"></i>
+                Select how you'd like to receive your ${product.title}
+            </div>
+            
+            <div class="delivery-option pickup" onclick="selectDeliveryOption('pickup')">
+                <div class="delivery-option-icon">
+                    <i class="fas fa-store"></i>
+                </div>
+                <div class="delivery-option-content">
+                    <div class="delivery-option-title">Pickup from Seller</div>
+                    <div class="delivery-option-description">
+                        Arrange pickup directly with the seller at their location. 
+                        No delivery charges apply.
+                    </div>
+                    <div class="delivery-option-price">FREE</div>
+                </div>
+            </div>
+            
+            <div class="delivery-option delivery" onclick="selectDeliveryOption('delivery')">
+                <div class="delivery-option-icon">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <div class="delivery-option-content">
+                    <div class="delivery-option-title">Home Delivery</div>
+                    <div class="delivery-option-description">
+                        Professional delivery by DSOG Deliveries. 
+                        Rates based on package size and location.
+                    </div>
+                    <div class="delivery-option-price">From KSh 100</div>
+                </div>
+                <div class="delivery-option-badge">Recommended</div>
+            </div>
+            
+            <div class="form-group" style="margin-top: 1.5rem;">
+                <button class="btn btn-primary w-full" onclick="proceedToOrder()" id="proceedBtn" disabled>
+                    Continue to Order
+                </button>
+            </div>
+        `;
+        
+        showModal('deliveryModal');
+        
+    } catch (error) {
+        console.error('Error showing delivery options:', error);
+        showToast('Failed to load delivery options', 'error');
+    }
+}
+
+function selectDeliveryOption(option) {
+    try {
+        document.querySelectorAll('.delivery-option').forEach(el => {
+            el.classList.remove('selected');
+        });
+        
+        const selectedEl = document.querySelector(`.delivery-option.${option}`);
+        if (selectedEl) {
+            selectedEl.classList.add('selected');
+        }
+        
+        state.delivery.selectedOption = option;
+        
+        const proceedBtn = document.getElementById('proceedBtn');
+        if (proceedBtn) {
+            proceedBtn.disabled = false;
+            proceedBtn.textContent = option === 'delivery' 
+                ? 'Continue with Delivery' 
+                : 'Continue with Pickup';
+        }
+        
+    } catch (error) {
+        console.error('Error selecting delivery option:', error);
+    }
+}
+
+function proceedToOrder() {
+    try {
+        if (!state.delivery.selectedOption) {
+            showToast('Please select a delivery option', 'error');
+            return;
+        }
+        
+        closeModal('deliveryModal');
+        
+        if (state.delivery.selectedOption === 'delivery') {
+            showDeliveryForm();
+        } else {
+            showOrderForm();
+        }
+        
+    } catch (error) {
+        console.error('Error proceeding to order:', error);
+        showToast('Failed to proceed with order', 'error');
+    }
+}
+
+function showDeliveryForm() {
+    try {
+        const modal = document.getElementById('orderModal');
+        const content = document.getElementById('orderFormContent');
+        
+        content.innerHTML = `
+            <div class="loading-delivery" id="deliveryFormLoading">
+                <div class="loading"></div>
+                <p>Loading delivery options...</p>
+            </div>
+            
+            <div id="deliveryFormContent" style="display: none;">
+                <!-- Will be populated by loadDeliveryForm -->
+            </div>
+        `;
+        
+        showModal('orderModal');
+        loadDeliveryForm();
+        
+    } catch (error) {
+        console.error('Error showing delivery form:', error);
+        showToast('Failed to load delivery form', 'error');
+    }
+}
+
+async function loadDeliveryForm() {
+    try {
+        const product = state.delivery.currentProduct;
+        
+        const response = await fetch(`${CONFIG.BACKEND_URL}?action=getDeliveryRates`);
+        const ratesData = await response.json();
+        
+        if (!ratesData.success) {
+            throw new Error('Failed to load delivery rates');
+        }
+        
+        const loadingEl = document.getElementById('deliveryFormLoading');
+        const formEl = document.getElementById('deliveryFormContent');
+        
+        loadingEl.style.display = 'none';
+        formEl.style.display = 'block';
+        
+        formEl.innerHTML = `
+            <div class="delivery-form-section">
+                <h4 class="section-title">
+                    <i class="fas fa-box"></i> Select Package Size
+                </h4>
+                <div class="package-size-selector">
+                    <div class="package-size-option" onclick="selectPackageSize('SMALL')">
+                        <div class="package-size-icon">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="package-size-name">Small</div>
+                        <div class="package-size-desc">Up to 2kg</div>
+                        <div class="package-size-price">KSh ${ratesData.data.standardRates.SMALL}</div>
+                    </div>
+                    
+                    <div class="package-size-option" onclick="selectPackageSize('MEDIUM')">
+                        <div class="package-size-icon">
+                            <i class="fas fa-archive"></i>
+                        </div>
+                        <div class="package-size-name">Medium</div>
+                        <div class="package-size-desc">2-10kg</div>
+                        <div class="package-size-price">KSh ${ratesData.data.standardRates.MEDIUM}</div>
+                    </div>
+                    
+                    <div class="package-size-option" onclick="selectPackageSize('LARGE')">
+                        <div class="package-size-icon">
+                            <i class="fas fa-pallet"></i>
+                        </div>
+                        <div class="package-size-name">Large</div>
+                        <div class="package-size-desc">10-50kg</div>
+                        <div class="package-size-price">KSh ${ratesData.data.standardRates.LARGE}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="delivery-form-section">
+                <h4 class="section-title">
+                    <i class="fas fa-map-marker-alt"></i> Delivery Address
+                </h4>
                 
-        // Force remove loading protection
+                <div class="form-group">
+                    <label class="form-label">Full Delivery Address *</label>
+                    <input type="text" class="form-control" id="deliveryAddress" 
+                           placeholder="Street, Building, Apartment Number" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">City/Town *</label>
+                    <input type="text" class="form-control" id="deliveryCity" 
+                           placeholder="e.g., Nairobi, Mombasa, Kisumu" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Nearest Landmark</label>
+                    <input type="text" class="form-control" id="deliveryLandmark" 
+                           placeholder="e.g., Near mall, school, hospital">
+                </div>
+            </div>
+            
+            <div class="delivery-form-section">
+                <h4 class="section-title">
+                    <i class="fas fa-user"></i> Your Information
+                </h4>
+                
+                <div class="form-group">
+                    <label class="form-label">Full Name *</label>
+                    <input type="text" class="form-control" id="buyerName" 
+                           placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Phone Number *</label>
+                    <input type="tel" class="form-control" id="buyerPhone" 
+                           placeholder="e.g., 254712345678" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="buyerEmail" 
+                           placeholder="you@example.com">
+                </div>
+            </div>
+            
+            <div class="delivery-form-section">
+                <h4 class="section-title">
+                    <i class="fas fa-sticky-note"></i> Additional Information
+                </h4>
+                
+                <div class="form-group">
+                    <label class="form-label">Special Instructions</label>
+                    <textarea class="form-control form-textarea" id="deliveryInstructions" 
+                              placeholder="Any special delivery instructions..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Preferred Delivery Date</label>
+                    <input type="date" class="form-control" id="preferredDate" 
+                           min="${new Date().toISOString().split('T')[0]}">
+                </div>
+            </div>
+            
+            <div id="deliverySummary" class="delivery-summary" style="display: none;">
+                <!-- Delivery summary will be calculated here -->
+            </div>
+            
+            <div class="form-group">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                    <label class="form-check-label">
+                        I agree to the <a href="#" onclick="showTerms()">terms and conditions</a> 
+                        and understand that DSOG Deliveries will contact me for delivery arrangements.
+                    </label>
+                </div>
+            </div>
+            
+            <div class="form-group" style="display: flex; gap: 1rem;">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('orderModal')" style="flex: 1;">
+                    Cancel
+                </button>
+                <button type="button" class="btn btn-primary" onclick="calculateDeliveryCost()" style="flex: 1;">
+                    Calculate Delivery
+                </button>
+                <button type="button" class="btn btn-primary" onclick="submitDeliveryOrder()" id="submitOrderBtn" disabled style="flex: 2;">
+                    <i class="fas fa-shopping-cart"></i> Complete Order
+                </button>
+            </div>
+        `;
+        
+    } catch (error) {
+        console.error('Error loading delivery form:', error);
+        showToast('Failed to load delivery form', 'error');
+    }
+}
+
+function selectPackageSize(size) {
+    try {
+        document.querySelectorAll('.package-size-option').forEach(el => {
+            el.classList.remove('selected');
+        });
+        
+        const selectedEl = document.querySelectorAll('.package-size-option')[{
+            'SMALL': 0,
+            'MEDIUM': 1,
+            'LARGE': 2
+        }[size]];
+        
+        if (selectedEl) {
+            selectedEl.classList.add('selected');
+        }
+        
+        state.delivery.packageSize = size;
+        
+    } catch (error) {
+        console.error('Error selecting package size:', error);
+    }
+}
+
+async function calculateDeliveryCost() {
+    try {
+        const packageSize = state.delivery.packageSize;
+        const deliveryCity = document.getElementById('deliveryCity').value;
+        const buyerName = document.getElementById('buyerName').value;
+        const buyerPhone = document.getElementById('buyerPhone').value;
+        
+        if (!packageSize) {
+            showToast('Please select package size', 'error');
+            return;
+        }
+        
+        if (!deliveryCity || !buyerName || !buyerPhone) {
+            showToast('Please fill in all required fields', 'error');
+            return;
+        }
+        
+        const product = state.delivery.currentProduct;
+        const sellerCity = product.sellerLocation.split(',')[0] || 'Nairobi';
+        
+        state.delivery.calculating = true;
+        
+        const response = await fetch(
+            `${CONFIG.BACKEND_URL}?action=calculateDelivery&packageSize=${packageSize}&deliveryCity=${deliveryCity}&sellerCity=${sellerCity}`
+        );
+        
+        const result = await response.json();
+        
+        if (!result.success) {
+            throw new Error(result.message || 'Failed to calculate delivery');
+        }
+        
+        state.delivery.calculating = false;
+        state.delivery.deliveryCost = result.data.deliveryCost;
+        state.delivery.deliveryData = {
+            packageSize: packageSize,
+            deliveryAddress: document.getElementById('deliveryAddress').value,
+            deliveryCity: deliveryCity,
+            nearestLandmark: document.getElementById('deliveryLandmark').value,
+            instructions: document.getElementById('deliveryInstructions').value,
+            preferredDate: document.getElementById('preferredDate').value,
+            specialInstructions: document.getElementById('deliveryInstructions').value
+        };
+        
+        showDeliverySummary(result.data);
+        
+        const submitBtn = document.getElementById('submitOrderBtn');
+        if (submitBtn) {
+            submitBtn.disabled = false;
+        }
+        
+    } catch (error) {
+        console.error('Error calculating delivery cost:', error);
+        state.delivery.calculating = false;
+        showToast(error.message || 'Failed to calculate delivery cost', 'error');
+    }
+}
+
+function showDeliverySummary(deliveryInfo) {
+    try {
+        const product = state.delivery.currentProduct;
+        const quantity = state.delivery.currentQuantity;
+        const productTotal = product.price * quantity;
+        const totalAmount = productTotal + state.delivery.deliveryCost;
+        
+        const summaryEl = document.getElementById('deliverySummary');
+        summaryEl.style.display = 'block';
+        summaryEl.innerHTML = `
+            <h4 style="font-weight: 600; margin-bottom: 1rem; color: var(--black);">
+                <i class="fas fa-receipt"></i> Order Summary
+            </h4>
+            
+            <div class="summary-row">
+                <span>${product.title} × ${quantity}</span>
+                <span>KSh ${productTotal.toLocaleString()}</span>
+            </div>
+            
+            <div class="summary-row">
+                <span>Delivery (${deliveryInfo.deliveryType})</span>
+                <span>KSh ${state.delivery.deliveryCost.toLocaleString()}</span>
+            </div>
+            
+            <div class="summary-row">
+                <span>Package Size</span>
+                <span>${deliveryInfo.packageSize}</span>
+            </div>
+            
+            <div class="summary-row">
+                <span>Estimated Delivery</span>
+                <span>${deliveryInfo.deliveryTime}</span>
+            </div>
+            
+            <div class="summary-row total">
+                <span>Total Amount</span>
+                <span>KSh ${totalAmount.toLocaleString()}</span>
+            </div>
+        `;
+        
+    } catch (error) {
+        console.error('Error showing delivery summary:', error);
+    }
+}
+
+async function submitDeliveryOrder() {
+    try {
+        const product = state.delivery.currentProduct;
+        const quantity = state.delivery.currentQuantity;
+        
+        const buyerName = document.getElementById('buyerName').value;
+        const buyerPhone = document.getElementById('buyerPhone').value;
+        const buyerEmail = document.getElementById('buyerEmail').value;
+        const deliveryCity = document.getElementById('deliveryCity').value;
+        const agreeTerms = document.getElementById('agreeTerms').checked;
+        
+        if (!buyerName || !buyerPhone || !deliveryCity) {
+            showToast('Please fill in all required fields', 'error');
+            return;
+        }
+        
+        if (!agreeTerms) {
+            showToast('Please agree to the terms and conditions', 'error');
+            return;
+        }
+        
+        const orderData = {
+            action: 'submitOrder',
+            listingId: product.listingId,
+            listingType: 'product',
+            buyerInfo: {
+                name: buyerName,
+                phone: buyerPhone,
+                email: buyerEmail,
+                location: document.getElementById('deliveryAddress').value,
+                city: deliveryCity
+            },
+            quantity: quantity,
+            unitPrice: product.price,
+            deliveryRequired: 'yes',
+            deliveryData: state.delivery.deliveryData
+        };
+        
+        const submitBtn = document.getElementById('submitOrderBtn');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<div class="loading" style="display: inline-block; margin-right: 0.5rem;"></div> Processing...';
+        submitBtn.disabled = true;
+        
+        const response = await fetch(CONFIG.BACKEND_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderData)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            showToast(`Order #${result.data.orderId} submitted successfully!`, 'success');
+            showOrderConfirmation(result.data);
+            
+            setTimeout(() => {
+                closeModal('orderModal');
+                resetDeliveryState();
+            }, 3000);
+            
+        } else {
+            throw new Error(result.message || 'Failed to submit order');
+        }
+        
+    } catch (error) {
+        console.error('Error submitting delivery order:', error);
+        showToast(error.message || 'Failed to submit order', 'error');
+        
+        const submitBtn = document.getElementById('submitOrderBtn');
+        if (submitBtn) {
+            submitBtn.innerHTML = '<i class="fas fa-shopping-cart"></i> Complete Order';
+            submitBtn.disabled = false;
+        }
+    }
+}
+
+function showOrderForm() {
+    try {
+        const product = state.delivery.currentProduct;
+        const quantity = state.delivery.currentQuantity;
+        const totalAmount = product.price * quantity;
+        
+        const modal = document.getElementById('orderModal');
+        const content = document.getElementById('orderFormContent');
+        
+        content.innerHTML = `
+            <div class="order-summary">
+                <div class="order-summary-title">
+                    <i class="fas fa-shopping-cart"></i> Order Summary
+                </div>
+                
+                <div class="order-summary-item">
+                    <span>${product.title} × ${quantity}</span>
+                    <span>KSh ${(product.price * quantity).toLocaleString()}</span>
+                </div>
+                
+                <div class="order-summary-item">
+                    <span>Delivery</span>
+                    <span>Pickup from Seller</span>
+                </div>
+                
+                <div class="order-summary-total">
+                    <span>Total Amount</span>
+                    <span>KSh ${totalAmount.toLocaleString()}</span>
+                </div>
+            </div>
+            
+            <div class="delivery-form-section">
+                <h4 class="section-title">
+                    <i class="fas fa-user"></i> Your Information
+                </h4>
+                
+                <div class="form-group">
+                    <label class="form-label">Full Name *</label>
+                    <input type="text" class="form-control" id="pickupName" 
+                           placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Phone Number *</label>
+                    <input type="tel" class="form-control" id="pickupPhone" 
+                           placeholder="e.g., 254712345678" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="pickupEmail" 
+                           placeholder="you@example.com">
+                </div>
+            </div>
+            
+            <div class="delivery-form-section">
+                <h4 class="section-title">
+                    <i class="fas fa-info-circle"></i> Pickup Information
+                </h4>
+                <p style="color: var(--gray-600); font-size: 0.875rem; margin-bottom: 1rem;">
+                    You will need to contact the seller directly to arrange pickup:
+                    <br><strong>${product.sellerName}</strong> - ${product.sellerPhone}
+                    <br>Location: ${product.sellerLocation}
+                </p>
+            </div>
+            
+            <div class="form-group">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="pickupAgreeTerms" required>
+                    <label class="form-check-label">
+                        I agree to contact the seller to arrange pickup and understand 
+                        this is a direct transaction between buyer and seller.
+                    </label>
+                </div>
+            </div>
+            
+            <div class="form-group" style="display: flex; gap: 1rem;">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('orderModal')" style="flex: 1;">
+                    Cancel
+                </button>
+                <button type="button" class="btn btn-primary" onclick="submitPickupOrder()" style="flex: 2;">
+                    <i class="fas fa-shopping-cart"></i> Submit Order
+                </button>
+            </div>
+        `;
+        
+        showModal('orderModal');
+        
+    } catch (error) {
+        console.error('Error showing order form:', error);
+        showToast('Failed to load order form', 'error');
+    }
+}
+
+async function submitPickupOrder() {
+    try {
+        const product = state.delivery.currentProduct;
+        const quantity = state.delivery.currentQuantity;
+        
+        const buyerName = document.getElementById('pickupName').value;
+        const buyerPhone = document.getElementById('pickupPhone').value;
+        const buyerEmail = document.getElementById('pickupEmail').value;
+        const agreeTerms = document.getElementById('pickupAgreeTerms').checked;
+        
+        if (!buyerName || !buyerPhone) {
+            showToast('Please fill in all required fields', 'error');
+            return;
+        }
+        
+        if (!agreeTerms) {
+            showToast('Please agree to the terms', 'error');
+            return;
+        }
+        
+        const orderData = {
+            action: 'submitOrder',
+            listingId: product.listingId,
+            listingType: 'product',
+            buyerInfo: {
+                name: buyerName,
+                phone: buyerPhone,
+                email: buyerEmail,
+                location: 'Pickup from seller',
+                city: product.sellerLocation.split(',')[0] || 'Nairobi'
+            },
+            quantity: quantity,
+            unitPrice: product.price,
+            deliveryRequired: 'no'
+        };
+        
+        const submitBtn = document.querySelector('.btn-primary[onclick="submitPickupOrder()"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<div class="loading" style="display: inline-block; margin-right: 0.5rem;"></div> Processing...';
+        submitBtn.disabled = true;
+        
+        const response = await fetch(CONFIG.BACKEND_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderData)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            showToast(`Order #${result.data.orderId} submitted successfully!`, 'success');
+            showPickupConfirmation(product);
+            
+            setTimeout(() => {
+                closeModal('orderModal');
+                resetDeliveryState();
+            }, 5000);
+            
+        } else {
+            throw new Error(result.message || 'Failed to submit order');
+        }
+        
+    } catch (error) {
+        console.error('Error submitting pickup order:', error);
+        showToast(error.message || 'Failed to submit order', 'error');
+        
+        const submitBtn = document.querySelector('.btn-primary[onclick="submitPickupOrder()"]');
+        if (submitBtn) {
+            submitBtn.innerHTML = '<i class="fas fa-shopping-cart"></i> Submit Order';
+            submitBtn.disabled = false;
+        }
+    }
+}
+
+function showOrderConfirmation(orderData) {
+    const content = document.getElementById('orderFormContent');
+    content.innerHTML = `
+        <div class="delivery-message success" style="text-align: center;">
+            <i class="fas fa-check-circle" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+            <h3 style="margin-bottom: 0.5rem;">Order Confirmed!</h3>
+            <p>Order #: <strong>${orderData.orderId}</strong></p>
+        </div>
+        
+        <div class="delivery-summary">
+            <h4 style="font-weight: 600; margin-bottom: 1rem; color: var(--black);">
+                <i class="fas fa-receipt"></i> Order Details
+            </h4>
+            
+            <div class="summary-row">
+                <span>Product Total</span>
+                <span>KSh ${orderData.productTotal.toLocaleString()}</span>
+            </div>
+            
+            <div class="summary-row">
+                <span>Delivery Cost</span>
+                <span>KSh ${orderData.deliveryCost.toLocaleString()}</span>
+            </div>
+            
+            <div class="summary-row total">
+                <span>Total Amount</span>
+                <span>KSh ${orderData.totalAmount.toLocaleString()}</span>
+            </div>
+        </div>
+        
+        <div class="delivery-message info">
+            <h4 style="margin-bottom: 0.5rem;"><i class="fas fa-envelope"></i> What Happens Next?</h4>
+            <p style="font-size: 0.875rem; margin-bottom: 0;">
+                1. Emails have been sent to you, the seller, and DSOG Deliveries<br>
+                2. DSOG will contact you for delivery arrangements<br>
+                3. You'll receive delivery updates via email/SMS<br>
+                4. Complete payment when contacted by the seller
+            </p>
+        </div>
+        
+        <div class="form-group" style="margin-top: 1.5rem; text-align: center;">
+            <button class="btn btn-primary" onclick="closeModal('orderModal')">
+                <i class="fas fa-check"></i> Done
+            </button>
+        </div>
+    `;
+}
+
+function showPickupConfirmation(product) {
+    const content = document.getElementById('orderFormContent');
+    content.innerHTML = `
+        <div class="delivery-message success" style="text-align: center;">
+            <i class="fas fa-check-circle" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+            <h3 style="margin-bottom: 0.5rem;">Order Request Sent!</h3>
+            <p>The seller has been notified of your interest.</p>
+        </div>
+        
+        <div class="delivery-summary">
+            <h4 style="font-weight: 600; margin-bottom: 1rem; color: var(--black);">
+                <i class="fas fa-user-tie"></i> Contact Seller
+            </h4>
+            
+            <div style="background: var(--white); padding: 1rem; border-radius: var(--radius-md);">
+                <p style="margin-bottom: 0.75rem;"><strong>${product.sellerName}</strong></p>
+                <p style="margin-bottom: 0.5rem;">
+                    <i class="fas fa-phone" style="color: var(--maroon);"></i>
+                    <a href="tel:${product.sellerPhone}" style="color: var(--maroon); margin-left: 0.5rem;">
+                        ${product.sellerPhone}
+                    </a>
+                </p>
+                <p style="margin-bottom: 0.5rem;">
+                    <i class="fab fa-whatsapp" style="color: #25D366;"></i>
+                    <a href="https://wa.me/${product.sellerWhatsapp || product.sellerPhone}" 
+                       target="_blank" 
+                       style="color: #25D366; margin-left: 0.5rem;">
+                        WhatsApp Seller
+                    </a>
+                </p>
+                <p style="margin-bottom: 0;">
+                    <i class="fas fa-map-marker-alt" style="color: var(--gray-600);"></i>
+                    <span style="margin-left: 0.5rem;">${product.sellerLocation}</span>
+                </p>
+            </div>
+        </div>
+        
+        <div class="delivery-message info">
+            <h4 style="margin-bottom: 0.5rem;"><i class="fas fa-info-circle"></i> Next Steps</h4>
+            <p style="font-size: 0.875rem; margin-bottom: 0;">
+                1. Contact the seller to arrange pickup<br>
+                2. Confirm product availability<br>
+                3. Agree on payment method<br>
+                4. Complete the transaction
+            </p>
+        </div>
+        
+        <div class="form-group" style="margin-top: 1.5rem; text-align: center;">
+            <button class="btn btn-primary" onclick="closeModal('orderModal')">
+                <i class="fas fa-check"></i> Done
+            </button>
+        </div>
+    `;
+}
+
+function resetDeliveryState() {
+    state.delivery = {
+        selectedOption: null,
+        packageSize: null,
+        deliveryData: null,
+        deliveryCost: 0,
+        calculating: false,
+        currentProduct: null,
+        currentQuantity: 1
+    };
+}
+
+// ==================== UPDATED PRODUCT CARD FUNCTIONS ====================
+function createProductHTML(product) {
+    try {
+        const images = product.images || [CONFIG.DEFAULT_IMAGE];
+        const imageCount = images.length;
+        const firstImage = images[0];
+        
+        return `
+        <div class="product-card" data-id="${product.listingId}">
+            ${product.stock === 0 ? '<span class="product-badge">Sold Out</span>' : ''}
+            ${product.stock > 0 && product.stock <= 3 ? '<span class="product-badge">Low Stock</span>' : ''}
+            
+            <div class="product-image">
+                <div class="image-placeholder"></div>
+                <img src="${firstImage}" 
+                    alt="${product.title}"
+                    onerror="this.src='${CONFIG.DEFAULT_IMAGE}'; this.classList.add('loaded')"
+                    class="loaded">
+                ${imageCount > 1 ? `<div class="image-counter">+${imageCount - 1}</div>` : ''}
+            </div>
+            
+            <div class="product-content">
+                <h3 class="product-title" onclick="viewProduct('${product.listingId}')">${product.title}</h3>
+                <div class="product-price">KSh ${product.price.toLocaleString()}</div>
+                
+                <div class="product-seller">
+                    <span class="seller-location">📍 ${product.sellerLocation || 'Nairobi'}</span>
+                    ${product.sellerVerification === 'verified' ? '<span class="seller-verified">✓</span>' : ''}
+                </div>
+                
+                <div class="product-rating">
+                    <span style="color: #fbbf24;">${'★'.repeat(Math.floor(product.rating || 4))}${'☆'.repeat(5 - Math.floor(product.rating || 4))}</span>
+                    <span style="font-size: 0.75rem; color: var(--gray-500);">(${product.reviewCount || 0})</span>
+                </div>
+                
+                <div class="product-actions">
+                    <button class="btn btn-primary" onclick="showDeliveryOptions('${product.listingId}', 1)">
+                        <i class="fas fa-shopping-cart"></i> Order Now
+                    </button>
+                    <div class="contact-toggle">
+                        <button class="btn btn-secondary" onclick="toggleContactOptions(this, '${product.listingId}', event)">
+                            <i class="fas fa-phone-alt"></i> Contact
+                        </button>
+                        <div class="contact-options">
+                            <button class="contact-option whatsapp-option" 
+                            onclick="openWhatsApp('${product.listingId}', event)">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </button>
+                            <button class="contact-option call-option" 
+                            onclick="openPhone('${product.listingId}', event)">
+                                <i class="fas fa-phone"></i> Call
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `;
+    } catch (error) {
+        console.error('Error creating product HTML:', error);
+        return '<div class="product-card">Error loading product</div>';
+    }
+}
+
+function openWhatsApp(productId, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    
+    const product = state.allProducts.find(p => p.listingId === productId);
+    if (!product || !product.sellerWhatsapp) return;
+    
+    const message = `Hi, I'm interested in your "${product.title}" for KSh ${product.price.toLocaleString()} on SokoInn`;
+    window.open(`https://wa.me/${product.sellerWhatsapp}?text=${encodeURIComponent(message)}`, '_blank');
+    
+    const dropdown = event?.target?.closest('.contact-options');
+    if (dropdown) dropdown.classList.remove('show');
+}
+
+function openPhone(productId, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    
+    const product = state.allProducts.find(p => p.listingId === productId);
+    if (!product || !product.sellerPhone) return;
+    
+    window.location.href = `tel:${product.sellerPhone}`;
+    
+    const dropdown = event?.target?.closest('.contact-options');
+    if (dropdown) dropdown.classList.remove('show');
+}
+
+// ==================== UPDATED CHATBOT RESPONSES ====================
+function processUserMessage(message) {
+    try {
+        const lowerMessage = message.toLowerCase();
+        
+        const responses = {
+            'hello': "Hello! Welcome to SokoInn. How can I assist you today?",
+            'hi': "Hi there! 👋 I'm here to help you with anything about SokoInn.",
+            'help': "I can help you with:\n\n1. 📦 Buying products\n2. 🛍️ Becoming a seller\n3. 📢 Advertising\n4. 📞 Contacting support\n5. 🚚 Delivery information\n6. ❓ General inquiries\n\nWhat would you like to know?",
+            'buy': "To buy products:\n\n1. Click 'Order Now' on any product\n2. Choose delivery or pickup\n3. Enter your details\n4. Submit the order\n5. Complete payment with seller\n\nNeed help with a specific purchase?",
+            'delivery': "We offer delivery through DSOG Deliveries! 🚚\n\n📦 **Package Sizes & Rates (Within City - Standard):**\n• Small (up to 2kg): KSh 100\n• Medium (2-10kg): KSh 300\n• Large (10-50kg): KSh 600\n\n📍 **Outside City (Express):** 3x the Standard rate\n\n📅 **Delivery Times:**\n• Standard: 2-3 business days\n• Express: 3-5 business days\n\n💡 **How it works:**\n1. Select 'Order Now' on any product\n2. Choose 'Home Delivery'\n3. Enter your address\n4. We'll handle the rest!\n\nNeed help with a specific delivery?",
+            'dsog': "DSOG Deliveries is our trusted delivery partner. They handle:\n\n• Professional pickup from sellers\n• Secure delivery to your address\n• Real-time delivery updates\n• Insurance for your items\n\n📧 Contact DSOG: b2cdsog1@gmail.com\n\nAll deliveries are coordinated through our system - just place your order and we'll handle the rest!",
+            'seller': "To become a seller:\n\n1. Contact our admin directly at +254 784 599 322\n2. We'll guide you through the verification process\n3. Once verified, you can list your products\n\nWant to start the registration process?",
+            'ad': "For advertising opportunities:\n\n📢 Hero section ads (high visibility)\n⭐ Featured product listings\n🏷️ Category sponsorships\n\nContact +254 784 599 322 for rates and availability.",
+            'support': "Need support? Contact our admin at +254 784 599 322 via WhatsApp for immediate assistance.",
+            'price': "Advertising prices vary by placement:\n\n• Hero section: Contact for pricing\n• Featured listings: Contact for pricing\n• Category sponsorship: Contact for pricing\n\nAll prices are competitive and based on duration.",
+            'contact': "You can contact us:\n\n• WhatsApp: +254 784 599 322\n• Email: info@sokoinn.com\n• Website: www.sokoinn.com",
+            'order': "To place an order:\n\n1. Click 'Order Now' on any product\n2. Choose delivery or pickup\n3. Enter your details\n4. Submit the order\n\nFor delivery orders:\n• We'll email you, the seller, and DSOG\n• DSOG will contact you for arrangements\n• Pay when contacted by seller\n\nFor pickup orders:\n• We'll provide seller contact details\n• You arrange pickup directly\n• Complete payment with seller",
+            'thank': "You're welcome! 😊 Let me know if you need anything else.",
+            'bye': "Goodbye! Feel free to come back anytime you need help."
+        };
+        
+        let response = null;
+        for (const [keyword, reply] of Object.entries(responses)) {
+            if (lowerMessage.includes(keyword)) {
+                response = reply;
+                break;
+            }
+        }
+        
+        if (!response) {
+            response = `I'm not sure about that. For specific inquiries, please contact our support team directly at +254 784 599 322.`;
+        }
+        
+        addBotMessage(response);
+        
+        if (!state.chatbotOpen) {
+            state.unreadMessages++;
+            const notification = document.getElementById('chatbotNotification');
+            if (notification) {
+                notification.textContent = state.unreadMessages > 9 ? '9+' : state.unreadMessages;
+                notification.classList.remove('hidden');
+            }
+        }
+    } catch (error) {
+        console.error('Error processing user message:', error);
+    }
+}
+
+// ==================== ERROR HANDLING ====================
+function handleError(error, context = 'Unknown') {
+    console.error(`Error in ${context}:`, error);
+    
+    if (state.retryCount >= state.maxRetries) {
+        state.isErrorState = true;
+        showEmergencyReload();
+        return;
+    }
+    
+    state.retryCount++;
+    
+    setTimeout(() => {
+        if (context.includes('loadProducts')) {
+            loadProductsFromBackend();
+        }
+    }, 1000 * state.retryCount);
+}
+
+function showEmergencyReload() {
+    const emergencyBtn = document.querySelector('.emergency-reload');
+    if (emergencyBtn) {
+        emergencyBtn.style.display = 'flex';
+    }
+    
+    const loadingProtection = document.getElementById('loadingProtection');
+    if (loadingProtection) {
+        loadingProtection.classList.remove('active');
+    }
+}
+
+// ==================== PRODUCT LOADING ====================
+async function loadProductsFromBackend() {
+    if (state.isLoading) return;
+    
+    state.isLoading = true;
+    showLoading(true);
+    
+    try {
         const loadingProtection = document.getElementById('loadingProtection');
         if (loadingProtection) {
-            loadingProtection.classList.remove('active');
+            loadingProtection.classList.add('active');
+            loadingProtection.textContent = 'Loading products...';
         }
-    }
-
-    function hideEmergencyReload() {
-        const emergencyBtn = document.querySelector('.emergency-reload');
-        if (emergencyBtn) {
-            emergencyBtn.style.display = 'none';
-        }
-    }
-
-    // ==================== ENHANCED INITIALIZATION ====================
-    document.addEventListener('DOMContentLoaded', () => {
-        try {
-            // Initialize PWA first
-            initPWA();
-            
-            // Hide loading overlay after 1.5 seconds
-            setTimeout(() => {
-                const loadingOverlay = document.getElementById('loadingOverlay');
-                if (loadingOverlay) {
-                    loadingOverlay.classList.add('hidden');
-                }
-            }, 1500);
-            
-            initHeroSlideshow();
-            initScrollDetection();
-            initBottomNav();
-            initChatbot();
-            initLocationFiltering();
-            initEventListeners();
-            initTouchGestures();
-            
-            // Load products from backend
-            loadProductsFromBackend();
-            
-            // Close search suggestions when clicking outside
-            document.addEventListener('click', (e) => {
-                const searchContainer = document.querySelector('.search-container');
-                if (searchContainer && !searchContainer.contains(e.target)) {
-                    hideSearchSuggestions();
-                }
-            });
-            
-            // Initialize error boundary
-            window.addEventListener('error', (event) => {
-                handleError(event.error, 'Global Error Handler');
-                return true;
-            });
-            
-            window.addEventListener('unhandledrejection', (event) => {
-                handleError(event.reason, 'Unhandled Promise Rejection');
-            });
-            
-        } catch (error) {
-            handleError(error, 'Initialization');
-        }
-    });
-
-    function initEventListeners() {
-        try {
-            // Escape key to close modals
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    if (document.getElementById('chatbotContainer').classList.contains('active')) {
-                        toggleChatbot();
-                    } else if (state.mobileMenuOpen) {
-                        toggleMobileMenu();
-                    } else {
-                        const modals = document.querySelectorAll('.modal.active');
-                        modals.forEach(modal => closeModal(modal.id));
-                    }
-                }
-            });
-            
-            // Resize event for responsive adjustments
-            let resizeTimeout;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(() => {
-                    adjustChatbotPosition();
-                }, 250);
-            });
-            
-            // Touch events for mobile gestures
-            document.addEventListener('touchstart', handleTouchStart, { passive: true });
-            document.addEventListener('touchend', handleTouchEnd, { passive: true });
-            
-        } catch (error) {
-            handleError(error, 'Event Listeners');
-        }
-    }
-
-    function initTouchGestures() {
-        state.touchStartY = 0;
-        state.touchEndY = 0;
-    }
-
-    function handleTouchStart(e) {
-        state.touchStartY = e.changedTouches[0].screenY;
-    }
-
-    function handleTouchEnd(e) {
-        state.touchEndY = e.changedTouches[0].screenY;
-        handleSwipeGesture();
-    }
-
-    function handleSwipeGesture() {
-        const swipeThreshold = 50;
-        const swipeDistance = state.touchStartY - state.touchEndY;
         
-        if (Math.abs(swipeDistance) > swipeThreshold) {
-            if (swipeDistance > 0) {
-                hideBottomNav();
-            } else {
-                showBottomNav();
-            }
-        }
-    }
-
-    function toggleMobileMenu() {
-        try {
-            const mobileMenu = document.getElementById('mobileMenu');
-            state.mobileMenuOpen = !state.mobileMenuOpen;
-            mobileMenu.classList.toggle('hidden', !state.mobileMenuOpen);
-            
-            // Prevent body scroll when menu is open
-            document.body.style.overflow = state.mobileMenuOpen ? 'hidden' : '';
-        } catch (error) {
-            handleError(error, 'Toggle Mobile Menu');
-        }
-    }
-
-    // ==================== ENHANCED HERO SLIDESHOW ====================
-    function initHeroSlideshow() {
-        try {
-            const slideshow = document.getElementById('heroSlideshow');
-            const indicators = document.getElementById('heroIndicators');
-            
-            if (!slideshow || !indicators) return;
-            
-            // Clear any existing content
-            slideshow.innerHTML = '';
-            indicators.innerHTML = '';
-            
-            CONFIG.HERO_IMAGES.forEach((ad, index) => {
-                // Create slide
-                const slide = document.createElement('div');
-                slide.className = `hero-slide ${index === 0 ? 'active' : ''}`;
-                
-                // Create image element with proper attributes
-                const img = document.createElement('img');
-                img.src = ad.image;
-                img.alt = ad.title;
-                img.loading = 'eager';
-                img.onerror = () => {
-                    img.src = 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1920&h=600&fit=crop&auto=format&q=80';
-                };
-                
-                slide.appendChild(img);
-                slide.onclick = () => window.open(ad.link, '_blank');
-                slideshow.appendChild(slide);
-                
-                // Create indicator
-                const indicator = document.createElement('div');
-                indicator.className = `hero-indicator ${index === 0 ? 'active' : ''}`;
-                indicator.onclick = () => changeHeroSlide(index);
-                indicators.appendChild(indicator);
-            });
-            
-            // Update hero content for first ad
-            updateHeroContent(CONFIG.HERO_IMAGES[0]);
-            
-            // Clear any existing interval
-            if (state.heroInterval) {
-                clearInterval(state.heroInterval);
-            }
-            
-            // Auto slide every 8 seconds
-            state.heroInterval = setInterval(() => {
-                const slides = document.querySelectorAll('.hero-slide');
-                if (slides.length === 0) return;
-                
-                const indicators = document.querySelectorAll('.hero-indicator');
-                
-                slides[state.currentSlide].classList.remove('active');
-                if (indicators[state.currentSlide]) {
-                    indicators[state.currentSlide].classList.remove('active');
-                }
-                
-                state.currentSlide = (state.currentSlide + 1) % slides.length;
-                
-                slides[state.currentSlide].classList.add('active');
-                if (indicators[state.currentSlide]) {
-                    indicators[state.currentSlide].classList.add('active');
-                }
-                
-                updateHeroContent(CONFIG.HERO_IMAGES[state.currentSlide]);
-            }, 8000);
-        } catch (error) {
-            handleError(error, 'Hero Slideshow');
-        }
-    }
-
-    function updateHeroContent(ad) {
-        try {
-            const content = document.querySelector('.hero-content');
-            if (!content) return;
-            
-            content.innerHTML = `
-                <div class="hero-badge">${ad.badge}</div>
-                <h1>${ad.title}</h1>
-                <p>${ad.description}</p>
-                <a href="${ad.link}" class="hero-cta" target="_blank" rel="noopener">${ad.cta}</a>
-            `;
-        } catch (error) {
-            handleError(error, 'Update Hero Content');
-        }
-    }
-
-    function changeHeroSlide(index) {
-        try {
-            if (state.heroInterval) {
-                clearInterval(state.heroInterval);
-            }
-            
-            state.currentSlide = index;
-            
-            const slides = document.querySelectorAll('.hero-slide');
-            const indicators = document.querySelectorAll('.hero-indicator');
-            
-            slides.forEach(slide => slide.classList.remove('active'));
-            indicators.forEach(indicator => indicator.classList.remove('active'));
-            
-            if (slides[index]) {
-                slides[index].classList.add('active');
-            }
-            if (indicators[index]) {
-                indicators[index].classList.add('active');
-            }
-            
-            if (CONFIG.HERO_IMAGES[index]) {
-                updateHeroContent(CONFIG.HERO_IMAGES[index]);
-            }
-            
-            // Restart interval
-            state.heroInterval = setInterval(() => {
-                const nextIndex = (state.currentSlide + 1) % slides.length;
-                changeHeroSlide(nextIndex);
-            }, 8000);
-        } catch (error) {
-            handleError(error, 'Change Hero Slide');
-        }
-    }
-
-    function prevHeroSlide() {
-        try {
-            const slides = document.querySelectorAll('.hero-slide');
-            const newIndex = (state.currentSlide - 1 + slides.length) % slides.length;
-            changeHeroSlide(newIndex);
-        } catch (error) {
-            handleError(error, 'Previous Hero Slide');
-        }
-    }
-
-    function nextHeroSlide() {
-        try {
-            const slides = document.querySelectorAll('.hero-slide');
-            const newIndex = (state.currentSlide + 1) % slides.length;
-            changeHeroSlide(newIndex);
-        } catch (error) {
-            handleError(error, 'Next Hero Slide');
-        }
-    }
-
-    // ==================== ENHANCED RESPONSIVE CHATBOT ====================
-    function initChatbot() {
-        try {
-            // Initialize with welcome message
-            const messages = document.getElementById('chatbotMessages');
-            if (messages && messages.children.length === 0) {
-                addBotMessage("Hello! 👋 I'm your SokoInn assistant. How can I help you today?");
-            }
-            
-            loadChatHistory();
-        } catch (error) {
-            handleError(error, 'Chatbot Initialization');
-        }
-    }
-
-    function toggleChatbot() {
-        try {
-            const chatbot = document.getElementById('chatbotContainer');
-            const chatbotButton = document.querySelector('.chatbot-button');
-            const notification = document.getElementById('chatbotNotification');
-            
-            if (!chatbot) return;
-            
-            state.chatbotOpen = !state.chatbotOpen;
-            chatbot.classList.toggle('active', state.chatbotOpen);
-            
-            if (state.chatbotOpen) {
-                // On mobile, ensure chatbot is in fullscreen mode
-                if (window.innerWidth <= 768) {
-                }
-                
-                state.unreadMessages = 0;
-                if (notification) {
-                    notification.classList.add('hidden');
-                }
-                saveChatHistory();
-                
-                // Hide bottom nav when chatbot is open on mobile
-                if (window.innerWidth <= 768) {
-                    hideBottomNav();
-                }
-                
-                // Focus on input
-                setTimeout(() => {
-                    const input = document.getElementById('chatbotInput');
-                    if (input) input.focus();
-                    const messages = document.getElementById('chatbotMessages');
-                    if (messages) messages.scrollTop = messages.scrollHeight;
-                }, 100);
-            } else {                
-                // Show bottom nav when chatbot is closed on mobile
-                if (window.innerWidth <= 768) {
-                    showBottomNav();
+        const response = await fetch(
+            `${CONFIG.BACKEND_URL}?action=getProducts&limit=${CONFIG.ITEMS_PER_PAGE}&page=${state.currentPage}`,
+            { 
+                method: 'GET',
+                mode: 'cors',
+                headers: {
+                    'Accept': 'application/json'
                 }
             }
-            
-            // Add animation to button
-            if (state.chatbotOpen && chatbotButton) {
-                chatbotButton.style.transform = 'scale(1.1)';
-                setTimeout(() => {
-                    if (chatbotButton) chatbotButton.style.transform = '';
-                }, 300);
-            }
-        } catch (error) {
-            handleError(error, 'Toggle Chatbot');
-        }
-    }
-
-    function addBotMessage(text) {
-        try {
-            const messages = document.getElementById('chatbotMessages');
-            if (!messages) return;
-            
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'chatbot-message bot';
-            
-            // Preserve line breaks in bot messages
-            const formattedText = text.replace(/\n/g, '<br>');
-            messageDiv.innerHTML = formattedText;
-            
-            messages.appendChild(messageDiv);
-            
-            messages.scrollTop = messages.scrollHeight;
-            saveChatHistory();
-        } catch (error) {
-            handleError(error, 'Add Bot Message');
-        }
-    }
-
-    function addUserMessage(text) {
-        try {
-            const messages = document.getElementById('chatbotMessages');
-            if (!messages) return;
-            
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'chatbot-message user';
-            messageDiv.textContent = text;
-            messages.appendChild(messageDiv);
-            
-            messages.scrollTop = messages.scrollHeight;
-            saveChatHistory();
-        } catch (error) {
-            handleError(error, 'Add User Message');
-        }
-    }
-
-    function showTypingIndicator() {
-        if (state.isTyping) return;
+        );
         
-        try {
-            state.isTyping = true;
-            const messages = document.getElementById('chatbotMessages');
-            if (!messages) return;
-            
-            const typingDiv = document.createElement('div');
-            typingDiv.className = 'typing-indicator';
-            typingDiv.id = 'typingIndicator';
-            typingDiv.innerHTML = '<span></span><span></span><span></span>';
-            messages.appendChild(typingDiv);
-            messages.scrollTop = messages.scrollHeight;
-        } catch (error) {
-            handleError(error, 'Show Typing Indicator');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-    }
-
-    function hideTypingIndicator() {
-        state.isTyping = false;
-        try {
-            const typingIndicator = document.getElementById('typingIndicator');
-            if (typingIndicator) {
-                typingIndicator.remove();
-            }
-        } catch (error) {
-            handleError(error, 'Hide Typing Indicator');
-        }
-    }
-
-    function handleChatbotKeyPress(event) {
-        if (event.key === 'Enter' && !event.shiftKey) {
-            event.preventDefault();
-            sendChatbotMessage();
-        }
-    }
-
-    function sendChatbotMessage() {
-        try {
-            const input = document.getElementById('chatbotInput');
-            if (!input) return;
-            
-            const message = input.value.trim();
-            if (!message) return;
-            
-            addUserMessage(message);
-            input.value = '';
-            
-            showTypingIndicator();
-            
-            setTimeout(() => {
-                hideTypingIndicator();
-                processUserMessage(message);
-            }, 1000 + Math.random() * 1000);
-        } catch (error) {
-            handleError(error, 'Send Chatbot Message');
-        }
-    }
-
-    function sendQuickMessage(message) {
-        try {
-            const input = document.getElementById('chatbotInput');
-            if (!input) return;
-            
-            input.value = message;
-            sendChatbotMessage();
-        } catch (error) {
-            handleError(error, 'Send Quick Message');
-        }
-    }
-
-    function processUserMessage(message) {
-        try {
-            const lowerMessage = message.toLowerCase();
-            
-            const responses = {
-                'hello': "Hello! Welcome to SokoInn. How can I assist you today?",
-                'hi': "Hi there! 👋 I'm here to help you with anything about SokoInn.",
-                'help': "I can help you with:<br><br>1. 📦 Buying products<br>2. 🛍️ Becoming a seller<br>3. 📢 Advertising<br>4. 📞 Contacting support<br>5. ❓ General inquiries<br><br>What would you like to know?",
-                'buy': "To buy products:<br><br>1. Browse products on the homepage<br>2. Click 'View' on any product<br>3. Use the 'Contact Seller' button<br>4. Arrange payment and delivery directly with the seller<br><br>Need help with a specific purchase?",
-                'seller': "To become a seller:<br><br>1. Contact our admin directly at +254 784 599 322<br>2. We'll guide you through the verification process<br>3. Once verified, you can list your products<br><br>Want to start the registration process?",
-                'ad': "For advertising opportunities:<br><br>📢 Hero section ads (high visibility)<br>⭐ Featured product listings<br>🏷️ Category sponsorships<br><br>Contact +254 784 599 322 for rates and availability.",
-                'support': "Need support? Contact our admin at +254 784 599 322 via WhatsApp for immediate assistance.",
-                'price': "Advertising prices vary by placement:<br><br>• Hero section: Contact for pricing<br>• Featured listings: Contact for pricing<br>• Category sponsorship: Contact for pricing<br><br>All prices are competitive and based on duration.",
-                'contact': "You can contact us:<br><br>• WhatsApp: +254 784 599 322<br>• Email: info@sokoinn.com<br>• Website: www.sokoinn.com",
-                'thank': "You're welcome! 😊 Let me know if you need anything else.",
-                'bye': "Goodbye! Feel free to come back anytime you need help."
-            };
-            
-            let response = null;
-            for (const [keyword, reply] of Object.entries(responses)) {
-                if (lowerMessage.includes(keyword)) {
-                    response = reply;
-                    break;
-                }
-            }
-            
-            if (!response) {
-                response = `I'm not sure about that. For specific inquiries, please contact our support team directly at +254 784 599 322.`;
-            }
-            
-            addBotMessage(response);
-            
-            if (!state.chatbotOpen) {
-                state.unreadMessages++;
-                const notification = document.getElementById('chatbotNotification');
-                if (notification) {
-                    notification.textContent = state.unreadMessages > 9 ? '9+' : state.unreadMessages;
-                    notification.classList.remove('hidden');
-                }
-            }
-        } catch (error) {
-            handleError(error, 'Process User Message');
-        }
-    }
-
-    function saveChatHistory() {
-        try {
-            const messages = document.getElementById('chatbotMessages');
-            if (!messages) return;
-            
-            localStorage.setItem('sokoinn_chat_history', messages.innerHTML);
-        } catch (e) {
-            console.warn('Could not save chat history');
-        }
-    }
-
-    function loadChatHistory() {
-        try {
-            const saved = localStorage.getItem('sokoinn_chat_history');
-            if (saved) {
-                const messages = document.getElementById('chatbotMessages');
-                if (messages) {
-                    messages.innerHTML = saved;
-                }
-            }
-        } catch (e) {
-            console.warn('Could not load chat history');
-        }
-    }
-
-
-    // ==================== SCROLL AND NAVIGATION ====================
-    function initScrollDetection() {
-        try {
-            const scrollTopBtn = document.getElementById('scrollTop');
-            
-            let scrollTimeout;
-            window.addEventListener('scroll', () => {
-                clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(() => {
-                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                    
-                    // Show/hide scroll to top button
-                    if (scrollTop > 300) {
-                        if (scrollTopBtn) scrollTopBtn.classList.add('visible');
-                    } else {
-                        if (scrollTopBtn) scrollTopBtn.classList.remove('visible');
-                    }
-                    
-                    // Detect scroll direction for bottom nav
-                    if (scrollTop > state.lastScrollTop) {
-                        state.scrollDirection = 'down';
-                        if (scrollTop > 100 && !state.chatbotOpen) {
-                            hideBottomNav();
-                        }
-                    } else {
-                        state.scrollDirection = 'up';
-                        if (scrollTop < state.lastScrollTop - 10) {
-                            showBottomNav();
-                        }
-                    }
-                    
-                    state.lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-                    hideSearchSuggestions();
-                }, 50);
-            });
-            
-            if (window.scrollY > 300 && scrollTopBtn) {
-                scrollTopBtn.classList.add('visible');
-            }
-        } catch (error) {
-            handleError(error, 'Scroll Detection');
-        }
-    }
-
-    function initBottomNav() {
-        try {
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            document.querySelectorAll('.nav-item').forEach(item => {
-                const href = item.getAttribute('href');
-                if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
-            });
-            
-            showBottomNav();
-        } catch (error) {
-            handleError(error, 'Bottom Navigation');
-        }
-    }
-
-    function showBottomNav() {
-        if (state.chatbotOpen && window.innerWidth <= 768) return;
         
-        try {
-            const bottomNav = document.getElementById('bottomNav');
-            if (bottomNav) {
-                bottomNav.classList.remove('hidden');
-                bottomNav.classList.add('visible');
-                state.isBottomNavVisible = true;
-                
-                document.body.style.paddingBottom = '80px';
-            }
-        } catch (error) {
-            handleError(error, 'Show Bottom Nav');
-        }
-    }
-
-    function hideBottomNav() {
-        try {
-            const bottomNav = document.getElementById('bottomNav');
-            if (bottomNav) {
-                bottomNav.classList.add('hidden');
-                bottomNav.classList.remove('visible');
-                state.isBottomNavVisible = false;
-                
-                document.body.style.paddingBottom = '20px';
-            }
-        } catch (error) {
-            handleError(error, 'Hide Bottom Nav');
-        }
-    }
-
-    function scrollToTop() {
-        try {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-            
-            setTimeout(showBottomNav, 300);
-        } catch (error) {
-            handleError(error, 'Scroll to Top');
-        }
-    }
-
-    // ==================== LOCATION FILTERING ====================
-    function initLocationFiltering() {
-        try {
-            const savedLocation = localStorage.getItem('sokoinn_selected_location');
-            if (savedLocation) {
-                state.selectedLocation = savedLocation;
-                const dropdown = document.getElementById('locationDropdown');
-                if (dropdown) {
-                    dropdown.value = savedLocation;
-                }
-                updateLocationFilterButtons(savedLocation);
-                updateLocationDisplay(savedLocation);
-            }
-        } catch (error) {
-            handleError(error, 'Location Filtering');
-        }
-    }
-
-    function handleLocationChange() {
-        try {
-            const dropdown = document.getElementById('locationDropdown');
-            if (!dropdown) return;
-            
-            const selectedCity = dropdown.value;
-            
-            localStorage.setItem('sokoinn_selected_location', selectedCity);
-            state.selectedLocation = selectedCity;
-            
-            updateLocationFilterButtons(selectedCity);
-            updateLocationDisplay(selectedCity);
-            applyLocationFilter();
-            
-            const message = selectedCity ? `Showing products from ${selectedCity}` : 'Showing products from all Kenya';
-            showToast(message, 'success');
-        } catch (error) {
-            handleError(error, 'Handle Location Change');
-        }
-    }
-
-    function selectLocationFilter(city) {
-        try {
-            const dropdown = document.getElementById('locationDropdown');
-            if (dropdown) {
-                dropdown.value = city;
-            }
-            
-            localStorage.setItem('sokoinn_selected_location', city);
-            state.selectedLocation = city;
-            
-            updateLocationFilterButtons(city);
-            updateLocationDisplay(city);
-            applyLocationFilter();
-        } catch (error) {
-            handleError(error, 'Select Location Filter');
-        }
-    }
-
-    function updateLocationFilterButtons(selectedCity) {
-        try {
-            const buttons = document.querySelectorAll('.location-filter-btn');
-            buttons.forEach(button => {
-                const onclick = button.getAttribute('onclick');
-                if (!onclick) return;
-                
-                const match = onclick.match(/'([^']+)'/);
-                const city = match ? match[1] : '';
-                
-                if (city === selectedCity || (city === '' && selectedCity === '')) {
-                    button.classList.add('active');
-                } else {
-                    button.classList.remove('active');
-                }
-            });
-        } catch (error) {
-            handleError(error, 'Update Location Filter Buttons');
-        }
-    }
-
-    function updateLocationDisplay(city) {
-        try {
-            const locationDisplay = document.getElementById('currentLocationText');
-            const sectionTitle = document.getElementById('sectionTitle');
-            
-            if (locationDisplay) {
-                locationDisplay.textContent = city || 'All Kenya';
-            }
-            
-            if (sectionTitle) {
-                if (state.searchQuery) {
-                    sectionTitle.textContent = 'Search Results';
-                } else if (city) {
-                    sectionTitle.textContent = `Products in ${city}`;
-                } else {
-                    sectionTitle.textContent = 'Featured Products';
-                }
-            }
-        } catch (error) {
-            handleError(error, 'Update Location Display');
-        }
-    }
-
-    function applyLocationFilter() {
-        try {
-            if (!state.selectedLocation) {
-                state.filteredProducts = [...state.allProducts];
-            } else {
-                state.filteredProducts = state.allProducts.filter(product => {
-                    const productLocation = (product.sellerLocation || '').toLowerCase();
-                    const selectedCity = state.selectedLocation.toLowerCase();
-                    
-                    return productLocation.includes(selectedCity) || 
-                        selectedCity.includes(productLocation);
-                });
-            }
-            
-            state.currentPage = 1;
-            renderProducts();
-            updateLoadMoreButton();
-        } catch (error) {
-            handleError(error, 'Apply Location Filter');
-        }
-    }
-
-    // ==================== PRODUCT LOADING AND MANAGEMENT ====================
-    async function loadProductsFromBackend() {
-        if (state.isLoading) return;
+        const data = await response.json();
         
-        state.isLoading = true;
-        showLoading(true);
-        
-        try {
-            // Show loading protection
-            const loadingProtection = document.getElementById('loadingProtection');
-            if (loadingProtection) {
-                loadingProtection.classList.add('active');
-                loadingProtection.textContent = 'Loading products...';
-            }
-            
-            const response = await fetch(
-                `${CONFIG.BACKEND_URL}?action=getProducts&limit=${CONFIG.ITEMS_PER_PAGE}&page=${state.currentPage}`,
-                { 
-                    method: 'GET',
-                    mode: 'cors',
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                }
-            );
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            
-            const data = await response.json();
-            
-            if (data.success && data.data && Array.isArray(data.data) && data.data.length > 0) {
-                const newProducts = data.data.map(product => ({
-                    listingId: product.id || product.listingId || `PROD${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-                    title: product.title || 'Untitled Product',
-                    price: parseFloat(product.price) || 0,
-                    sellerName: product.sellerName || 'Unknown Seller',
-                    sellerVerification: product.sellerVerification || 'unverified',
-                    sellerRating: parseFloat(product.sellerRating) || 4.0,
-                    sellerTotalReviews: parseInt(product.sellerTotalReviews) || 0,
-                    sellerLocation: product.sellerLocation || 'Nairobi',
-                    sellerPhone: product.sellerPhone || '254700000000',
-                    sellerWhatsapp: product.sellerWhatsapp || product.sellerPhone || '254700000000',
-                    images: Array.isArray(product.images) && product.images.length > 0 
-                        ? product.images 
-                        : [product.image || CONFIG.DEFAULT_IMAGE].filter(Boolean),
-                    rating: parseFloat(product.rating) || 4.0,
-                    reviewCount: parseInt(product.reviewCount) || 0,
-                    category: product.category || 'Uncategorized',
-                    description: product.description || 'No description available',
-                    stock: parseInt(product.stock) || 1,
-                    condition: product.condition || 'New'
-                }));
-                
-                if (state.currentPage === 1) {
-                    state.products = newProducts;
-                    state.allProducts = newProducts;
-                } else {
-                    state.products = [...state.products, ...newProducts];
-                    state.allProducts = [...state.allProducts, ...newProducts];
-                }
-                
-                state.hasMore = newProducts.length === CONFIG.ITEMS_PER_PAGE;
-                
-                if (state.selectedLocation) {
-                    applyLocationFilter();
-                } else {
-                    state.filteredProducts = [...state.allProducts];
-                    renderProducts();
-                }
-                
-                updateLoadMoreButton();
-                
-                if (state.currentPage === 1) {
-                    showToast('Products loaded successfully!', 'success');
-                }
-                
-                // Reset retry count on success
-                state.retryCount = 0;
-                hideEmergencyReload();
-                
-            } else {
-                console.warn('Backend returned no products, using sample data');
-                loadSampleProducts();
-            }
-            
-        } catch (error) {
-            handleError(error, 'Load Products from Backend');
-            loadSampleProducts();
-            
-        } finally {
-            state.isLoading = false;
-            showLoading(false);
-            
-            // Hide loading protection
-            const loadingProtection = document.getElementById('loadingProtection');
-            if (loadingProtection) {
-                loadingProtection.classList.remove('active');
-            }
-        }
-    }
-
-    function loadSampleProducts() {
-        try {
-            const sampleProducts = [
-                {
-                    listingId: 'PROD001',
-                    title: 'Genuine Leather Handbag',
-                    price: 4500,
-                    sellerName: 'Luxury Bags Kenya',
-                    sellerVerification: 'verified',
-                    sellerRating: 4.8,
-                    sellerTotalReviews: 24,
-                    sellerLocation: 'Nairobi',
-                    sellerPhone: '254712345678',
-                    sellerWhatsapp: '254712345678',
-                    images: [
-                        'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500&q=80',
-                        'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=500&q=80'
-                    ],
-                    rating: 4.5,
-                    reviewCount: 24,
-                    category: 'Fashion',
-                    description: 'Premium genuine leather handbag with multiple compartments.',
-                    stock: 5,
-                    condition: 'New'
-                }
-            ];
+        if (data.success && data.data && Array.isArray(data.data) && data.data.length > 0) {
+            const newProducts = data.data.map(product => ({
+                listingId: product.id || product.listingId || `PROD${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+                title: product.title || 'Untitled Product',
+                price: parseFloat(product.price) || 0,
+                sellerName: product.sellerName || 'Unknown Seller',
+                sellerVerification: product.sellerVerification || 'unverified',
+                sellerRating: parseFloat(product.sellerRating) || 4.0,
+                sellerTotalReviews: parseInt(product.sellerTotalReviews) || 0,
+                sellerLocation: product.sellerLocation || 'Nairobi',
+                sellerPhone: product.sellerPhone || '254700000000',
+                sellerWhatsapp: product.sellerWhatsapp || product.sellerPhone || '254700000000',
+                images: Array.isArray(product.images) && product.images.length > 0 
+                    ? product.images 
+                    : [product.image || CONFIG.DEFAULT_IMAGE].filter(Boolean),
+                rating: parseFloat(product.rating) || 4.0,
+                reviewCount: parseInt(product.reviewCount) || 0,
+                category: product.category || 'Uncategorized',
+                description: product.description || 'No description available',
+                stock: parseInt(product.stock) || 1,
+                condition: product.condition || 'New'
+            }));
             
             if (state.currentPage === 1) {
-                state.products = sampleProducts;
-                state.allProducts = sampleProducts;
+                state.products = newProducts;
+                state.allProducts = newProducts;
             } else {
-                state.products = [...state.products, ...sampleProducts];
-                state.allProducts = [...state.allProducts, ...sampleProducts];
+                state.products = [...state.products, ...newProducts];
+                state.allProducts = [...state.allProducts, ...newProducts];
             }
             
-            state.hasMore = false;
+            state.hasMore = newProducts.length === CONFIG.ITEMS_PER_PAGE;
             
             if (state.selectedLocation) {
                 applyLocationFilter();
@@ -3758,786 +4225,1357 @@
             
             updateLoadMoreButton();
             
-        } catch (error) {
-            handleError(error, 'Load Sample Products');
+            if (state.currentPage === 1) {
+                showToast('Products loaded successfully!', 'success');
+            }
+            
+            state.retryCount = 0;
+            hideEmergencyReload();
+            
+        } else {
+            loadSampleProducts();
         }
-    }
-
-    function loadMoreProducts() {
-        if (!state.isLoading && state.hasMore) {
-            state.currentPage++;
-            loadProductsFromBackend();
-        }
-    }
-
-    function showAllProducts(event) {
-        if (event) event.preventDefault();
         
-        try {
-            state.selectedLocation = '';
-            state.searchQuery = '';
-            
-            const dropdown = document.getElementById('locationDropdown');
-            if (dropdown) dropdown.value = '';
-            
-            updateLocationFilterButtons('');
-            updateLocationDisplay('');
-            
-            const searchInput = document.getElementById('searchInput');
-            if (searchInput) searchInput.value = '';
-            
-            state.filteredProducts = [...state.allProducts];
-            state.currentPage = 1;
-            
-            renderProducts();
-            updateLoadMoreButton();
-            
-            showToast('Showing all products from Kenya', 'success');
-        } catch (error) {
-            handleError(error, 'Show All Products');
+    } catch (error) {
+        handleError(error, 'Load Products from Backend');
+        loadSampleProducts();
+        
+    } finally {
+        state.isLoading = false;
+        showLoading(false);
+        
+        const loadingProtection = document.getElementById('loadingProtection');
+        if (loadingProtection) {
+            loadingProtection.classList.remove('active');
         }
     }
+}
 
-    // ==================== PRODUCT RENDERING ====================
-    function renderProducts() {
-        try {
-            const productGrid = document.getElementById('productGrid');
-            if (!productGrid) return;
-            
-            const productsToShow = state.filteredProducts.slice(0, state.currentPage * CONFIG.ITEMS_PER_PAGE);
-            
-            if (productsToShow.length === 0) {
-                let message = '';
-                if (state.searchQuery) {
-                    message = `No products found for "${state.searchQuery}"`;
-                } else if (state.selectedLocation) {
-                    message = `No products found in ${state.selectedLocation}. Try selecting "All Kenya"`;
+function loadSampleProducts() {
+    try {
+        const sampleProducts = [
+            {
+                listingId: 'PROD001',
+                title: 'Genuine Leather Handbag',
+                price: 4500,
+                sellerName: 'Luxury Bags Kenya',
+                sellerVerification: 'verified',
+                sellerRating: 4.8,
+                sellerTotalReviews: 24,
+                sellerLocation: 'Nairobi',
+                sellerPhone: '254712345678',
+                sellerWhatsapp: '254712345678',
+                images: [
+                    'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500&q=80',
+                    'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=500&q=80'
+                ],
+                rating: 4.5,
+                reviewCount: 24,
+                category: 'Fashion',
+                description: 'Premium genuine leather handbag with multiple compartments.',
+                stock: 5,
+                condition: 'New'
+            }
+        ];
+        
+        if (state.currentPage === 1) {
+            state.products = sampleProducts;
+            state.allProducts = sampleProducts;
+        } else {
+            state.products = [...state.products, ...sampleProducts];
+            state.allProducts = [...state.allProducts, ...sampleProducts];
+        }
+        
+        state.hasMore = false;
+        
+        if (state.selectedLocation) {
+            applyLocationFilter();
+        } else {
+            state.filteredProducts = [...state.allProducts];
+            renderProducts();
+        }
+        
+        updateLoadMoreButton();
+        
+    } catch (error) {
+        console.error('Error loading sample products:', error);
+    }
+}
+
+// ==================== CORE FUNCTIONS (Keep existing) ====================
+function initEventListeners() {
+    try {
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (document.getElementById('chatbotContainer').classList.contains('active')) {
+                    toggleChatbot();
+                } else if (state.mobileMenuOpen) {
+                    toggleMobileMenu();
                 } else {
-                    message = 'No products available. Check back soon!';
+                    const modals = document.querySelectorAll('.modal.active');
+                    modals.forEach(modal => closeModal(modal.id));
+                }
+            }
+        });
+        
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                adjustChatbotPosition();
+            }, 250);
+        });
+        
+        document.addEventListener('touchstart', handleTouchStart, { passive: true });
+        document.addEventListener('touchend', handleTouchEnd, { passive: true });
+        
+    } catch (error) {
+        handleError(error, 'Event Listeners');
+    }
+}
+
+function initTouchGestures() {
+    state.touchStartY = 0;
+    state.touchEndY = 0;
+}
+
+function handleTouchStart(e) {
+    state.touchStartY = e.changedTouches[0].screenY;
+}
+
+function handleTouchEnd(e) {
+    state.touchEndY = e.changedTouches[0].screenY;
+    handleSwipeGesture();
+}
+
+function handleSwipeGesture() {
+    const swipeThreshold = 50;
+    const swipeDistance = state.touchStartY - state.touchEndY;
+    
+    if (Math.abs(swipeDistance) > swipeThreshold) {
+        if (swipeDistance > 0) {
+            hideBottomNav();
+        } else {
+            showBottomNav();
+        }
+    }
+}
+
+function toggleMobileMenu() {
+    try {
+        const mobileMenu = document.getElementById('mobileMenu');
+        state.mobileMenuOpen = !state.mobileMenuOpen;
+        mobileMenu.classList.toggle('hidden', !state.mobileMenuOpen);
+        document.body.style.overflow = state.mobileMenuOpen ? 'hidden' : '';
+    } catch (error) {
+        handleError(error, 'Toggle Mobile Menu');
+    }
+}
+
+// ==================== HERO SLIDESHOW ====================
+function initHeroSlideshow() {
+    try {
+        const slideshow = document.getElementById('heroSlideshow');
+        const indicators = document.getElementById('heroIndicators');
+        
+        if (!slideshow || !indicators) return;
+        
+        slideshow.innerHTML = '';
+        indicators.innerHTML = '';
+        
+        CONFIG.HERO_IMAGES.forEach((ad, index) => {
+            const slide = document.createElement('div');
+            slide.className = `hero-slide ${index === 0 ? 'active' : ''}`;
+            
+            const img = document.createElement('img');
+            img.src = ad.image;
+            img.alt = ad.title;
+            img.loading = 'eager';
+            img.onerror = () => {
+                img.src = 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1920&h=600&fit=crop&auto=format&q=80';
+            };
+            
+            slide.appendChild(img);
+            slide.onclick = () => window.open(ad.link, '_blank');
+            slideshow.appendChild(slide);
+            
+            const indicator = document.createElement('div');
+            indicator.className = `hero-indicator ${index === 0 ? 'active' : ''}`;
+            indicator.onclick = () => changeHeroSlide(index);
+            indicators.appendChild(indicator);
+        });
+        
+        updateHeroContent(CONFIG.HERO_IMAGES[0]);
+        
+        if (state.heroInterval) {
+            clearInterval(state.heroInterval);
+        }
+        
+        state.heroInterval = setInterval(() => {
+            const slides = document.querySelectorAll('.hero-slide');
+            if (slides.length === 0) return;
+            
+            const indicators = document.querySelectorAll('.hero-indicator');
+            
+            slides[state.currentSlide].classList.remove('active');
+            if (indicators[state.currentSlide]) {
+                indicators[state.currentSlide].classList.remove('active');
+            }
+            
+            state.currentSlide = (state.currentSlide + 1) % slides.length;
+            
+            slides[state.currentSlide].classList.add('active');
+            if (indicators[state.currentSlide]) {
+                indicators[state.currentSlide].classList.add('active');
+            }
+            
+            updateHeroContent(CONFIG.HERO_IMAGES[state.currentSlide]);
+        }, 8000);
+    } catch (error) {
+        handleError(error, 'Hero Slideshow');
+    }
+}
+
+function updateHeroContent(ad) {
+    try {
+        const content = document.querySelector('.hero-content');
+        if (!content) return;
+        
+        content.innerHTML = `
+            <div class="hero-badge">${ad.badge}</div>
+            <h1>${ad.title}</h1>
+            <p>${ad.description}</p>
+            <a href="${ad.link}" class="hero-cta" target="_blank" rel="noopener">${ad.cta}</a>
+        `;
+    } catch (error) {
+        handleError(error, 'Update Hero Content');
+    }
+}
+
+function changeHeroSlide(index) {
+    try {
+        if (state.heroInterval) {
+            clearInterval(state.heroInterval);
+        }
+        
+        state.currentSlide = index;
+        
+        const slides = document.querySelectorAll('.hero-slide');
+        const indicators = document.querySelectorAll('.hero-indicator');
+        
+        slides.forEach(slide => slide.classList.remove('active'));
+        indicators.forEach(indicator => indicator.classList.remove('active'));
+        
+        if (slides[index]) {
+            slides[index].classList.add('active');
+        }
+        if (indicators[index]) {
+            indicators[index].classList.add('active');
+        }
+        
+        if (CONFIG.HERO_IMAGES[index]) {
+            updateHeroContent(CONFIG.HERO_IMAGES[index]);
+        }
+        
+        state.heroInterval = setInterval(() => {
+            const nextIndex = (state.currentSlide + 1) % slides.length;
+            changeHeroSlide(nextIndex);
+        }, 8000);
+    } catch (error) {
+        handleError(error, 'Change Hero Slide');
+    }
+}
+
+// ==================== CHATBOT FUNCTIONS ====================
+function initChatbot() {
+    try {
+        const messages = document.getElementById('chatbotMessages');
+        if (messages && messages.children.length === 0) {
+            addBotMessage("Hello! 👋 I'm your SokoInn assistant. How can I help you today?");
+        }
+        
+        loadChatHistory();
+    } catch (error) {
+        handleError(error, 'Chatbot Initialization');
+    }
+}
+
+function toggleChatbot() {
+    try {
+        const chatbot = document.getElementById('chatbotContainer');
+        const chatbotButton = document.querySelector('.chatbot-button');
+        const notification = document.getElementById('chatbotNotification');
+        
+        if (!chatbot) return;
+        
+        state.chatbotOpen = !state.chatbotOpen;
+        chatbot.classList.toggle('active', state.chatbotOpen);
+        
+        if (state.chatbotOpen) {
+            state.unreadMessages = 0;
+            if (notification) {
+                notification.classList.add('hidden');
+            }
+            saveChatHistory();
+            
+            if (window.innerWidth <= 768) {
+                hideBottomNav();
+            }
+            
+            setTimeout(() => {
+                const input = document.getElementById('chatbotInput');
+                if (input) input.focus();
+                const messages = document.getElementById('chatbotMessages');
+                if (messages) messages.scrollTop = messages.scrollHeight;
+            }, 100);
+        } else {
+            if (window.innerWidth <= 768) {
+                showBottomNav();
+            }
+        }
+        
+        if (state.chatbotOpen && chatbotButton) {
+            chatbotButton.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                if (chatbotButton) chatbotButton.style.transform = '';
+            }, 300);
+        }
+    } catch (error) {
+        handleError(error, 'Toggle Chatbot');
+    }
+}
+
+function addBotMessage(text) {
+    try {
+        const messages = document.getElementById('chatbotMessages');
+        if (!messages) return;
+        
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'chatbot-message bot';
+        messageDiv.innerHTML = text.replace(/\n/g, '<br>');
+        messages.appendChild(messageDiv);
+        messages.scrollTop = messages.scrollHeight;
+        saveChatHistory();
+    } catch (error) {
+        handleError(error, 'Add Bot Message');
+    }
+}
+
+function addUserMessage(text) {
+    try {
+        const messages = document.getElementById('chatbotMessages');
+        if (!messages) return;
+        
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'chatbot-message user';
+        messageDiv.textContent = text;
+        messages.appendChild(messageDiv);
+        messages.scrollTop = messages.scrollHeight;
+        saveChatHistory();
+    } catch (error) {
+        handleError(error, 'Add User Message');
+    }
+}
+
+function showTypingIndicator() {
+    if (state.isTyping) return;
+    
+    try {
+        state.isTyping = true;
+        const messages = document.getElementById('chatbotMessages');
+        if (!messages) return;
+        
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'typing-indicator';
+        typingDiv.id = 'typingIndicator';
+        typingDiv.innerHTML = '<span></span><span></span><span></span>';
+        messages.appendChild(typingDiv);
+        messages.scrollTop = messages.scrollHeight;
+    } catch (error) {
+        handleError(error, 'Show Typing Indicator');
+    }
+}
+
+function hideTypingIndicator() {
+    state.isTyping = false;
+    try {
+        const typingIndicator = document.getElementById('typingIndicator');
+        if (typingIndicator) {
+            typingIndicator.remove();
+        }
+    } catch (error) {
+        handleError(error, 'Hide Typing Indicator');
+    }
+}
+
+function handleChatbotKeyPress(event) {
+    if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        sendChatbotMessage();
+    }
+}
+
+function sendChatbotMessage() {
+    try {
+        const input = document.getElementById('chatbotInput');
+        if (!input) return;
+        
+        const message = input.value.trim();
+        if (!message) return;
+        
+        addUserMessage(message);
+        input.value = '';
+        
+        showTypingIndicator();
+        
+        setTimeout(() => {
+            hideTypingIndicator();
+            processUserMessage(message);
+        }, 1000 + Math.random() * 1000);
+    } catch (error) {
+        handleError(error, 'Send Chatbot Message');
+    }
+}
+
+function sendQuickMessage(message) {
+    try {
+        const input = document.getElementById('chatbotInput');
+        if (!input) return;
+        
+        input.value = message;
+        sendChatbotMessage();
+    } catch (error) {
+        handleError(error, 'Send Quick Message');
+    }
+}
+
+function saveChatHistory() {
+    try {
+        const messages = document.getElementById('chatbotMessages');
+        if (!messages) return;
+        
+        localStorage.setItem('sokoinn_chat_history', messages.innerHTML);
+    } catch (e) {
+        console.warn('Could not save chat history');
+    }
+}
+
+function loadChatHistory() {
+    try {
+        const saved = localStorage.getItem('sokoinn_chat_history');
+        if (saved) {
+            const messages = document.getElementById('chatbotMessages');
+            if (messages) {
+                messages.innerHTML = saved;
+            }
+        }
+    } catch (e) {
+        console.warn('Could not load chat history');
+    }
+}
+
+// ==================== SCROLL AND NAVIGATION ====================
+function initScrollDetection() {
+    try {
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > 300) {
+                    if (scrollTopBtn) scrollTopBtn.classList.add('visible');
+                } else {
+                    if (scrollTopBtn) scrollTopBtn.classList.remove('visible');
                 }
                 
-                productGrid.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">🔍</div>
-                        <h3 class="empty-state-title">No products found</h3>
-                        <p class="empty-state-message">${message}</p>
-                        ${state.selectedLocation ? `
-                        <button class="btn btn-primary mt-4" onclick="selectLocationFilter('')">
-                            Show All Kenya Products
-                        </button>
-                        ` : ''}
-                    </div>
-                `;
-                return;
-            }
-            
-            productGrid.innerHTML = '';
-            
-            productsToShow.forEach(product => {
-                productGrid.innerHTML += createProductHTML(product);
-            });
-            
-            // Initialize image click events
-            setTimeout(() => {
-                document.querySelectorAll('.product-image').forEach((imageDiv, index) => {
-                    const product = state.filteredProducts[index];
-                    if (product) {
-                        imageDiv.onclick = (e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            openImageViewer(product.images, 0);
-                        };
+                if (scrollTop > state.lastScrollTop) {
+                    state.scrollDirection = 'down';
+                    if (scrollTop > 100 && !state.chatbotOpen) {
+                        hideBottomNav();
                     }
-                });
-            }, 100);
-        } catch (error) {
-            handleError(error, 'Render Products');
-        }
-    }
-
-    function createProductHTML(product) {
-        try {
-            const images = product.images || [CONFIG.DEFAULT_IMAGE];
-            const imageCount = images.length;
-            const firstImage = images[0];
-            
-            return `
-            <div class="product-card" data-id="${product.listingId}">
-                ${product.stock === 0 ? '<span class="product-badge">Sold Out</span>' : ''}
-                ${product.stock > 0 && product.stock <= 3 ? '<span class="product-badge">Low Stock</span>' : ''}
+                } else {
+                    state.scrollDirection = 'up';
+                    if (scrollTop < state.lastScrollTop - 10) {
+                        showBottomNav();
+                    }
+                }
                 
-                <div class="product-image">
-                    <div class="image-placeholder"></div>
-                    <img src="${firstImage}" 
-                        alt="${product.title}"
-                        onerror="this.src='${CONFIG.DEFAULT_IMAGE}'; this.classList.add('loaded')"
-                        class="loaded">
-                    ${imageCount > 1 ? `<div class="image-counter">+${imageCount - 1}</div>` : ''}
-                </div>
-                
-                <div class="product-content">
-                    <h3 class="product-title" onclick="viewProduct('${product.listingId}')">${product.title}</h3>
-                    <div class="product-price">KSh ${product.price.toLocaleString()}</div>
-                    
-                    <div class="product-seller">
-                        <span class="seller-location">📍 ${product.sellerLocation || 'Nairobi'}</span>
-                        ${product.sellerVerification === 'verified' ? '<span class="seller-verified">✓</span>' : ''}
-                    </div>
-                    
-                    <div class="product-rating">
-                        <span style="color: #fbbf24;">${'★'.repeat(Math.floor(product.rating || 4))}${'☆'.repeat(5 - Math.floor(product.rating || 4))}</span>
-                        <span style="font-size: 0.75rem; color: var(--gray-500);">(${product.reviewCount || 0})</span>
-                    </div>
-                    
-                    <div class="product-actions">
-                        <button class="btn btn-primary" onclick="viewProduct('${product.listingId}')">
-                            <i class="fas fa-eye"></i> View
-                        </button>
-                        <div class="contact-toggle">
-                            <button class="btn btn-secondary" onclick="toggleContactOptions(this, '${product.listingId}', event)">
-                                <i class="fas fa-phone-alt"></i> Contact
-                            </button>
-                            <div class="contact-options">
-                                <button class="contact-option whatsapp-option" 
-                                onclick="contactSeller('${product.listingId}', 'whatsapp', event)">
-                                    <i class="fab fa-whatsapp"></i> WhatsApp
-                                </button>
-                                <button class="contact-option call-option" 
-                                onclick="contactSeller('${product.listingId}', 'call', event)">
-                                    <i class="fas fa-phone"></i> Call
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            `;
-        } catch (error) {
-            handleError(error, 'Create Product HTML');
-            return '<div class="product-card">Error loading product</div>';
-        }
-    }
-
-    // ==================== SEARCH FUNCTIONALITY ====================
-    function handleSearchInput() {
-        try {
-            const searchInput = document.getElementById('searchInput');
-            if (!searchInput) return;
-            
-            const query = searchInput.value.trim();
-            
-            if (state.searchTimeout) {
-                clearTimeout(state.searchTimeout);
-            }
-            
-            if (query.length === 0) {
+                state.lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
                 hideSearchSuggestions();
-                return;
-            }
-            
-            state.searchTimeout = setTimeout(() => {
-                showSearchSuggestions(query);
-            }, 300);
-        } catch (error) {
-            handleError(error, 'Handle Search Input');
+            }, 50);
+        });
+        
+        if (window.scrollY > 300 && scrollTopBtn) {
+            scrollTopBtn.classList.add('visible');
         }
+    } catch (error) {
+        handleError(error, 'Scroll Detection');
     }
+}
 
-    function showSearchSuggestions(query) {
-        try {
-            const suggestionsContainer = document.getElementById('searchSuggestions');
-            if (!suggestionsContainer) return;
-            
-            if (!query || query.length < 2) {
-                suggestionsContainer.classList.remove('active');
-                return;
-            }
-            
-            const searchResults = searchProducts(query, 5);
-            
-            if (searchResults.length === 0) {
-                suggestionsContainer.innerHTML = `
-                    <div class="no-suggestions">
-                        No products found for "${query}"
-                    </div>
-                `;
+function initBottomNav() {
+    try {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        document.querySelectorAll('.nav-item').forEach(item => {
+            const href = item.getAttribute('href');
+            if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
+                item.classList.add('active');
             } else {
-                suggestionsContainer.innerHTML = searchResults.map(product => `
-                    <div class="suggestion-item" onclick="selectSearchSuggestion('${product.listingId}')">
-                        <img src="${product.images[0] || CONFIG.DEFAULT_IMAGE}" 
-                            alt="${product.title}"
-                            class="suggestion-image"
-                            onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
-                        <div class="suggestion-details">
-                            <div class="suggestion-title">${product.title}</div>
-                            <div class="suggestion-price">KSh ${product.price.toLocaleString()}</div>
-                            <div class="suggestion-location">📍 ${product.sellerLocation || 'Nairobi'}</div>
-                        </div>
-                    </div>
-                `).join('');
+                item.classList.remove('active');
             }
-            
-            suggestionsContainer.classList.add('active');
-        } catch (error) {
-            handleError(error, 'Show Search Suggestions');
+        });
+        
+        showBottomNav();
+    } catch (error) {
+        handleError(error, 'Bottom Navigation');
+    }
+}
+
+function showBottomNav() {
+    if (state.chatbotOpen && window.innerWidth <= 768) return;
+    
+    try {
+        const bottomNav = document.getElementById('bottomNav');
+        if (bottomNav) {
+            bottomNav.classList.remove('hidden');
+            bottomNav.classList.add('visible');
+            state.isBottomNavVisible = true;
+            document.body.style.paddingBottom = '80px';
         }
+    } catch (error) {
+        handleError(error, 'Show Bottom Nav');
     }
+}
 
-    function hideSearchSuggestions() {
-        try {
-            const suggestionsContainer = document.getElementById('searchSuggestions');
-            if (suggestionsContainer) {
-                suggestionsContainer.classList.remove('active');
-            }
-        } catch (error) {
-            handleError(error, 'Hide Search Suggestions');
+function hideBottomNav() {
+    try {
+        const bottomNav = document.getElementById('bottomNav');
+        if (bottomNav) {
+            bottomNav.classList.add('hidden');
+            bottomNav.classList.remove('visible');
+            state.isBottomNavVisible = false;
+            document.body.style.paddingBottom = '20px';
         }
+    } catch (error) {
+        handleError(error, 'Hide Bottom Nav');
     }
+}
 
-    function selectSearchSuggestion(productId) {
-        hideSearchSuggestions();
-        viewProduct(productId);
+function scrollToTop() {
+    try {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        
+        setTimeout(showBottomNav, 300);
+    } catch (error) {
+        handleError(error, 'Scroll to Top');
     }
+}
 
-    function performSearch() {
-        try {
-            const searchInput = document.getElementById('searchInput');
-            if (!searchInput) return;
+// ==================== LOCATION FILTERING ====================
+function initLocationFiltering() {
+    try {
+        const savedLocation = localStorage.getItem('sokoinn_selected_location');
+        if (savedLocation) {
+            state.selectedLocation = savedLocation;
+            const dropdown = document.getElementById('locationDropdown');
+            if (dropdown) {
+                dropdown.value = savedLocation;
+            }
+            updateLocationFilterButtons(savedLocation);
+            updateLocationDisplay(savedLocation);
+        }
+    } catch (error) {
+        handleError(error, 'Location Filtering');
+    }
+}
+
+function handleLocationChange() {
+    try {
+        const dropdown = document.getElementById('locationDropdown');
+        if (!dropdown) return;
+        
+        const selectedCity = dropdown.value;
+        
+        localStorage.setItem('sokoinn_selected_location', selectedCity);
+        state.selectedLocation = selectedCity;
+        
+        updateLocationFilterButtons(selectedCity);
+        updateLocationDisplay(selectedCity);
+        applyLocationFilter();
+        
+        const message = selectedCity ? `Showing products from ${selectedCity}` : 'Showing products from all Kenya';
+        showToast(message, 'success');
+    } catch (error) {
+        handleError(error, 'Handle Location Change');
+    }
+}
+
+function selectLocationFilter(city) {
+    try {
+        const dropdown = document.getElementById('locationDropdown');
+        if (dropdown) {
+            dropdown.value = city;
+        }
+        
+        localStorage.setItem('sokoinn_selected_location', city);
+        state.selectedLocation = city;
+        
+        updateLocationFilterButtons(city);
+        updateLocationDisplay(city);
+        applyLocationFilter();
+    } catch (error) {
+        handleError(error, 'Select Location Filter');
+    }
+}
+
+function updateLocationFilterButtons(selectedCity) {
+    try {
+        const buttons = document.querySelectorAll('.location-filter-btn');
+        buttons.forEach(button => {
+            const onclick = button.getAttribute('onclick');
+            if (!onclick) return;
             
-            const query = searchInput.value.trim();
+            const match = onclick.match(/'([^']+)'/);
+            const city = match ? match[1] : '';
             
-            if (query.length === 0) {
-                state.searchQuery = '';
-                applyLocationFilter();
-                updateLocationDisplay(state.selectedLocation);
-                return;
+            if (city === selectedCity || (city === '' && selectedCity === '')) {
+                button.classList.add('active');
+            } else {
+                button.classList.remove('active');
+            }
+        });
+    } catch (error) {
+        handleError(error, 'Update Location Filter Buttons');
+    }
+}
+
+function updateLocationDisplay(city) {
+    try {
+        const locationDisplay = document.getElementById('currentLocationText');
+        const sectionTitle = document.getElementById('sectionTitle');
+        
+        if (locationDisplay) {
+            locationDisplay.textContent = city || 'All Kenya';
+        }
+        
+        if (sectionTitle) {
+            if (state.searchQuery) {
+                sectionTitle.textContent = 'Search Results';
+            } else if (city) {
+                sectionTitle.textContent = `Products in ${city}`;
+            } else {
+                sectionTitle.textContent = 'Featured Products';
+            }
+        }
+    } catch (error) {
+        handleError(error, 'Update Location Display');
+    }
+}
+
+function applyLocationFilter() {
+    try {
+        if (!state.selectedLocation) {
+            state.filteredProducts = [...state.allProducts];
+        } else {
+            state.filteredProducts = state.allProducts.filter(product => {
+                const productLocation = (product.sellerLocation || '').toLowerCase();
+                const selectedCity = state.selectedLocation.toLowerCase();
+                
+                return productLocation.includes(selectedCity) || 
+                    selectedCity.includes(productLocation);
+            });
+        }
+        
+        state.currentPage = 1;
+        renderProducts();
+        updateLoadMoreButton();
+    } catch (error) {
+        handleError(error, 'Apply Location Filter');
+    }
+}
+
+// ==================== PRODUCT RENDERING ====================
+function renderProducts() {
+    try {
+        const productGrid = document.getElementById('productGrid');
+        if (!productGrid) return;
+        
+        const productsToShow = state.filteredProducts.slice(0, state.currentPage * CONFIG.ITEMS_PER_PAGE);
+        
+        if (productsToShow.length === 0) {
+            let message = '';
+            if (state.searchQuery) {
+                message = `No products found for "${state.searchQuery}"`;
+            } else if (state.selectedLocation) {
+                message = `No products found in ${state.selectedLocation}. Try selecting "All Kenya"`;
+            } else {
+                message = 'No products available. Check back soon!';
             }
             
-            state.searchQuery = query;
-            const searchResults = searchProducts(query);
-            
-            state.filteredProducts = searchResults;
-            state.currentPage = 1;
-            
-            updateLocationDisplay(state.selectedLocation);
-            
-            renderProducts();
+            productGrid.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-state-icon">🔍</div>
+                    <h3 class="empty-state-title">No products found</h3>
+                    <p class="empty-state-message">${message}</p>
+                    ${state.selectedLocation ? `
+                    <button class="btn btn-primary mt-4" onclick="selectLocationFilter('')">
+                        Show All Kenya Products
+                    </button>
+                    ` : ''}
+                </div>
+            `;
+            return;
+        }
+        
+        productGrid.innerHTML = '';
+        
+        productsToShow.forEach(product => {
+            productGrid.innerHTML += createProductHTML(product);
+        });
+        
+        setTimeout(() => {
+            document.querySelectorAll('.product-image').forEach((imageDiv, index) => {
+                const product = state.filteredProducts[index];
+                if (product) {
+                    imageDiv.onclick = (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        openImageViewer(product.images, 0);
+                    };
+                }
+            });
+        }, 100);
+    } catch (error) {
+        handleError(error, 'Render Products');
+    }
+}
+
+// ==================== SEARCH FUNCTIONALITY ====================
+function handleSearchInput() {
+    try {
+        const searchInput = document.getElementById('searchInput');
+        if (!searchInput) return;
+        
+        const query = searchInput.value.trim();
+        
+        if (state.searchTimeout) {
+            clearTimeout(state.searchTimeout);
+        }
+        
+        if (query.length === 0) {
             hideSearchSuggestions();
-            
-            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
-        } catch (error) {
-            handleError(error, 'Perform Search');
+            return;
         }
+        
+        state.searchTimeout = setTimeout(() => {
+            showSearchSuggestions(query);
+        }, 300);
+    } catch (error) {
+        handleError(error, 'Handle Search Input');
     }
+}
 
-    function searchProducts(query, limit = null) {
-        try {
-            const searchTerms = query.toLowerCase().split(' ');
-            
-            let sourceProducts = state.allProducts;
-            if (state.selectedLocation) {
-                sourceProducts = sourceProducts.filter(product => 
-                    (product.sellerLocation || '').toLowerCase().includes(state.selectedLocation.toLowerCase())
-                );
-            }
-            
-            const results = sourceProducts.filter(product => {
-                const searchableText = `
-                    ${product.title || ''}
-                    ${product.description || ''}
-                    ${product.category || ''}
-                    ${product.sellerName || ''}
-                `.toLowerCase();
-                
-                return searchTerms.every(term => searchableText.includes(term));
-            });
-            
-            results.sort((a, b) => {
-                const aTitle = (a.title || '').toLowerCase();
-                const bTitle = (b.title || '').toLowerCase();
-                const queryLower = query.toLowerCase();
-                
-                if (aTitle === queryLower) return -1;
-                if (bTitle === queryLower) return 1;
-                
-                if (aTitle.startsWith(queryLower)) return -1;
-                if (bTitle.startsWith(queryLower)) return 1;
-                
-                return (b.rating || 0) - (a.rating || 0);
-            });
-            
-            return limit ? results.slice(0, limit) : results;
-        } catch (error) {
-            handleError(error, 'Search Products');
-            return [];
+function showSearchSuggestions(query) {
+    try {
+        const suggestionsContainer = document.getElementById('searchSuggestions');
+        if (!suggestionsContainer) return;
+        
+        if (!query || query.length < 2) {
+            suggestionsContainer.classList.remove('active');
+            return;
         }
-    }
-
-    // ==================== PRODUCT DETAIL MODAL ====================
-    async function viewProduct(productId) {
-        try {
-            const product = state.allProducts.find(p => p.listingId === productId);
-            if (!product) {
-                showToast('Product not found', 'error');
-                return;
-            }
-            
-            const images = product.images || [CONFIG.DEFAULT_IMAGE];
-            const whatsappMessage = `Hi, I'm interested in your "${product.title}" for KSh ${product.price.toLocaleString()} on SokoInn`;
-            
-            document.getElementById('productModalBody').innerHTML = `
-                <div>
-                    <!-- Product Gallery -->
-                    <div class="product-gallery">
-                        <div class="gallery-main" id="galleryMain">
-                            ${images.map((img, index) => `
-                                <div class="gallery-slide ${index === 0 ? 'active' : ''}">
-                                    <img src="${img}" 
-                                        alt="Image ${index + 1}" 
-                                        onerror="this.src='${CONFIG.DEFAULT_IMAGE}'"
-                                        onclick="openImageViewer(${JSON.stringify(images)}, ${index})">
-                                </div>
-                            `).join('')}
-                        </div>
-                        ${images.length > 1 ? `
-                            <button class="gallery-nav gallery-prev" onclick="prevGalleryImage()">‹</button>
-                            <button class="gallery-nav gallery-next" onclick="nextGalleryImage()">›</button>
-                        ` : ''}
+        
+        const searchResults = searchProducts(query, 5);
+        
+        if (searchResults.length === 0) {
+            suggestionsContainer.innerHTML = `
+                <div class="no-suggestions">
+                    No products found for "${query}"
+                </div>
+            `;
+        } else {
+            suggestionsContainer.innerHTML = searchResults.map(product => `
+                <div class="suggestion-item" onclick="selectSearchSuggestion('${product.listingId}')">
+                    <img src="${product.images[0] || CONFIG.DEFAULT_IMAGE}" 
+                        alt="${product.title}"
+                        class="suggestion-image"
+                        onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
+                    <div class="suggestion-details">
+                        <div class="suggestion-title">${product.title}</div>
+                        <div class="suggestion-price">KSh ${product.price.toLocaleString()}</div>
+                        <div class="suggestion-location">📍 ${product.sellerLocation || 'Nairobi'}</div>
                     </div>
-                    
-                    <!-- Thumbnails -->
-                    ${images.length > 1 ? `
-                    <div class="gallery-thumbnails">
+                </div>
+            `).join('');
+        }
+        
+        suggestionsContainer.classList.add('active');
+    } catch (error) {
+        handleError(error, 'Show Search Suggestions');
+    }
+}
+
+function hideSearchSuggestions() {
+    try {
+        const suggestionsContainer = document.getElementById('searchSuggestions');
+        if (suggestionsContainer) {
+            suggestionsContainer.classList.remove('active');
+        }
+    } catch (error) {
+        handleError(error, 'Hide Search Suggestions');
+    }
+}
+
+function selectSearchSuggestion(productId) {
+    hideSearchSuggestions();
+    viewProduct(productId);
+}
+
+function performSearch() {
+    try {
+        const searchInput = document.getElementById('searchInput');
+        if (!searchInput) return;
+        
+        const query = searchInput.value.trim();
+        
+        if (query.length === 0) {
+            state.searchQuery = '';
+            applyLocationFilter();
+            updateLocationDisplay(state.selectedLocation);
+            return;
+        }
+        
+        state.searchQuery = query;
+        const searchResults = searchProducts(query);
+        
+        state.filteredProducts = searchResults;
+        state.currentPage = 1;
+        
+        updateLocationDisplay(state.selectedLocation);
+        
+        renderProducts();
+        hideSearchSuggestions();
+        
+        document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+    } catch (error) {
+        handleError(error, 'Perform Search');
+    }
+}
+
+function searchProducts(query, limit = null) {
+    try {
+        const searchTerms = query.toLowerCase().split(' ');
+        
+        let sourceProducts = state.allProducts;
+        if (state.selectedLocation) {
+            sourceProducts = sourceProducts.filter(product => 
+                (product.sellerLocation || '').toLowerCase().includes(state.selectedLocation.toLowerCase())
+            );
+        }
+        
+        const results = sourceProducts.filter(product => {
+            const searchableText = `
+                ${product.title || ''}
+                ${product.description || ''}
+                ${product.category || ''}
+                ${product.sellerName || ''}
+            `.toLowerCase();
+            
+            return searchTerms.every(term => searchableText.includes(term));
+        });
+        
+        results.sort((a, b) => {
+            const aTitle = (a.title || '').toLowerCase();
+            const bTitle = (b.title || '').toLowerCase();
+            const queryLower = query.toLowerCase();
+            
+            if (aTitle === queryLower) return -1;
+            if (bTitle === queryLower) return 1;
+            
+            if (aTitle.startsWith(queryLower)) return -1;
+            if (bTitle.startsWith(queryLower)) return 1;
+            
+            return (b.rating || 0) - (a.rating || 0);
+        });
+        
+        return limit ? results.slice(0, limit) : results;
+    } catch (error) {
+        console.error('Error searching products:', error);
+        return [];
+    }
+}
+
+// ==================== UTILITY FUNCTIONS ====================
+function showModal(modalId) {
+    try {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            hideBottomNav();
+        }
+    } catch (error) {
+        handleError(error, 'Show Modal');
+    }
+}
+
+function closeModal(modalId) {
+    try {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+            if (modalId === 'productModal') {
+                const modalBody = document.getElementById('productModalBody');
+                if (modalBody) modalBody.innerHTML = '';
+            }
+            showBottomNav();
+        }
+    } catch (error) {
+        handleError(error, 'Close Modal');
+    }
+}
+
+function showToast(message, type = 'info') {
+    try {
+        const existingToast = document.querySelector('.toast');
+        if (existingToast) existingToast.remove();
+        
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                <span>${message}</span>
+            </div>
+        `;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(-10px)';
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    } catch (error) {
+        console.error('Error showing toast:', error);
+    }
+}
+
+function updateLoadMoreButton() {
+    try {
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        if (!loadMoreBtn) return;
+        
+        if (!state.hasMore || state.filteredProducts.length <= state.currentPage * CONFIG.ITEMS_PER_PAGE) {
+            loadMoreBtn.textContent = 'No more products';
+            loadMoreBtn.disabled = true;
+            state.hasMore = false;
+        } else {
+            loadMoreBtn.textContent = 'Load More Products';
+            loadMoreBtn.disabled = false;
+            state.hasMore = true;
+        }
+    } catch (error) {
+        handleError(error, 'Update Load More Button');
+    }
+}
+
+function showLoading(show) {
+    try {
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        if (loadMoreBtn) {
+            if (show) {
+                loadMoreBtn.disabled = true;
+                loadMoreBtn.innerHTML = '<div class="loading"></div> Loading...';
+            } else {
+                loadMoreBtn.disabled = false;
+                loadMoreBtn.textContent = 'Load More Products';
+            }
+        }
+    } catch (error) {
+        handleError(error, 'Show Loading');
+    }
+}
+
+function loadMoreProducts() {
+    if (!state.isLoading && state.hasMore) {
+        state.currentPage++;
+        loadProductsFromBackend();
+    }
+}
+
+function showAllProducts(event) {
+    if (event) event.preventDefault();
+    
+    try {
+        state.selectedLocation = '';
+        state.searchQuery = '';
+        
+        const dropdown = document.getElementById('locationDropdown');
+        if (dropdown) dropdown.value = '';
+        
+        updateLocationFilterButtons('');
+        updateLocationDisplay('');
+        
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) searchInput.value = '';
+        
+        state.filteredProducts = [...state.allProducts];
+        state.currentPage = 1;
+        
+        renderProducts();
+        updateLoadMoreButton();
+        
+        showToast('Showing all products from Kenya', 'success');
+    } catch (error) {
+        handleError(error, 'Show All Products');
+    }
+}
+
+// ==================== PRODUCT DETAIL VIEW ====================
+async function viewProduct(productId) {
+    try {
+        const product = state.allProducts.find(p => p.listingId === productId);
+        if (!product) {
+            showToast('Product not found', 'error');
+            return;
+        }
+        
+        const images = product.images || [CONFIG.DEFAULT_IMAGE];
+        const whatsappMessage = `Hi, I'm interested in your "${product.title}" for KSh ${product.price.toLocaleString()} on SokoInn`;
+        
+        document.getElementById('productModalBody').innerHTML = `
+            <div>
+                <!-- Product Gallery -->
+                <div class="product-gallery">
+                    <div class="gallery-main" id="galleryMain">
                         ${images.map((img, index) => `
-                            <div class="thumbnail ${index === 0 ? 'active' : ''}" onclick="changeGalleryImage(${index})">
-                                <img src="${img}" alt="Thumbnail ${index + 1}" onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
+                            <div class="gallery-slide ${index === 0 ? 'active' : ''}">
+                                <img src="${img}" 
+                                    alt="Image ${index + 1}" 
+                                    onerror="this.src='${CONFIG.DEFAULT_IMAGE}'"
+                                    onclick="openImageViewer(${JSON.stringify(images)}, ${index})">
                             </div>
                         `).join('')}
                     </div>
+                    ${images.length > 1 ? `
+                        <button class="gallery-nav gallery-prev" onclick="prevGalleryImage()">‹</button>
+                        <button class="gallery-nav gallery-next" onclick="nextGalleryImage()">›</button>
                     ` : ''}
-                    
-                    <!-- Product Info -->
-                    <div style="margin-top: 1.5rem;">
-                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: #333;">${product.title}</h3>
-                        <div style="font-size: 1.75rem; font-weight: 800; color: var(--maroon); margin-bottom: 1rem;">
-                            KSh ${product.price.toLocaleString()}
+                </div>
+                
+                <!-- Thumbnails -->
+                ${images.length > 1 ? `
+                <div class="gallery-thumbnails">
+                    ${images.map((img, index) => `
+                        <div class="thumbnail ${index === 0 ? 'active' : ''}" onclick="changeGalleryImage(${index})">
+                            <img src="${img}" alt="Thumbnail ${index + 1}" onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">
                         </div>
-                        
-                        <!-- Seller Info -->
-                        <div style="background: var(--gray-100); padding: 1.25rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
-                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--maroon), var(--light-maroon)); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1.25rem;">
-                                    ${(product.sellerName || '').charAt(0)}
-                                </div>
-                                <div style="flex: 1;">
-                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
-                                        <span style="font-weight: 700; font-size: 1.125rem; color: #333;">${product.sellerName}</span>
-                                        ${product.sellerVerification === 'verified' ? '<span style="color: #10b981; font-size: 1rem;">✓</span>' : ''}
-                                    </div>
-                                    <div style="display: flex; flex-direction: column; gap: 0.25rem;">
-                                        <div style="display: flex; align-items: center; gap: 0.25rem; font-size: 0.875rem; color: var(--gray-600);">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                            <span>${product.sellerLocation || 'Nairobi'}</span>
-                                        </div>
-                                        <div style="display: flex; align-items: center; gap: 0.25rem; font-size: 0.875rem; color: var(--gray-600);">
-                                            <i class="fas fa-star" style="color: #fbbf24;"></i>
-                                            <span>${product.sellerRating || 4.0} (${product.sellerTotalReviews || 0} reviews)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Contact Buttons -->
-                            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                                <div style="font-weight: 600; color: #333; margin-bottom: 0.5rem;">Contact Seller:</div>
-                                <div style="display: flex; gap: 0.75rem;">
-                                    ${product.sellerWhatsapp ? `
-                                    <a href="https://wa.me/${product.sellerWhatsapp}?text=${encodeURIComponent(whatsappMessage)}" 
-                                       target="_blank"
-                                       style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.875rem; background: linear-gradient(135deg, #25D366, #128C7E); color: white; border-radius: var(--radius-md); text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
-                                        <i class="fab fa-whatsapp" style="font-size: 1.125rem;"></i>
-                                        <span>WhatsApp</span>
-                                    </a>
-                                    ` : ''}
-                                    
-                                    ${product.sellerPhone ? `
-                                    <a href="tel:${product.sellerPhone}" 
-                                       style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.875rem; background: linear-gradient(135deg, var(--maroon), var(--light-maroon)); color: white; border-radius: var(--radius-md); text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
-                                        <i class="fas fa-phone" style="font-size: 1.125rem;"></i>
-                                        <span>Call Now</span>
-                                    </a>
-                                    ` : ''}
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Product Description -->
-                        ${product.description ? `
-                        <div style="margin-bottom: 1.5rem;">
-                            <h4 style="font-weight: 600; margin-bottom: 0.75rem; color: #333; font-size: 1.125rem;">Description</h4>
-                            <div style="background: var(--gray-100); padding: 1.25rem; border-radius: var(--radius-md);">
-                                <p style="color: var(--gray-600); line-height: 1.6; white-space: pre-line;">${product.description}</p>
-                            </div>
-                        </div>
-                        ` : ''}
+                    `).join('')}
+                </div>
+                ` : ''}
+                
+                <!-- Product Info -->
+                <div style="margin-top: 1.5rem;">
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: #333;">${product.title}</h3>
+                    <div style="font-size: 1.75rem; font-weight: 800; color: var(--maroon); margin-bottom: 1rem;">
+                        KSh ${product.price.toLocaleString()}
                     </div>
+                    
+                    <!-- Seller Info -->
+                    <div style="background: var(--gray-100); padding: 1.25rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--maroon), var(--light-maroon)); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1.25rem;">
+                                ${(product.sellerName || '').charAt(0)}
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                                    <span style="font-weight: 700; font-size: 1.125rem; color: #333;">${product.sellerName}</span>
+                                    ${product.sellerVerification === 'verified' ? '<span style="color: #10b981; font-size: 1rem;">✓</span>' : ''}
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+                                    <div style="display: flex; align-items: center; gap: 0.25rem; font-size: 0.875rem; color: var(--gray-600);">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span>${product.sellerLocation || 'Nairobi'}</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 0.25rem; font-size: 0.875rem; color: var(--gray-600);">
+                                        <i class="fas fa-star" style="color: #fbbf24;"></i>
+                                        <span>${product.sellerRating || 4.0} (${product.sellerTotalReviews || 0} reviews)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Contact Buttons -->
+                        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                            <div style="font-weight: 600; color: #333; margin-bottom: 0.5rem;">Contact Seller:</div>
+                            <div style="display: flex; gap: 0.75rem;">
+                                ${product.sellerWhatsapp ? `
+                                <a href="https://wa.me/${product.sellerWhatsapp}?text=${encodeURIComponent(whatsappMessage)}" 
+                                   target="_blank"
+                                   style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.875rem; background: linear-gradient(135deg, #25D366, #128C7E); color: white; border-radius: var(--radius-md); text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
+                                    <i class="fab fa-whatsapp" style="font-size: 1.125rem;"></i>
+                                    <span>WhatsApp</span>
+                                </a>
+                                ` : ''}
+                                
+                                ${product.sellerPhone ? `
+                                <a href="tel:${product.sellerPhone}" 
+                                   style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.875rem; background: linear-gradient(135deg, var(--maroon), var(--light-maroon)); color: white; border-radius: var(--radius-md); text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
+                                    <i class="fas fa-phone" style="font-size: 1.125rem;"></i>
+                                    <span>Call Now</span>
+                                </a>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Order Now Button -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <button class="btn btn-primary" style="width: 100%; padding: 1rem; font-size: 1.125rem; font-weight: 600;" onclick="closeModal('productModal'); showDeliveryOptions('${product.listingId}', 1);">
+                            <i class="fas fa-shopping-cart"></i> Order Now
+                        </button>
+                    </div>
+                    
+                    <!-- Product Description -->
+                    ${product.description ? `
+                    <div style="margin-bottom: 1.5rem;">
+                        <h4 style="font-weight: 600; margin-bottom: 0.75rem; color: #333; font-size: 1.125rem;">Description</h4>
+                        <div style="background: var(--gray-100); padding: 1.25rem; border-radius: var(--radius-md);">
+                            <p style="color: var(--gray-600); line-height: 1.6; white-space: pre-line;">${product.description}</p>
+                        </div>
+                    </div>
+                    ` : ''}
                 </div>
-            `;
-            
-            window.currentGalleryImages = images;
-            window.currentGalleryIndex = 0;
-            showModal('productModal');
-            
-        } catch (error) {
-            handleError(error, 'View Product');
-        }
+            </div>
+        `;
+        
+        window.currentGalleryImages = images;
+        window.currentGalleryIndex = 0;
+        showModal('productModal');
+        
+    } catch (error) {
+        handleError(error, 'View Product');
     }
+}
 
-    // ==================== IMAGE VIEWER FUNCTIONS ====================
-    function openImageViewer(images, startIndex = 0) {
-        try {
-            state.currentImages = images;
-            state.currentImageIndex = startIndex;
-            
-            const viewer = document.getElementById('imageViewer');
-            const viewerImage = document.getElementById('viewerImage');
-            const thumbnailsContainer = document.getElementById('viewerThumbnails');
-            const imageCounter = document.getElementById('imageCounter');
-            
-            if (!viewer || !viewerImage || !thumbnailsContainer || !imageCounter) return;
-            
-            viewerImage.src = images[startIndex];
-            
-            thumbnailsContainer.innerHTML = '';
-            images.forEach((img, index) => {
-                const thumbnail = document.createElement('div');
-                thumbnail.className = `image-viewer-thumbnail ${index === startIndex ? 'active' : ''}`;
-                thumbnail.onclick = () => changeImage(index);
-                thumbnail.innerHTML = `<img src="${img}" alt="Thumbnail ${index + 1}" onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">`;
-                thumbnailsContainer.appendChild(thumbnail);
-            });
-            
-            imageCounter.textContent = `${startIndex + 1} / ${images.length}`;
-            viewer.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            
-            hideBottomNav();
-        } catch (error) {
-            handleError(error, 'Open Image Viewer');
-        }
+// ==================== IMAGE VIEWER FUNCTIONS ====================
+function openImageViewer(images, startIndex = 0) {
+    try {
+        state.currentImages = images;
+        state.currentImageIndex = startIndex;
+        
+        const viewer = document.getElementById('imageViewer');
+        const viewerImage = document.getElementById('viewerImage');
+        const thumbnailsContainer = document.getElementById('viewerThumbnails');
+        const imageCounter = document.getElementById('imageCounter');
+        
+        if (!viewer || !viewerImage || !thumbnailsContainer || !imageCounter) return;
+        
+        viewerImage.src = images[startIndex];
+        
+        thumbnailsContainer.innerHTML = '';
+        images.forEach((img, index) => {
+            const thumbnail = document.createElement('div');
+            thumbnail.className = `image-viewer-thumbnail ${index === startIndex ? 'active' : ''}`;
+            thumbnail.onclick = () => changeImage(index);
+            thumbnail.innerHTML = `<img src="${img}" alt="Thumbnail ${index + 1}" onerror="this.src='${CONFIG.DEFAULT_IMAGE}'">`;
+            thumbnailsContainer.appendChild(thumbnail);
+        });
+        
+        imageCounter.textContent = `${startIndex + 1} / ${images.length}`;
+        viewer.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        hideBottomNav();
+    } catch (error) {
+        handleError(error, 'Open Image Viewer');
     }
+}
 
-    function closeImageViewer() {
-        try {
-            const viewer = document.getElementById('imageViewer');
-            if (viewer) {
-                viewer.classList.remove('active');
-            }
-            document.body.style.overflow = '';
-            state.currentImages = [];
-            state.currentImageIndex = 0;
-            
-            showBottomNav();
-        } catch (error) {
-            handleError(error, 'Close Image Viewer');
+function closeImageViewer() {
+    try {
+        const viewer = document.getElementById('imageViewer');
+        if (viewer) {
+            viewer.classList.remove('active');
         }
+        document.body.style.overflow = '';
+        state.currentImages = [];
+        state.currentImageIndex = 0;
+        
+        showBottomNav();
+    } catch (error) {
+        handleError(error, 'Close Image Viewer');
     }
+}
 
-    function changeImage(index) {
-        try {
-            state.currentImageIndex = index;
-            const viewerImage = document.getElementById('viewerImage');
-            const thumbnails = document.querySelectorAll('.image-viewer-thumbnail');
-            const imageCounter = document.getElementById('imageCounter');
-            
-            if (!viewerImage) return;
-            
-            viewerImage.src = state.currentImages[index];
-            
-            thumbnails.forEach((thumb, i) => {
-                thumb.classList.toggle('active', i === index);
-            });
-            
-            if (imageCounter) {
-                imageCounter.textContent = `${index + 1} / ${state.currentImages.length}`;
-            }
-        } catch (error) {
-            handleError(error, 'Change Image');
+function changeImage(index) {
+    try {
+        state.currentImageIndex = index;
+        const viewerImage = document.getElementById('viewerImage');
+        const thumbnails = document.querySelectorAll('.image-viewer-thumbnail');
+        const imageCounter = document.getElementById('imageCounter');
+        
+        if (!viewerImage) return;
+        
+        viewerImage.src = state.currentImages[index];
+        
+        thumbnails.forEach((thumb, i) => {
+            thumb.classList.toggle('active', i === index);
+        });
+        
+        if (imageCounter) {
+            imageCounter.textContent = `${index + 1} / ${state.currentImages.length}`;
         }
+    } catch (error) {
+        handleError(error, 'Change Image');
     }
+}
 
-    function prevImage() {
-        try {
-            const newIndex = (state.currentImageIndex - 1 + state.currentImages.length) % state.currentImages.length;
-            changeImage(newIndex);
-        } catch (error) {
-            handleError(error, 'Previous Image');
-        }
+function prevImage() {
+    try {
+        const newIndex = (state.currentImageIndex - 1 + state.currentImages.length) % state.currentImages.length;
+        changeImage(newIndex);
+    } catch (error) {
+        handleError(error, 'Previous Image');
     }
+}
 
-    function nextImage() {
-        try {
-            const newIndex = (state.currentImageIndex + 1) % state.currentImages.length;
-            changeImage(newIndex);
-        } catch (error) {
-            handleError(error, 'Next Image');
-        }
+function nextImage() {
+    try {
+        const newIndex = (state.currentImageIndex + 1) % state.currentImages.length;
+        changeImage(newIndex);
+    } catch (error) {
+        handleError(error, 'Next Image');
     }
+}
 
-    // ==================== GALLERY FUNCTIONS ====================
-    window.changeGalleryImage = function(index) {
-        try {
-            const slides = document.querySelectorAll('#galleryMain .gallery-slide');
-            const thumbnails = document.querySelectorAll('.gallery-thumbnails .thumbnail');
-            
-            slides.forEach(slide => slide.classList.remove('active'));
-            thumbnails.forEach(thumb => thumb.classList.remove('active'));
-            
-            if (slides[index]) {
-                slides[index].classList.add('active');
-            }
-            if (thumbnails[index]) {
-                thumbnails[index].classList.add('active');
-            }
-            
-            window.currentGalleryIndex = index;
-        } catch (error) {
-            handleError(error, 'Change Gallery Image');
+// ==================== GALLERY FUNCTIONS ====================
+window.changeGalleryImage = function(index) {
+    try {
+        const slides = document.querySelectorAll('#galleryMain .gallery-slide');
+        const thumbnails = document.querySelectorAll('.gallery-thumbnails .thumbnail');
+        
+        slides.forEach(slide => slide.classList.remove('active'));
+        thumbnails.forEach(thumb => thumb.classList.remove('active'));
+        
+        if (slides[index]) {
+            slides[index].classList.add('active');
         }
-    };
-
-    window.prevGalleryImage = function() {
-        try {
-            if (!window.currentGalleryImages) return;
-            const newIndex = (window.currentGalleryIndex - 1 + window.currentGalleryImages.length) % window.currentGalleryImages.length;
-            window.changeGalleryImage(newIndex);
-        } catch (error) {
-            handleError(error, 'Previous Gallery Image');
-        }
-    };
-
-    window.nextGalleryImage = function() {
-        try {
-            if (!window.currentGalleryImages) return;
-            const newIndex = (window.currentGalleryIndex + 1) % window.currentGalleryImages.length;
-            window.changeGalleryImage(newIndex);
-        } catch (error) {
-            handleError(error, 'Next Gallery Image');
-        }
-    };
-
-    // ==================== CONTACT FUNCTIONS ====================
-    function toggleContactOptions(button, productId, event) {
-        if (event) {
-            event.preventDefault();
-            event.stopPropagation();
+        if (thumbnails[index]) {
+            thumbnails[index].classList.add('active');
         }
         
-        try {
-            const options = button.nextElementSibling;
-            if (!options) return;
-            
-            const isVisible = options.classList.contains('show');
-            
-            document.querySelectorAll('.contact-options').forEach(el => {
-                if (el !== options) el.classList.remove('show');
-            });
-            
-            options.classList.toggle('show', !isVisible);
-            
-            if (!isVisible) {
-                const closeHandler = (e) => {
-                    if (!options.contains(e.target) && e.target !== button) {
-                        options.classList.remove('show');
-                        document.removeEventListener('click', closeHandler);
-                    }
-                };
-                setTimeout(() => document.addEventListener('click', closeHandler), 10);
-            }
-        } catch (error) {
-            handleError(error, 'Toggle Contact Options');
-        }
+        window.currentGalleryIndex = index;
+    } catch (error) {
+        handleError(error, 'Change Gallery Image');
     }
+};
 
-    function contactSeller(productId, method, event) {
-        if (event) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-        
-        try {
-            const product = state.allProducts.find(p => p.listingId === productId);
-            if (!product) return;
-            
-            if (method === 'whatsapp' && product.sellerWhatsapp) {
-                const message = `Hi, I'm interested in your "${product.title}" for KSh ${product.price.toLocaleString()} on SokoInn`;
-                window.open(`https://wa.me/${product.sellerWhatsapp}?text=${encodeURIComponent(message)}`, '_blank');
-                showToast(`Opening WhatsApp...`, 'info');
-            } else if (method === 'call' && product.sellerPhone) {
-                window.location.href = `tel:${product.sellerPhone}`;
-            } else {
-                showToast('Contact information not available', 'error');
-            }
-            
-            const dropdown = event?.target?.closest('.contact-options');
-            if (dropdown) dropdown.classList.remove('show');
-        } catch (error) {
-            handleError(error, 'Contact Seller');
-        }
+window.prevGalleryImage = function() {
+    try {
+        if (!window.currentGalleryImages) return;
+        const newIndex = (window.currentGalleryIndex - 1 + window.currentGalleryImages.length) % window.currentGalleryImages.length;
+        window.changeGalleryImage(newIndex);
+    } catch (error) {
+        handleError(error, 'Previous Gallery Image');
     }
+};
 
-    // ==================== UTILITY FUNCTIONS ====================
-    function formatPhoneNumber(phone) {
-        if (!phone) return '';
-        const cleaned = phone.toString().replace(/\D/g, '');
-        const match = cleaned.match(/^(\d{3})(\d{3})(\d{3,4})$/);
-        if (match) {
-            return match[1] + ' ' + match[2] + ' ' + match[3];
-        }
-        return phone;
+window.nextGalleryImage = function() {
+    try {
+        if (!window.currentGalleryImages) return;
+        const newIndex = (window.currentGalleryIndex + 1) % window.currentGalleryImages.length;
+        window.changeGalleryImage(newIndex);
+    } catch (error) {
+        handleError(error, 'Next Gallery Image');
     }
+};
 
-    function updateLoadMoreButton() {
-        try {
-            const loadMoreBtn = document.getElementById('loadMoreBtn');
-            if (!loadMoreBtn) return;
-            
-            if (!state.hasMore || state.filteredProducts.length <= state.currentPage * CONFIG.ITEMS_PER_PAGE) {
-                loadMoreBtn.textContent = 'No more products';
-                loadMoreBtn.disabled = true;
-                state.hasMore = false;
-            } else {
-                loadMoreBtn.textContent = 'Load More Products';
-                loadMoreBtn.disabled = false;
-                state.hasMore = true;
-            }
-        } catch (error) {
-            handleError(error, 'Update Load More Button');
-        }
+// ==================== CONTACT FUNCTIONS ====================
+function toggleContactOptions(button, productId, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
     }
-
-    function showLoading(show) {
-        try {
-            const loadMoreBtn = document.getElementById('loadMoreBtn');
-            if (loadMoreBtn) {
-                if (show) {
-                    loadMoreBtn.disabled = true;
-                    loadMoreBtn.innerHTML = '<div class="loading"></div> Loading...';
-                } else {
-                    loadMoreBtn.disabled = false;
-                    loadMoreBtn.textContent = 'Load More Products';
-                }
-            }
-        } catch (error) {
-            handleError(error, 'Show Loading');
-        }
-    }
-
-    function showModal(modalId) {
-        try {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-                hideBottomNav();
-            }
-        } catch (error) {
-            handleError(error, 'Show Modal');
-        }
-    }
-
-    function closeModal(modalId) {
-        try {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.remove('active');
-                document.body.style.overflow = '';
-                if (modalId === 'productModal') {
-                    const modalBody = document.getElementById('productModalBody');
-                    if (modalBody) modalBody.innerHTML = '';
-                }
-                showBottomNav();
-            }
-        } catch (error) {
-            handleError(error, 'Close Modal');
-        }
-    }
-
-    function showToast(message, type = 'info') {
-        try {
-            const existingToast = document.querySelector('.toast');
-            if (existingToast) existingToast.remove();
-            
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            toast.innerHTML = `
-                <div style="display: flex; align-items: center; gap: 0.75rem;">
-                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
-                    <span>${message}</span>
-                </div>
-            `;
-            document.body.appendChild(toast);
-            
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateY(-10px)';
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        } catch (error) {
-            console.error('Error showing toast:', error);
-        }
-    }
-
-    // ==================== INITIALIZE ON WINDOW LOAD ====================
-    window.addEventListener('load', () => {
-        try {
-            document.querySelectorAll('.product-image img').forEach(img => {
-                if (img.complete) {
-                    img.classList.add('loaded');
-                } else {
-                    img.onload = () => img.classList.add('loaded');
-                }
-            });
-            
-            setTimeout(() => {
-                if (!state.chatbotOpen && state.unreadMessages === 0) {
-                    state.unreadMessages = 1;
-                    const notification = document.getElementById('chatbotNotification');
-                    if (notification) {
-                        notification.textContent = '1';
-                        notification.classList.remove('hidden');
-                    }
-                }
-            }, 3000);
-            
-            adjustChatbotPosition();
-        } catch (error) {
-            handleError(error, 'Window Load');
-        }
-    });
     
-    // ==================== PREVENT MEMORY LEAKS ====================
-    window.addEventListener('beforeunload', () => {
-        // Clean up intervals
-        if (state.heroInterval) {
-            clearInterval(state.heroInterval);
-            state.heroInterval = null;
-        }
+    try {
+        const options = button.nextElementSibling;
+        if (!options) return;
         
-        // Clean up timeouts
-        if (state.searchTimeout) {
-            clearTimeout(state.searchTimeout);
-            state.searchTimeout = null;
-        }
+        const isVisible = options.classList.contains('show');
         
-        // Save important state
-        try {
-            localStorage.setItem('sokoinn_selected_location', state.selectedLocation || '');
-            saveChatHistory();
-        } catch (e) {
-            console.warn('Could not save state before unload');
+        document.querySelectorAll('.contact-options').forEach(el => {
+            if (el !== options) el.classList.remove('show');
+        });
+        
+        options.classList.toggle('show', !isVisible);
+        
+        if (!isVisible) {
+            const closeHandler = (e) => {
+                if (!options.contains(e.target) && e.target !== button) {
+                    options.classList.remove('show');
+                    document.removeEventListener('click', closeHandler);
+                }
+            };
+            setTimeout(() => document.addEventListener('click', closeHandler), 10);
         }
-    });
+    } catch (error) {
+        handleError(error, 'Toggle Contact Options');
+    }
+}
+
+// ==================== FINAL INITIALIZATION ====================
+window.addEventListener('load', () => {
+    try {
+        document.querySelectorAll('.product-image img').forEach(img => {
+            if (img.complete) {
+                img.classList.add('loaded');
+            } else {
+                img.onload = () => img.classList.add('loaded');
+            }
+        });
+        
+        setTimeout(() => {
+            if (!state.chatbotOpen && state.unreadMessages === 0) {
+                state.unreadMessages = 1;
+                const notification = document.getElementById('chatbotNotification');
+                if (notification) {
+                    notification.textContent = '1';
+                    notification.classList.remove('hidden');
+                }
+            }
+        }, 3000);
+        
+    } catch (error) {
+        handleError(error, 'Window Load');
+    }
+});
+
+window.addEventListener('beforeunload', () => {
+    if (state.heroInterval) {
+        clearInterval(state.heroInterval);
+        state.heroInterval = null;
+    }
+    
+    if (state.searchTimeout) {
+        clearTimeout(state.searchTimeout);
+        state.searchTimeout = null;
+    }
+    
+    try {
+        localStorage.setItem('sokoinn_selected_location', state.selectedLocation || '');
+        saveChatHistory();
+    } catch (e) {
+        console.warn('Could not save state before unload');
+    }
+});
     </script>
     
 </body>
